@@ -88,8 +88,8 @@ private:
         std_msgs::msg::Float32MultiArray torque_msg;
         torque_msg.data.clear();
 
-        torque_msg.data.push_back(ag[0]);
         torque_msg.data.push_back(-ag[0]);
+        torque_msg.data.push_back(ag[0]);
         torque_msg.data.push_back(ag[0]);
         torque_msg.data.push_back(-ag[0]);
 
