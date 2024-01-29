@@ -148,9 +148,9 @@
     </inertial>
 
     <collision>
-      <origin xyz="0.125 0 0" rpy="0 0 0"/>
+      <origin xyz="0.145 0 0" rpy="0 0 0"/>
       <geometry>
-        <box size="0.250 0.050 0.050"/>
+        <box size="0.230 0.050 0.050"/>
       </geometry>
     </collision>
 
@@ -257,9 +257,9 @@
     </inertial>
 
     <collision>
-      <origin xyz="0.125 0 0" rpy="0 0 0"/>
+      <origin xyz="0.145 0 0" rpy="0 0 0"/>
       <geometry>
-        <box size="0.250 0.050 0.050"/>
+        <box size="0.230 0.050 0.050"/>
       </geometry>
     </collision>
 
@@ -366,9 +366,9 @@
     </inertial>
 
     <collision>
-      <origin xyz="0.125 0 0" rpy="0 0 0"/>
+      <origin xyz="0.145 0 0" rpy="0 0 0"/>
       <geometry>
-        <box size="0.250 0.050 0.050"/>
+        <box size="0.230 0.050 0.050"/>
       </geometry>
     </collision>
 
@@ -475,9 +475,9 @@
     </inertial>
 
     <collision>
-      <origin xyz="0.125 0 0" rpy="0 0 0"/>
+      <origin xyz="0.145 0 0" rpy="0 0 0"/>
       <geometry>
-        <box size="0.250 0.050 0.050"/>
+        <box size="0.230 0.050 0.050"/>
       </geometry>
     </collision>
 
@@ -553,7 +553,8 @@
     <plugin name="aidin_m1_plugin" filename="libaidin_m1_plugin.so">
       <update_rate>20</update_rate>
 
-      <joint_name>odom_joint</joint_name>
+      <!-- necessary? -->
+      <!-- <joint_name>odom_joint</joint_name>
 
       <joint_name>RFJ_scap</joint_name>
       <joint_name>RFJ_hip</joint_name>
@@ -569,7 +570,7 @@
 
       <joint_name>RBJ_scap</joint_name>
       <joint_name>RBJ_hip</joint_name>
-      <joint_name>RBJ_knee</joint_name>
+      <joint_name>RBJ_knee</joint_name> -->
 
     </plugin>
   </gazebo>
