@@ -45,7 +45,7 @@
   <joint name="odom_joint" type="fixed">
     <child link="body"/>
     <parent link="world"/>
-    <origin xyz="0 0 0.440" rpy="0 0 0"/>
+    <origin xyz="0 0 0.500" rpy="0 0 0"/>
   </joint>
 
   <!-- <joint name="fixed_base" type="fixed">
@@ -166,6 +166,31 @@
     <material>Gazebo/Blue</material>
   </gazebo>
 
+  <link name="RF_foot">
+    <inertial>
+      <mass value="0.01"/>
+      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
+    </inertial>
+
+    <collision name="RF_foot_col1">
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <sphere radius="0.025"/>
+      </geometry>
+    </collision>
+
+    <visual name="RF_foot_vis_cover">
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <sphere radius="0.0250"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+  </link>
+  <gazebo reference="RF_foot">
+    <material>Gazebo/Black</material>
+  </gazebo>
+
 <!--//////////////////////////////// RF JOINTS ////////////////////////////////-->
 
   <joint name="RFJ_scap" type="revolute">
@@ -193,6 +218,13 @@
     <axis xyz="0 0 1"/>
     <limit lower="-1.308996939" upper="1.0471975512" effort="200.0" velocity="9"/>
     <dynamics damping="3"/>
+  </joint>
+
+  <joint name="RFJ_foot" type="fixed" dont_collapse="true">
+    <parent link="RF_knee"/>
+    <child link="RF_foot"/>
+    <origin xyz="0.25 0 0" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
   </joint>
 
 <!--//////////////////////////////// LF LINKS /////////////////////////////////-->
@@ -275,6 +307,31 @@
     <material>Gazebo/Blue</material>
   </gazebo>
 
+  <link name="LF_foot">
+    <inertial>
+      <mass value="0.01"/>
+      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
+    </inertial>
+
+    <collision name="LF_foot_col1">
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <sphere radius="0.025"/>
+      </geometry>
+    </collision>
+
+    <visual name="LF_foot_vis_cover">
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <sphere radius="0.0250"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+  </link>
+  <gazebo reference="LF_foot">
+    <material>Gazebo/Black</material>
+  </gazebo>
+
 <!--//////////////////////////////// LF JOINTS ////////////////////////////////-->
 
   <joint name="LFJ_scap" type="revolute">
@@ -302,6 +359,13 @@
     <axis xyz="0 0 1"/>
     <limit lower="-1.308996939" upper="1.0471975512" effort="200.0" velocity="9"/>
     <dynamics damping="3"/>
+  </joint>
+
+  <joint name="LFJ_foot" type="fixed" dont_collapse="true">
+    <parent link="LF_knee"/>
+    <child link="LF_foot"/>
+    <origin xyz="0.25 0 0" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
   </joint>
 
 <!--//////////////////////////////// LB LINKS /////////////////////////////////-->
@@ -384,6 +448,31 @@
     <material>Gazebo/Blue</material>
   </gazebo>
 
+  <link name="LB_foot">
+    <inertial>
+      <mass value="0.01"/>
+      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
+    </inertial>
+
+    <collision name="LB_foot_col1">
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <sphere radius="0.025"/>
+      </geometry>
+    </collision>
+
+    <visual name="LB_foot_vis_cover">
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <sphere radius="0.0250"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+  </link>
+  <gazebo reference="LB_foot">
+    <material>Gazebo/Black</material>
+  </gazebo>
+
 <!--//////////////////////////////// LB JOINTS ////////////////////////////////-->
 
   <joint name="LBJ_scap" type="revolute">
@@ -411,6 +500,13 @@
     <axis xyz="0 0 1"/>
     <limit lower="-1.308996939" upper="1.0471975512" effort="200.0" velocity="9"/>
     <dynamics damping="3"/>
+  </joint>
+
+  <joint name="LBJ_foot" type="fixed" dont_collapse="true">
+    <parent link="LB_knee"/>
+    <child link="LB_foot"/>
+    <origin xyz="0.25 0 0" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
   </joint>
 
 <!--//////////////////////////////// RB LINKS /////////////////////////////////-->
@@ -493,6 +589,31 @@
     <material>Gazebo/Blue</material>
   </gazebo>
 
+  <link name="RB_foot">
+    <inertial>
+      <mass value="0.01"/>
+      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
+    </inertial>
+
+    <collision name="RB_foot_col1">
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <sphere radius="0.025"/>
+      </geometry>
+    </collision>
+
+    <visual name="RB_foot_vis_cover">
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <sphere radius="0.0250"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+  </link>
+  <gazebo reference="RB_foot">
+    <material>Gazebo/Black</material>
+  </gazebo>
+
 <!--//////////////////////////////// RB JOINTS ////////////////////////////////-->
 
   <joint name="RBJ_scap" type="revolute">
@@ -520,6 +641,13 @@
     <axis xyz="0 0 1"/>
     <limit lower="-1.308996939" upper="1.0471975512" effort="200.0" velocity="9"/>
     <dynamics damping="3"/>
+  </joint>
+
+  <joint name="RBJ_foot" type="fixed" dont_collapse="true">
+    <parent link="RB_knee"/>
+    <child link="RB_foot"/>
+    <origin xyz="0.25 0 0" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
   </joint>
 
 <!--//////////////////////////////// Sensor - Lidar //////////////////////////////////-->
