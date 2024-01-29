@@ -190,7 +190,7 @@
   <joint name="RFJ_knee" type="revolute">
     <parent link="RF_hip"/>
     <child link="RF_knee"/>
-    <origin xyz="0.275 0   0" rpy="0      0      1.57079"/>
+    <origin xyz="0.250 0   0" rpy="0      0      1.57079"/>
     <axis xyz="0 0 1"/>
     <limit lower="-1.308996939" upper="1.0471975512" effort="200.0" velocity="9"/>
     <dynamics damping="3"/>
@@ -299,26 +299,19 @@
   <joint name="LFJ_knee" type="revolute">
     <parent link="LF_hip"/>
     <child link="LF_knee"/>
-    <origin xyz="0.275 0   0" rpy="0 0 1.57079"/>
+    <origin xyz="0.250 0   0" rpy="0 0 1.57079"/>
     <axis xyz="0 0 1"/>
     <limit lower="-1.308996939" upper="1.0471975512" effort="200.0" velocity="9"/>
     <dynamics damping="3"/>
   </joint>
-  <!-- <joint name="LFJ_knee" type="continuous">
-    <parent link="LF_hip"/>
-    <child link="LF_knee"/>
-    <origin xyz="0 0 0.091" rpy="0 0 0"/>
-    <axis xyz="0 0 1"/>
-    <dynamics damping="0.7"/>
-  </joint> -->
 
 <!--//////////////////////////////// LB LINKS /////////////////////////////////-->
 
   <link name="LB_scap">
     <inertial>
-      <mass value="1.80"/>
+      <mass value="6"/>
       <origin xyz="0 0 0" rpy="0 0 0"/>
-      <inertia ixx="0.001541527" ixy="0.000007051" ixz="-0.000001356" iyy="0.001938779" iyz="0.000000659" izz="0.001547151"/>
+      <inertia ixx="0.73716790" ixy="0.130721360" ixz="0" iyy="0.431162858" iyz="0" izz="0.477083568"/>
     </inertial>
 
     <collision>
@@ -328,12 +321,10 @@
       </geometry>
     </collision>
 
-    <visual name="LB_scap_vis_cover">
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+    <visual name="LB_scap_vis_cover1">
+      <origin xyz="0 0 0.060" rpy="0 0 0"/>
       <geometry>
-        <!-- <cylinder length="0.0760" radius="0.0730"/> -->
-        <!-- <mesh filename="file://$(find aidin_m1)/meshes/actuator.stl"/>  ////fail,,//// -->
-        <mesh filename="/home/eunseop/dev_ws/src/aidin_m1/meshes/actuator_1.stl" scale="0.001 0.001 0.001"/>
+        <box size="0.140 0.140 0.230"/>
       </geometry>
       <material name="red"/>
     </visual>
@@ -344,24 +335,22 @@
 
   <link name="LB_hip">
     <inertial>
-      <mass value="1.80"/>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.600"/>
+      <origin xyz="0.125 0 0" rpy="0 0 0"/>
       <inertia ixx="0.001541527" ixy="0.000007051" ixz="-0.000001356" iyy="0.001938779" iyz="0.000000659" izz="0.001547151"/>
     </inertial>
 
     <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="0.125 0 0" rpy="0 0 0"/>
       <geometry>
-        <cylinder length="0.0760" radius="0.0730"/>
+        <box size="0.250 0.050 0.050"/>
       </geometry>
     </collision>
 
     <visual name="LB_hip_vis_cover">
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="0.125 0 0" rpy="0 0 0"/>
       <geometry>
-        <!-- <cylinder length="0.0760" radius="0.0730"/> -->
-        <!-- <mesh filename="file://$(find aidin_m1)/meshes/actuator.stl"/>  ////fail,,//// -->
-        <mesh filename="/home/eunseop/dev_ws/src/aidin_m1/meshes/actuator_1.stl" scale="0.001 0.001 0.001"/>
+        <box size="0.250 0.050 0.050"/>
       </geometry>
       <material name="green"/>
     </visual>
@@ -372,24 +361,22 @@
 
   <link name="LB_knee">
     <inertial>
-      <mass value="1.80"/>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.600"/>
+      <origin xyz="0.125 0 0" rpy="0 0 0"/>
       <inertia ixx="0.001541527" ixy="0.000007051" ixz="-0.000001356" iyy="0.001938779" iyz="0.000000659" izz="0.001547151"/>
     </inertial>
 
     <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="0.125 0 0" rpy="0 0 0"/>
       <geometry>
-        <cylinder length="0.0760" radius="0.0730"/>
+        <box size="0.250 0.050 0.050"/>
       </geometry>
     </collision>
 
     <visual name="LB_knee_vis_cover">
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="0.125 0 0" rpy="0 0 0"/>
       <geometry>
-        <!-- <cylinder length="0.0760" radius="0.0730"/> -->
-        <!-- <mesh filename="file://$(find aidin_m1)/meshes/actuator.stl"/>  ////fail,,//// -->
-        <mesh filename="/home/eunseop/dev_ws/src/aidin_m1/meshes/actuator_1.stl" scale="0.001 0.001 0.001"/>
+        <box size="0.250 0.050 0.050"/>
       </geometry>
       <material name="blue"/>
     </visual>
@@ -400,28 +387,31 @@
 
 <!--//////////////////////////////// LB JOINTS ////////////////////////////////-->
 
-  <joint name="LBJ_scap" type="continuous">
+  <joint name="LBJ_scap" type="revolute">
     <parent link="body"/>
     <child link="LB_scap"/>
-    <origin xyz="-0.138 0.08750 0" rpy="0 1.5708 3.14159"/>
+    <origin xyz="-0.282 0.1150 0" rpy="1.57079 0 1.57079"/>
     <axis xyz="0 0 1"/>
-    <dynamics damping="0.7"/>
+    <limit lower="-0.00001" upper="0.6108652382" effort="200.0" velocity="9"/>
+    <dynamics damping="3"/>
   </joint>
 
-  <joint name="LBJ_hip" type="continuous">
+  <joint name="LBJ_hip" type="revolute">
     <parent link="LB_scap"/>
     <child link="LB_hip"/>
-    <origin xyz="0 0 0.122" rpy="1.5708 0 0"/>
+    <origin xyz="0.095 0 0" rpy="-1.559    1.57079  1.58259"/>
     <axis xyz="0 0 1"/>
-    <dynamics damping="0.7"/>
+    <limit lower="-3.14" upper="3.14" effort="200.0" velocity="9"/>
+    <dynamics damping="3"/>
   </joint>
 
-  <joint name="LBJ_knee" type="continuous">
+  <joint name="LBJ_knee" type="revolute">
     <parent link="LB_hip"/>
     <child link="LB_knee"/>
-    <origin xyz="0 0 0.091" rpy="0 0 0"/>
+    <origin xyz="0.250 0 0" rpy="0 0 1.57079"/>
     <axis xyz="0 0 1"/>
-    <dynamics damping="0.7"/>
+    <limit lower="-1.308996939" upper="1.0471975512" effort="200.0" velocity="9"/>
+    <dynamics damping="3"/>
   </joint>
 
 <!--//////////////////////////////// RB LINKS /////////////////////////////////-->
