@@ -171,7 +171,7 @@
   <joint name="RFJ_scap" type="revolute">
     <parent link="body"/>
     <child link="RF_scap"/>
-    <origin xyz="0.282 -0.08750 0" rpy="-1.57079 0 -1.57079"/>
+    <origin xyz="0.282 -0.115 0" rpy="-1.57079 0 -1.57079"/>
     <axis xyz="0 0 1"/>
     <limit lower="-3.14" upper="0.000001" effort="50.0" velocity="3"/> <!--I dont know what it is-->
     <dynamics damping="0.7"/>
