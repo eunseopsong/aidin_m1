@@ -93,9 +93,9 @@
     </inertial>
 
     <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="0 0 -0.060" rpy="0 0 0"/>
       <geometry>
-        <cylinder length="0.0760" radius="0.0730"/>
+        <box size="0.140 0.140 0.230"/>
       </geometry>
     </collision>
 
@@ -205,9 +205,9 @@
     </inertial>
 
     <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="0 0 -0.060" rpy="0 0 0"/>
       <geometry>
-        <cylinder length="0.0760" radius="0.0730"/>
+        <box size="0.140 0.140 0.230"/>
       </geometry>
     </collision>
 
@@ -314,9 +314,9 @@
     </inertial>
 
     <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="0 0 0.060" rpy="0 0 0"/>
       <geometry>
-        <cylinder length="0.0760" radius="0.0730"/>
+        <box size="0.140 0.140 0.230"/>
       </geometry>
     </collision>
 
@@ -423,9 +423,9 @@
     </inertial>
 
     <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="0 0 0.060" rpy="0 0 0"/>
       <geometry>
-        <cylinder length="0.0760" radius="0.0730"/>
+        <box size="0.140 0.140 0.230"/>
       </geometry>
     </collision>
 
