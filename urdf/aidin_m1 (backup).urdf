@@ -1,0 +1,571 @@
+<?xml version="1.0"?>
+<robot name="aidin_m1">
+
+  <material name="black">
+    <color rgba="0.0 0.0 0.0 1.0"/>
+  </material>
+  <material name="blue">
+    <color rgba="0.0 0.0 0.8 1.0"/>
+  </material>
+  <material name="green">
+    <color rgba="0.0 0.8 0.0 1.0"/>
+  </material>
+  <material name="grey">
+    <color rgba="0.2 0.2 0.2 1.0"/>
+  </material>
+  <material name="silver">
+    <color rgba="0.913725490196 0.913725490196 0.847058823529 1.0"/>
+  </material>
+  <material name="orange">
+    <color rgba="1.0 0.423529411765 0.0392156862745 1.0"/>
+  </material>
+  <material name="brown">
+    <color rgba="0.870588235294 0.811764705882 0.764705882353 1.0"/>
+  </material>
+  <material name="red">
+    <color rgba="0.8 0.0 0.0 1.0"/>
+  </material>
+  <material name="yellow">
+    <color rgba="0.8 0.8 0.0 1.0"/>
+  </material>
+  <material name="white">
+    <color rgba="1.0 1.0 1.0 1.0"/>
+  </material>
+
+<!--////////////////////////////////   Odom    ////////////////////////////////-->
+
+  <!-- <link name="odom" /> -->
+
+  <!-- "world" link -->
+  <link name="world"/>
+  <gazebo reference="world">
+    <static>true</static>
+  </gazebo>
+
+  <joint name="odom_joint" type="fixed">
+    <child link="body"/>
+    <parent link="world"/>
+    <origin xyz="0 0 0.440" rpy="0 0 0"/>
+  </joint>
+
+  <!-- <joint name="fixed_base" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="world"/>
+    <child link="base"/>
+  </joint> -->
+
+<!--////////////////////////////////   Body    ////////////////////////////////-->
+
+  <link name="body">
+    <inertial>
+      <mass value="10"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.15296333" ixy="0" ixz="0" iyy="0.07221333" iyz="0" izz="0.1474166667"/>
+    </inertial>
+
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.200 0.370 0.216"/>
+      </geometry>
+    </collision>
+
+    <visual name="body_visual">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <!-- <box size="0.200 0.370 0.216"/> -->
+        <mesh filename="/home/eunseop/dev_ws/src/aidin_m1/meshes/body_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="silver"/>
+    </visual>
+  </link>
+  <gazebo reference="body">
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+
+<!--//////////////////////////////// RF LINKS /////////////////////////////////-->
+
+  <link name="RF_scap">
+    <inertial>
+      <mass value="6"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.73716790" ixy="0.130721360" ixz="0" iyy="0.431162858" iyz="0" izz="0.477083568"/>
+    </inertial>
+
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.0760" radius="0.0730"/>
+      </geometry>
+    </collision>
+
+    <visual name="RF_scap_vis_cover1">
+      <origin xyz="0 0 -0.060" rpy="0 0 0"/>
+      <geometry>
+        <!-- <cylinder length="0.0760" radius="0.0730"/> -->
+        <!-- <mesh filename="file://$(find aidin_m1)/meshes/actuator.stl"/>  ////fail,,//// -->
+        <!-- <mesh filename="/home/eunseop/dev_ws/src/aidin_m1/meshes/sc_cover_RF_1.stl" scale="0.001 0.001 0.001"/> -->
+        <box size="0.140 0.140 0.230"/>
+      </geometry>
+      <material name="red"/>
+    </visual>
+  </link>
+  <gazebo reference="RF_scap">
+    <material>Gazebo/Red</material>
+  </gazebo>
+
+  <link name="RF_hip">
+    <inertial>
+      <mass value="0.600"/>
+      <origin xyz="0.125 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.001541527" ixy="0.000007051" ixz="-0.000001356" iyy="0.001938779" iyz="0.000000659" izz="0.001547151"/>
+    </inertial>
+
+    <collision>
+      <origin xyz="0.125 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.250 0.050 0.050"/>
+      </geometry>
+    </collision>
+
+    <visual name="RF_hip_vis_cover">
+      <origin xyz="0.125 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.250 0.050 0.050"/>
+      </geometry>
+      <material name="green"/>
+    </visual>
+  </link>
+  <gazebo reference="RF_hip">
+    <material>Gazebo/Green</material>
+  </gazebo>
+
+  <link name="RF_knee">
+    <inertial>
+      <mass value="0.600"/>
+      <origin xyz="0.125 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.001541527" ixy="0.000007051" ixz="-0.000001356" iyy="0.001938779" iyz="0.000000659" izz="0.001547151"/>
+    </inertial>
+
+    <collision>
+      <origin xyz="0.125 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.250 0.050 0.050"/>
+      </geometry>
+    </collision>
+
+    <visual name="RF_hip_vis_cover">
+      <origin xyz="0.125 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.250 0.050 0.050"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+  </link>
+  <gazebo reference="RF_hip">
+    <material>Gazebo/Blue</material>
+  </gazebo>
+
+<!--//////////////////////////////// RF JOINTS ////////////////////////////////-->
+
+  <joint name="RFJ_scap" type="revolute">
+    <parent link="body"/>
+    <child link="RF_scap"/>
+    <origin xyz="0.282 -0.08750 0" rpy="-1.57079 0 -1.57079"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-3.14" upper="0.000001" effort="50.0" velocity="3"/> <!--I dont know what it is-->
+    <dynamics damping="0.7"/>
+  </joint>
+
+  <joint name="RFJ_hip" type="revolute">
+    <parent link="RF_scap"/>
+    <child link="RF_hip"/>
+    <origin xyz="0.095 0 0" rpy="-1.57079  1.57079 -1.57079"/>
+    <axis xyz="0 0 1"/>
+    <!-- <limit lower="-3.14" upper="0.00001" effort="200.0" velocity="9"/> -->
+    <limit lower="-3.14" upper="0.78540" effort="200.0" velocity="9"/>
+    <dynamics damping="0.7"/>
+  </joint>
+
+  <joint name="RFJ_knee" type="revolute">
+    <parent link="RF_hip"/>
+    <child link="RF_knee"/>
+    <origin xyz="0.275 0   0" rpy="0      0      1.57079"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-1.308996939" upper="1.0471975512" effort="200.0" velocity="9"/>
+    <dynamics damping="3"/>
+  </joint>
+
+<!--//////////////////////////////// LF LINKS /////////////////////////////////-->
+
+  <link name="LF_scap">
+    <inertial>
+      <mass value="1.80"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.001541527" ixy="0.000007051" ixz="-0.000001356" iyy="0.001938779" iyz="0.000000659" izz="0.001547151"/>
+    </inertial>
+
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.0760" radius="0.0730"/>
+      </geometry>
+    </collision>
+
+    <visual name="LF_scap_vis_cover">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <!-- <cylinder length="0.0760" radius="0.0730"/> -->
+        <!-- <mesh filename="file://$(find aidin_m1)/meshes/actuator.stl"/>  ////fail,,//// -->
+        <mesh filename="/home/eunseop/dev_ws/src/aidin_m1/meshes/actuator_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="red"/>
+    </visual>
+  </link>
+  <gazebo reference="LF_scap">
+    <material>Gazebo/Red</material>
+  </gazebo>
+
+  <link name="LF_hip">
+    <inertial>
+      <mass value="1.80"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.001541527" ixy="0.000007051" ixz="-0.000001356" iyy="0.001938779" iyz="0.000000659" izz="0.001547151"/>
+    </inertial>
+
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.0760" radius="0.0730"/>
+      </geometry>
+    </collision>
+
+    <visual name="LF_hip_vis_cover">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <!-- <cylinder length="0.0760" radius="0.0730"/> -->
+        <!-- <mesh filename="file://$(find aidin_m1)/meshes/actuator.stl"/>  ////fail,,//// -->
+        <mesh filename="/home/eunseop/dev_ws/src/aidin_m1/meshes/actuator_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="green"/>
+    </visual>
+  </link>
+  <gazebo reference="LF_hip">
+    <material>Gazebo/Green</material>
+  </gazebo>
+
+  <link name="LF_knee">
+    <inertial>
+      <mass value="1.80"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.001541527" ixy="0.000007051" ixz="-0.000001356" iyy="0.001938779" iyz="0.000000659" izz="0.001547151"/>
+    </inertial>
+
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.0760" radius="0.0730"/>
+      </geometry>
+    </collision>
+
+    <visual name="LF_knee_vis_cover">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <!-- <cylinder length="0.0760" radius="0.0730"/> -->
+        <!-- <mesh filename="file://$(find aidin_m1)/meshes/actuator.stl"/>  ////fail,,//// -->
+        <mesh filename="/home/eunseop/dev_ws/src/aidin_m1/meshes/actuator_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+  </link>
+  <gazebo reference="LF_knee">
+    <material>Gazebo/Blue</material>
+  </gazebo>
+
+<!--//////////////////////////////// LF JOINTS ////////////////////////////////-->
+
+  <joint name="LFJ_scap" type="continuous">
+    <parent link="body"/>
+    <child link="LF_scap"/>
+    <origin xyz="0.138 0.08750 0" rpy="0 1.5708 0"/>
+    <axis xyz="0 0 1"/>
+    <dynamics damping="0.7"/>
+  </joint>
+
+  <joint name="LFJ_hip" type="continuous">
+    <parent link="LF_scap"/>
+    <child link="LF_hip"/>
+    <origin xyz="0 0 0.122" rpy="-1.5708 0 0"/>
+    <axis xyz="0 0 1"/>
+    <dynamics damping="0.7"/>
+  </joint>
+
+  <joint name="LFJ_knee" type="continuous">
+    <parent link="LF_hip"/>
+    <child link="LF_knee"/>
+    <origin xyz="0 0 0.091" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <dynamics damping="0.7"/>
+  </joint>
+
+<!--//////////////////////////////// LB LINKS /////////////////////////////////-->
+
+  <link name="LB_scap">
+    <inertial>
+      <mass value="1.80"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.001541527" ixy="0.000007051" ixz="-0.000001356" iyy="0.001938779" iyz="0.000000659" izz="0.001547151"/>
+    </inertial>
+
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.0760" radius="0.0730"/>
+      </geometry>
+    </collision>
+
+    <visual name="LB_scap_vis_cover">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <!-- <cylinder length="0.0760" radius="0.0730"/> -->
+        <!-- <mesh filename="file://$(find aidin_m1)/meshes/actuator.stl"/>  ////fail,,//// -->
+        <mesh filename="/home/eunseop/dev_ws/src/aidin_m1/meshes/actuator_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="red"/>
+    </visual>
+  </link>
+  <gazebo reference="LB_scap">
+    <material>Gazebo/Red</material>
+  </gazebo>
+
+  <link name="LB_hip">
+    <inertial>
+      <mass value="1.80"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.001541527" ixy="0.000007051" ixz="-0.000001356" iyy="0.001938779" iyz="0.000000659" izz="0.001547151"/>
+    </inertial>
+
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.0760" radius="0.0730"/>
+      </geometry>
+    </collision>
+
+    <visual name="LB_hip_vis_cover">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <!-- <cylinder length="0.0760" radius="0.0730"/> -->
+        <!-- <mesh filename="file://$(find aidin_m1)/meshes/actuator.stl"/>  ////fail,,//// -->
+        <mesh filename="/home/eunseop/dev_ws/src/aidin_m1/meshes/actuator_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="green"/>
+    </visual>
+  </link>
+  <gazebo reference="LB_hip">
+    <material>Gazebo/Green</material>
+  </gazebo>
+
+  <link name="LB_knee">
+    <inertial>
+      <mass value="1.80"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.001541527" ixy="0.000007051" ixz="-0.000001356" iyy="0.001938779" iyz="0.000000659" izz="0.001547151"/>
+    </inertial>
+
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.0760" radius="0.0730"/>
+      </geometry>
+    </collision>
+
+    <visual name="LB_knee_vis_cover">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <!-- <cylinder length="0.0760" radius="0.0730"/> -->
+        <!-- <mesh filename="file://$(find aidin_m1)/meshes/actuator.stl"/>  ////fail,,//// -->
+        <mesh filename="/home/eunseop/dev_ws/src/aidin_m1/meshes/actuator_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+  </link>
+  <gazebo reference="LB_knee">
+    <material>Gazebo/Blue</material>
+  </gazebo>
+
+<!--//////////////////////////////// LB JOINTS ////////////////////////////////-->
+
+  <joint name="LBJ_scap" type="continuous">
+    <parent link="body"/>
+    <child link="LB_scap"/>
+    <origin xyz="-0.138 0.08750 0" rpy="0 1.5708 3.14159"/>
+    <axis xyz="0 0 1"/>
+    <dynamics damping="0.7"/>
+  </joint>
+
+  <joint name="LBJ_hip" type="continuous">
+    <parent link="LB_scap"/>
+    <child link="LB_hip"/>
+    <origin xyz="0 0 0.122" rpy="1.5708 0 0"/>
+    <axis xyz="0 0 1"/>
+    <dynamics damping="0.7"/>
+  </joint>
+
+  <joint name="LBJ_knee" type="continuous">
+    <parent link="LB_hip"/>
+    <child link="LB_knee"/>
+    <origin xyz="0 0 0.091" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <dynamics damping="0.7"/>
+  </joint>
+
+<!--//////////////////////////////// RB LINKS /////////////////////////////////-->
+
+  <link name="RB_scap">
+    <inertial>
+      <mass value="1.80"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.001541527" ixy="0.000007051" ixz="-0.000001356" iyy="0.001938779" iyz="0.000000659" izz="0.001547151"/>
+    </inertial>
+
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.0760" radius="0.0730"/>
+      </geometry>
+    </collision>
+
+    <visual name="RB_scap_vis_cover">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <!-- <cylinder length="0.0760" radius="0.0730"/> -->
+        <!-- <mesh filename="file://$(find aidin_m1)/meshes/actuator.stl"/>  ////fail,,//// -->
+        <mesh filename="/home/eunseop/dev_ws/src/aidin_m1/meshes/actuator_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="red"/>
+    </visual>
+  </link>
+  <gazebo reference="RB_scap">
+    <material>Gazebo/Red</material>
+  </gazebo>
+
+  <link name="RB_hip">
+    <inertial>
+      <mass value="1.80"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.001541527" ixy="0.000007051" ixz="-0.000001356" iyy="0.001938779" iyz="0.000000659" izz="0.001547151"/>
+    </inertial>
+
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.0760" radius="0.0730"/>
+      </geometry>
+    </collision>
+
+    <visual name="RB_hip_vis_cover">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <!-- <cylinder length="0.0760" radius="0.0730"/> -->
+        <!-- <mesh filename="file://$(find aidin_m1)/meshes/actuator.stl"/>  ////fail,,//// -->
+        <mesh filename="/home/eunseop/dev_ws/src/aidin_m1/meshes/actuator_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="green"/>
+    </visual>
+  </link>
+  <gazebo reference="RB_hip">
+    <material>Gazebo/Green</material>
+  </gazebo>
+
+  <link name="RB_knee">
+    <inertial>
+      <mass value="1.80"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.001541527" ixy="0.000007051" ixz="-0.000001356" iyy="0.001938779" iyz="0.000000659" izz="0.001547151"/>
+    </inertial>
+
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.0760" radius="0.0730"/>
+      </geometry>
+    </collision>
+
+    <visual name="RB_knee_vis_cover">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <!-- <cylinder length="0.0760" radius="0.0730"/> -->
+        <!-- <mesh filename="file://$(find aidin_m1)/meshes/actuator.stl"/>  ////fail,,//// -->
+        <mesh filename="/home/eunseop/dev_ws/src/aidin_m1/meshes/actuator_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+  </link>
+  <gazebo reference="RB_knee">
+    <material>Gazebo/Blue</material>
+  </gazebo>
+
+<!--//////////////////////////////// RB JOINTS ////////////////////////////////-->
+
+  <joint name="RBJ_scap" type="continuous">
+    <parent link="body"/>
+    <child link="RB_scap"/>
+    <origin xyz="-0.138 -0.08750 0" rpy="0 1.5708 3.14159"/>
+    <axis xyz="0 0 1"/>
+    <dynamics damping="0.7"/>
+  </joint>
+
+  <joint name="RBJ_hip" type="continuous">
+    <parent link="RB_scap"/>
+    <child link="RB_hip"/>
+    <origin xyz="0 0 0.122" rpy="-1.5708 0 0"/>
+    <axis xyz="0 0 1"/>
+    <dynamics damping="0.7"/>
+  </joint>
+
+  <joint name="RBJ_knee" type="continuous">
+    <parent link="RB_hip"/>
+    <child link="RB_knee"/>
+    <origin xyz="0 0 0.091" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <dynamics damping="0.7"/>
+  </joint>
+
+<!--//////////////////////////////// Sensor - Lidar //////////////////////////////////-->
+
+<!--//////////////////////////////// Sensor - Camera ////////////////////////////////-->
+<!-- camera names -->
+<!--
+
+                              __1/2__
+1. camera_upper               |     |
+2. camera_lower               |     |
+3. camera_left              3 |     | 5
+4. camera_back                |     |
+5. camera_right               |_____|
+                                 4
+-->
+
+<!--/////////////////////////////// Camera Upper //////////////////////////////////-->
+
+<!--/////////////////////////////// Camera Lower //////////////////////////////////-->
+
+<!--/////////////////////////////// Camera Left //////////////////////////////////-->
+
+<!--/////////////////////////////// Camera Back //////////////////////////////////-->
+
+<!--/////////////////////////////// Camera Right //////////////////////////////////-->
+
+<!--//////////////////////////////// Aidin_m1 Plugin ////////////////////////////////-->
+
+  <gazebo>
+    <plugin name="aidin_m1_plugin" filename="libaidin_m1_plugin.so">
+      <update_rate>20</update_rate>
+      <joint_name>RFJ_scap</joint_name>
+      <joint_name>RFJ_hip</joint_name>
+      <joint_name>RFJ_knee</joint_name>
+    </plugin>
+  </gazebo>
+
+</robot>
