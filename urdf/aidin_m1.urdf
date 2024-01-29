@@ -173,7 +173,7 @@
     <child link="RF_scap"/>
     <origin xyz="0.282 -0.1150 0" rpy="-1.57079 0 -1.57079"/>
     <axis xyz="0 0 1"/>
-    <limit lower="-1.5709" upper="0.00001" effort="200.0" velocity="9"/>
+    <limit lower="-0.00001" upper="0.7854" effort="200.0" velocity="9"/>
     <dynamics damping="0.7"/>
   </joint>
 
@@ -282,7 +282,7 @@
     <child link="LF_scap"/>
     <origin xyz="0.282 0.115 0" rpy="1.57079 0 1.57079"/>
     <axis xyz="0 0 1"/>
-    <limit lower="-0.00001" upper="1.5709" effort="200.0" velocity="9"/>
+    <limit lower="-0.7854" upper="0.00001" effort="200.0" velocity="9"/>
     <dynamics damping="3"/>
   </joint>
 
@@ -391,7 +391,7 @@
     <child link="LB_scap"/>
     <origin xyz="-0.282 0.1150 0" rpy="1.57079 0 1.57079"/>
     <axis xyz="0 0 1"/>
-    <limit lower="-0.00001" upper="1.5709" effort="200.0" velocity="9"/>
+    <limit lower="-0.7854" upper="0.00001" effort="200.0" velocity="9"/>
     <dynamics damping="3"/>
   </joint>
 
@@ -500,7 +500,7 @@
     <child link="RB_scap"/>
     <origin xyz="-0.282 -0.1150   0" rpy="-1.57079 0 -1.57079"/>
     <axis xyz="0 0 1"/>
-    <limit lower="-1.5709" upper="0.00001" effort="200.0" velocity="9"/>
+    <limit lower="-0.00001" upper="0.7854" effort="200.0" velocity="9"/>
     <dynamics damping="3"/>
   </joint>
 
@@ -553,7 +553,7 @@
     <plugin name="aidin_m1_plugin" filename="libaidin_m1_plugin.so">
       <update_rate>20</update_rate>
 
-      <!-- <joint_name>odom_joint</joint_name> -->
+      <joint_name>odom_joint</joint_name>
 
       <joint_name>RFJ_scap</joint_name>
       <joint_name>RFJ_hip</joint_name>
