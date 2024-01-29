@@ -171,7 +171,7 @@
   <joint name="RFJ_scap" type="revolute">
     <parent link="body"/>
     <child link="RF_scap"/>
-    <origin xyz="0.282 -0.08750 0" rpy="-1.57079 0 -1.57079"/>
+    <origin xyz="0.282 -0.115 0" rpy="-1.57079 0 -1.57079"/>
     <axis xyz="0 0 1"/>
     <limit lower="-3.14" upper="0.000001" effort="50.0" velocity="3"/> <!--I dont know what it is-->
     <dynamics damping="0.7"/>
@@ -562,6 +562,7 @@
   <gazebo>
     <plugin name="aidin_m1_plugin" filename="libaidin_m1_plugin.so">
       <update_rate>20</update_rate>
+      <!-- <joint_name>odom_joint</joint_name> -->
       <joint_name>RFJ_scap</joint_name>
       <joint_name>RFJ_hip</joint_name>
       <joint_name>RFJ_knee</joint_name>

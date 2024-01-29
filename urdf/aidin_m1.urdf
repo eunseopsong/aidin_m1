@@ -154,7 +154,7 @@
       </geometry>
     </collision>
 
-    <visual name="RF_hip_vis_cover">
+    <visual name="RF_knee_vis_cover">
       <origin xyz="0.125 0 0" rpy="0 0 0"/>
       <geometry>
         <box size="0.250 0.050 0.050"/>
@@ -162,7 +162,7 @@
       <material name="blue"/>
     </visual>
   </link>
-  <gazebo reference="RF_hip">
+  <gazebo reference="RF_knee">
     <material>Gazebo/Blue</material>
   </gazebo>
 
@@ -562,6 +562,7 @@
   <gazebo>
     <plugin name="aidin_m1_plugin" filename="libaidin_m1_plugin.so">
       <update_rate>20</update_rate>
+      <!-- <joint_name>odom_joint</joint_name> -->
       <joint_name>RFJ_scap</joint_name>
       <joint_name>RFJ_hip</joint_name>
       <joint_name>RFJ_knee</joint_name>
