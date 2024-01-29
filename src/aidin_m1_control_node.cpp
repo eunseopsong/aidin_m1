@@ -21,6 +21,14 @@ public:
                 joint2_pos = msg->data[1];
                 joint3_pos = msg->data[2];
                 joint4_pos = msg->data[3];
+                joint5_pos = msg->data[4];
+                joint6_pos = msg->data[5];
+                joint7_pos = msg->data[6];
+                joint8_pos = msg->data[7];
+                joint9_pos = msg->data[8];
+                joint10_pos = msg->data[9];
+                joint11_pos = msg->data[10];
+                joint12_pos = msg->data[11];
                 CalculateAndPublishTorque();
             });
 
@@ -31,6 +39,14 @@ public:
                 joint2_vel = msg->data[1];
                 joint3_vel = msg->data[2];
                 joint4_vel = msg->data[3];
+                joint5_vel = msg->data[4];
+                joint6_vel = msg->data[5];
+                joint7_vel = msg->data[6];
+                joint8_vel = msg->data[7];
+                joint9_vel = msg->data[8];
+                joint10_vel = msg->data[9];
+                joint11_vel = msg->data[10];
+                joint12_vel = msg->data[11];
                 CalculateAndPublishTorque();
             });
 
@@ -78,7 +94,10 @@ private:
 
     rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_desiredpos;
 
-    float joint1_pos, joint2_pos, joint3_pos, joint4_pos, joint1_vel, joint2_vel, joint3_vel, joint4_vel;   // Joint angle & velocity
+    // Joint angle
+    float joint1_pos, joint2_pos, joint3_pos, joint4_pos, joint5_pos, joint6_pos, joint7_pos, joint8_pos, joint9_pos, joint10_pos, joint11_pos, joint12_pos;
+    // Joint velocity
+    float joint1_vel, joint2_vel, joint3_vel, joint4_vel, joint5_vel, joint6_vel, joint7_vel, joint8_vel, joint9_vel, joint10_vel, joint11_vel, joint12_vel;
     double sim_time;                    // Gazebo simulation time
     double ag[3];                       // Angles
 
@@ -88,10 +107,18 @@ private:
         std_msgs::msg::Float32MultiArray torque_msg;
         torque_msg.data.clear();
 
-        torque_msg.data.push_back(-ag[0]);
         torque_msg.data.push_back(ag[0]);
-        torque_msg.data.push_back(ag[0]);
+        torque_msg.data.push_back(0);
+        torque_msg.data.push_back(0);
         torque_msg.data.push_back(-ag[0]);
+        torque_msg.data.push_back(0);
+        torque_msg.data.push_back(0);
+        torque_msg.data.push_back(ag[0]);
+        torque_msg.data.push_back(0);
+        torque_msg.data.push_back(0);
+        torque_msg.data.push_back(-ag[0]);
+        torque_msg.data.push_back(0);
+        torque_msg.data.push_back(0);
 
         pub_torque->publish(torque_msg);
 
@@ -100,9 +127,17 @@ private:
         desiredpos_msg.data.clear();
 
         desiredpos_msg.data.push_back(ag[0]);
+        desiredpos_msg.data.push_back(0);
+        desiredpos_msg.data.push_back(0);
         desiredpos_msg.data.push_back(ag[0]);
+        desiredpos_msg.data.push_back(0);
+        desiredpos_msg.data.push_back(0);
         desiredpos_msg.data.push_back(ag[0]);
+        desiredpos_msg.data.push_back(0);
+        desiredpos_msg.data.push_back(0);
         desiredpos_msg.data.push_back(ag[0]);
+        desiredpos_msg.data.push_back(0);
+        desiredpos_msg.data.push_back(0);
 
         pub_desiredpos->publish(desiredpos_msg);
     }
