@@ -1,169 +1,155 @@
-#ifndef _LEG_PLUGIN_HH_
-#define _LEG_PLUGIN_HH_
+#include <iostream>
+#include <cmath>
+#include <math.h>
 
 #include "rclcpp/rclcpp.hpp"
-
-#include <stdio.h>
-#include <gazebo/gazebo.hh>
-#include <gazebo/physics/physics.hh>
-
-#include "std_msgs/msg/float32.hpp"
 #include "std_msgs/msg/float32_multi_array.hpp"
-
+#include "rosgraph_msgs/msg/clock.hpp"
 
 using namespace std;
 
-namespace gazebo
+class JointControl: public rclcpp::Node
 {
-    class aidin_m1_plugin : public ModelPlugin
+public:
+    JointControl() : Node("aidin_m1_control_node")
     {
-        // Constructor
-        public: aidin_m1_plugin() {
-            int argc =0;
-            // rclcpp::init(argc, nullptr);
-        }
+        // Subscribe to JointPos_sim and JointVel_sim topics
+        sub_jointpos = this->create_subscription<std_msgs::msg::Float32MultiArray>(
+            "/aidin_m1/JointPos_sim", 10,
+            [this](const std_msgs::msg::Float32MultiArray::SharedPtr msg) {
+                joint1_pos = msg->data[0];
+                joint2_pos = msg->data[1];
+                joint3_pos = msg->data[2];
+                joint4_pos = msg->data[3];
+                joint5_pos = msg->data[4];
+                joint6_pos = msg->data[5];
+                joint7_pos = msg->data[6];
+                joint8_pos = msg->data[7];
+                joint9_pos = msg->data[8];
+                joint10_pos = msg->data[9];
+                joint11_pos = msg->data[10];
+                joint12_pos = msg->data[11];
+                CalculateAndPublishTorque();
+            });
 
-        // Destructor
-        public: ~aidin_m1_plugin() {}
+        sub_jointvel = this->create_subscription<std_msgs::msg::Float32MultiArray>(
+            "/aidin_m1/JointVel_sim", 10,
+            [this](const std_msgs::msg::Float32MultiArray::SharedPtr msg) {
+                joint1_vel = msg->data[0];
+                joint2_vel = msg->data[1];
+                joint3_vel = msg->data[2];
+                joint4_vel = msg->data[3];
+                joint5_vel = msg->data[4];
+                joint6_vel = msg->data[5];
+                joint7_vel = msg->data[6];
+                joint8_vel = msg->data[7];
+                joint9_vel = msg->data[8];
+                joint10_vel = msg->data[9];
+                joint11_vel = msg->data[10];
+                joint12_vel = msg->data[11];
+                CalculateAndPublishTorque();
+            });
 
+        sub_simtime = this->create_subscription<rosgraph_msgs::msg::Clock>(
+            "/clock", rclcpp::QoS(10).best_effort(),
+            [this](const rosgraph_msgs::msg::Clock::SharedPtr msg) {
+                sim_time = msg->clock.sec + (msg->clock.nanosec)/1000000000.0;
+                CalculateAndPublishTorque();
+            });
 
-        // Pointer to subscriber
-        private: rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_torque;
-        // Pointer to publisher
-        private: rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_jointpos;
-        private: rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_jointvel;
-        //private: rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_jointtorque;
+        pub_torque = this->create_publisher<std_msgs::msg::Float32MultiArray>(
+            "/aidin_m1/Torque_sim", 10);
 
-        // Pointer to model
-        private: physics::ModelPtr model;
+        // sub_gains = this->create_subscription<std_msgs::msg::Float32MultiArray>(
+        //     "/aidin_m1/Gains_sim", 10,
+        //     [this](const std_msgs::msg::Float32MultiArray::SharedPtr msg) {
+        //         kp[0] = msg->data[0];
+        //         kp[1] = msg->data[1];
+        //         kp[2] = msg->data[2];
+        //         kd[0] = msg->data[3];
+        //         kd[1] = msg->data[4];
+        //         kd[2] = msg->data[5];
+        //     });
 
-        // Pointer to the joint controller
-        private: physics::JointControllerPtr joint1_Controller_;
-        private: physics::JointControllerPtr joint2_Controller_;
-        private: physics::JointControllerPtr joint3_Controller_;
-        private: physics::JointControllerPtr joint4_Controller_;
-
-        // Pointer to the joint
-        private: physics::JointPtr joint1_;
-        private: physics::JointPtr joint2_;
-        private: physics::JointPtr joint3_;
-        private: physics::JointPtr joint4_;
-
-        // Pointer to the update event connection
-        private: event::ConnectionPtr updateConnection;
-
-        // Start node
-        private: rclcpp::Node::SharedPtr node;
-
-
-        public: void Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
-        {
-            this->model = _model;
-
-            // Initialize node
-            node = rclcpp::Node::make_shared("my_aidin_m1_node");
-
-            // Print messages
-            RCLCPP_INFO(this->node->get_logger(), "aiidn_m1_plugin run");
-            std::cerr << "The aidin_m1 plugin is attached to the model ["
-                      << this->model->GetName() << "]\n";
-
-            std::string robot_namespace = "/" + this->model->GetName() + "/";
-
-/*
-            // Print joint info
-            int jointCount = this->model->GetJointCount();
-            RCLCPP_INFO(node->get_logger(), "Number of joints in the model: %d", jointCount);
-
-            for (int i = 0; i < jointCount; ++i) {
-                physics::JointPtr joint = this->model->GetJoints()[i];
-                RCLCPP_INFO(node->get_logger(), "Joint %d: %s", i, joint->GetName().c_str());
-            }
-*/
-
-            // Store the joint
-            this->joint1_ = this->model->GetJoint("aidin_m1::RFJ_scap");
-            this->joint2_ = this->model->GetJoint("aidin_m1::LFJ_scap");
-            this->joint3_ = this->model->GetJoint("aidin_m1::LBJ_scap");
-            this->joint4_ = this->model->GetJoint("aidin_m1::RBJ_scap");
-
-            // Store the joint Controller to control Joint
-            this->joint1_Controller_ = this->model->GetJointController();
-            this->joint2_Controller_ = this->model->GetJointController();
-            this->joint3_Controller_ = this->model->GetJointController();
-            this->joint4_Controller_ = this->model->GetJointController();
-
-            auto qos = rclcpp::QoS(rclcpp::KeepLast(10)).reliable().durability_volatile();
-            //qos.reliability(RMW_QOS_POLICY_RELIABILITY_RELIABLE);
-            //qos.transient_local();
-
-            // Create subscriber
-            this->sub_torque = this->node->create_subscription<std_msgs::msg::Float32MultiArray>(
-                robot_namespace+"Torque_sim",
-                qos,
-                std::bind(&aidin_m1_plugin::ROSCallbackTorque_sim, this, std::placeholders::_1));
-
-            // Create publisher
-            this->pub_jointpos = this->node->create_publisher<std_msgs::msg::Float32MultiArray>(
-                robot_namespace+"JointPos_sim", qos);
-            this->pub_jointvel = this->node->create_publisher<std_msgs::msg::Float32MultiArray>(
-                robot_namespace+"JointVel_sim", qos);
-            /*this->pub_jointtorque = this->node->create_publisher<std_msgs::msg::Float32MultiArray>(
-                robot_namespace+"JointTorque_sim", qos);
-            */
-
-            // Listen to the update event. This event is broadcast every
-            // simulation iteration.
-            this->updateConnection = gazebo::event::Events::ConnectWorldUpdateBegin(
-                std::bind(&aidin_m1_plugin::OnUpdate, this));
-        }
+        sub_angles = this->create_subscription<std_msgs::msg::Float32MultiArray>(
+            "/aidin_m1/Angles_sim", 10,
+            [this](const std_msgs::msg::Float32MultiArray::SharedPtr msg) {
+                ag[0] = msg->data[0];
+                ag[1] = msg->data[1];
+            });
 
 
-        public: void OnUpdate()
-        {
-            // Publish joint position
-            std_msgs::msg::Float32MultiArray JointPos;
-            JointPos.data.clear();
-            JointPos.data.push_back(this->joint1_->Position(1));
-            JointPos.data.push_back(this->joint2_->Position(1));
-            JointPos.data.push_back(this->joint3_->Position(1));
-            JointPos.data.push_back(this->joint4_->Position(1));
-            pub_jointpos->publish(JointPos);
+        // Publish desired joint poses
+        pub_desiredpos = this->create_publisher<std_msgs::msg::Float32MultiArray>(
+            "/aidin_m1/DesiredPos", 10);
+    }
+
+private:
+    rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_jointpos;
+    rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_jointvel;
+    rclcpp::Subscription<rosgraph_msgs::msg::Clock>::SharedPtr sub_simtime;
+    rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_torque;
+    // rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_gains;
+    rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_angles;
+
+    rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_desiredpos;
+
+    // Joint angle
+    float joint1_pos, joint2_pos, joint3_pos, joint4_pos, joint5_pos, joint6_pos, joint7_pos, joint8_pos, joint9_pos, joint10_pos, joint11_pos, joint12_pos;
+    // Joint velocity
+    float joint1_vel, joint2_vel, joint3_vel, joint4_vel, joint5_vel, joint6_vel, joint7_vel, joint8_vel, joint9_vel, joint10_vel, joint11_vel, joint12_vel;
+
+    double sim_time;                    // Gazebo simulation time
+    double ag[3];                       // Angles
 
 
-            // Publish joint velocity
-            std_msgs::msg::Float32MultiArray JointVel;
-            JointVel.data.clear();
-            JointVel.data.push_back(this->joint1_->GetVelocity(1));
-            JointVel.data.push_back(this->joint2_->GetVelocity(1));
-            JointVel.data.push_back(this->joint3_->GetVelocity(1));
-            JointVel.data.push_back(this->joint4_->GetVelocity(1));
-            pub_jointvel->publish(JointVel);
-	/*
-            // Publish joint torque
-            std_msgs::msg::Float32MultiArray JointTorque;
-            JointTorque.data.clear();
-            JointTorque.data.push_back(this->joint1_->GetForceTorque(0).body2Torque[1]);
-            JointTorque.data.push_back(this->joint2_->GetForceTorque(0).body2Torque[1]);
-            JointTorque.data.push_back(this->joint3_->GetForceTorque(0).body2Torque[1]);
-            pub_jointtorque->publish(JointTorque);
-	*/
+    void CalculateAndPublishTorque()
+    {
+        std_msgs::msg::Float32MultiArray torque_msg;
+        torque_msg.data.clear();
 
-            rclcpp::executors::SingleThreadedExecutor executor;
-            executor.add_node(this->node);
-            executor.spin_once();
-        }
+        torque_msg.data.push_back(ag[0]);
+        torque_msg.data.push_back(0);
+        torque_msg.data.push_back(0);
+        torque_msg.data.push_back(-ag[0]);
+        torque_msg.data.push_back(0);
+        torque_msg.data.push_back(0);
+        torque_msg.data.push_back(ag[0]);
+        torque_msg.data.push_back(0);
+        torque_msg.data.push_back(0);
+        torque_msg.data.push_back(-ag[0]);
+        torque_msg.data.push_back(0);
+        torque_msg.data.push_back(0);
 
-        void ROSCallbackTorque_sim(const std_msgs::msg::Float32MultiArray::ConstSharedPtr torque)
-        {
-            this->joint1_->SetForce(0, torque->data[0]);
-            this->joint2_->SetForce(0, torque->data[1]);
-            this->joint3_->SetForce(0, torque->data[2]);
-            this->joint4_->SetForce(0, torque->data[3]);
-        }
-    };
+        pub_torque->publish(torque_msg);
 
-    // Register this plugin with the simulator
-    GZ_REGISTER_MODEL_PLUGIN(aidin_m1_plugin);
+
+        std_msgs::msg::Float32MultiArray desiredpos_msg;
+        desiredpos_msg.data.clear();
+
+        desiredpos_msg.data.push_back(ag[0]);
+        desiredpos_msg.data.push_back(0);
+        desiredpos_msg.data.push_back(0);
+        desiredpos_msg.data.push_back(ag[0]);
+        desiredpos_msg.data.push_back(0);
+        desiredpos_msg.data.push_back(0);
+        desiredpos_msg.data.push_back(ag[0]);
+        desiredpos_msg.data.push_back(0);
+        desiredpos_msg.data.push_back(0);
+        desiredpos_msg.data.push_back(ag[0]);
+        desiredpos_msg.data.push_back(0);
+        desiredpos_msg.data.push_back(0);
+
+        pub_desiredpos->publish(desiredpos_msg);
+    }
+};
+
+
+int main(int argc, char **argv)
+{
+    rclcpp::init(argc, argv);
+    rclcpp::spin(std::make_shared<JointControl>());
+    rclcpp::shutdown();
+
+    return 0;
 }
-#endif
