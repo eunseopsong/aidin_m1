@@ -108,7 +108,8 @@ void PrintVector(double tStart, double T, double dt, std::vector<double> values,
     std::cout << "Vector의 길이: " << values.size() << std::endl << std::endl;
 }
 
-int main(){
+int main()
+{
     /////////////////// Initializing ////////////////////
 
     double vel_of_body = 1600;
