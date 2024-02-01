@@ -175,9 +175,9 @@ private:
         return SWValues;
     }
 
-    void bezierEndpoint(double t, double &y, double &z)
+    void SplineTrajectory(double sim_time, double &xVal, double &zVal)
     {
-        /////////////////// Initializing ////////////////////
+        /////////////////////// Initializing ////////////////////////
 
         double vel_of_body = 1600;
         double T = 0.5;
@@ -187,7 +187,7 @@ private:
         double tStart = 0.0;
         double tEnd = T/2;
 
-        double scap_degree, hip_degree, knee_degree;
+        double scap_degree = 0, hip_degree = (40 * M_PI / 180 - M_PI), knee_degree = 90 * M_PI / 180;
         double height = 1656/5;
         double scap_length = 80, hip_length = 250, knee_length = 250;
         double InitailxValues = -61.1902;
@@ -195,103 +195,75 @@ private:
         int ST_x_case = 1, SW_x_case = 2, Reverse_x_case = 3;
         int ST_z_case = 4, SW_z_case = 5, Reverse_z_case = 6;
 
-        ///////////////////// Solve x /////////////////////
-        ////// StandingPhase //////
-
-        // 시간에 따른 x 좌표의 변화 계산
-        std::vector<double> STxValues = CalculateXValues(vel_of_body, tStart, T/2, dt, length_of_STanding_phase);
-
-        ////// SwingPhase //////
-
-        // undetermined coefficients (a1*t^5 + b1*t^4 + c1*t^3 + d1*t^2 + e1*t + f1)
+        // undetermined coefficients of SWxValues (a1*t^5 + b1*t^4 + c1*t^3 + d1*t^2 + e1*t + f1)
         double d1 = 0, e1 = -(vel_of_body), f1 = -length_of_STanding_phase/2;
         double singular1 = T/16;
         double B_val1[3] = {-e1, -(f1 +e1*T/4), 0};
         double S1[6];
+
+        // undetermined coefficients of SWzValues (a2*t^5 + b2*t^4 + c2*t^3 + d2*t^2 + e2*t + f2)
+        double d2 = 0, e2 = 0, f2 = -height;
+        double singular2 = T/4;
+        double B_val2[3] = {0, -(5*height/6 +f2), 0};
+        double S2[6];
+
+        // return value initialize
+        double By = 0, Bz = 0;
+        sim_time = fmod(sim_time, T);
+
+        //////////////////// Divide the Phase /////////////////////
+
+        if (sim_time <= T/2) {
+        ////////////////// STandingPhase //////////////////
+        //// Solve x ////
+
+        // 시간에 따른 x 좌표의 변화 계산
+        std::vector<double> STxValues = CalculateXValues(vel_of_body, tStart, T/2, dt, length_of_STanding_phase);
+
+        //// Solve z ////
+
+        // 시간에 따른 z 좌표의 변화 계산 // zValue is constant in STanding Phase.
+        std::vector<double> STzValues(T/2/dt, -height);
+
+        } else if (sim_time <= T*(3/4)) {
+
+        ////////////////// SWingPhase //////////////////
+        //// Solve x ////
 
         // solve undetermined coefficients (double S1[6] = {a1, b1, c1, d1, e1, f1};)
         solve(d1, e1, f1, T, singular1, B_val1, S1);
 
         std::vector<double> SWxValues = CalculateValues(S1, tStart, T/2, dt, SW_x_case);
 
-        ////// ReversePhase //////
-
-        // Reverse of SWingPhase
-        std::vector<double> REVERSExValues = CalculateValues(S1, tStart, T/2, dt, Reverse_x_case);
-
-        ///////////////////// Solve z /////////////////////
-        ////// StandingPhase //////
-
-        // 시간에 따른 z 좌표의 변화 계산 // zValue is constant in STanding Phase.
-        std::vector<double> STzValues(T/2/dt, -height);
-
-        ////// SwingPhase //////
-
-        // undetermined coefficients (a2*t^5 + b2*t^4 + c2*t^3 + d2*t^2 + e2*t + f2)
-        double d2 = 0, e2 = 0, f2 = -height;
-        double singular2 = T/4;
-        double B_val2[3] = {0, -(5*height/6 +f2), 0};
-        double S2[6];
+        //// Solve z ////
 
         // solve undetermined coefficients (double S2[6] = {a2, b2, c2, d2, e2, f2};)
         solve(d2, e2, f2, T, singular2, B_val2, S2);
 
         std::vector<double> SWzValues = CalculateValues(S2, tStart, T/2, dt, SW_z_case);
 
-        ////// ReversePhase //////
+        } else {
+        ////////////////// ReversePhase //////////////////
+        //// Solve x ////
+
+        // Reverse of SWingPhase
+        std::vector<double> REVERSExValues = CalculateValues(S1, tStart, T/2, dt, Reverse_x_case);
+
+        //// Solve z ////
 
         std::vector<double> REVERSEzValues = CalculateValues(S2, tStart, T/2, dt, Reverse_z_case);
 
-
-        ////////////////////////////////////////////////////////////////////////////////
-        ////////////////////// Bezier Curve Created by jwa & kwon //////////////////////
-        ////////////////////////////////////////////////////////////////////////////////
-
-        q1 = 0, q2 = 40 * M_PI / 180 - M_PI, q3 = 90 * M_PI / 180;          // initial leg angle
-        l1 = 80, l2 = 230, l3 = 230;        // leg length
-        double S = 0.2, V = 1.8*1000;       // S: period of gate cycle, V: gate velocity
-        double D = S*V/2;
-        double pe[2];
-
-        // Points for Making Bezier Curve
-        // pe[0] = l3*(cos(q2)*sin(q1)*sin(q3) + cos(q3)*sin(q1)*sin(q2)) + l1*cos(q1) + l2*sin(q1)*sin(q2);    // x forward kinematics
-        pe[0] = l3*(cos(q2)*cos(q3) - sin(q2)*sin(q3)) + l2*cos(q2);                                            // y forward kinematics
-        pe[1] = l3*(cos(q1)*cos(q2)*sin(q3) + cos(q1)*cos(q3)*sin(q2)) - l1*sin(q1) + l2*cos(q1)*sin(q2);       // z forward kinematics
-
-        double P0[2], P1[2], P2[2], P3[2], P4[2], P5[2], P6[2], P7[2], P8[2];
-        P0[0] = pe[0];              P0[1] = pe[1];
-        P1[0] = pe[0]-D;            P1[1] = pe[1];
-        P2[0] = pe[0]-D-V/10*S;     P2[1] = pe[1];
-        P3[0] = pe[0]-D-V/10*S-10;  P3[1] = 7*pe[1]/8;
-        P4[0] = pe[0];              P4[1] = 7*pe[1]/8;
-        P5[0] = pe[0];              P5[1] = 19*pe[1]/24;
-        P6[0] = pe[0]+D+V/10*S+10;  P6[1] = 5*pe[1]/6;
-        P7[0] = pe[0]+D+V/10*S;     P7[1] = pe[1];
-        P8[0] = pe[0]+D;            P8[1] = pe[1];
-
-        double By = 0, Bz = 0;
-        t = fmod(t, 2*S);
-
-        if (t <= S/2) {
-
-        }
-        else if (t <= 3*S/2) {
-
-        }
-        else {
-
         }
 
-        y = By;
-        z = Bz;
+        xVal = By;
+        zVal = Bz;
     }
-
 
     void CalculateAndPublishTorque()
     {
         // 발 끝 좌표
         double xVal, zVal;
-        bezierEndpoint(sim_time, xVal, zVal);
+        SplineTrajectory(sim_time, xVal, zVal);
         double yVal = 79;
 
         // 조인트 각도 계산
@@ -310,6 +282,7 @@ private:
             double th2 = M_PI + th - acos((l2*l2 + l*l - l3*l3) / (2*l2*l));
             double th3 = M_PI - acos((l2*l2 + l3*l3 - l*l) / (2*l2*l3));
 
+            //// Publish Torque to Joint ////
 
             std_msgs::msg::Float32MultiArray torque_msg;
             torque_msg.data.clear();
@@ -329,6 +302,7 @@ private:
 
             pub_torque->publish(torque_msg);
 
+            //// Publish DesiredPos ////
 
             std_msgs::msg::Float32MultiArray desiredpos_msg;
             desiredpos_msg.data.clear();
@@ -350,7 +324,6 @@ private:
         }
     }
 };
-
 
 int main(int argc, char **argv)
 {
