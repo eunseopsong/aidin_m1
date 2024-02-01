@@ -64,16 +64,16 @@ public:
             "/aidin_m1/Torque_sim", 10);
 
 
-        // sub_gains = this->create_subscription<std_msgs::msg::Float32MultiArray>(
-        //     "/aidin_m1/Gains_sim", 10,
-        //     [this](const std_msgs::msg::Float32MultiArray::SharedPtr msg) {
-        //         kp[0] = msg->data[0];
-        //         kp[1] = msg->data[1];
-        //         kp[2] = msg->data[2];
-        //         kd[0] = msg->data[3];
-        //         kd[1] = msg->data[4];
-        //         kd[2] = msg->data[5];
-        //     });
+        sub_gains = this->create_subscription<std_msgs::msg::Float32MultiArray>(
+            "/aidin_m1/Gains_sim", 10,
+            [this](const std_msgs::msg::Float32MultiArray::SharedPtr msg) {
+                kp[0] = msg->data[0];
+                kp[1] = msg->data[1];
+                kp[2] = msg->data[2];
+                kd[0] = msg->data[3];
+                kd[1] = msg->data[4];
+                kd[2] = msg->data[5];
+            });
 
         sub_angles = this->create_subscription<std_msgs::msg::Float32MultiArray>(
             "/aidin_m1/Angles_sim", 10,
@@ -93,7 +93,7 @@ private:
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_jointvel;
     rclcpp::Subscription<rosgraph_msgs::msg::Clock>::SharedPtr sub_simtime;
     rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_torque;
-    // rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_gains;
+    rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_gains;
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_angles;
 
     rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_desiredpos;
@@ -104,7 +104,7 @@ private:
     float joint1_vel, joint2_vel, joint3_vel, joint4_vel, joint5_vel, joint6_vel, joint7_vel, joint8_vel, joint9_vel, joint10_vel, joint11_vel, joint12_vel;
     double sim_time;                    // Gazebo simulation time
     double ag[3];                       // Angles
-
+    double kp[3], kd[3];                // Gains
 
     double q1, q2, q3, l1, l2, l3;      // initial leg angle, leg length
 
@@ -207,13 +207,13 @@ private:
         double B_val2[3] = {0, -(5*height/6 +f2), 0};
         double S2[6];
 
-        // return value initialize
-        double By = 0, Bz = 0;
-        sim_time = fmod(sim_time, T);
+        // Initialize return value
+        double returnXValue = 0, returnZValue = 0;
+        double t = fmod(sim_time, T);
 
         //////////////////// Divide the Phase /////////////////////
 
-        if (sim_time <= T/2) {
+        if (t <= T/2) {
         ////////////////// STandingPhase //////////////////
         //// Solve x ////
 
@@ -225,7 +225,7 @@ private:
         // 시간에 따른 z 좌표의 변화 계산 // zValue is constant in STanding Phase.
         std::vector<double> STzValues(T/2/dt, -height);
 
-        } else if (sim_time <= T*(3/4)) {
+        } else if (t <= T*(3/4)) {
 
         ////////////////// SWingPhase //////////////////
         //// Solve x ////
@@ -255,8 +255,8 @@ private:
 
         }
 
-        xVal = By;
-        zVal = Bz;
+        xVal = returnXValue;
+        zVal = returnZValue;
     }
 
     void CalculateAndPublishTorque()
@@ -291,8 +291,8 @@ private:
             torque_msg.data.push_back(0);
             torque_msg.data.push_back(0);
             torque_msg.data.push_back(-ag[0]);
-            torque_msg.data.push_back(0);
-            torque_msg.data.push_back(0);
+            torque_msg.data.push_back(kp[1]*(th2-M_PI/2 - joint2_pos) + kd[1]*(0-joint2_vel));
+            torque_msg.data.push_back(kp[2]*(th3 - joint3_pos) + kd[2]*(0-joint3_vel));
             torque_msg.data.push_back(ag[0]);
             torque_msg.data.push_back(0);
             torque_msg.data.push_back(0);
@@ -311,8 +311,8 @@ private:
             desiredpos_msg.data.push_back(0);
             desiredpos_msg.data.push_back(0);
             desiredpos_msg.data.push_back(ag[0]);
-            desiredpos_msg.data.push_back(0);
-            desiredpos_msg.data.push_back(0);
+            desiredpos_msg.data.push_back(th2-M_PI/2);
+            desiredpos_msg.data.push_back(th3)
             desiredpos_msg.data.push_back(ag[0]);
             desiredpos_msg.data.push_back(0);
             desiredpos_msg.data.push_back(0);
