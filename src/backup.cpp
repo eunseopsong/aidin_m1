@@ -312,7 +312,7 @@ private:
             desiredpos_msg.data.push_back(0);
             desiredpos_msg.data.push_back(ag[0]);
             desiredpos_msg.data.push_back(th2-M_PI/2);
-            desiredpos_msg.data.push_back(th3)
+            desiredpos_msg.data.push_back(th3);
             desiredpos_msg.data.push_back(ag[0]);
             desiredpos_msg.data.push_back(0);
             desiredpos_msg.data.push_back(0);

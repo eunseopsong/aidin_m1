@@ -128,7 +128,7 @@ private:
         // 결과값 반환
         for (int i=0; i < 6; i++)
             arr[i] = S[i];
-    }
+    };
 
     ////////////////// for STandingPhase //////////////////
 
@@ -169,7 +169,7 @@ private:
         }
 
         return SWValues;
-    }
+    };
 
     void SplineTrajectory(double sim_time, double &xVal, double &zVal)
     {
@@ -251,26 +251,25 @@ private:
     void CalculateAndPublishTorque()
     {
         // 발 끝 좌표
-        double y, z;
-        SplineTrajectory(sim_time, y, z);
-        double x = 79;
+        double xVal, zVal;
+        SplineTrajectory(sim_time, xVal, zVal);
+        double yVal = 79;
 
-        // // 조인트 각도 계산
-        // double costh1 = (x*l1 + sqrt(x*x*l1*l1 - (x*x + z*z)*(l1*l1 - z*z))) / (x*x + z*z);
+        // 조인트 각도 계산
+        double costh1 = (yVal*l1 + sqrt(yVal*yVal*l1*l1 - (yVal*yVal + zVal*zVal)*(l1*l1 - zVal*zVal))) / (yVal*yVal + zVal*zVal);
 
         // if (costh1 >= -1 && costh1 <= 1)
         // {
         //     double th1 = atan2(sqrt(1 - costh1*costh1), costh1);
 
-        //     double p_rot_y = y*cos(th1) - z*sin(th1);
-        //     double p_rot_z = y*sin(th1) + z*cos(th1);
+        //     double p_rot_y = xVal*cos(th1) - xVal*sin(th1);
+        //     double p_rot_z = xVal*sin(th1) + xVal*cos(th1);
 
         //     double th = atan2(p_rot_z, p_rot_y);
         //     double l = sqrt(p_rot_y*p_rot_y + p_rot_z*p_rot_z);
 
         //     double th2 = M_PI + th - acos((l2*l2 + l*l - l3*l3) / (2*l2*l));
         //     double th3 = M_PI - acos((l2*l2 + l3*l3 - l*l) / (2*l2*l3));
-
 
         //     std_msgs::msg::Float32MultiArray torque_msg;
         //     torque_msg.data.clear();
@@ -310,6 +309,20 @@ private:
         //     pub_desiredpos->publish(desiredpos_msg);
         // }
 
+
+            double th1 = atan2(sqrt(1 - costh1*costh1), costh1);
+
+            double p_rot_y = xVal*cos(th1) - xVal*sin(th1);
+            double p_rot_z = xVal*sin(th1) + xVal*cos(th1);
+
+            double th = atan2(p_rot_z, p_rot_y);
+            double l = sqrt(p_rot_y*p_rot_y + p_rot_z*p_rot_z);
+
+            double th2 = M_PI + th - acos((l2*l2 + l*l - l3*l3) / (2*l2*l));
+            double th3 = M_PI - acos((l2*l2 + l3*l3 - l*l) / (2*l2*l3));
+
+            //// Publish Torque to Joint ////
+
             std_msgs::msg::Float32MultiArray torque_msg;
             torque_msg.data.clear();
 
@@ -328,6 +341,7 @@ private:
 
             pub_torque->publish(torque_msg);
 
+            //// Publish DesiredPos ////
 
             std_msgs::msg::Float32MultiArray desiredpos_msg;
             desiredpos_msg.data.clear();
@@ -346,9 +360,9 @@ private:
             desiredpos_msg.data.push_back(0);
 
             pub_desiredpos->publish(desiredpos_msg);
+
     }
 };
-
 
 int main(int argc, char **argv)
 {
