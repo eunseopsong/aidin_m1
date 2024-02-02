@@ -202,22 +202,22 @@
     <dynamics damping="0.7"/>
   </joint>
 
-  <joint name="RFJ_hip" type="revolute">
+  <joint name="RFJ_hip" type="continuous">
     <parent link="RF_scap"/>
     <child link="RF_hip"/>
     <origin xyz="0.095 0 0" rpy="-1.57079  1.57079 -1.57079"/>
     <axis xyz="0 0 1"/>
-    <limit lower="-3.14" upper="3.14" effort="200.0" velocity="9"/>
-    <dynamics damping="0.7"/>
+    <!-- <limit lower="-3.14" upper="3.14" effort="200.0" velocity="9"/> -->
+    <!-- <dynamics damping="0.7"/> -->
   </joint>
 
-  <joint name="RFJ_knee" type="revolute">
+  <joint name="RFJ_knee" type="continuous">
     <parent link="RF_hip"/>
     <child link="RF_knee"/>
-    <origin xyz="0.250 0   0" rpy="0      0      1.57079"/>
-    <axis xyz="0 0 1"/>
-    <limit lower="-1.308996939" upper="1.0471975512" effort="200.0" velocity="9"/>
-    <dynamics damping="3"/>
+    <origin xyz="0.250 0 0" rpy="0 0 1.57079"/>
+    <!-- <axis xyz="0 0 1"/> -->
+    <!-- <limit lower="-1.308996939" upper="1.0471975512" effort="200.0" velocity="9"/> -->
+    <!-- <dynamics damping="3"/> -->
   </joint>
 
   <joint name="RFJ_foot" type="fixed" dont_collapse="true">
