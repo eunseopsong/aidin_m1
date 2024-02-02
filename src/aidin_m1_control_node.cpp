@@ -107,7 +107,7 @@ private:
     double ag[3];                       // Angles
     double kp[3], kd[3];                // Gains
 
-    double len_scap, len_hip, len_knee;      // initial leg length
+    double len_scap = 210, len_hip = 250, len_knee = 250;      // initial leg length
 
     //////////// Method of Undetermined Coefficients using Eigen ////////////
 
@@ -196,7 +196,8 @@ private:
         ////////////////// SWingPhase //////////////////
         //// Solve x ////
         // solve undetermined coefficients (double S1[6] = {a1, b1, c1, d1, e1, f1};)
-        solve(d1, e1, f1, T, singular1, B_val1, S1);
+        solve(d1, e1, f1, T, singular1, B_egree = CalculateKinematics(xValues, zValues, 2);
+    // std::vector<double> KneeDegval1, S1);
         returnXValue = CalculateValues(S1, t, T, SW_x_case);
 
         //// Solve z ////
@@ -243,14 +244,14 @@ private:
             torque_msg.data.push_back(0);
             torque_msg.data.push_back(0);
             torque_msg.data.push_back(-ag[0]);
-            torque_msg.data.push_back(kp[1]*(th2-M_PI/2 - joint2_pos) + kd[1]*(0-joint2_vel));
-            torque_msg.data.push_back(kp[2]*(th3 - joint3_pos) + kd[2]*(0-joint3_vel));
+            torque_msg.data.push_back(0);
+            torque_msg.data.push_back(0);
             torque_msg.data.push_back(ag[0]);
             torque_msg.data.push_back(0);
             torque_msg.data.push_back(0);
             torque_msg.data.push_back(-ag[0]);
-            torque_msg.data.push_back(0);
-            torque_msg.data.push_back(0);
+            torque_msg.data.push_back(ag[0]);
+            torque_msg.data.push_back(ag[0]);
 
             pub_torque->publish(torque_msg);
 
