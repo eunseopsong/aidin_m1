@@ -102,6 +102,7 @@ private:
     float joint1_pos, joint2_pos, joint3_pos, joint4_pos, joint5_pos, joint6_pos, joint7_pos, joint8_pos, joint9_pos, joint10_pos, joint11_pos, joint12_pos;
     // Joint velocity
     float joint1_vel, joint2_vel, joint3_vel, joint4_vel, joint5_vel, joint6_vel, joint7_vel, joint8_vel, joint9_vel, joint10_vel, joint11_vel, joint12_vel;
+
     double sim_time;                    // Gazebo simulation time
     double ag[3];                       // Angles
     double kp[3], kd[3];                // Gains
@@ -131,7 +132,6 @@ private:
     }
 
     ////////////////// for STandingPhase //////////////////
-
     // 시간에 따른 STandingPhase x 좌표의 변화를 반환하는 함수
     double CalculateXValues(double l, double v, double t)
     {
@@ -163,13 +163,7 @@ private:
         double vel_of_body = 1600;
         double T = 0.5;
         double length_of_STanding_phase = vel_of_body * T /2;
-
-        // double dt = 0.001;
-
-        // double scap_degree = 0, hip_degree = (40 * M_PI / 180 - M_PI), knee_degree = 90 * M_PI / 180;
         double height = 1656/5;
-        // double scap_length = 80, hip_length = 250, knee_length = 250;
-        // double InitailxValues = -61.1902;
 
         // int ST_x_case = 1;
         int SW_x_case = 2, Reverse_x_case = 3;
@@ -249,8 +243,8 @@ private:
             torque_msg.data.push_back(0);
             torque_msg.data.push_back(0);
             torque_msg.data.push_back(-ag[0]);
-            torque_msg.data.push_back(kp[1]*(th2-M_PI/2 - joint2_pos) + kd[1]*(0-joint2_vel));
-            torque_msg.data.push_back(kp[2]*(th3 - joint3_pos) + kd[2]*(0-joint3_vel));
+            torque_msg.data.push_back(0);
+            torque_msg.data.push_back(0);
             torque_msg.data.push_back(ag[0]);
             torque_msg.data.push_back(0);
             torque_msg.data.push_back(0);
@@ -268,8 +262,8 @@ private:
             desiredpos_msg.data.push_back(0);
             desiredpos_msg.data.push_back(0);
             desiredpos_msg.data.push_back(ag[0]);
-            desiredpos_msg.data.push_back(th2-M_PI/2);
-            desiredpos_msg.data.push_back(th3);
+            desiredpos_msg.data.push_back(0);
+            desiredpos_msg.data.push_back(0);
             desiredpos_msg.data.push_back(ag[0]);
             desiredpos_msg.data.push_back(0);
             desiredpos_msg.data.push_back(0);
@@ -279,61 +273,6 @@ private:
 
             pub_desiredpos->publish(desiredpos_msg);
         }
-
-
-            // double th1 = atan2(sqrt(1 - costh1*costh1), costh1);
-
-            // double p_rot_y = xVal*cos(th1) - xVal*sin(th1);
-            // double p_rot_z = xVal*sin(th1) + xVal*cos(th1);
-
-            // double th = atan2(p_rot_z, p_rot_y);
-            // double l = sqrt(p_rot_y*p_rot_y + p_rot_z*p_rot_z);
-
-            // double th2 = M_PI + th - acos((l2*l2 + l*l - l3*l3) / (2*l2*l));
-            // double th3 = M_PI - acos((l2*l2 + l3*l3 - l*l) / (2*l2*l3));
-
-            // //// Publish Torque to Joint ////
-
-            // std_msgs::msg::Float32MultiArray torque_msg;
-            // torque_msg.data.clear();
-
-            // torque_msg.data.push_back(ag[0]);
-            // torque_msg.data.push_back(0);
-            // torque_msg.data.push_back(0);
-            // torque_msg.data.push_back(-ag[0]);
-            // torque_msg.data.push_back(0);
-            // torque_msg.data.push_back(0);
-            // torque_msg.data.push_back(ag[0]);
-            // torque_msg.data.push_back(0);
-            // torque_msg.data.push_back(0);
-            // torque_msg.data.push_back(-ag[0]);
-            // torque_msg.data.push_back(0);
-            // torque_msg.data.push_back(0);
-
-            // pub_torque->publish(torque_msg);
-
-            // //// Publish DesiredPos ////
-
-            // std_msgs::msg::Float32MultiArray desiredpos_msg;
-            // desiredpos_msg.data.clear();
-
-            // desiredpos_msg.data.push_back(ag[0]);
-            // desiredpos_msg.data.push_back(0);
-            // desiredpos_msg.data.push_back(0);
-            // desiredpos_msg.data.push_back(ag[0]);
-            // desiredpos_msg.data.push_back(0);
-            // desiredpos_msg.data.push_back(0);
-            // desiredpos_msg.data.push_back(ag[0]);
-            // desiredpos_msg.data.push_back(0);
-            // desiredpos_msg.data.push_back(0);
-            // desiredpos_msg.data.push_back(ag[0]);
-            // desiredpos_msg.data.push_back(0);
-            // desiredpos_msg.data.push_back(0);
-
-            // pub_desiredpos->publish(desiredpos_msg);
-
-
-
     }
 };
 
