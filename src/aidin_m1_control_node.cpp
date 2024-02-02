@@ -128,48 +128,33 @@ private:
         // 결과값 반환
         for (int i=0; i < 6; i++)
             arr[i] = S[i];
-    };
+    }
 
     ////////////////// for STandingPhase //////////////////
 
-    // 시간에 따른 STandingPhase x 좌표의 변화를 저장하는 함수
-    std::vector<double> CalculateXValues(double v, double tStart, double tEnd, double dt, double l)
+    // 시간에 따른 STandingPhase x 좌표의 변화를 반환하는 함수
+    double CalculateXValues(double l, double v, double t)
     {
-        // 계산된 x 좌표를 저장할 배열
-        std::vector<double> xValues;
-
-        // 주어진 시간 범위에 따라 x 좌표를 계산하고 배열에 저장
-        for (double t = tStart; t <= tEnd; t += dt) {
-            double x = (l/2) - v * t;
-            xValues.push_back(x);
-        }
-
-        return xValues;
+        double returnXValue = (l/2) - v*t;
+        return returnXValue;
     }
 
     //////////////////// for SWingPhase ////////////////////
 
-    std::vector<double> CalculateValues(double S[], double tStart, double tEnd, double dt, int cases)
+    double CalculateValues(double S[], double t, double T, int cases)
     {
-        // 계산된 좌표를 저장할 배열
-        std::vector<double> SWValues;
+        double returnValue;
 
         if (cases == 2 || cases == 5) {
             // SWingPhase (x & z)
-            for (double t = tStart; t <= tEnd/2; t += dt) {
-                double sw = S[0]*pow(t, 5) + S[1]*pow(t, 4) + S[2]*pow(t, 3) + S[3]*pow(t, 2) + S[4]*pow(t, 1) + S[5];
-                SWValues.push_back(sw);
-            }
+            returnValue = S[0]*pow(t - T/2, 5) + S[1]*pow(t - T/2, 4) + S[2]*pow(t - T/2, 3) + S[3]*pow(t - T/2, 2) + S[4]*pow(t - T/2, 1) + S[5];
         } else {
             // ReversePhase (x & z)
-            for (double t = tStart; t <= tEnd/2; t += dt) {
-                double sw = S[0]*pow(tEnd/2-t, 5) + S[1]*pow(tEnd/2-t, 4) + S[2]*pow(tEnd/2-t, 3) + S[3]*pow(tEnd/2-t, 2) + S[4]*pow(tEnd/2-t, 1) + S[5];
-                SWValues.push_back(sw);
-            }
+            returnValue = S[0]*pow(T-t, 5) + S[1]*pow(T-t, 4) + S[2]*pow(T-t, 3) + S[3]*pow(T-t, 2) + S[4]*pow(T-t, 1) + S[5];
         }
 
-        return SWValues;
-    };
+        return returnValue;
+    }
 
     void SplineTrajectory(double sim_time, double &xVal, double &zVal)
     {
@@ -180,16 +165,16 @@ private:
         double length_of_STanding_phase = vel_of_body * T /2;
 
         double dt = 0.001;
-        double tStart = 0.0;
-        double tEnd = T/2;
 
         double scap_degree = 0, hip_degree = (40 * M_PI / 180 - M_PI), knee_degree = 90 * M_PI / 180;
         double height = 1656/5;
         double scap_length = 80, hip_length = 250, knee_length = 250;
         double InitailxValues = -61.1902;
 
-        int ST_x_case = 1, SW_x_case = 2, Reverse_x_case = 3;
-        int ST_z_case = 4, SW_z_case = 5, Reverse_z_case = 6;
+        // int ST_x_case = 1;
+        int SW_x_case = 2, Reverse_x_case = 3;
+        // int ST_z_case = 4;
+        int SW_z_case = 5, Reverse_z_case = 6;
 
         // undetermined coefficients of SWxValues (a1*t^5 + b1*t^4 + c1*t^3 + d1*t^2 + e1*t + f1)
         double d1 = 0, e1 = -(vel_of_body), f1 = -length_of_STanding_phase/2;
@@ -203,50 +188,36 @@ private:
         double B_val2[3] = {0, -(5*height/6 +f2), 0};
         double S2[6];
 
-        // Initialize return value
+        /////////////////////// Calculate the return Value ////////////////////////
+        // Initialize the return value
         double returnXValue = 0, returnZValue = 0;
         double t = fmod(sim_time, T);
 
-        //////////////////// Divide the Phase /////////////////////
-
         if (t <= T/2) {
         ////////////////// STandingPhase //////////////////
-        //// Solve x ////
-        // 시간에 따른 x 좌표의 변화 계산
-        std::vector<double> STxValues = CalculateXValues(vel_of_body, tStart, T/2, dt, length_of_STanding_phase);
+        returnXValue = CalculateXValues(length_of_STanding_phase, vel_of_body, t);
+        returnZValue = -height;
 
-        //// Solve z ////
-        // 시간에 따른 z 좌표의 변화 계산 // zValue is constant in STanding Phase.
-        std::vector<double> STzValues(T/2/dt, -height);
-
-        } else if (t <= T*(3/4)) {
+        } else if (t <= T/4*3) {
         ////////////////// SWingPhase //////////////////
         //// Solve x ////
         // solve undetermined coefficients (double S1[6] = {a1, b1, c1, d1, e1, f1};)
         solve(d1, e1, f1, T, singular1, B_val1, S1);
-
-        std::vector<double> SWxValues = CalculateValues(S1, tStart, T/2, dt, SW_x_case);
+        returnXValue = CalculateValues(S1, t, T, SW_x_case);
 
         //// Solve z ////
         // solve undetermined coefficients (double S2[6] = {a2, b2, c2, d2, e2, f2};)
         solve(d2, e2, f2, T, singular2, B_val2, S2);
-
-        std::vector<double> SWzValues = CalculateValues(S2, tStart, T/2, dt, SW_z_case);
+        returnZValue = CalculateValues(S2, t, T, SW_z_case);
 
         } else {
         ////////////////// ReversePhase //////////////////
-        //// Solve x ////
-        // Reverse of SWingPhase
-        std::vector<double> REVERSExValues = CalculateValues(S1, tStart, T/2, dt, Reverse_x_case);
-
-        //// Solve z ////
-
-        std::vector<double> REVERSEzValues = CalculateValues(S2, tStart, T/2, dt, Reverse_z_case);
+        returnXValue = CalculateValues(S1, t, T, Reverse_x_case);
+        returnZValue = CalculateValues(S2, t, T, Reverse_z_case);
         }
         xVal = returnXValue;
         zVal = returnZValue;
     }
-
 
     void CalculateAndPublishTorque()
     {
@@ -360,6 +331,8 @@ private:
             desiredpos_msg.data.push_back(0);
 
             pub_desiredpos->publish(desiredpos_msg);
+
+
 
     }
 };

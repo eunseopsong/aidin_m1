@@ -30,47 +30,29 @@ void solve(double d, double e, double f, double T, double singularity, double B_
 ////////////////// for STandingPhase //////////////////
 
 // 시간에 따른 STandingPhase x 좌표의 변화를 저장하는 함수
-std::vector<double> CalculateXValues(double v, double tStart, double tEnd, double dt, double l)
+double CalculateXValues(double l, double v, double t)
 {
-    // 계산된 x 좌표를 저장할 배열
-    std::vector<double> xValues;
+    double returnXValue = (l/2) - v*t;
 
-    // 주어진 시간 범위에 따라 x 좌표를 계산하고 배열에 저장
-    for (double t = tStart; t <= tEnd; t += dt) {
-        double x = (l/2) - v * t;
-        xValues.push_back(x);
-    }
-
-    return xValues;
+    return returnXValue;
 }
 
 //////////////////// for SWingPhase ////////////////////
 
-std::vector<double> CalculateValues(double S[], double tStart, double tEnd, double dt, int cases)
+double CalculateValues(double S[], double t, double T, int cases)
 {
-    // 계산된 좌표를 저장할 배열
-    std::vector<double> SWValues;
+    double returnValue;
 
-    if (cases == 2 || cases == 5)
-    {
+    if (cases == 2 || cases == 5) {
         // SWingPhase (x & z)
-        for (double t = tStart; t <= tEnd/2; t += dt)
-        {
-            double sw = S[0]*pow(t, 5) + S[1]*pow(t, 4) + S[2]*pow(t, 3) + S[3]*pow(t, 2) + S[4]*pow(t, 1) + S[5];
-            SWValues.push_back(sw);
-        }
-    }
-    else
-    {
+        returnValue = S[0]*pow(t - T/2, 5) + S[1]*pow(t - T/2, 4) + S[2]*pow(t - T/2, 3) + S[3]*pow(t - T/2, 2) + S[4]*pow(t - T/2, 1) + S[5];
+    } else {
         // ReversePhase (x & z)
-        for (double t = tStart; t <= tEnd/2; t += dt)
-        {
-            double sw = S[0]*pow(tEnd/2-t, 5) + S[1]*pow(tEnd/2-t, 4) + S[2]*pow(tEnd/2-t, 3) + S[3]*pow(tEnd/2-t, 2) + S[4]*pow(tEnd/2-t, 1) + S[5];
-            SWValues.push_back(sw);
-        }
+        returnValue = S[0]*pow(T-t, 5) + S[1]*pow(T-t, 4) + S[2]*pow(T-t, 3) + S[3]*pow(T-t, 2) + S[4]*pow(T-t, 1) + S[5];
+
     }
 
-    return SWValues;
+    return returnValue;
 }
 
 ///////////////////// for Print /////////////////////
@@ -78,8 +60,7 @@ std::vector<double> CalculateValues(double S[], double tStart, double tEnd, doub
 void PrintVector(double tStart, double T, double dt, std::vector<double> values, int cases)
 {
     // 결과 출력
-    if (cases == 1 || cases == 4)
-    {
+    if (cases == 1 || cases == 4) {
         if (cases == 1)
             std::cout << "Time\tST-X-Coordinate" << std::endl;
         else
@@ -87,10 +68,7 @@ void PrintVector(double tStart, double T, double dt, std::vector<double> values,
 
         for (double t = tStart; t <= T/2; t += dt)
             std::cout << t << "\t" << values[(t - tStart) / dt] << std::endl;
-    }
-
-    else
-    {
+    } else {
         if (cases == 2)
             std::cout << "Time\tSW-X-Coordinate" << std::endl;
         else if (cases == 3)
@@ -108,8 +86,7 @@ void PrintVector(double tStart, double T, double dt, std::vector<double> values,
     std::cout << "Vector의 길이: " << values.size() << std::endl << std::endl;
 }
 
-int main()
-{
+int main(){
     /////////////////// Initializing ////////////////////
 
     double vel_of_body = 1600;
@@ -131,8 +108,14 @@ int main()
     ///////////////////// Solve x /////////////////////
     ////// StandingPhase //////
 
-    // 시간에 따른 x 좌표의 변화 계산
-    std::vector<double> STxValues = CalculateXValues(vel_of_body, tStart, T/2, dt, length_of_STanding_phase);
+    // 좌표값을 저장할 배열 생성
+    std::vector<double> STxValues;
+
+    // 주어진 시간 범위에 따라 x 좌표를 계산하고 배열에 저장
+    for (double t = 0.0; t <= T/2; t += dt) {
+        double x = CalculateXValues(length_of_STanding_phase, vel_of_body, t);
+        STxValues.push_back(x);
+    }
 
     // 좌표 출력
     PrintVector(tStart, T, dt, STxValues, ST_x_case);
@@ -148,13 +131,25 @@ int main()
     // solve undetermined coefficients (double S1[6] = {a1, b1, c1, d1, e1, f1};)
     solve(d1, e1, f1, T, singular1, B_val1, S1);
 
-    std::vector<double> SWxValues = CalculateValues(S1, tStart, T/2, dt, SW_x_case);
+    std::vector<double> SWxValues;
+
+    for (double t = T/2; t <= T/4*3; t += dt) {
+        double x = CalculateValues(S1, t, T, SW_x_case);
+        SWxValues.push_back(x);
+    }
+
     PrintVector(tStart, T, dt, SWxValues, SW_x_case);
 
     ////// ReversePhase //////
 
     // Reverse of SWingPhase
-    std::vector<double> REVERSExValues = CalculateValues(S1, tStart, T/2, dt, Reverse_x_case);
+    std::vector<double> REVERSExValues;
+
+    for (double t = T/4*3; t <= T; t += dt) {
+        double x = CalculateValues(S1, t, T, Reverse_x_case);
+        REVERSExValues.push_back(x);
+    }
+
     PrintVector(tStart, T, dt, REVERSExValues, Reverse_x_case);
 
     ///////////////////// Solve z /////////////////////
@@ -176,12 +171,24 @@ int main()
     // solve undetermined coefficients (double S2[6] = {a2, b2, c2, d2, e2, f2};)
     solve(d2, e2, f2, T, singular2, B_val2, S2);
 
-    std::vector<double> SWzValues = CalculateValues(S2, tStart, T/2, dt, SW_z_case);
+    std::vector<double> SWzValues;
+
+    for (double t = T/2; t <= T/4*3; t += dt) {
+        double z = CalculateValues(S2, t, T, SW_z_case);
+        SWzValues.push_back(z);
+    }
+
     PrintVector(tStart, T, dt, SWzValues, SW_z_case);
 
     ////// ReversePhase //////
 
-    std::vector<double> REVERSEzValues = CalculateValues(S2, tStart, T/2, dt, Reverse_z_case);
+    std::vector<double> REVERSEzValues;
+
+    for (double t = T/4*3; t <= T; t += dt) {
+        double z = CalculateValues(S2, t, T, Reverse_z_case);
+        REVERSEzValues.push_back(z);
+    }
+
     PrintVector(tStart, T, dt, REVERSEzValues, Reverse_z_case);
 
     return 0;
