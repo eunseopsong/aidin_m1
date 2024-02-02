@@ -107,7 +107,7 @@ private:
     double ag[3];                       // Angles
     double kp[3], kd[3];                // Gains
 
-    double q1, q2, q3, l1, l2, l3;      // initial leg angle, leg length
+    double len_scap, len_hip, len_knee;      // initial leg length
 
     //////////// Method of Undetermined Coefficients using Eigen ////////////
 
@@ -218,14 +218,14 @@ private:
         // 발 끝 좌표
         double xVal, zVal;
         SplineTrajectory(sim_time, xVal, zVal);
-        double yVal = 79;
+        double yVal = 210;
 
         // 조인트 각도 계산
-        double costh1 = (yVal*l1 + sqrt(yVal*yVal*l1*l1 - (yVal*yVal + zVal*zVal)*(l1*l1 - zVal*zVal))) / (yVal*yVal + zVal*zVal);
+        double costh1 = (yVal*len_scap + sqrt(pow(yVal, 2)*pow(len_scap, 2) - (pow(yVal, 2) + pow(zVal, 2))*(pow(len_scap, 2) - pow(zVal, 2)))) / (pow(yVal, 2) + pow(zVal, 2));
 
         if (costh1 >= -1 && costh1 <= 1)
         {
-            double th1 = atan2(sqrt(1 - costh1*costh1), costh1);
+            double th1 = atan2(sqrt(1 - pow(costh1, 2)), costh1);
 
             double p_rot_y = xVal*cos(th1) - xVal*sin(th1);
             double p_rot_z = xVal*sin(th1) + xVal*cos(th1);
@@ -233,8 +233,8 @@ private:
             double th = atan2(p_rot_z, p_rot_y);
             double l = sqrt(p_rot_y*p_rot_y + p_rot_z*p_rot_z);
 
-            double th2 = M_PI + th - acos((l2*l2 + l*l - l3*l3) / (2*l2*l));
-            double th3 = M_PI - acos((l2*l2 + l3*l3 - l*l) / (2*l2*l3));
+            double th2 = M_PI + th - acos((pow(len_hip, 2) + pow(l, 2) - pow(len_knee, 2)) / (2*len_hip*l));
+            double th3 = M_PI - acos((pow(len_hip, 2) + pow(len_knee, 2) - pow(l, 2)) / (2*len_hip*len_knee));
 
             std_msgs::msg::Float32MultiArray torque_msg;
             torque_msg.data.clear();
@@ -243,8 +243,8 @@ private:
             torque_msg.data.push_back(0);
             torque_msg.data.push_back(0);
             torque_msg.data.push_back(-ag[0]);
-            torque_msg.data.push_back(0);
-            torque_msg.data.push_back(0);
+            torque_msg.data.push_back(kp[1]*(th2-M_PI/2 - joint2_pos) + kd[1]*(0-joint2_vel));
+            torque_msg.data.push_back(kp[2]*(th3 - joint3_pos) + kd[2]*(0-joint3_vel));
             torque_msg.data.push_back(ag[0]);
             torque_msg.data.push_back(0);
             torque_msg.data.push_back(0);
