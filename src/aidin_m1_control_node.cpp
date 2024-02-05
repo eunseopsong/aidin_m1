@@ -229,7 +229,7 @@ private:
         // Calculate Hip Joint Value using Inverse Kinematics
         double hip_degree = atan2(zVal, xVal) - atan2(len_knee*sin(knee_degree), len_hip + len_knee*cos(knee_degree));
 
-        knee_degree -= M_PI_2;
+        knee_degree = knee_degree - M_PI_2;
 
         if (cases == 1)
             returnDegree = hip_degree;
@@ -279,8 +279,8 @@ private:
         torque_msg.data.push_back(0);
         torque_msg.data.push_back(0);
         torque_msg.data.push_back(-ag[0]);
-        torque_msg.data.push_back(ag[0]);
-        torque_msg.data.push_back(ag[0]);
+        torque_msg.data.push_back(0);
+        torque_msg.data.push_back(0);
 
         pub_torque->publish(torque_msg);
 
