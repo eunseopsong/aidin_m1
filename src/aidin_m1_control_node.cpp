@@ -107,8 +107,6 @@ private:
     double ag[3];                       // Angles
     double kp[3], kd[3];                // Gains
 
-    double len_scap = 210, len_hip = 250, len_knee = 250;      // initial leg length
-
     //////////// Method of Undetermined Coefficients using Eigen ////////////
 
     void solve(double d, double e, double f, double T, double singularity, double B_val[], double arr[6])
@@ -184,7 +182,7 @@ private:
 
         /////////////////////// Calculate the return Value ////////////////////////
         // Initialize the return value
-        double returnXValue = 0, returnZValue = 0;
+        double returnXValue, returnZValue;
         double t = fmod(sim_time, T);
 
         if (t <= T/2) {
@@ -294,8 +292,8 @@ private:
         desiredpos_msg.data.push_back(0);
         desiredpos_msg.data.push_back(0);
         desiredpos_msg.data.push_back(ag[0]);
-        desiredpos_msg.data.push_back(0);
-        desiredpos_msg.data.push_back(0);
+        desiredpos_msg.data.push_back(hip_degree);
+        desiredpos_msg.data.push_back(knee_degree);
         desiredpos_msg.data.push_back(ag[0]);
         desiredpos_msg.data.push_back(0);
         desiredpos_msg.data.push_back(0);
