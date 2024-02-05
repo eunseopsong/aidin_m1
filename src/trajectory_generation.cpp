@@ -45,10 +45,12 @@ double CalculateValues(double S[], double t, double T, int cases)
     if (cases == 2 || cases == 5) {
         // SWingPhase (x & z)
         returnValue = S[0]*pow(t - T/2, 5) + S[1]*pow(t - T/2, 4) + S[2]*pow(t - T/2, 3) + S[3]*pow(t - T/2, 2) + S[4]*pow(t - T/2, 1) + S[5];
+    } else if (cases == 3) {
+        // ReversePhase (x)
+        returnValue = -S[0]*pow(T-t, 5) - S[1]*pow(T-t, 4) - S[2]*pow(T-t, 3) - S[3]*pow(T-t, 2) - S[4]*pow(T-t, 1) - S[5];
     } else {
-        // ReversePhase (x & z)
+        // ReversePhase (z)
         returnValue = S[0]*pow(T-t, 5) + S[1]*pow(T-t, 4) + S[2]*pow(T-t, 3) + S[3]*pow(T-t, 2) + S[4]*pow(T-t, 1) + S[5];
-
     }
 
     return returnValue;
@@ -275,9 +277,9 @@ int main(){
     // PrintVector(SWhipDegree, 2);
     // PrintVector(REVERSEhipDegree, 3);
 
-    // PrintVector(STkneeDegree, 4);
-    // PrintVector(SWkneeDegree, 5);
-    // PrintVector(REVERSEkneeDegree, 6);
+    PrintVector(STkneeDegree, 4);
+    PrintVector(SWkneeDegree, 5);
+    PrintVector(REVERSEkneeDegree, 6);
 
     ///// Concatenation /////
     std::vector<double> HipDegree;
