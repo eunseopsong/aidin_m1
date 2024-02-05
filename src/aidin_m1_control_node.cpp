@@ -196,8 +196,7 @@ private:
         ////////////////// SWingPhase //////////////////
         //// Solve x ////
         // solve undetermined coefficients (double S1[6] = {a1, b1, c1, d1, e1, f1};)
-        solve(d1, e1, f1, T, singular1, B_egree = CalculateKinematics(xValues, zValues, 2);
-    // std::vector<double> KneeDegval1, S1);
+        solve(d1, e1, f1, T, singular1, B_val1, S1);
         returnXValue = CalculateValues(S1, t, T, SW_x_case);
 
         //// Solve z ////
@@ -214,66 +213,99 @@ private:
         zVal = returnZValue;
     }
 
+    ////////////////////////////////////////////////////////
+    //////////////////// for Kinematics ////////////////////
+    ////////////////////////////////////////////////////////
+
+    double CalculateKinematics(double xVal, double zVal, int cases)
+    {
+        double returnDegree;
+        double len_hip = 250, len_knee = 250;
+
+        zVal = -zVal;
+
+        // Calculate Knee Joint Value using Inverse Kinematics
+        double costh3 = (pow(xVal, 2) + pow(zVal, 2) - pow(len_hip, 2) - pow(len_knee ,2)) / (2*len_hip*len_knee);
+        double knee_degree = acos(costh3);
+
+        // Calculate Hip Joint Value using Inverse Kinematics
+        double hip_degree = atan2(zVal, xVal) - atan2(len_knee*sin(knee_degree), len_hip + len_knee*cos(knee_degree));
+
+        knee_degree -= M_PI_2;
+
+        if (cases == 1)
+            returnDegree = hip_degree;
+        else
+            returnDegree = knee_degree;
+
+        return returnDegree;
+    }
+
+    double PID(double kp, double kd, double degree, int cases)
+    {
+        double returnValue;
+
+        double output_torque_5 = kp*(degree - joint5_pos) + kd*(0 - joint5_vel);
+        double output_torque_6 = kp*(degree - joint6_pos) + kd*(0 - joint6_vel);
+
+        if (cases == 1)
+            returnValue = output_torque_5;
+        else
+            returnValue = output_torque_6;
+
+        return returnValue;
+    }
+
     void CalculateAndPublishTorque()
     {
-        // 발 끝 좌표
+        // double yVal = 210;
         double xVal, zVal;
         SplineTrajectory(sim_time, xVal, zVal);
-        double yVal = 210;
 
-        // 조인트 각도 계산
-        double costh1 = (yVal*len_scap + sqrt(pow(yVal, 2)*pow(len_scap, 2) - (pow(yVal, 2) + pow(zVal, 2))*(pow(len_scap, 2) - pow(zVal, 2)))) / (pow(yVal, 2) + pow(zVal, 2));
+        double hip_degree = CalculateKinematics(xVal, zVal, 1);
+        double knee_degree = CalculateKinematics(xVal, zVal, 2);
 
-        if (costh1 >= -1 && costh1 <= 1)
-        {
-            double th1 = atan2(sqrt(1 - pow(costh1, 2)), costh1);
+        double RF_hip_output_torque = PID(kp[1], kd[1], hip_degree, 1);
+        double RF_knee_output_torque = PID(kp[2], kd[2], knee_degree, 2);
 
-            double p_rot_y = xVal*cos(th1) - xVal*sin(th1);
-            double p_rot_z = xVal*sin(th1) + xVal*cos(th1);
+        std_msgs::msg::Float32MultiArray torque_msg;
+        torque_msg.data.clear();
 
-            double th = atan2(p_rot_z, p_rot_y);
-            double l = sqrt(p_rot_y*p_rot_y + p_rot_z*p_rot_z);
+        torque_msg.data.push_back(ag[0]);
+        torque_msg.data.push_back(0);
+        torque_msg.data.push_back(0);
+        torque_msg.data.push_back(-ag[0]);
+        torque_msg.data.push_back(RF_hip_output_torque);
+        torque_msg.data.push_back(RF_knee_output_torque);
+        torque_msg.data.push_back(ag[0]);
+        torque_msg.data.push_back(0);
+        torque_msg.data.push_back(0);
+        torque_msg.data.push_back(-ag[0]);
+        torque_msg.data.push_back(ag[0]);
+        torque_msg.data.push_back(ag[0]);
 
-            double th2 = M_PI + th - acos((pow(len_hip, 2) + pow(l, 2) - pow(len_knee, 2)) / (2*len_hip*l));
-            double th3 = M_PI - acos((pow(len_hip, 2) + pow(len_knee, 2) - pow(l, 2)) / (2*len_hip*len_knee));
-
-            std_msgs::msg::Float32MultiArray torque_msg;
-            torque_msg.data.clear();
-
-            torque_msg.data.push_back(ag[0]);
-            torque_msg.data.push_back(0);
-            torque_msg.data.push_back(0);
-            torque_msg.data.push_back(-ag[0]);
-            torque_msg.data.push_back(0);
-            torque_msg.data.push_back(0);
-            torque_msg.data.push_back(ag[0]);
-            torque_msg.data.push_back(0);
-            torque_msg.data.push_back(0);
-            torque_msg.data.push_back(-ag[0]);
-            torque_msg.data.push_back(ag[0]);
-            torque_msg.data.push_back(ag[0]);
-
-            pub_torque->publish(torque_msg);
+        pub_torque->publish(torque_msg);
 
 
-            std_msgs::msg::Float32MultiArray desiredpos_msg;
-            desiredpos_msg.data.clear();
+        std_msgs::msg::Float32MultiArray desiredpos_msg;
+        desiredpos_msg.data.clear();
 
-            desiredpos_msg.data.push_back(ag[0]);
-            desiredpos_msg.data.push_back(0);
-            desiredpos_msg.data.push_back(0);
-            desiredpos_msg.data.push_back(ag[0]);
-            desiredpos_msg.data.push_back(0);
-            desiredpos_msg.data.push_back(0);
-            desiredpos_msg.data.push_back(ag[0]);
-            desiredpos_msg.data.push_back(0);
-            desiredpos_msg.data.push_back(0);
-            desiredpos_msg.data.push_back(ag[0]);
-            desiredpos_msg.data.push_back(0);
-            desiredpos_msg.data.push_back(0);
+        desiredpos_msg.data.push_back(ag[0]);
+        desiredpos_msg.data.push_back(0);
+        desiredpos_msg.data.push_back(0);
+        desiredpos_msg.data.push_back(ag[0]);
+        desiredpos_msg.data.push_back(0);
+        desiredpos_msg.data.push_back(0);
+        desiredpos_msg.data.push_back(ag[0]);
+        desiredpos_msg.data.push_back(0);
+        desiredpos_msg.data.push_back(0);
+        desiredpos_msg.data.push_back(ag[0]);
+        desiredpos_msg.data.push_back(0);
+        desiredpos_msg.data.push_back(0);
 
-            pub_desiredpos->publish(desiredpos_msg);
-        }
+        pub_desiredpos->publish(desiredpos_msg);
+
+
     }
 };
 
