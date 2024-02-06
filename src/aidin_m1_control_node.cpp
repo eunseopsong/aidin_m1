@@ -92,7 +92,7 @@ public:
 
         // publish node 실행 주기 설정 (1ms)
         timer_ = this->create_wall_timer(
-            20ms, std::bind(&JointControl::CalculateAndPublishTorque, this));
+            1ms, std::bind(&JointControl::CalculateAndPublishTorque, this));
     }
 
 private:
