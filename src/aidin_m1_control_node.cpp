@@ -252,10 +252,17 @@ private:
         double output_torque_5 = kp*(degree - joint5_pos) + kd*(0 - joint5_vel);
         double output_torque_6 = kp*(degree - joint6_pos) + kd*(0 - joint6_vel);
 
+        double output_torque_2 = kp*(degree - joint2_pos) + kd*(0 - joint2_vel);
+        double output_torque_3 = kp*(degree - joint3_pos) + kd*(0 - joint3_vel);
+
         if (cases == 1)
             returnValue = output_torque_5;
-        else
+        else if (cases == 2)
             returnValue = output_torque_6;
+        else if (cases == 3)
+            returnValue = output_torque_2;
+        else
+            returnValue = output_torque_3;
 
         return returnValue;
     }
@@ -265,18 +272,31 @@ private:
         count_ = count_ + 0.001;
         double T = 0.5;
         double t = fmod(count_, T);
+        double t_counter = t + T/2;
 
-        // double yVal = 210;
+        // Calculate the coordinate using Trajectory Function
         double xVal, zVal;
         SplineTrajectory(t, xVal, zVal);
+        double xVal_counter, zVal_counter;
+        SplineTrajectory(t_counter, xVal_counter, zVal_counter);
 
+        // Calulate the degree using Inverse Kinematics
         double RF_hip_degree = CalculateKinematics(xVal, zVal, 1);
         double RF_knee_degree = CalculateKinematics(xVal, zVal, 2);
+        double LF_hip_degree = CalculateKinematics(xVal_counter, zVal_counter, 1);
+        double LF_knee_degree = CalculateKinematics(xVal_counter, zVal_counter, 2);
 
+        // Calculate the output_torque using PD control
         double RF_hip_output_torque = PID(kp[1], kd[1], RF_hip_degree, 1);
         double RF_knee_output_torque = PID(kp[2], kd[2], RF_knee_degree, 2);;
         double LB_hip_output_torque = RF_hip_output_torque;
         double LB_knee_output_torque = RF_knee_output_torque;
+
+        double LF_hip_output_torque = PID(kp[1], kd[1], LF_hip_degree, 3);
+        double LF_knee_output_torque = PID(kp[2], kd[2], LF_knee_degree, 4);;
+        double RB_hip_output_torque = LF_hip_output_torque;
+        double RB_knee_output_torque = LF_knee_output_torque;
+
 
         std_msgs::msg::Float32MultiArray torque_msg;
         torque_msg.data.clear();
