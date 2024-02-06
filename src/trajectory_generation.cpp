@@ -31,7 +31,7 @@ void solve(double d, double e, double f, double T, double singularity, double B_
 // 시간에 따른 STandingPhase x 좌표의 변화를 저장하는 함수
 double CalculateXValues(double l, double v, double t)
 {
-    double returnXValue = (l/2) - v*t;
+    double returnXValue = -(l/2) + v*t;
 
     return returnXValue;
 }
@@ -144,7 +144,7 @@ int main(){
 
     ////// SwingPhase //////
     // undetermined coefficients (a1*t^5 + b1*t^4 + c1*t^3 + d1*t^2 + e1*t + f1)
-    double d1 = 0, e1 = -(vel_of_body), f1 = -length_of_STanding_phase/2;
+    double d1 = 0, e1 = (vel_of_body), f1 = length_of_STanding_phase/2;
     double singular1 = T/16;
     double B_val1[3] = {-e1, -(f1 +e1*T/4), 0};
     double S1[6];
@@ -277,9 +277,9 @@ int main(){
     // PrintVector(SWhipDegree, 2);
     // PrintVector(REVERSEhipDegree, 3);
 
-    PrintVector(STkneeDegree, 4);
-    PrintVector(SWkneeDegree, 5);
-    PrintVector(REVERSEkneeDegree, 6);
+    // PrintVector(STkneeDegree, 4);
+    // PrintVector(SWkneeDegree, 5);
+    // PrintVector(REVERSEkneeDegree, 6);
 
     ///// Concatenation /////
     std::vector<double> HipDegree;

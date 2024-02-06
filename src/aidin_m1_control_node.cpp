@@ -131,7 +131,7 @@ private:
     // 시간에 따른 STandingPhase x 좌표의 변화를 저장하는 함수
     double CalculateXValues(double l, double v, double t)
     {
-        double returnXValue = (l/2) - v*t;
+        double returnXValue = -(l/2) + v*t;
 
         return returnXValue;
     }
@@ -163,7 +163,7 @@ private:
         double vel_of_body = 1600;
         double T = 0.5;
         double length_of_STanding_phase = vel_of_body * T /2;
-        double height = 1656/5;
+        double height = 400;
 
         // int ST_x_case = 1;
         int SW_x_case = 2, Reverse_x_case = 3;
@@ -171,7 +171,7 @@ private:
         int SW_z_case = 5, Reverse_z_case = 6;
 
         // undetermined coefficients of SWxValues (a1*t^5 + b1*t^4 + c1*t^3 + d1*t^2 + e1*t + f1)
-        double d1 = 0, e1 = -(vel_of_body), f1 = -length_of_STanding_phase/2;
+        double d1 = 0, e1 = (vel_of_body), f1 = length_of_STanding_phase/2;
         double singular1 = T/16;
         double B_val1[3] = {-e1, -(f1 +e1*T/4), 0};
         double S1[6];
