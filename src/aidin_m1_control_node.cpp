@@ -272,7 +272,7 @@ private:
         count_ = count_ + 0.001;
         double T = 0.5;
         double t = fmod(count_, T);
-        double t_counter = t + T/2;
+        double t_counter = fmod(count_ + 0.250 , T);
 
         // Calculate the coordinate using Trajectory Function
         double xVal, zVal;
@@ -302,8 +302,8 @@ private:
         torque_msg.data.clear();
 
         torque_msg.data.push_back(angle[0]);
-        torque_msg.data.push_back(0);
-        torque_msg.data.push_back(0);
+        torque_msg.data.push_back(LF_hip_output_torque);
+        torque_msg.data.push_back(LF_knee_output_torque);
         torque_msg.data.push_back(-angle[0]);
         torque_msg.data.push_back(RF_hip_output_torque);
         torque_msg.data.push_back(RF_knee_output_torque);
@@ -311,8 +311,8 @@ private:
         torque_msg.data.push_back(LB_hip_output_torque);
         torque_msg.data.push_back(LB_knee_output_torque);
         torque_msg.data.push_back(-angle[0]);
-        torque_msg.data.push_back(0);
-        torque_msg.data.push_back(0);
+        torque_msg.data.push_back(RB_hip_output_torque);
+        torque_msg.data.push_back(RB_knee_output_torque);
 
         pub_torque->publish(torque_msg);
 
