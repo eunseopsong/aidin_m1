@@ -22,7 +22,7 @@ class JointControl: public rclcpp::Node
 {
 public:
     JointControl()
-    : Node("aidin_m1_control_node"), count_(0)
+    : Node("aidin_m1_control_node"), count_(0) // count_ == 0 (Initialize)
     {
         // Subscribe to JointPos_sim and JointVel_sim topics
         sub_jointpos = this->create_subscription<std_msgs::msg::Float32MultiArray>(
@@ -90,20 +90,19 @@ public:
         pub_desiredpos = this->create_publisher<std_msgs::msg::Float32MultiArray>(
             "/aidin_m1/DesiredPos", 10);
 
-        // publish node 실행 주기 설정 (1ms)
+        // node Publish 실행 주기 설정 (1ms)
         timer_ = this->create_wall_timer(
             1ms, std::bind(&JointControl::CalculateAndPublishTorque, this));
     }
 
 private:
-    // Joint angle
+    /////////////////////// Initializing ////////////////////////
     float joint1_pos, joint2_pos, joint3_pos, joint4_pos, joint5_pos, joint6_pos, joint7_pos, joint8_pos, joint9_pos, joint10_pos, joint11_pos, joint12_pos;
-    // Joint velocity
     float joint1_vel, joint2_vel, joint3_vel, joint4_vel, joint5_vel, joint6_vel, joint7_vel, joint8_vel, joint9_vel, joint10_vel, joint11_vel, joint12_vel;
 
-    double sim_time;                    // Gazebo simulation time
-    double angle[3];                    // Angles
-    double kp[3], kd[3];                // Gains
+    double sim_time;         // Gazebo simulation time
+    double angle[3];         // Angles
+    double kp[3], kd[3];     // Gains
 
     //////////// Method of Undetermined Coefficients using Eigen ////////////
 
@@ -223,9 +222,7 @@ private:
 
     double CalculateKinematics(double xVal, double zVal, int cases)
     {
-        double returnDegree;
         double len_hip = 250, len_knee = 250;
-
         zVal = -zVal;
 
         // Calculate Knee Joint Value using Inverse Kinematics
@@ -235,20 +232,16 @@ private:
         // Calculate Hip Joint Value using Inverse Kinematics
         double hip_degree = atan2(zVal, xVal) - atan2(len_knee*sin(knee_degree), len_hip + len_knee*cos(knee_degree));
 
-        knee_degree -= M_PI_2;
+        knee_degree -= M_PI_2; // because of the difference between Kinematics theory and joint of the urdf
 
         if (cases == 1)
-            returnDegree = hip_degree;
+            return hip_degree;
         else
-            returnDegree = knee_degree;
-
-        return returnDegree;
+            return knee_degree;
     }
 
     double PID(double kp, double kd, double degree, int cases)
     {
-        double returnValue;
-
         double output_torque_5 = kp*(degree - joint5_pos) + kd*(0 - joint5_vel);
         double output_torque_6 = kp*(degree - joint6_pos) + kd*(0 - joint6_vel);
 
@@ -256,20 +249,18 @@ private:
         double output_torque_3 = kp*(degree - joint3_pos) + kd*(0 - joint3_vel);
 
         if (cases == 1)
-            returnValue = output_torque_5;
+            return output_torque_5;
         else if (cases == 2)
-            returnValue = output_torque_6;
+            return output_torque_6;
         else if (cases == 3)
-            returnValue = output_torque_2;
+            return output_torque_2;
         else
-            returnValue = output_torque_3;
-
-        return returnValue;
+            return output_torque_3;
     }
 
     void CalculateAndPublishTorque()
     {
-        count_ = count_ + 0.001;
+        count_ = count_ + 0.001; // CalculateAndPublishTorque가 실행될 때마다 count_ = count + 1ms; -> count_ 는 실제 시뮬레이션 시간을 나타내는 변수가 됨
         double T = 0.5;
         double t = fmod(count_, T);
         double t_counter = fmod(count_ + 0.250 , T);
