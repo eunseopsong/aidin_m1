@@ -343,21 +343,21 @@
     <dynamics damping="3"/>
   </joint>
 
-  <joint name="LFJ_hip" type="continuous">
+  <joint name="LFJ_hip" type="revolute">
     <parent link="LF_scap"/>
     <child link="LF_hip"/>
     <origin xyz="0.095 0 0" rpy="-1.57079 1.57079 1.57079"/>
     <axis xyz="0 0 1"/>
-    <!-- <limit lower="-3.14" upper="3.14" effort="200.0" velocity="9"/> -->
+    <limit lower="-3.14" upper="3.14" effort="200.0" velocity="9"/>
     <dynamics damping="1.5"/>
   </joint>
 
-  <joint name="LFJ_knee" type="continuous">
+  <joint name="LFJ_knee" type="revolute">
     <parent link="LF_hip"/>
     <child link="LF_knee"/>
     <origin xyz="0.250 0 0" rpy="0 0 1.57079"/>
     <axis xyz="0 0 1"/>
-    <!-- <limit lower="-1.308996939" upper="1.0471975512" effort="200.0" velocity="9"/> -->
+    <limit lower="-1.308996939" upper="1.0471975512" effort="200.0" velocity="9"/>
     <dynamics damping="1.5"/>
   </joint>
 
@@ -625,22 +625,22 @@
     <dynamics damping="3"/>
   </joint>
 
-  <joint name="RBJ_hip" type="cotinuous">
+  <joint name="RBJ_hip" type="revolute">
     <parent link="RB_scap"/>
     <child link="RB_hip"/>
     <origin xyz="0.095 0 0" rpy="-1.58259 1.57079 -1.58259"/>
     <axis xyz="0 0 1"/>
-    <!-- <limit lower="-3.14" upper="3.14" effort="200.0" velocity="9"/> -->
+    <limit lower="-3.14" upper="3.14" effort="200.0" velocity="9"/>
     <!-- <limit lower="-0.00001" upper="1.20" effort="200.0" velocity="9"/> -->
     <dynamics damping="1.5"/>
   </joint>
 
-  <joint name="RBJ_knee" type="continuous">
+  <joint name="RBJ_knee" type="revolute">
     <parent link="RB_hip"/>
     <child link="RB_knee"/>
     <origin xyz="0.250 0 0" rpy="0 0 1.57079"/>
     <axis xyz="0 0 1"/>
-    <!-- <limit lower="-3.14" upper="3.14" effort="200.0" velocity="9"/> -->
+    <limit lower="-3.14" upper="3.14" effort="200.0" velocity="9"/>
     <!-- <limit lower="-3.14" upper="0.07" effort="200.0" velocity="9"/> -->
     <dynamics damping="1.5"/>
   </joint>
@@ -684,7 +684,7 @@
       <update_rate>20</update_rate>
 
       <!-- necessary? -->
-      <!-- <joint_name>odom_joint</joint_name>
+      <joint_name>odom_joint</joint_name>
 
       <joint_name>RFJ_scap</joint_name>
       <joint_name>RFJ_hip</joint_name>
@@ -700,7 +700,7 @@
 
       <joint_name>RBJ_scap</joint_name>
       <joint_name>RBJ_hip</joint_name>
-      <joint_name>RBJ_knee</joint_name> -->
+      <joint_name>RBJ_knee</joint_name>
 
     </plugin>
   </gazebo>
