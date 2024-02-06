@@ -204,7 +204,7 @@
 
 
   <!--////////////////////////////////   plugin    ////////////////////////////////-->
-  
+
   <gazebo>
     <plugin name="leg_plugin" filename="libleg_plugin.so">
     </plugin>

@@ -199,7 +199,7 @@
     <origin xyz="0.282 -0.1150 0" rpy="-1.57079 0 -1.57079"/>
     <axis xyz="0 0 1"/>
     <limit lower="0" upper="0.7854" effort="200.0" velocity="9"/>
-    <dynamics damping="0.7"/>
+    <dynamics damping="1.5"/>
   </joint>
 
   <joint name="RFJ_hip" type="continuous">
@@ -208,7 +208,7 @@
     <origin xyz="0.095 0 0" rpy="-1.57079  1.57079 -1.57079"/>
     <axis xyz="0 0 1"/>
     <!-- <limit lower="-3.14" upper="3.14" effort="200.0" velocity="9"/> -->
-    <!-- <dynamics damping="0.7"/> -->
+    <dynamics damping="1.5"/>
   </joint>
 
   <joint name="RFJ_knee" type="continuous">
@@ -217,7 +217,7 @@
     <origin xyz="0.250 0 0" rpy="0 0 1.57079"/>
     <!-- <axis xyz="0 0 1"/> -->
     <!-- <limit lower="-1.308996939" upper="1.0471975512" effort="200.0" velocity="9"/> -->
-    <!-- <dynamics damping="3"/> -->
+    <dynamics damping="1.5"/>
   </joint>
 
   <joint name="RFJ_foot" type="fixed" dont_collapse="true">
