@@ -22,7 +22,7 @@ class JointControl: public rclcpp::Node
 {
 public:
     JointControl()
-    : Node("aidin_m1_control_node")
+    : Node("aidin_m1_control_node"), count_(0)
     {
         // Subscribe to JointPos_sim and JointVel_sim topics
         sub_jointpos = this->create_subscription<std_msgs::msg::Float32MultiArray>(
@@ -40,7 +40,7 @@ public:
                 joint10_pos = msg->data[9];
                 joint11_pos = msg->data[10];
                 joint12_pos = msg->data[11];
-                CalculateAndPublishTorque();
+                // CalculateAndPublishTorque();
             });
 
         sub_jointvel = this->create_subscription<std_msgs::msg::Float32MultiArray>(
@@ -58,19 +58,15 @@ public:
                 joint10_vel = msg->data[9];
                 joint11_vel = msg->data[10];
                 joint12_vel = msg->data[11];
-                CalculateAndPublishTorque();
+                // CalculateAndPublishTorque();
             });
 
         sub_simtime = this->create_subscription<rosgraph_msgs::msg::Clock>(
             "/clock", rclcpp::QoS(10).best_effort(),
             [this](const rosgraph_msgs::msg::Clock::SharedPtr msg) {
                 sim_time = msg->clock.sec + (msg->clock.nanosec)/1000000000.0;
-                CalculateAndPublishTorque();
+                // CalculateAndPublishTorque();
             });
-
-        pub_torque = this->create_publisher<std_msgs::msg::Float32MultiArray>(
-            "/aidin_m1/Torque_sim", 10);
-
 
         sub_gains = this->create_subscription<std_msgs::msg::Float32MultiArray>(
             "/aidin_m1/Gains_sim", 10,
@@ -86,15 +82,18 @@ public:
         sub_angles = this->create_subscription<std_msgs::msg::Float32MultiArray>(
             "/aidin_m1/Angles_sim", 10,
             [this](const std_msgs::msg::Float32MultiArray::SharedPtr msg) {
-                ag[0] = msg->data[0];
-                ag[1] = msg->data[1];
+                angle[0] = msg->data[0];
+                angle[1] = msg->data[1];
             });
 
+        // Publish torque & desired joint poses
+        pub_torque = this->create_publisher<std_msgs::msg::Float32MultiArray>(
+            "/aidin_m1/Torque_sim", 10);
 
-        // Publish desired joint poses
         pub_desiredpos = this->create_publisher<std_msgs::msg::Float32MultiArray>(
             "/aidin_m1/DesiredPos", 10);
 
+        // publish node 실행 주기 설정 (1ms)
         timer_ = this->create_wall_timer(
             1ms, std::bind(&JointControl::CalculateAndPublishTorque, this));
     }
@@ -106,7 +105,7 @@ private:
     float joint1_vel, joint2_vel, joint3_vel, joint4_vel, joint5_vel, joint6_vel, joint7_vel, joint8_vel, joint9_vel, joint10_vel, joint11_vel, joint12_vel;
 
     double sim_time;                    // Gazebo simulation time
-    double ag[3];                       // Angles
+    double angle[3];                    // Angles
     double kp[3], kd[3];                // Gains
 
     //////////// Method of Undetermined Coefficients using Eigen ////////////
@@ -159,7 +158,7 @@ private:
         return returnValue;
     }
 
-    void SplineTrajectory(double sim_time, double &xVal, double &zVal)
+    void SplineTrajectory(double t, double &xVal, double &zVal)
     {
         /////////////////////// Initializing ////////////////////////
 
@@ -188,7 +187,6 @@ private:
         /////////////////////// Calculate the return Value ////////////////////////
         // Initialize the return value
         double returnXValue, returnZValue;
-        double t = fmod(sim_time, T);
 
         if (t <= T/2) {
         ////////////////// STandingPhase //////////////////
@@ -261,29 +259,33 @@ private:
 
     void CalculateAndPublishTorque()
     {
+        count_ = count_ + 0.001;
+        double T = 0.5;
+        double t = fmod(count_, T);
         // double yVal = 210;
         double xVal, zVal;
-        SplineTrajectory(sim_time, xVal, zVal);
+        SplineTrajectory(t, xVal, zVal);
 
         double RF_hip_degree = CalculateKinematics(xVal, zVal, 1);
         double RF_knee_degree = CalculateKinematics(xVal, zVal, 2);
 
         double RF_hip_output_torque = PID(kp[1], kd[1], RF_hip_degree, 1);
-        double RF_knee_output_torque = PID(kp[2], kd[2], RF_knee_degree, 2);
+        double RF_knee_output_torque = PID(kp[2], kd[2], RF_knee_degree, 2);;
+
 
         std_msgs::msg::Float32MultiArray torque_msg;
         torque_msg.data.clear();
 
-        torque_msg.data.push_back(ag[0]);
+        torque_msg.data.push_back(angle[0]);
         torque_msg.data.push_back(0);
         torque_msg.data.push_back(0);
-        torque_msg.data.push_back(-ag[0]);
+        torque_msg.data.push_back(-angle[0]);
         torque_msg.data.push_back(RF_hip_output_torque);
         torque_msg.data.push_back(RF_knee_output_torque);
-        torque_msg.data.push_back(ag[0]);
+        torque_msg.data.push_back(angle[0]);
         torque_msg.data.push_back(0);
         torque_msg.data.push_back(0);
-        torque_msg.data.push_back(-ag[0]);
+        torque_msg.data.push_back(-angle[0]);
         torque_msg.data.push_back(0);
         torque_msg.data.push_back(0);
 
@@ -293,16 +295,16 @@ private:
         std_msgs::msg::Float32MultiArray desiredpos_msg;
         desiredpos_msg.data.clear();
 
-        desiredpos_msg.data.push_back(ag[0]);
+        desiredpos_msg.data.push_back(angle[0]);
         desiredpos_msg.data.push_back(0);
         desiredpos_msg.data.push_back(0);
-        desiredpos_msg.data.push_back(ag[0]);
+        desiredpos_msg.data.push_back(angle[0]);
         desiredpos_msg.data.push_back(RF_hip_degree);
         desiredpos_msg.data.push_back(RF_knee_degree);
-        desiredpos_msg.data.push_back(ag[0]);
+        desiredpos_msg.data.push_back(angle[0]);
         desiredpos_msg.data.push_back(0);
         desiredpos_msg.data.push_back(0);
-        desiredpos_msg.data.push_back(ag[0]);
+        desiredpos_msg.data.push_back(angle[0]);
         desiredpos_msg.data.push_back(0);
         desiredpos_msg.data.push_back(0);
 
@@ -311,14 +313,15 @@ private:
     }
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_jointpos;
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_jointvel;
-    rclcpp::Subscription<rosgraph_msgs::msg::Clock>::SharedPtr sub_simtime;
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_gains;
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_angles;
+    rclcpp::Subscription<rosgraph_msgs::msg::Clock>::SharedPtr sub_simtime;
 
     rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_torque;
     rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_desiredpos;
+
     rclcpp::TimerBase::SharedPtr timer_;
-    size_t count_;
+    double count_;
 };
 
 int main(int argc, char **argv)
