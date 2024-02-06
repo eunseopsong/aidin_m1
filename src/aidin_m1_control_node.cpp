@@ -275,7 +275,8 @@ private:
 
         double RF_hip_output_torque = PID(kp[1], kd[1], RF_hip_degree, 1);
         double RF_knee_output_torque = PID(kp[2], kd[2], RF_knee_degree, 2);;
-
+        double LB_hip_output_torque = RF_hip_output_torque;
+        double LB_knee_output_torque = RF_knee_output_torque;
 
         std_msgs::msg::Float32MultiArray torque_msg;
         torque_msg.data.clear();
@@ -287,8 +288,8 @@ private:
         torque_msg.data.push_back(RF_hip_output_torque);
         torque_msg.data.push_back(RF_knee_output_torque);
         torque_msg.data.push_back(angle[0]);
-        torque_msg.data.push_back(0);
-        torque_msg.data.push_back(0);
+        torque_msg.data.push_back(LB_hip_output_torque);
+        torque_msg.data.push_back(LB_knee_output_torque);
         torque_msg.data.push_back(-angle[0]);
         torque_msg.data.push_back(0);
         torque_msg.data.push_back(0);
