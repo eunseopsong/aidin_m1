@@ -111,15 +111,15 @@ private:
 
     void solve(double d, double e, double f, double T, double singularity, double B_val[], double arr[6])
     {
-        Eigen::Matrix3d A;  // 3x3 행렬
-        Eigen::Vector3d B;  // 크기 3의 벡터
+        Matrix3d A;  // 3x3 행렬
+        Vector3d B;  // 크기 3의 벡터
 
         // 행렬과 벡터 값 설정 (A는 주어진 행렬, B는 상수 벡터)
         A << (5*pow(singularity, 4)), (4*pow(singularity, 3)), (3*pow(singularity, 2)), pow((T/4), 5), pow((T/4), 4), pow((T/4), 3), 20*pow((T/4), 3), 12*pow((T/4), 2), 6*pow((T/4), 1);
         B << B_val[0], B_val[1], B_val[2];
 
         // 선형 시스템 풀기
-        Eigen::Vector3d solution = A.colPivHouseholderQr().solve(B);
+        Vector3d solution = A.colPivHouseholderQr().solve(B);
 
         // 결과값 저장
         double S[6] = {solution[0], solution[1], solution[2], d, e, f};
@@ -146,8 +146,11 @@ private:
         if (cases == 2 || cases == 5) {
             // SWingPhase (x & z)
             returnValue = S[0]*pow(t - T/2, 5) + S[1]*pow(t - T/2, 4) + S[2]*pow(t - T/2, 3) + S[3]*pow(t - T/2, 2) + S[4]*pow(t - T/2, 1) + S[5];
+        } else if (cases == 3) {
+            // ReversePhase (x)
+            returnValue = -S[0]*pow(T-t, 5) - S[1]*pow(T-t, 4) - S[2]*pow(T-t, 3) - S[3]*pow(T-t, 2) - S[4]*pow(T-t, 1) - S[5];
         } else {
-            // ReversePhase (x & z)
+            // ReversePhase (z)
             returnValue = S[0]*pow(T-t, 5) + S[1]*pow(T-t, 4) + S[2]*pow(T-t, 3) + S[3]*pow(T-t, 2) + S[4]*pow(T-t, 1) + S[5];
         }
 
@@ -260,11 +263,11 @@ private:
         double xVal, zVal;
         SplineTrajectory(sim_time, xVal, zVal);
 
-        double hip_degree = CalculateKinematics(xVal, zVal, 1);
-        double knee_degree = CalculateKinematics(xVal, zVal, 2);
+        double RF_hip_degree = CalculateKinematics(xVal, zVal, 1);
+        double RF_knee_degree = CalculateKinematics(xVal, zVal, 2);
 
-        double RF_hip_output_torque = PID(kp[1], kd[1], hip_degree, 1);
-        double RF_knee_output_torque = PID(kp[2], kd[2], knee_degree, 2);
+        double RF_hip_output_torque = PID(kp[1], kd[1], RF_hip_degree, 1);
+        double RF_knee_output_torque = PID(kp[2], kd[2], RF_knee_degree, 2);
 
         std_msgs::msg::Float32MultiArray torque_msg;
         torque_msg.data.clear();
@@ -292,8 +295,8 @@ private:
         desiredpos_msg.data.push_back(0);
         desiredpos_msg.data.push_back(0);
         desiredpos_msg.data.push_back(ag[0]);
-        desiredpos_msg.data.push_back(hip_degree);
-        desiredpos_msg.data.push_back(knee_degree);
+        desiredpos_msg.data.push_back(RF_hip_degree);
+        desiredpos_msg.data.push_back(RF_knee_degree);
         desiredpos_msg.data.push_back(ag[0]);
         desiredpos_msg.data.push_back(0);
         desiredpos_msg.data.push_back(0);
@@ -302,7 +305,6 @@ private:
         desiredpos_msg.data.push_back(0);
 
         pub_desiredpos->publish(desiredpos_msg);
-
 
     }
 };

@@ -1,20 +1,28 @@
 #include <iostream>
+#include <chrono>
+#include <functional>
+#include <memory>
+#include <string>
+
 #include <cmath>
 #include <math.h>
 #include <vector>
 #include <eigen3/Eigen/Dense>
 
 #include "rclcpp/rclcpp.hpp"
+#include "std_msgs/msg/string.hpp"
 #include "std_msgs/msg/float32_multi_array.hpp"
 #include "rosgraph_msgs/msg/clock.hpp"
 
 using namespace std;
 using namespace Eigen;
+using namespace std::chrono_literals;
 
 class JointControl: public rclcpp::Node
 {
 public:
-    JointControl() : Node("aidin_m1_control_node")
+    JointControl()
+    : Node("aidin_m1_control_node")
     {
         // Subscribe to JointPos_sim and JointVel_sim topics
         sub_jointpos = this->create_subscription<std_msgs::msg::Float32MultiArray>(
@@ -86,18 +94,12 @@ public:
         // Publish desired joint poses
         pub_desiredpos = this->create_publisher<std_msgs::msg::Float32MultiArray>(
             "/aidin_m1/DesiredPos", 10);
+
+        timer_ = this->create_wall_timer(
+            1ms, std::bind(&JointControl::CalculateAndPublishTorque, this));
     }
 
 private:
-    rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_jointpos;
-    rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_jointvel;
-    rclcpp::Subscription<rosgraph_msgs::msg::Clock>::SharedPtr sub_simtime;
-    rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_torque;
-    rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_gains;
-    rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_angles;
-
-    rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_desiredpos;
-
     // Joint angle
     float joint1_pos, joint2_pos, joint3_pos, joint4_pos, joint5_pos, joint6_pos, joint7_pos, joint8_pos, joint9_pos, joint10_pos, joint11_pos, joint12_pos;
     // Joint velocity
@@ -232,7 +234,7 @@ private:
         // Calculate Hip Joint Value using Inverse Kinematics
         double hip_degree = atan2(zVal, xVal) - atan2(len_knee*sin(knee_degree), len_hip + len_knee*cos(knee_degree));
 
-        knee_degree = knee_degree - M_PI_2;
+        knee_degree -= M_PI_2;
 
         if (cases == 1)
             returnDegree = hip_degree;
@@ -306,8 +308,17 @@ private:
 
         pub_desiredpos->publish(desiredpos_msg);
 
-
     }
+    rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_jointpos;
+    rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_jointvel;
+    rclcpp::Subscription<rosgraph_msgs::msg::Clock>::SharedPtr sub_simtime;
+    rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_gains;
+    rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_angles;
+
+    rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_torque;
+    rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_desiredpos;
+    rclcpp::TimerBase::SharedPtr timer_;
+    size_t count_;
 };
 
 int main(int argc, char **argv)
@@ -315,6 +326,5 @@ int main(int argc, char **argv)
     rclcpp::init(argc, argv);
     rclcpp::spin(std::make_shared<JointControl>());
     rclcpp::shutdown();
-
     return 0;
 }
