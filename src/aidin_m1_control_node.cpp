@@ -40,7 +40,6 @@ public:
                 joint10_pos = msg->data[9];
                 joint11_pos = msg->data[10];
                 joint12_pos = msg->data[11];
-                // CalculateAndPublishTorque();
             });
 
         sub_jointvel = this->create_subscription<std_msgs::msg::Float32MultiArray>(
@@ -58,14 +57,12 @@ public:
                 joint10_vel = msg->data[9];
                 joint11_vel = msg->data[10];
                 joint12_vel = msg->data[11];
-                // CalculateAndPublishTorque();
             });
 
         sub_simtime = this->create_subscription<rosgraph_msgs::msg::Clock>(
             "/clock", rclcpp::QoS(10).best_effort(),
             [this](const rosgraph_msgs::msg::Clock::SharedPtr msg) {
                 sim_time = msg->clock.sec + (msg->clock.nanosec)/1000000000.0;
-                // CalculateAndPublishTorque();
             });
 
         sub_gains = this->create_subscription<std_msgs::msg::Float32MultiArray>(
@@ -95,7 +92,7 @@ public:
 
         // publish node 실행 주기 설정 (1ms)
         timer_ = this->create_wall_timer(
-            1ms, std::bind(&JointControl::CalculateAndPublishTorque, this));
+            20ms, std::bind(&JointControl::CalculateAndPublishTorque, this));
     }
 
 private:
@@ -112,15 +109,15 @@ private:
 
     void solve(double d, double e, double f, double T, double singularity, double B_val[], double arr[6])
     {
-        Eigen::Matrix3d A;  // 3x3 행렬
-        Eigen::Vector3d B;  // 크기 3의 벡터
+        Matrix3d A;  // 3x3 행렬
+        Vector3d B;  // 크기 3의 벡터
 
         // 행렬과 벡터 값 설정 (A는 주어진 행렬, B는 상수 벡터)
         A << (5*pow(singularity, 4)), (4*pow(singularity, 3)), (3*pow(singularity, 2)), pow((T/4), 5), pow((T/4), 4), pow((T/4), 3), 20*pow((T/4), 3), 12*pow((T/4), 2), 6*pow((T/4), 1);
         B << B_val[0], B_val[1], B_val[2];
 
         // 선형 시스템 풀기
-        Eigen::Vector3d solution = A.colPivHouseholderQr().solve(B);
+        Vector3d solution = A.colPivHouseholderQr().solve(B);
 
         // 결과값 저장
         double S[6] = {solution[0], solution[1], solution[2], d, e, f};
@@ -131,10 +128,11 @@ private:
     }
 
     ////////////////// for STandingPhase //////////////////
-    // 시간에 따른 STandingPhase x 좌표의 변화를 반환하는 함수
+    // 시간에 따른 STandingPhase x 좌표의 변화를 저장하는 함수
     double CalculateXValues(double l, double v, double t)
     {
         double returnXValue = (l/2) - v*t;
+
         return returnXValue;
     }
 
@@ -150,7 +148,7 @@ private:
         } else if (cases == 3) {
             // ReversePhase (x)
             returnValue = -S[0]*pow(T-t, 5) - S[1]*pow(T-t, 4) - S[2]*pow(T-t, 3) - S[3]*pow(T-t, 2) - S[4]*pow(T-t, 1) - S[5];
-        } else {
+        } else if (cases == 6) {
             // ReversePhase (z)
             returnValue = S[0]*pow(T-t, 5) + S[1]*pow(T-t, 4) + S[2]*pow(T-t, 3) + S[3]*pow(T-t, 2) + S[4]*pow(T-t, 1) + S[5];
         }
@@ -207,7 +205,12 @@ private:
 
         } else {
         ////////////////// ReversePhase //////////////////
+        //// Solve x ////
+        solve(d1, e1, f1, T, singular1, B_val1, S1);
         returnXValue = CalculateValues(S1, t, T, Reverse_x_case);
+
+        //// Solve z ////
+        solve(d2, e2, f2, T, singular2, B_val2, S2);
         returnZValue = CalculateValues(S2, t, T, Reverse_z_case);
         }
         xVal = returnXValue;
@@ -262,6 +265,7 @@ private:
         count_ = count_ + 0.001;
         double T = 0.5;
         double t = fmod(count_, T);
+
         // double yVal = 210;
         double xVal, zVal;
         SplineTrajectory(t, xVal, zVal);
