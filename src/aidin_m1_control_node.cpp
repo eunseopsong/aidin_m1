@@ -155,12 +155,11 @@ private:
         return returnValue;
     }
 
-    void SplineTrajectory(double t, double &xVal, double &zVal)
+    void SplineTrajectory(double t, double T, double &xVal, double &zVal)
     {
         /////////////////////// Initializing ////////////////////////
 
-        double vel_of_body = 1600;
-        double T = 0.5;
+        double vel_of_body = 2500;
         double length_of_STanding_phase = vel_of_body * T /2;
         double height = 400;
 
@@ -261,15 +260,15 @@ private:
     void CalculateAndPublishTorque()
     {
         count_ = count_ + 0.001; // CalculateAndPublishTorque가 실행될 때마다 count_ = count + 1ms; -> count_ 는 실제 시뮬레이션 시간을 나타내는 변수가 됨
-        double T = 0.5;
+        double T = 0.4;
         double t = fmod(count_, T);
-        double t_counter = fmod(count_ + 0.250 , T);
+        double t_counter = fmod(count_ + 0.200 , T); // 다리를 두 쌍(pair)씩 짝지어 번갈아 움직이기 위한 작업
 
         // Calculate the coordinate using Trajectory Function
         double xVal, zVal;
-        SplineTrajectory(t, xVal, zVal);
+        SplineTrajectory(t, T, xVal, zVal);
         double xVal_counter, zVal_counter;
-        SplineTrajectory(t_counter, xVal_counter, zVal_counter);
+        SplineTrajectory(t_counter, T, xVal_counter, zVal_counter);
 
         // Calulate the degree using Inverse Kinematics
         double RF_hip_degree = CalculateKinematics(xVal, zVal, 1);
@@ -288,7 +287,7 @@ private:
         double RB_hip_output_torque = LF_hip_output_torque;
         double RB_knee_output_torque = LF_knee_output_torque;
 
-
+        ////////////////// Torque Publish //////////////////
         std_msgs::msg::Float32MultiArray torque_msg;
         torque_msg.data.clear();
 
@@ -307,7 +306,7 @@ private:
 
         pub_torque->publish(torque_msg);
 
-
+        ////////////// DesiredPose Publish //////////////
         std_msgs::msg::Float32MultiArray desiredpos_msg;
         desiredpos_msg.data.clear();
 
@@ -325,7 +324,6 @@ private:
         desiredpos_msg.data.push_back(0);
 
         pub_desiredpos->publish(desiredpos_msg);
-
     }
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_jointpos;
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_jointvel;
