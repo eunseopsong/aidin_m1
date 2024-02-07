@@ -237,6 +237,7 @@ private:
         // Calculate the coordinate using Trajectory Function
         double xVal, zVal;
         SplineTrajectory(t, T, xVal, zVal);
+
         double xVal_counter, zVal_counter;
         SplineTrajectory(t_counter, T, xVal_counter, zVal_counter);
 

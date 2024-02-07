@@ -679,7 +679,7 @@
 
   <gazebo>
     <plugin name="aidin_m1_plugin" filename="libaidin_m1_plugin.so">
-      <update_rate>20</update_rate> <!--Number of times per second a plugin information is taken within Gazebo. (1000times/sec)-->
+      <update_rate>1000</update_rate> <!--Number of times per second a plugin information is taken within Gazebo. (1000times/sec)-->
 
       <!-- necessary? -->
       <joint_name>odom_joint</joint_name>
