@@ -260,7 +260,7 @@ private:
     void CalculateAndPublishTorque()
     {
         count_ = count_ + 0.001; // CalculateAndPublishTorque가 실행될 때마다 count_ = count + 1ms; -> count_ 는 실제 시뮬레이션 시간을 나타내는 변수가 됨
-        double T = 0.4;
+        double T = 0.400;
         double t = fmod(count_, T);
         double t_counter = fmod(count_ + 0.200 , T); // 다리를 두 쌍(pair)씩 짝지어 번갈아 움직이기 위한 작업
 
