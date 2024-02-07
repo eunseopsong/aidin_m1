@@ -197,9 +197,7 @@ private:
         zVal = returnZValue;
     }
 
-    ////////////////////////////////////////////////////////
     //////////////////// for Kinematics ////////////////////
-    ////////////////////////////////////////////////////////
 
     double CalculateKinematics(double xVal, double zVal, int cases)
     {
@@ -221,14 +219,19 @@ private:
             return knee_degree;
     }
 
-    double PID(double kp, double kd, double degree, int index)
+    //////////////////// PID Control Function ////////////////////
+
+    double PID(double kp, double kd, double desiered_pos, int index)
     {
-        double output_torque = kp*(degree - joint_pos[index]) + kd*(0 - joint_vel[index]);
+        double output_torque = kp*(desiered_pos - joint_pos[index]) + kd*(0 - joint_vel[index]);
         return output_torque;
     }
 
+    /////////////// timer_에 의해 호출되어 Publish를 실행하는 함수 ///////////////
+
     void CalculateAndPublishTorque()
     {
+        // Initializing
         count_ = count_ + 0.001; // CalculateAndPublishTorque가 실행될 때마다 count_ = count + 1ms; -> count_ 는 실제 시뮬레이션 시간을 나타내는 변수가 됨
         double T = 0.4;          // The period of the whole trajectory phase
         double t = fmod(count_, T);
