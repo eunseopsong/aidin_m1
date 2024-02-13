@@ -38,11 +38,11 @@ install(DIRECTORY
   )
 
 # Build
-add_executable(joint_control_node src/joint_control_node.cpp)
-ament_target_dependencies(joint_control_node rclcpp std_msgs)
+add_executable(aidin_m1_command src/aidin_m1_command.cpp)
+ament_target_dependencies(aidin_m1_command rclcpp std_msgs)
 
-add_executable(aidin_m1_control_node src/aidin_m1_control_node.cpp)
-ament_target_dependencies(aidin_m1_control_node rclcpp std_msgs)
+add_executable(aidin_m1_main src/aidin_m1_main.cpp)
+ament_target_dependencies(aidin_m1_main rclcpp std_msgs)
 
 add_library(aidin_m1_plugin SHARED src/aidin_m1_plugin.cpp)
 target_link_libraries(aidin_m1_plugin ${GAZEBO_LIBRARIES} ${rclcpp_LIBRARIES} ${std_msgs_LIBRARIES})
@@ -50,8 +50,8 @@ ament_target_dependencies(aidin_m1_plugin rclcpp std_msgs)
 
 # Install
 install(TARGETS
-  joint_control_node
-  aidin_m1_control_node
+  aidin_m1_command
+  aidin_m1_main
   aidin_m1_plugin
   DESTINATION lib/${PROJECT_NAME}
   )
