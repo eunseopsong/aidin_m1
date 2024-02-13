@@ -120,21 +120,23 @@ private:
         // Calculate the output_torque using PD control
         double output_torque[12];
 
-        output_torque[0] = PID(kp[0], kd[0], target_pos[0], 0);
-        output_torque[1] = PID(kp[1], kd[1], target_pos[1],  1);
-        output_torque[2] = PID(kp[2], kd[2], target_pos[2], 2);;
-
-        output_torque[3] = PID(kp[0], kd[0], target_pos[3], 3);
-        output_torque[4] = PID(kp[1], kd[1], target_pos[4],  4);
-        output_torque[5] = PID(kp[2], kd[2], target_pos[5], 5);;
-
-        output_torque[6] = -output_torque[3];
-        output_torque[7] =  output_torque[4];
-        output_torque[8] =  output_torque[5];
-
-        output_torque[9]  = -output_torque[0];
-        output_torque[10] =  output_torque[1];
-        output_torque[11] =  output_torque[2];
+        for (int i=0; i<12; i++){
+            if (i<3) {
+                output_torque[i] = PID(kp[i], kd[i], target_pos[i], i);
+            } else if (i<6) {
+                output_torque[i] = PID(kp[i-3], kd[i-3], target_pos[i], i);
+            } else if (i<9) {
+                if (i == 6)
+                    output_torque[i] = -output_torque[i-3];
+                else
+                    output_torque[i] =  output_torque[i-3];
+            } else {
+                if (i == 9)
+                    output_torque[i] = -output_torque[i-9];
+                else
+                    output_torque[i] =  output_torque[i-9];
+            }
+        }
 
         ////////////////// Publish Torque //////////////////
         std_msgs::msg::Float32MultiArray torque_msg;
