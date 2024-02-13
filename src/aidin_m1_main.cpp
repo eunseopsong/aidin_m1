@@ -38,9 +38,9 @@ public:
             [this](const std_msgs::msg::Float32MultiArray::SharedPtr msg) {
                 for (int i = 0; i < 6; ++i) {
                     if (i <= 2)
-                        kp[i]   = msg->data[i];
+                        Kp[i]   = msg->data[i];
                     else
-                        kd[i-3] = msg->data[i];
+                        Kd[i-3] = msg->data[i];
                 }
             });
 
@@ -71,13 +71,13 @@ private:
 
     double sim_time;         // Gazebo simulation time
     double angle[3];         // Angles
-    double kp[3], kd[3];     // Gains
+    double Kp[3], Kd[3];     // Gains
 
     //////////////////// PID Control Function ////////////////////
 
-    double PID(double kp, double kd, double target_pos, int index)
+    double PIDController(double Kp, double Kd, double target_pos, int index)
     {
-        double output_torque = kp*(target_pos - joint_pos[index]) + kd*(0 - joint_vel[index]);
+        double output_torque = Kp*(target_pos - joint_pos[index]) + Kd*(0 - joint_vel[index]);
         return output_torque;
     }
 
@@ -122,9 +122,9 @@ private:
 
         for (int i=0; i<12; i++){
             if (i<3) {
-                output_torque[i] = PID(kp[i], kd[i], target_pos[i], i);
+                output_torque[i] = PIDController(Kp[i],   Kd[i],   target_pos[i], i);
             } else if (i<6) {
-                output_torque[i] = PID(kp[i-3], kd[i-3], target_pos[i], i);
+                output_torque[i] = PIDController(Kp[i-3], Kd[i-3], target_pos[i], i);
             } else if (i<9) {
                 if (i == 6)
                     output_torque[i] = -output_torque[i-3];
@@ -137,6 +137,15 @@ private:
                     output_torque[i] =  output_torque[i-9];
             }
         }
+        /////////////// Publish Desired Pose ///////////////
+        std_msgs::msg::Float32MultiArray targetpos_msg;
+        targetpos_msg.data.clear();
+
+        for (int i=0; i < 12; i++){
+            targetpos_msg.data.push_back(target_pos[i]);
+        }
+
+        pub_targetpos->publish(targetpos_msg);
 
         ////////////////// Publish Torque //////////////////
         std_msgs::msg::Float32MultiArray torque_msg;
@@ -147,16 +156,6 @@ private:
         }
 
         pub_torque->publish(torque_msg);
-
-        /////////////// Publish Desired Pose ///////////////
-        std_msgs::msg::Float32MultiArray targetpos_msg;
-        targetpos_msg.data.clear();
-
-        for (int i=0; i < 12; i++){
-            targetpos_msg.data.push_back(target_pos[i]);
-        }
-
-        pub_targetpos->publish(targetpos_msg);
     }
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_jointpos;
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_jointvel;

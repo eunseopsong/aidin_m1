@@ -10,7 +10,6 @@
 #include "std_msgs/msg/float32.hpp"
 #include "std_msgs/msg/float32_multi_array.hpp"
 
-
 using namespace std;
 
 namespace gazebo
@@ -32,7 +31,6 @@ namespace gazebo
         // Pointer to publisher
         private: rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_jointpos;
         private: rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_jointvel;
-        //private: rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_jointtorque;
 
         // Pointer to model
         private: physics::ModelPtr model;
@@ -98,29 +96,29 @@ namespace gazebo
 */
 
             // Store the joint
-            this->joint1_ = this->model->GetJoint("aidin_m1::LFJ_scap");
-            this->joint2_ = this->model->GetJoint("aidin_m1::LFJ_hip");
-            this->joint3_ = this->model->GetJoint("aidin_m1::LFJ_knee");
-            this->joint4_ = this->model->GetJoint("aidin_m1::RFJ_scap");
-            this->joint5_ = this->model->GetJoint("aidin_m1::RFJ_hip");
-            this->joint6_ = this->model->GetJoint("aidin_m1::RFJ_knee");
-            this->joint7_ = this->model->GetJoint("aidin_m1::LBJ_scap");
-            this->joint8_ = this->model->GetJoint("aidin_m1::LBJ_hip");
-            this->joint9_ = this->model->GetJoint("aidin_m1::LBJ_knee");
+            this->joint1_  = this->model->GetJoint("aidin_m1::LFJ_scap");
+            this->joint2_  = this->model->GetJoint("aidin_m1::LFJ_hip");
+            this->joint3_  = this->model->GetJoint("aidin_m1::LFJ_knee");
+            this->joint4_  = this->model->GetJoint("aidin_m1::RFJ_scap");
+            this->joint5_  = this->model->GetJoint("aidin_m1::RFJ_hip");
+            this->joint6_  = this->model->GetJoint("aidin_m1::RFJ_knee");
+            this->joint7_  = this->model->GetJoint("aidin_m1::LBJ_scap");
+            this->joint8_  = this->model->GetJoint("aidin_m1::LBJ_hip");
+            this->joint9_  = this->model->GetJoint("aidin_m1::LBJ_knee");
             this->joint10_ = this->model->GetJoint("aidin_m1::RBJ_scap");
             this->joint11_ = this->model->GetJoint("aidin_m1::RBJ_hip");
             this->joint12_ = this->model->GetJoint("aidin_m1::RBJ_knee");
 
             // Store the joint Controller to control Joint
-            this->joint1_Controller_ = this->model->GetJointController();
-            this->joint2_Controller_ = this->model->GetJointController();
-            this->joint3_Controller_ = this->model->GetJointController();
-            this->joint4_Controller_ = this->model->GetJointController();
-            this->joint5_Controller_ = this->model->GetJointController();
-            this->joint6_Controller_ = this->model->GetJointController();
-            this->joint7_Controller_ = this->model->GetJointController();
-            this->joint8_Controller_ = this->model->GetJointController();
-            this->joint9_Controller_ = this->model->GetJointController();
+            this->joint1_Controller_  = this->model->GetJointController();
+            this->joint2_Controller_  = this->model->GetJointController();
+            this->joint3_Controller_  = this->model->GetJointController();
+            this->joint4_Controller_  = this->model->GetJointController();
+            this->joint5_Controller_  = this->model->GetJointController();
+            this->joint6_Controller_  = this->model->GetJointController();
+            this->joint7_Controller_  = this->model->GetJointController();
+            this->joint8_Controller_  = this->model->GetJointController();
+            this->joint9_Controller_  = this->model->GetJointController();
             this->joint10_Controller_ = this->model->GetJointController();
             this->joint11_Controller_ = this->model->GetJointController();
             this->joint12_Controller_ = this->model->GetJointController();
@@ -140,9 +138,6 @@ namespace gazebo
                 robot_namespace+"JointPos_sim", qos);
             this->pub_jointvel = this->node->create_publisher<std_msgs::msg::Float32MultiArray>(
                 robot_namespace+"JointVel_sim", qos);
-            /*this->pub_jointtorque = this->node->create_publisher<std_msgs::msg::Float32MultiArray>(
-                robot_namespace+"JointTorque_sim", qos);
-            */
 
             // Listen to the update event. This event is broadcast every
             // simulation iteration.
@@ -150,21 +145,20 @@ namespace gazebo
                 std::bind(&aidin_m1_plugin::OnUpdate, this));
         }
 
-
         public: void OnUpdate()
         {
             // Publish joint position
             std_msgs::msg::Float32MultiArray JointPos;
             JointPos.data.clear();
-            JointPos.data.push_back(this->joint1_->Position(1));
-            JointPos.data.push_back(this->joint2_->Position(1));
-            JointPos.data.push_back(this->joint3_->Position(1));
-            JointPos.data.push_back(this->joint4_->Position(1));
-            JointPos.data.push_back(this->joint5_->Position(1));
-            JointPos.data.push_back(this->joint6_->Position(1));
-            JointPos.data.push_back(this->joint7_->Position(1));
-            JointPos.data.push_back(this->joint8_->Position(1));
-            JointPos.data.push_back(this->joint9_->Position(1));
+            JointPos.data.push_back(this->joint1_ ->Position(1));
+            JointPos.data.push_back(this->joint2_ ->Position(1));
+            JointPos.data.push_back(this->joint3_ ->Position(1));
+            JointPos.data.push_back(this->joint4_ ->Position(1));
+            JointPos.data.push_back(this->joint5_ ->Position(1));
+            JointPos.data.push_back(this->joint6_ ->Position(1));
+            JointPos.data.push_back(this->joint7_ ->Position(1));
+            JointPos.data.push_back(this->joint8_ ->Position(1));
+            JointPos.data.push_back(this->joint9_ ->Position(1));
             JointPos.data.push_back(this->joint10_->Position(1));
             JointPos.data.push_back(this->joint11_->Position(1));
             JointPos.data.push_back(this->joint12_->Position(1));
@@ -174,28 +168,19 @@ namespace gazebo
             // Publish joint velocity
             std_msgs::msg::Float32MultiArray JointVel;
             JointVel.data.clear();
-            JointVel.data.push_back(this->joint1_->GetVelocity(1));
-            JointVel.data.push_back(this->joint2_->GetVelocity(1));
-            JointVel.data.push_back(this->joint3_->GetVelocity(1));
-            JointVel.data.push_back(this->joint4_->GetVelocity(1));
-            JointVel.data.push_back(this->joint5_->GetVelocity(1));
-            JointVel.data.push_back(this->joint6_->GetVelocity(1));
-            JointVel.data.push_back(this->joint7_->GetVelocity(1));
-            JointVel.data.push_back(this->joint8_->GetVelocity(1));
-            JointVel.data.push_back(this->joint9_->GetVelocity(1));
+            JointVel.data.push_back(this->joint1_ ->GetVelocity(1));
+            JointVel.data.push_back(this->joint2_ ->GetVelocity(1));
+            JointVel.data.push_back(this->joint3_ ->GetVelocity(1));
+            JointVel.data.push_back(this->joint4_ ->GetVelocity(1));
+            JointVel.data.push_back(this->joint5_ ->GetVelocity(1));
+            JointVel.data.push_back(this->joint6_ ->GetVelocity(1));
+            JointVel.data.push_back(this->joint7_ ->GetVelocity(1));
+            JointVel.data.push_back(this->joint8_ ->GetVelocity(1));
+            JointVel.data.push_back(this->joint9_ ->GetVelocity(1));
             JointVel.data.push_back(this->joint10_->GetVelocity(1));
             JointVel.data.push_back(this->joint11_->GetVelocity(1));
             JointVel.data.push_back(this->joint12_->GetVelocity(1));
             pub_jointvel->publish(JointVel);
-	/*
-            // Publish joint torque
-            std_msgs::msg::Float32MultiArray JointTorque;
-            JointTorque.data.clear();
-            JointTorque.data.push_back(this->joint1_->GetForceTorque(0).body2Torque[1]);
-            JointTorque.data.push_back(this->joint2_->GetForceTorque(0).body2Torque[1]);
-            JointTorque.data.push_back(this->joint3_->GetForceTorque(0).body2Torque[1]);
-            pub_jointtorque->publish(JointTorque);
-	*/
 
             rclcpp::executors::SingleThreadedExecutor executor;
             executor.add_node(this->node);
@@ -204,15 +189,15 @@ namespace gazebo
 
         void ROSCallbackTorque_sim(const std_msgs::msg::Float32MultiArray::ConstSharedPtr torque)
         {
-            this->joint1_->SetForce(0, torque->data[0]);
-            this->joint2_->SetForce(0, torque->data[1]);
-            this->joint3_->SetForce(0, torque->data[2]);
-            this->joint4_->SetForce(0, torque->data[3]);
-            this->joint5_->SetForce(0, torque->data[4]);
-            this->joint6_->SetForce(0, torque->data[5]);
-            this->joint7_->SetForce(0, torque->data[6]);
-            this->joint8_->SetForce(0, torque->data[7]);
-            this->joint9_->SetForce(0, torque->data[8]);
+            this->joint1_ ->SetForce(0, torque->data[0]);
+            this->joint2_ ->SetForce(0, torque->data[1]);
+            this->joint3_ ->SetForce(0, torque->data[2]);
+            this->joint4_ ->SetForce(0, torque->data[3]);
+            this->joint5_ ->SetForce(0, torque->data[4]);
+            this->joint6_ ->SetForce(0, torque->data[5]);
+            this->joint7_ ->SetForce(0, torque->data[6]);
+            this->joint8_ ->SetForce(0, torque->data[7]);
+            this->joint9_ ->SetForce(0, torque->data[8]);
             this->joint10_->SetForce(0, torque->data[9]);
             this->joint11_->SetForce(0, torque->data[10]);
             this->joint12_->SetForce(0, torque->data[11]);
