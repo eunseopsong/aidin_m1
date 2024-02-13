@@ -52,12 +52,12 @@ public:
                 }
             });
 
-        // Publish torque & desired joint poses
+        // Publish torque & target joint poses
         pub_torque = this->create_publisher<std_msgs::msg::Float32MultiArray>(
             "/aidin_m1/Torque_sim", 10);
 
-        pub_desiredpos = this->create_publisher<std_msgs::msg::Float32MultiArray>(
-            "/aidin_m1/DesiredPos", 10);
+        pub_targetpos = this->create_publisher<std_msgs::msg::Float32MultiArray>(
+            "/aidin_m1/TargetPos", 10);
 
         // node Publish 실행 주기 설정 (1ms)
         timer_ = this->create_wall_timer(
@@ -75,7 +75,7 @@ private:
 
     //////////////////// PID Control Function ////////////////////
 
-    double PID(double kp, double kd, double taret_pos, int index)
+    double PID(double kp, double kd, double target_pos, int index)
     {
         double output_torque = kp*(target_pos - joint_pos[index]) + kd*(0 - joint_vel[index]);
         return output_torque;
@@ -99,82 +99,62 @@ private:
         SplineTrajectory(t_counter, T, xVal_counter, zVal_counter);
 
         // Calulate the degree using Inverse Kinematics
-        double LF_scap_degree = angle[0];
-        double LF_hip_degree  = InverseKinematics(xVal, zVal, 1);
-        double LF_knee_degree = InverseKinematics(xVal, zVal, 2);
+        double target_pos[12];
 
-        double RF_scap_degree = -angle[0];
-        double RF_hip_degree  = InverseKinematics(xVal_counter, zVal_counter, 1);
-        double RF_knee_degree = InverseKinematics(xVal_counter, zVal_counter, 2);
+        target_pos[0] = angle[0];
+        target_pos[1] = InverseKinematics(xVal, zVal, 1);
+        target_pos[2] = InverseKinematics(xVal, zVal, 2);
 
-        double LB_scap_degree = -RF_scap_degree;
-        double LB_hip_degree  =  RF_hip_degree;
-        double LB_knee_degree =  RF_knee_degree;
+        target_pos[3] = -angle[0];
+        target_pos[4] =  InverseKinematics(xVal_counter, zVal_counter, 1);
+        target_pos[5] =  InverseKinematics(xVal_counter, zVal_counter, 2);
 
-        double RB_scap_degree = -LF_scap_degree;
-        double RB_hip_degree  =  LF_hip_degree;
-        double RB_knee_degree =  LF_knee_degree;
+        target_pos[6] = -target_pos[3];
+        target_pos[7] =  target_pos[4];
+        target_pos[8] =  target_pos[5];
+
+        target_pos[9]  = -target_pos[0];
+        target_pos[10] =  target_pos[1];
+        target_pos[11] =  target_pos[2];
 
         // Calculate the output_torque using PD control
-        double LF_scap_output_torque = PID(kp[0], kd[0], LF_scap_degree, 0);
-        double LF_hip_output_torque  = PID(kp[1], kd[1], LF_hip_degree,  1);
-        double LF_knee_output_torque = PID(kp[2], kd[2], LF_knee_degree, 2);;
+        double output_torque[12];
 
-        double RF_scap_output_torque = PID(kp[0], kd[0], RF_scap_degree, 3);
-        double RF_hip_output_torque  = PID(kp[1], kd[1], RF_hip_degree,  4);
-        double RF_knee_output_torque = PID(kp[2], kd[2], RF_knee_degree, 5);;
+        output_torque[0] = PID(kp[0], kd[0], target_pos[0], 0);
+        output_torque[1] = PID(kp[1], kd[1], target_pos[1],  1);
+        output_torque[2] = PID(kp[2], kd[2], target_pos[2], 2);;
 
-        double LB_scap_output_torque = -RF_scap_output_torque;
-        double LB_hip_output_torque  =  RF_hip_output_torque;
-        double LB_knee_output_torque =  RF_knee_output_torque;
+        output_torque[3] = PID(kp[0], kd[0], target_pos[3], 3);
+        output_torque[4] = PID(kp[1], kd[1], target_pos[4],  4);
+        output_torque[5] = PID(kp[2], kd[2], target_pos[5], 5);;
 
-        double RB_scap_output_torque = -LF_scap_output_torque;
-        double RB_hip_output_torque  =  LF_hip_output_torque;
-        double RB_knee_output_torque =  LF_knee_output_torque;
+        output_torque[6] = -output_torque[3];
+        output_torque[7] =  output_torque[4];
+        output_torque[8] =  output_torque[5];
+
+        output_torque[9]  = -output_torque[0];
+        output_torque[10] =  output_torque[1];
+        output_torque[11] =  output_torque[2];
 
         ////////////////// Publish Torque //////////////////
         std_msgs::msg::Float32MultiArray torque_msg;
         torque_msg.data.clear();
 
-        torque_msg.data.push_back(LF_scap_output_torque);
-        torque_msg.data.push_back(LF_hip_output_torque);
-        torque_msg.data.push_back(LF_knee_output_torque);
-
-        torque_msg.data.push_back(RF_scap_output_torque);
-        torque_msg.data.push_back(RF_hip_output_torque);
-        torque_msg.data.push_back(RF_knee_output_torque);
-
-        torque_msg.data.push_back(LB_scap_output_torque);
-        torque_msg.data.push_back(LB_hip_output_torque);
-        torque_msg.data.push_back(LB_knee_output_torque);
-
-        torque_msg.data.push_back(RB_scap_output_torque);
-        torque_msg.data.push_back(RB_hip_output_torque);
-        torque_msg.data.push_back(RB_knee_output_torque);
+        for (int i=0; i < 12; i++){
+            torque_msg.data.push_back(output_torque[i]);
+        }
 
         pub_torque->publish(torque_msg);
 
         /////////////// Publish Desired Pose ///////////////
-        std_msgs::msg::Float32MultiArray desiredpos_msg;
-        desiredpos_msg.data.clear();
+        std_msgs::msg::Float32MultiArray targetpos_msg;
+        targetpos_msg.data.clear();
 
-        desiredpos_msg.data.push_back(LF_scap_degree);
-        desiredpos_msg.data.push_back(LF_hip_degree);
-        desiredpos_msg.data.push_back(LF_knee_degree);
+        for (int i=0; i < 12; i++){
+            targetpos_msg.data.push_back(target_pos[i]);
+        }
 
-        desiredpos_msg.data.push_back(RF_scap_degree);
-        desiredpos_msg.data.push_back(RF_hip_degree);
-        desiredpos_msg.data.push_back(RF_knee_degree);
-
-        desiredpos_msg.data.push_back(LB_scap_degree);
-        desiredpos_msg.data.push_back(LB_hip_degree);
-        desiredpos_msg.data.push_back(LB_knee_degree);
-
-        desiredpos_msg.data.push_back(RB_scap_degree);
-        desiredpos_msg.data.push_back(RB_hip_degree);
-        desiredpos_msg.data.push_back(RB_knee_degree);
-
-        pub_desiredpos->publish(desiredpos_msg);
+        pub_targetpos->publish(targetpos_msg);
     }
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_jointpos;
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_jointvel;
@@ -183,7 +163,7 @@ private:
     rclcpp::Subscription<rosgraph_msgs::msg::Clock>::SharedPtr sub_simtime;
 
     rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_torque;
-    rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_desiredpos;
+    rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_targetpos;
 
     rclcpp::TimerBase::SharedPtr timer_;
     double count_;
