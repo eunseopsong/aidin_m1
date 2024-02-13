@@ -41,7 +41,7 @@ bool first_callback = true, up = true;
 
 //--------------DH param-------------------//
 float L1 = 0.5, L2 = 1, L3 = 1;
-float th1_i, th2_i, th3_i, 
+float th1_i, th2_i, th3_i,
 	  th1, th2, th3,
 	  x, y, z;
 

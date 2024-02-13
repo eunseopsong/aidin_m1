@@ -1,4 +1,5 @@
 #include "func.cpp"
+using namespace std::chrono_literals;
 
 class JointCommandPublisher : public rclcpp::Node
 {
@@ -6,11 +7,11 @@ public:
     JointCommandPublisher()
     : Node("jointcmd_publishing_node") //, op_mode(0)
     {
-        // Create a publisher on the "/aidin_m1/ArmCmd" topic
-        aidin_m1_command_pub = this->create_publisher<std_msgs::msg::Float32MultiArray>("/aidin_m1/RobotCmd", 100);
+        // Create a publisher on the "/aidin_m1/RobotCmd" topic
+        aidin_m1_command_pub = this->create_publisher<std_msgs::msg::Float32MultiArray>("/aidin_m1/RobotCmd", 10);
 
         // Create a timer to publish the number every 1 second
-        timer_ = this->create_wall_timer(std::chrono::seconds(1), std::bind(&JointCommandPublisher::getJointCmdInput, this));
+        timer_ = this->create_wall_timer(1ms, std::bind(&JointCommandPublisher::getJointCmdInput, this));
     }
 
 private:
@@ -68,6 +69,7 @@ private:
     }
 
     rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr aidin_m1_command_pub;
+
     rclcpp::TimerBase::SharedPtr timer_;
     int op_mode;
 };

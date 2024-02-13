@@ -29,7 +29,7 @@ public:
             });
 
         sub_joint_cmd = this->create_subscription<std_msgs::msg::Float32MultiArray>(
-            "/aidin_m1/RobotCmd", 100, std::bind(&JointControl::msgCallbackArmCmd_sim, this, _1));
+            "/aidin_m1/RobotCmd", 10, std::bind(&JointControl::msgCallbackArmCmd_sim, this, _1));
 
         // sub_simtime = this->create_subscription<rosgraph_msgs::msg::Clock>(
         //     "/clock", rclcpp::QoS(10).best_effort(),
@@ -71,11 +71,25 @@ public:
 private:
     void msgCallbackArmCmd_sim(const std_msgs::msg::Float32MultiArray::SharedPtr msg)
     {
-        for (int i = 0; i < 3; i++)
-        {
+        double scap_output_torque;
+        for (int i = 0; i < 3; i++) {
             th_sub[i] = msg->data[i];
         }
 
+        scap_output_torque = PIDController(Kp[0], Kd[0], th_sub[0], 0);
+
+        /////////////// Publish Desired Pose ///////////////
+        std_msgs::msg::Float32MultiArray targetpos_msg;
+        targetpos_msg.data.clear();
+
+        for (int i=0; i < 12; i++){
+            if (i%3 == 0) {
+                if (i == 3 || i == 9)
+                    targetpos_msg.data.push_back(-scap_output_torque);
+                else
+                    targetpos_msg.data.push_back(scap_output_torque);
+            }
+        }
     }
 
     //////////////////// PID Control Function ////////////////////
