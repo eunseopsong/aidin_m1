@@ -55,19 +55,10 @@ private:
                 }
             }
 
-            ////////////////// Publish Torque //////////////////
-            std_msgs::msg::Float32MultiArray torque_msg;
-            torque_msg.data.clear();
-
-            torque_msg.data.push_back(LF_scap_output_torque);
-            torque_msg.data.push_back(LF_hip_output_torque);
-            torque_msg.data.push_back(LF_knee_output_torque);
-
-
             // Create a message and set its data
             auto joint_command_msg = std_msgs::msg::Float32MultiArray();
             joint_command_msg.data.clear();
-            for(int i = 0; i < DoF; i++) {
+            for(int i = 0; i < 3; i++) {
                 joint_command_msg.data.push_back(th_cmd[i]);
             }
 
