@@ -27,14 +27,6 @@ public:
                 }
             });
 
-        sub_cases = this->create_subscription<std_msgs::msg::Float32MultiArray>(
-            "/aidin_m1/Cases_sim", 10,
-            [this](const std_msgs::msg::Float32MultiArray::SharedPtr msg) {
-                for (int i = 0; i < 2; ++i) {
-                    case_[i] = msg->data[i];
-                }
-            });
-
         // sub_simtime = this->create_subscription<rosgraph_msgs::msg::Clock>(
         //     "/clock", rclcpp::QoS(10).best_effort(),
         //     [this](const rosgraph_msgs::msg::Clock::SharedPtr msg) {
@@ -98,6 +90,7 @@ private:
         double xVal_counter, zVal_counter;
         SplineTrajectory(t_counter, T, xVal_counter, zVal_counter);
 
+
         // Calulate the degree using Inverse Kinematics
         double target_pos[12];
 
@@ -159,7 +152,6 @@ private:
     }
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_jointpos;
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_jointvel;
-    rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_cases;
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_angles;
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_gains;
     // rclcpp::Subscription<rosgraph_msgs::msg::Clock>::SharedPtr sub_simtime;

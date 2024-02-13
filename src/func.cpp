@@ -28,7 +28,6 @@ float joint_pos[12];     // Joint Pose
 float joint_vel[12];     // Joint Velocity
 
 // double sim_time;      // Gazebo simulation time
-int case_[2];
 double angle[3];         // Angles
 double Kp[3], Kd[3];     // Gains
 
