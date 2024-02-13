@@ -3,7 +3,6 @@
 using namespace std;
 using namespace Eigen;
 using namespace std::chrono_literals;
-using std::placeholders::_1; // I dont know what it is.
 
 class JointControl: public rclcpp::Node
 {
@@ -28,8 +27,13 @@ public:
                 }
             });
 
-        sub_joint_cmd = this->create_subscription<std_msgs::msg::Float32MultiArray>(
-            "/aidin_m1/RobotCmd", 10, std::bind(&JointControl::msgCallbackArmCmd_sim, this, _1));
+        sub_cases = this->create_subscription<std_msgs::msg::Float32MultiArray>(
+            "/aidin_m1/Cases_sim", 10,
+            [this](const std_msgs::msg::Float32MultiArray::SharedPtr msg) {
+                for (int i = 0; i < 2; ++i) {
+                    case_[i] = msg->data[i];
+                }
+            });
 
         // sub_simtime = this->create_subscription<rosgraph_msgs::msg::Clock>(
         //     "/clock", rclcpp::QoS(10).best_effort(),
@@ -69,29 +73,6 @@ public:
     }
 
 private:
-    void msgCallbackArmCmd_sim(const std_msgs::msg::Float32MultiArray::SharedPtr msg)
-    {
-        double scap_output_torque;
-        for (int i = 0; i < 3; i++) {
-            th_sub[i] = msg->data[i];
-        }
-
-        scap_output_torque = PIDController(Kp[0], Kd[0], th_sub[0], 0);
-
-        /////////////// Publish Desired Pose ///////////////
-        std_msgs::msg::Float32MultiArray targetpos_msg;
-        targetpos_msg.data.clear();
-
-        for (int i=0; i < 12; i++){
-            if (i%3 == 0) {
-                if (i == 3 || i == 9)
-                    targetpos_msg.data.push_back(-scap_output_torque);
-                else
-                    targetpos_msg.data.push_back(scap_output_torque);
-            }
-        }
-    }
-
     //////////////////// PID Control Function ////////////////////
 
     double PIDController(double Kp, double Kd, double target_pos, int index)
@@ -178,9 +159,9 @@ private:
     }
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_jointpos;
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_jointvel;
-    rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_gains;
+    rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_cases;
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_angles;
-    rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_joint_cmd;
+    rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_gains;
     // rclcpp::Subscription<rosgraph_msgs::msg::Clock>::SharedPtr sub_simtime;
 
     rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_torque;
