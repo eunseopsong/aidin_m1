@@ -38,8 +38,8 @@ install(DIRECTORY
   )
 
 # Build
-# add_executable(aidin_m1_command src/aidin_m1_command.cpp)
-# ament_target_dependencies(aidin_m1_command rclcpp std_msgs)
+add_executable(aidin_m1_command src/aidin_m1_command.cpp)
+ament_target_dependencies(aidin_m1_command rclcpp std_msgs)
 
 add_executable(aidin_m1_main src/aidin_m1_main.cpp)
 ament_target_dependencies(aidin_m1_main rclcpp std_msgs)
@@ -50,7 +50,7 @@ ament_target_dependencies(aidin_m1_plugin rclcpp std_msgs)
 
 # Install
 install(TARGETS
-  # aidin_m1_command
+  aidin_m1_command
   aidin_m1_main
   aidin_m1_plugin
   DESTINATION lib/${PROJECT_NAME}

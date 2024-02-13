@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include <chrono>
 #include <functional>
 #include <memory>
@@ -11,19 +12,59 @@
 
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/string.hpp"
+
+#include "sensor_msgs/msg/joint_state.hpp"
+#include "std_msgs/msg/float64.hpp"
 #include "std_msgs/msg/float32_multi_array.hpp"
+#include "std_msgs/msg/float64_multi_array.hpp"
 #include "rosgraph_msgs/msg/clock.hpp"
 
 using namespace std;
 using namespace Eigen;
-using namespace std::chrono_literals;
+using Eigen::VectorXf;
+
+/////////////////////// Junasong's Method ////////////////////////
+
+#define PI 3.14159
+#define SAMPLING_TIME 0.01
+#define DoF 3
 
 //--------------Command-------------------//
 int cmd_mode = 1;
-double th_act[3] = {0,};
-double th_ini[3] = {0,};
-double th_cmd[3] = {0,};
-double th_sub[3] = {0,};
+double th_act[DoF] = {0,};
+double th_ini[DoF] = {0,};
+double th_cmd[DoF] = {0,};
+double th_sub[DoF] = {0,};
+MatrixXd T03 = MatrixXd::Identity(4, 4);
+
+bool first_callback = true, up = true;
+
+//--------------DH param-------------------//
+float L1 = 0.5, L2 = 1, L3 = 1;
+float th1_i, th2_i, th3_i, 
+	  th1, th2, th3,
+	  x, y, z;
+
+//--------------PID gain-------------------//
+double TargetTor[DoF] = {0, };
+double TargetPos[DoF] = {0, };
+
+//--------------Trajectory Planning-------------------//
+bool traj_init = false;
+int traj_cnt = 0;
+MatrixXf th_out = MatrixXf::Zero(1, DoF); // resize later
+
+
+//--------------Functions-------------------//
+Matrix4d T_craig(float th, float d, float al, float a)
+{
+	Matrix4d T_craig_;
+	T_craig_ << cos(th), 			-sin(th), 			0, 			a,
+				sin(th)*cos(al), 	cos(th)*cos(al), 	-sin(al), 	-d*sin(al),
+				sin(th)*sin(al), 	cos(th)*sin(al), 	cos(al), 	d*cos(al),
+				0, 					0, 					0, 			1;
+	return T_craig_;
+}
 
 /////////////////////// Initializing ////////////////////////
 float joint_pos[12];     // Joint Pose

@@ -35,24 +35,24 @@ private:
             }
             else if(op_mode == 2) // EE pose input
             {
-                char s;
-                cout << "Enter the target position and the solution type (u for upper, l for lower) : " << '\n';
-                cin >> x >> y >> z >> s;
-                if(s == 'u')
-                    up = true;
-                else if(s == 'l')
-                    up = false;
-                else{
-                    cout << "Wrong solution! Type it again." << '\n';
-                }
+                // char s;
+                // cout << "Enter the target position and the solution type (u for upper, l for lower) : " << '\n';
+                // cin >> x >> y >> z >> s;
+                // if(s == 'u')
+                //     up = true;
+                // else if(s == 'l')
+                //     up = false;
+                // else{
+                //     cout << "Wrong solution! Type it again." << '\n';
+                // }
 
-                try{
-                    Inverse_K(x, y, z, up, th_cmd);
-                }
-                catch(...){
-                    cout << "Out of Joint Configuration!" << '\n';
-                    continue;
-                }
+                // try{
+                //     Inverse_K(x, y, z, up, th_cmd);
+                // }
+                // catch(...){
+                //     cout << "Out of Joint Configuration!" << '\n';
+                //     continue;
+                // }
             }
 
             // Create a message and set its data
@@ -63,11 +63,11 @@ private:
             }
 
             // Publish the message
-            arm_command_pub->publish(joint_command_msg);
+            aidin_m1_command_pub->publish(joint_command_msg);
         }
     }
 
-    rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr arm_command_pub;
+    rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr aidin_m1_command_pub;
     rclcpp::TimerBase::SharedPtr timer_;
     int op_mode;
 };
