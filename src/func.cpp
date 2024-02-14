@@ -8,6 +8,7 @@
 #include <cmath>
 #include <math.h>
 #include <vector>
+// #include <Kinematics.h>
 #include <eigen3/Eigen/Dense>
 
 #include "rclcpp/rclcpp.hpp"
@@ -188,66 +189,6 @@ void SplineTrajectory(double t, double T, double &xVal, double &zVal)
 
 //////////////////// for Kinematics ////////////////////
 
-void InverseKinematics3D(float x, float y, float z, bool up_down, double* th_out)
-{
-	double th1, th2, th3;
-
-	th1 = atan2(y, x);
-	if (th1 <= - PI)
-		th1 += 2*PI;
-
-	float Ld = sqrt(pow(x,2) + pow(y,2) + pow(z - L1,2));
-
-	if(up_down){
-		th3 = acos( (pow(Ld,2) - pow(L2,2) - pow(L3,2)) / (2*L2*L3) );
-		th2 = atan2( sqrt(pow(x,2) + pow(y,2)), z - L1 ) - th3 / 2;
-	}
-	else{
-		th3 = - acos( (pow(Ld,2) - pow(L2,2) - pow(L3,2)) / (2*L2*L3) );
-		th2 = atan2( sqrt(pow(x,2) + pow(y,2)), z - L1 ) - th3 / 2;
-	}
-
-	th_out[0] = th1;
-	th_out[1] = th2;
-	th_out[2] = th3;
-}
-
-double PIDController(double Kp, double Kd, double target_pos, double current_pos, double current_vel)
-{
-	int torque_limit = 300;
-	double PD_torque = Kp*(target_pos - current_pos) + Kd*(0 - current_vel);
-
-	if (PD_torque > torque_limit) {
-		PD_torque = torque_limit;
-	}
-    else if (PD_torque < -torque_limit) {
-		PD_torque = -torque_limit;
-	}
-
-    return PD_torque;
-}
-
-// input DH, output target value
-void Forward_K(double* th, MatrixXd& T)
-{
-	double th1 = th[0];
-	double th2 = th[1];
-	double th3 = th[2];
-
-	Vector4f theta, d, a, alpha;
-	theta << th1, th2 - PI/2, th3, 0;
-	d << L1, 0, 0, 0;
-	alpha << 0, -PI/2, 0, 0;
-	a << 0, 0, L2, L3;
-
-	T = Matrix4d::Identity();
-
-	for (int i = 0; i < DoF + 1; i++)
-	{
-		T *= T_craig(theta(i), d(i), alpha(i), a(i));
-	}
-}
-
 double InverseKinematics2D(double xVal, double zVal, int cases)
 {
     double len_hip = 250, len_knee = 250;
@@ -268,25 +209,37 @@ double InverseKinematics2D(double xVal, double zVal, int cases)
         return knee_degree;
 }
 
-void Traj_joint(double* th_ini, double* th_cmd, MatrixXf& th_out)
+double InverseKinematics3D(float px, float py, float pz, float d1, double l2, double l3, int case_)
 {
-	// th_out row: 3dof / column: interpolated position
+	double th1, th2, th3;
 
-	double vel_des = PI/6; // rad/s
-	double max_error = 0;
-	for (int i = 0; i < DoF; i++) {
-		if(max_error < fabs(th_cmd[i] - th_ini[i]))
-			max_error = fabs(th_cmd[i] - th_ini[i]);
+    th1 = atan2(py, px) - atan2(d1, sqrt(pow(px, 2)+pow(py, 2) - pow(d1, 2)));
+
+    double D = (pow(px, 2) + pow(py, 2) + pow(pz, 2) - pow(d1, 2) - pow(l2, 2) - pow(l3, 2)) / (2*l2*l3);
+    th3 = atan2(sqrt(1 - pow(D, 2)), D);
+
+    th2 = atan2(pz, sqrt(pow(px, 2) + pow(py, 2) - pow(d1, 2))) - atan2(l3*sin(th3), l2 + l3*cos(th3));
+
+    if (case_ == 1)
+        return th1;
+    else if (case_ == 2)
+        return th2;
+    else
+        return th3;
+}
+
+double PDController(double Kp, double Kd, double target_pos, double current_pos, double current_vel)
+{
+	int torque_limit = 300;
+	double PD_torque = Kp*(target_pos - current_pos) + Kd*(0 - current_vel);
+
+	if (PD_torque > torque_limit) {
+		PD_torque = torque_limit;
+	}
+    else if (PD_torque < -torque_limit) {
+		PD_torque = -torque_limit;
 	}
 
-	double Tf = max_error / vel_des; // Use maximum error of angle
-	double step = round(Tf / SAMPLING_TIME);
-	th_out.resize(step, th_out.cols());
-
-	for (int i = 0; i < DoF; i++)
-	{
-		RowVectorXf inter_pos = RowVectorXf::LinSpaced(step, th_ini[i], th_cmd[i]);
-		th_out.block(0, i, step, 1) = inter_pos.transpose();
-	}
+    return PD_torque;
 }
 

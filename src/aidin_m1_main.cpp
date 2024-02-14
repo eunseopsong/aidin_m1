@@ -27,12 +27,6 @@ public:
                 }
             });
 
-        // sub_simtime = this->create_subscription<rosgraph_msgs::msg::Clock>(
-        //     "/clock", rclcpp::QoS(10).best_effort(),
-        //     [this](const rosgraph_msgs::msg::Clock::SharedPtr msg) {
-        //         sim_time = msg->clock.sec + (msg->clock.nanosec)/1000000000.0;
-        //     });
-
         sub_gains = this->create_subscription<std_msgs::msg::Float32MultiArray>(
             "/aidin_m1/Gains_sim", 10,
             [this](const std_msgs::msg::Float32MultiArray::SharedPtr msg) {
@@ -65,14 +59,6 @@ public:
     }
 
 private:
-    //////////////////// PID Control Function ////////////////////
-
-    // double PIDController(double Kp, double Kd, double target_pos, int index)
-    // {
-    //     double output_torque = Kp*(target_pos - joint_pos[index]) + Kd*(0 - joint_vel[index]);
-    //     return output_torque;
-    // }
-
     //////////////// Feedforward Control Function ////////////////
 
     double FeedforwardController(double Kp, double Kd, double target_pos, int index)
@@ -122,9 +108,9 @@ private:
 
         for (int i=0; i<12; i++){
             if (i<3) {
-                output_torque[i] = PIDController(Kp[i],   Kd[i],   target_pos[i], joint_pos[i], joint_vel[i]);
+                output_torque[i] = PDController(Kp[i],   Kd[i],   target_pos[i], joint_pos[i], joint_vel[i]);
             } else if (i<6) {
-                output_torque[i] = PIDController(Kp[i-3], Kd[i-3], target_pos[i], joint_pos[i], joint_vel[i]);
+                output_torque[i] = PDController(Kp[i-3], Kd[i-3], target_pos[i], joint_pos[i], joint_vel[i]);
             } else if (i<9) {
                 if (i == 6)
                     output_torque[i] = -output_torque[i-3];
@@ -161,7 +147,6 @@ private:
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_jointvel;
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_angles;
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_gains;
-    // rclcpp::Subscription<rosgraph_msgs::msg::Clock>::SharedPtr sub_simtime;
 
     rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_torque;
     rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_targetpos;
