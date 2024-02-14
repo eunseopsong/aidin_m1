@@ -102,12 +102,12 @@ private:
         double target_pos[12];
 
         target_pos[0] = angle[0];
-        target_pos[1] = InverseKinematics(xVal, zVal, 1);
-        target_pos[2] = InverseKinematics(xVal, zVal, 2);
+        target_pos[1] = InverseKinematics2D(xVal, zVal, 1);
+        target_pos[2] = InverseKinematics2D(xVal, zVal, 2);
 
         target_pos[3] = -angle[0];
-        target_pos[4] =  InverseKinematics(xVal_counter, zVal_counter, 1);
-        target_pos[5] =  InverseKinematics(xVal_counter, zVal_counter, 2);
+        target_pos[4] =  InverseKinematics2D(xVal_counter, zVal_counter, 1);
+        target_pos[5] =  InverseKinematics2D(xVal_counter, zVal_counter, 2);
 
         target_pos[6] = -target_pos[3];
         target_pos[7] =  target_pos[4];

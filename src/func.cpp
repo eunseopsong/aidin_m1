@@ -35,6 +35,46 @@ float joint_vel[12];     // Joint Velocity
 double angle[3];         // Angles
 double Kp[3], Kd[3];     // Gains
 
+//--------------Command-------------------//
+int cmd_mode = 1;
+double th_act[DoF] = {0,};
+double th_ini[DoF] = {0,};
+double th_cmd[DoF] = {0,};
+double th_sub[DoF] = {0,};
+MatrixXd T03 = MatrixXd::Identity(4, 4);
+
+bool first_callback = true, up = true;
+
+//--------------DH param-------------------//
+float L1 = 0.5, L2 = 1, L3 = 1;
+float th1_i, th2_i, th3_i,
+	  th1, th2, th3,
+	  x, y, z;
+
+//--------------PID gain-------------------//
+double TargetTor[DoF] = {0, };
+double TargetPos[DoF] = {0, };
+// double  Kp[3] = {},
+//         Ki[3] = {},
+//         Kd[3] = {};
+
+//--------------Trajectory Planning-------------------//
+bool traj_init = false;
+int traj_cnt = 0;
+MatrixXf th_out = MatrixXf::Zero(1, DoF); // resize later
+
+
+//--------------Functions-------------------//
+Matrix4d T_craig(float th, float d, float al, float a)
+{
+	Matrix4d T_craig_;
+	T_craig_ << cos(th), 			-sin(th), 			0, 			a,
+				sin(th)*cos(al), 	cos(th)*cos(al), 	-sin(al), 	-d*sin(al),
+				sin(th)*sin(al), 	cos(th)*sin(al), 	cos(al), 	d*cos(al),
+				0, 					0, 					0, 			1;
+	return T_craig_;
+}
+
 //////////// Method of Undetermined Coefficients using Eigen ////////////
 
 void solve(double d, double e, double f, double T, double singularity, double B_val[], double arr[6])
@@ -148,24 +188,28 @@ void SplineTrajectory(double t, double T, double &xVal, double &zVal)
 
 //////////////////// for Kinematics ////////////////////
 
-double InverseKinematics(double xVal, double zVal, int cases)
+void InverseKinematics3D(float x, float y, float z, bool up_down, double* th_out)
 {
-    double len_hip = 250, len_knee = 250;
-    zVal = -zVal;
+	double th1, th2, th3;
 
-    // Calculate Knee Joint Value using Inverse Kinematics
-    double costh3 = (pow(xVal, 2) + pow(zVal, 2) - pow(len_hip, 2) - pow(len_knee ,2)) / (2*len_hip*len_knee);
-    double knee_degree = acos(costh3);
+	th1 = atan2(y, x);
+	if (th1 <= - PI)
+		th1 += 2*PI;
 
-    // Calculate Hip Joint Value using Inverse Kinematics
-    double hip_degree = atan2(zVal, xVal) - atan2(len_knee*sin(knee_degree), len_hip + len_knee*cos(knee_degree));
+	float Ld = sqrt(pow(x,2) + pow(y,2) + pow(z - L1,2));
 
-    knee_degree -= M_PI_2; // because of the difference between Kinematics theory and joint of the urdf
+	if(up_down){
+		th3 = acos( (pow(Ld,2) - pow(L2,2) - pow(L3,2)) / (2*L2*L3) );
+		th2 = atan2( sqrt(pow(x,2) + pow(y,2)), z - L1 ) - th3 / 2;
+	}
+	else{
+		th3 = - acos( (pow(Ld,2) - pow(L2,2) - pow(L3,2)) / (2*L2*L3) );
+		th2 = atan2( sqrt(pow(x,2) + pow(y,2)), z - L1 ) - th3 / 2;
+	}
 
-    if (cases == 1)
-        return hip_degree;
-    else
-        return knee_degree;
+	th_out[0] = th1;
+	th_out[1] = th2;
+	th_out[2] = th3;
 }
 
 double PIDController(double Kp, double Kd, double target_pos, double current_pos, double current_vel)
@@ -181,46 +225,6 @@ double PIDController(double Kp, double Kd, double target_pos, double current_pos
 	}
 
     return PD_torque;
-}
-
-//--------------Command-------------------//
-int cmd_mode = 1;
-double th_act[DoF] = {0,};
-double th_ini[DoF] = {0,};
-double th_cmd[DoF] = {0,};
-double th_sub[DoF] = {0,};
-MatrixXd T03 = MatrixXd::Identity(4, 4);
-
-bool first_callback = true, up = true;
-
-//--------------DH param-------------------//
-float L1 = 0.5, L2 = 1, L3 = 1;
-float th1_i, th2_i, th3_i,
-	  th1, th2, th3,
-	  x, y, z;
-
-//--------------PID gain-------------------//
-double TargetTor[DoF] = {0, };
-double TargetPos[DoF] = {0, };
-// double  Kp[3] = {},
-//         Ki[3] = {},
-//         Kd[3] = {};
-
-//--------------Trajectory Planning-------------------//
-bool traj_init = false;
-int traj_cnt = 0;
-MatrixXf th_out = MatrixXf::Zero(1, DoF); // resize later
-
-
-//--------------Functions-------------------//
-Matrix4d T_craig(float th, float d, float al, float a)
-{
-	Matrix4d T_craig_;
-	T_craig_ << cos(th), 			-sin(th), 			0, 			a,
-				sin(th)*cos(al), 	cos(th)*cos(al), 	-sin(al), 	-d*sin(al),
-				sin(th)*sin(al), 	cos(th)*sin(al), 	cos(al), 	d*cos(al),
-				0, 					0, 					0, 			1;
-	return T_craig_;
 }
 
 // input DH, output target value
@@ -244,28 +248,24 @@ void Forward_K(double* th, MatrixXd& T)
 	}
 }
 
-void Inverse_K(float x, float y, float z, bool up_down, double* th_out)
+double InverseKinematics2D(double xVal, double zVal, int cases)
 {
-	double th1, th2, th3;
+    double len_hip = 250, len_knee = 250;
+    zVal = -zVal;
 
-	th1 = atan2(y, x);
-	if (th1 <= - PI)
-		th1 += 2*PI;
+    // Calculate Knee Joint Value using Inverse Kinematics
+    double costh3 = (pow(xVal, 2) + pow(zVal, 2) - pow(len_hip, 2) - pow(len_knee ,2)) / (2*len_hip*len_knee);
+    double knee_degree = acos(costh3);
 
-	float Ld = sqrt(pow(x,2) + pow(y,2) + pow(z - L1,2));
+    // Calculate Hip Joint Value using Inverse Kinematics
+    double hip_degree = atan2(zVal, xVal) - atan2(len_knee*sin(knee_degree), len_hip + len_knee*cos(knee_degree));
 
-	if(up_down){
-		th3 = acos( (pow(Ld,2) - pow(L2,2) - pow(L3,2)) / (2*L2*L3) );
-		th2 = atan2( sqrt(pow(x,2) + pow(y,2)), z - L1 ) - th3 / 2;
-	}
-	else{
-		th3 = - acos( (pow(Ld,2) - pow(L2,2) - pow(L3,2)) / (2*L2*L3) );
-		th2 = atan2( sqrt(pow(x,2) + pow(y,2)), z - L1 ) - th3 / 2;
-	}
+    knee_degree -= M_PI_2; // because of the difference between Kinematics theory and joint of the urdf
 
-	th_out[0] = th1;
-	th_out[1] = th2;
-	th_out[2] = th3;
+    if (cases == 1)
+        return hip_degree;
+    else
+        return knee_degree;
 }
 
 void Traj_joint(double* th_ini, double* th_cmd, MatrixXf& th_out)
