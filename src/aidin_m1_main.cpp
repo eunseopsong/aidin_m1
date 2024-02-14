@@ -67,7 +67,15 @@ public:
 private:
     //////////////////// PID Control Function ////////////////////
 
-    double PIDController(double Kp, double Kd, double target_pos, int index)
+    // double PIDController(double Kp, double Kd, double target_pos, int index)
+    // {
+    //     double output_torque = Kp*(target_pos - joint_pos[index]) + Kd*(0 - joint_vel[index]);
+    //     return output_torque;
+    // }
+
+    //////////////// Feedforward Control Function ////////////////
+
+    double FeedforwardController(double Kp, double Kd, double target_pos, int index)
     {
         double output_torque = Kp*(target_pos - joint_pos[index]) + Kd*(0 - joint_vel[index]);
         return output_torque;
@@ -79,9 +87,9 @@ private:
     {
         // Initializing
         count_ = count_ + 0.001; // CalculateAndPublishTorque가 실행될 때마다 count_ = count + 1ms; -> count_ 는 실제 시뮬레이션 시간을 나타내는 변수가 됨
-        double T = 0.4;          // The period of the whole trajectory phase
+        double T = 0.5;          // The period of the whole trajectory phase
         double t = fmod(count_, T);
-        double t_counter = fmod(count_ + 0.200 , T);
+        double t_counter = fmod(count_ + 0.250 , T);
 
         // Calculate the coordinate using Trajectory Function
         double xVal, zVal;
@@ -90,8 +98,7 @@ private:
         double xVal_counter, zVal_counter;
         SplineTrajectory(t_counter, T, xVal_counter, zVal_counter);
 
-
-        // Calulate the degree using Inverse Kinematics
+        // Calulate the target_pos using Inverse Kinematics
         double target_pos[12];
 
         target_pos[0] = angle[0];
@@ -115,9 +122,9 @@ private:
 
         for (int i=0; i<12; i++){
             if (i<3) {
-                output_torque[i] = PIDController(Kp[i],   Kd[i],   target_pos[i], i);
+                output_torque[i] = PIDController(Kp[i],   Kd[i],   target_pos[i], joint_pos[i], joint_vel[i]);
             } else if (i<6) {
-                output_torque[i] = PIDController(Kp[i-3], Kd[i-3], target_pos[i], i);
+                output_torque[i] = PIDController(Kp[i-3], Kd[i-3], target_pos[i], joint_pos[i], joint_vel[i]);
             } else if (i<9) {
                 if (i == 6)
                     output_torque[i] = -output_torque[i-3];
