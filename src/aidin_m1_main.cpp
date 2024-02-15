@@ -78,6 +78,7 @@ private:
         double t_counter = fmod(count_ + 0.250 , T);
 
         // Calculate the coordinate using Trajectory Function
+        // double yVal = 0.095*cos(joint_pos[0]);  // add this !
         double xVal, zVal;
         SplineTrajectory(t, T, xVal, zVal);
 
@@ -90,6 +91,10 @@ private:
         target_pos[0] = angle[0];
         target_pos[1] = InverseKinematics2D(xVal, zVal, 1);
         target_pos[2] = InverseKinematics2D(xVal, zVal, 2);
+
+        // target_pos[0] = InverseKinematics3D((0.095*cos(joint_pos[0]) + ))
+        // target_pos[1] = InverseKinematics2D(xVal, zVal, 1);
+        // target_pos[2] = InverseKinematics2D(xVal, zVal, 2);
 
         target_pos[3] = -angle[0];
         target_pos[4] =  InverseKinematics2D(xVal_counter, zVal_counter, 1);
