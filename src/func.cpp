@@ -7,6 +7,7 @@
 
 #include <cmath>
 #include <math.h>
+#include <stdlib.h>
 #include <vector>
 // #include <Kinematics.h>
 #include <eigen3/Eigen/Dense>
@@ -169,24 +170,26 @@ double InverseKinematics2D(double xVal, double zVal, int cases)
         return knee_degree;
 }
 
-double InverseKinematics3D(float px, float py, float pz, float d1, double l2, double l3, int case_)
-{
-	double th1, th2, th3;
+// double InverseKinematics3D(double px, double py, double pz, double d1, double l2, double l3, int case_)
+// {
+//     px = 0.095;
 
-    th1 = atan2(py, px) - atan2(d1, sqrt(pow(px, 2)+pow(py, 2) - pow(d1, 2)));
+// 	double th1, th2, th3;
 
-    double D = (pow(px, 2) + pow(py, 2) + pow(pz, 2) - pow(d1, 2) - pow(l2, 2) - pow(l3, 2)) / (2*l2*l3);
-    th3 = atan2(sqrt(1 - pow(D, 2)), D);
+//     th1 = atan2(py, px) - atan2(d1, sqrt(pow(px, 2)+pow(py, 2) - pow(d1, 2)));
 
-    th2 = atan2(pz, sqrt(pow(px, 2) + pow(py, 2) - pow(d1, 2))) - atan2(l3*sin(th3), l2 + l3*cos(th3));
+//     double D = (pow(px, 2) + pow(py, 2) + pow(pz, 2) - pow(d1, 2) - pow(l2, 2) - pow(l3, 2)) / (2*l2*l3);
+//     th3 = atan2(sqrt(1 - pow(D, 2)), D);
 
-    if (case_ == 1)
-        return th1;
-    else if (case_ == 2)
-        return th2;
-    else
-        return th3;
-}
+//     th2 = atan2(pz, sqrt(pow(px, 2) + pow(py, 2) - pow(d1, 2))) - atan2(l3*sin(th3), l2 + l3*cos(th3));
+
+//     if (case_ == 1)
+//         return th1;
+//     else if (case_ == 2)
+//         return th2;
+//     else
+//         return th3;
+// }
 
 double PDController(double Kp, double Kd, double target_pos, double current_pos, double current_vel)
 {
@@ -202,4 +205,3 @@ double PDController(double Kp, double Kd, double target_pos, double current_pos,
 
     return PD_torque;
 }
-

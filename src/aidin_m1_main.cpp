@@ -67,6 +67,25 @@ private:
         return output_torque;
     }
 
+    double InverseKinematics3D(double px, double py, double pz, double d1, double l2, double l3, int case_)
+    {
+        double th1, th2, th3;
+
+        th1 = atan2(py, px) - atan2(d1, fabs(py));
+
+        double D = (pow(px, 2) + pow(py, 2) + pow(pz, 2) - pow(d1, 2) - pow(l2, 2) - pow(l3, 2)) / 2*l2*l3;
+        th3 = atan2(sqrt(1 - pow(D, 2)) , D);
+
+        th2 = atan2(pz, sqrt(pow(px, 2) + pow(py, 2) - pow(d1, 2))) - atan2(l3*sin(th3), l2 + l3*cos(th3));
+
+
+        if (case_ == 1)
+            return th1;
+        else if (case_ == 2)
+            return th2;
+        else
+            return th3;
+    }
     /////////////// timer_에 의해 호출되어 Publish를 실행하는 함수 ///////////////
 
     void CalculateAndPublishTorque()
@@ -88,13 +107,13 @@ private:
         // Calulate the target_pos using Inverse Kinematics
         double target_pos[12];
 
-        target_pos[0] = angle[0];
-        target_pos[1] = InverseKinematics2D(xVal, zVal, 1);
-        target_pos[2] = InverseKinematics2D(xVal, zVal, 2);
-
-        // target_pos[0] = InverseKinematics3D((0.095*cos(joint_pos[0]) + ))
+        // target_pos[0] = angle[0];
         // target_pos[1] = InverseKinematics2D(xVal, zVal, 1);
         // target_pos[2] = InverseKinematics2D(xVal, zVal, 2);
+
+        target_pos[0] = InverseKinematics3D(0.095, zVal, xVal, 0.095, 0.250, 0.250, 1);
+        target_pos[1] = InverseKinematics3D(0.095, zVal, xVal, 0.095, 0.250, 0.250, 2);
+        target_pos[2] = InverseKinematics3D(0.095, zVal, xVal, 0.095, 0.250, 0.250, 3);
 
         target_pos[3] = -angle[0];
         target_pos[4] =  InverseKinematics2D(xVal_counter, zVal_counter, 1);
@@ -133,7 +152,10 @@ private:
         targetpos_msg.data.clear();
 
         for (int i=0; i < 12; i++){
-            targetpos_msg.data.push_back(target_pos[i]);
+            if (i < 3)
+                targetpos_msg.data.push_back(target_pos[i]);
+            else
+                targetpos_msg.data.push_back(0);
         }
 
         pub_targetpos->publish(targetpos_msg);
