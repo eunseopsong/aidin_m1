@@ -52,7 +52,7 @@ def generate_launch_description():
     # Start joint_control_node
     gazebo_aidin_m1_control = Node(
         package="aidin_m1",
-        executable="aidin_m1_control_node",
+        executable="aidin_m1_main",
         output="screen",
     )
 

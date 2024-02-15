@@ -73,9 +73,9 @@ private:
     {
         // Initializing
         count_ = count_ + 0.001; // CalculateAndPublishTorque가 실행될 때마다 count_ = count + 1ms; -> count_ 는 실제 시뮬레이션 시간을 나타내는 변수가 됨
-        double T = 0.5;          // The period of the whole trajectory phase
+        double T = 0.8;          // The period of the whole trajectory phase
         double t = fmod(count_, T);
-        double t_counter = fmod(count_ + 0.250 , T);
+        double t_counter = fmod(count_ + 0.400 , T);
 
         // Calculate the coordinate using Trajectory Function
         // double yVal = 0.095*cos(joint_pos[0]);  // add this !

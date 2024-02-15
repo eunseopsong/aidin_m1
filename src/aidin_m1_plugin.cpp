@@ -25,7 +25,6 @@ namespace gazebo
         // Destructor
         public: ~aidin_m1_plugin() {}
 
-
         // Pointer to subscriber
         private: rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_torque;
         // Pointer to publisher
