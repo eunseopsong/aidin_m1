@@ -92,7 +92,7 @@ void SplineTrajectory(double t, double T, double &xVal, double &zVal)
 {
     /////////////////////// Initializing ////////////////////////
 
-    double vel_of_body = 2500;
+    double vel_of_body = 1000;
     double length_of_STanding_phase = vel_of_body * T /2;
     double height = 400;
 
@@ -170,23 +170,20 @@ double InverseKinematics2D(double xVal, double zVal, int cases)
         return knee_degree;
 }
 
-double InverseKinematics3D(double px, double py, double pz, double l2, double l3, int case_)
+double InverseKinematics3D(double px, double py, double pz, double d1, double l2, double l3, int case_)
 {
     double th1, th2, th3;
-    double d1 = px;
     pz = -pz;
 
-    th1 = fabs( atan2(py, px) - atan2(px, -py) ) - M_PI_2;
-    // th1 = (atan2(py, px) - atan2(d1, -py)) + M_PI_2;
+    th1 = fabs( atan2(py, px) - atan2(d1, -py) ) - M_PI_2;
 
-    float Ld1 = sqrt(pow(px, 2) + pow(py, 2) + pow(pz, 2));
-    th3 = acos( (pow(Ld1, 2) - pow(d1, 2) - pow(l2, 2) - pow(l3, 2)) / (2*l2*l3) );
+    float Ld = sqrt(pow(px, 2) + pow(py, 2) + pow(pz, 2));
+    th3 = acos( (pow(Ld, 2) - pow(d1, 2) - pow(l2, 2) - pow(l3, 2)) / (2*l2*l3) );
 
-    float r_prime = sqrt( pow(px, 2) + pow(py, 2) - pow(d1, 2) );
-    th2 = ( atan2( pz , r_prime ) - atan2( l3*sin(th3), l2 + l3*cos(th3) ) );
+    th2 = ( atan2( pz , sqrt( pow(px, 2) + pow(py, 2) - pow(d1, 2) ) ) - atan2( l3*sin(th3), l2 + l3*cos(th3) ) );
 
-    th3 -= M_PI_2;
     th2 += M_PI_2;
+    th3 -= M_PI_2;
 
     if (case_ == 1){
         return th1;
@@ -196,27 +193,6 @@ double InverseKinematics3D(double px, double py, double pz, double l2, double l3
         return th3;
     }
 }
-
-// double InverseKinematics3D(double px, double py, double pz, double d1, double l2, double l3, int case_)
-// {
-//     px = 0.095;
-
-// 	double th1, th2, th3;
-
-//     th1 = atan2(py, px) - atan2(d1, sqrt(pow(px, 2)+pow(py, 2) - pow(d1, 2)));
-
-//     double D = (pow(px, 2) + pow(py, 2) + pow(pz, 2) - pow(d1, 2) - pow(l2, 2) - pow(l3, 2)) / (2*l2*l3);
-//     th3 = atan2(sqrt(1 - pow(D, 2)), D);
-
-//     th2 = atan2(pz, sqrt(pow(px, 2) + pow(py, 2) - pow(d1, 2))) - atan2(l3*sin(th3), l2 + l3*cos(th3));
-
-//     if (case_ == 1)
-//         return th1;
-//     else if (case_ == 2)
-//         return th2;
-//     else
-//         return th3;
-// }
 
 double PDController(double Kp, double Kd, double target_pos, double current_pos, double current_vel)
 {

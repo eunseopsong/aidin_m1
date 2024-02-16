@@ -73,12 +73,11 @@ private:
     {
         // Initializing
         count_ = count_ + 0.001; // CalculateAndPublishTorque가 실행될 때마다 count_ = count + 1ms; -> count_ 는 실제 시뮬레이션 시간을 나타내는 변수가 됨
-        double T = 0.4;          // The period of the whole trajectory phase
+        double T = 0.8;          // The period of the whole trajectory phase
         double t = fmod(count_, T);
-        double t_counter = fmod(count_ + 0.200 , T);
+        double t_counter = fmod(count_ + 0.400 , T);
 
         // Calculate the coordinate using Trajectory Function
-        // double yVal = 0.095*cos(joint_pos[0]);  // add this !
         double yVal = 95;
         double xVal, zVal;
         SplineTrajectory(t, T, xVal, zVal);
@@ -89,13 +88,13 @@ private:
         // Calulate the target_pos using Inverse Kinematics
         double target_pos[12];
 
-        target_pos[0] = InverseKinematics3D(yVal, zVal, xVal, 250, 250, 1);
-        target_pos[1] = InverseKinematics3D(yVal, zVal, xVal, 250, 250, 2);
-        target_pos[2] = InverseKinematics3D(yVal, zVal, xVal, 250, 250, 3);
+        target_pos[0] = InverseKinematics3D(yVal, zVal, xVal, yVal, 250, 250, 1);
+        target_pos[1] = InverseKinematics3D(yVal, zVal, xVal, yVal, 250, 250, 2);
+        target_pos[2] = InverseKinematics3D(yVal, zVal, xVal, yVal, 250, 250, 3);
 
-        target_pos[3] = -angle[0];
-        target_pos[4] =  InverseKinematics2D(xVal_counter, zVal_counter, 1);
-        target_pos[5] =  InverseKinematics2D(xVal_counter, zVal_counter, 2);
+        target_pos[3] = InverseKinematics3D(yVal, zVal_counter, xVal_counter, yVal, 250, 250, 1);
+        target_pos[4] = InverseKinematics3D(yVal, zVal_counter, xVal_counter, yVal, 250, 250, 2);
+        target_pos[5] = InverseKinematics3D(yVal, zVal_counter, xVal_counter, yVal, 250, 250, 3);
 
         target_pos[6] = -target_pos[3];
         target_pos[7] =  target_pos[4];
