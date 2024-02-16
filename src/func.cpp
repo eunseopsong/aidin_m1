@@ -9,7 +9,6 @@
 #include <math.h>
 #include <stdlib.h>
 #include <vector>
-// #include <Kinematics.h>
 #include <eigen3/Eigen/Dense>
 
 #include "rclcpp/rclcpp.hpp"
@@ -175,11 +174,15 @@ double InverseKinematics3D(double px, double py, double pz, double d1, double l2
     double th1, th2, th3;
     pz = -pz;
 
-    th1 = fabs( atan2(py, px) - atan2(d1, -py) ) - M_PI_2;
+    // Calculate Scap Joint Value using Inverse Kinematics
+    th1 = fabs( atan2(py, px) - atan2( d1, fabs(py) ) ) - M_PI_2; // fabs : 절댓값
 
+    // Calculate Knee Joint Value using Inverse Kinematics
     float Ld = sqrt(pow(px, 2) + pow(py, 2) + pow(pz, 2));
-    th3 = acos( (pow(Ld, 2) - pow(d1, 2) - pow(l2, 2) - pow(l3, 2)) / (2*l2*l3) );
+    double costh3 = (pow(Ld, 2) - pow(d1, 2) - pow(l2, 2) - pow(l3, 2)) / (2*l2*l3);
+    th3 = acos(costh3);
 
+    // Calculate Hip Joint Value using Inverse Kinematics
     th2 = ( atan2( pz , sqrt( pow(px, 2) + pow(py, 2) - pow(d1, 2) ) ) - atan2( l3*sin(th3), l2 + l3*cos(th3) ) );
 
     th2 += M_PI_2;
@@ -196,7 +199,7 @@ double InverseKinematics3D(double px, double py, double pz, double d1, double l2
 
 double PDController(double Kp, double Kd, double target_pos, double current_pos, double current_vel)
 {
-	int torque_limit = 300;
+	int torque_limit = 100;
 	double PD_torque = Kp*(target_pos - current_pos) + Kd*(0 - current_vel);
 
 	if (PD_torque > torque_limit) {
