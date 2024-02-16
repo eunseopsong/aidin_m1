@@ -67,37 +67,38 @@ private:
         return output_torque;
     }
 
-    double InverseKinematics3D(double px, double py, double pz, double d1, double l2, double l3, int case_)
+    double InverseKinematics3D(double px, double py, double pz, double l2, double l3, int case_)
     {
         double th1, th2, th3;
+        th2 = 2;
+        th1 = fabs(atan2(py, px) - atan2(px, -py)) - M_PI_2;
+        // th1 = (atan2(py, px) - atan2(d1, -py)) + M_PI_2;
 
-        th1 = atan2(py, px) - atan2(d1, fabs(py));
+        double D = (pow(py, 2) + pow(pz, 2) - pow(l2, 2) - pow(l3, 2)) / 2*l2*l3;
 
-        double D = (pow(px, 2) + pow(py, 2) + pow(pz, 2) - pow(d1, 2) - pow(l2, 2) - pow(l3, 2)) / 2*l2*l3;
-        th3 = atan2(sqrt(1 - pow(D, 2)) , D);
-
-        th2 = atan2(pz, sqrt(pow(px, 2) + pow(py, 2) - pow(d1, 2))) - atan2(l3*sin(th3), l2 + l3*cos(th3));
-
+        th3 = acos(D);
 
         if (case_ == 1)
             return th1;
         else if (case_ == 2)
             return th2;
-        else
+        else if (case_ == 3)
             return th3;
     }
+
     /////////////// timer_에 의해 호출되어 Publish를 실행하는 함수 ///////////////
 
     void CalculateAndPublishTorque()
     {
         // Initializing
         count_ = count_ + 0.001; // CalculateAndPublishTorque가 실행될 때마다 count_ = count + 1ms; -> count_ 는 실제 시뮬레이션 시간을 나타내는 변수가 됨
-        double T = 0.8;          // The period of the whole trajectory phase
+        double T = 0.4;          // The period of the whole trajectory phase
         double t = fmod(count_, T);
-        double t_counter = fmod(count_ + 0.400 , T);
+        double t_counter = fmod(count_ + 0.200 , T);
 
         // Calculate the coordinate using Trajectory Function
         // double yVal = 0.095*cos(joint_pos[0]);  // add this !
+        double yVal = 95;
         double xVal, zVal;
         SplineTrajectory(t, T, xVal, zVal);
 
@@ -107,13 +108,18 @@ private:
         // Calulate the target_pos using Inverse Kinematics
         double target_pos[12];
 
-        // target_pos[0] = angle[0];
-        // target_pos[1] = InverseKinematics2D(xVal, zVal, 1);
-        // target_pos[2] = InverseKinematics2D(xVal, zVal, 2);
+        target_pos[0] = InverseKinematics3D(yVal, zVal, xVal, 250, 250, 1);
+        target_pos[1] = InverseKinematics2D(xVal, zVal, 1);
+        target_pos[2] = InverseKinematics2D(xVal, zVal, 2);
+        double check = InverseKinematics3D(yVal, zVal, xVal, 250, 250, 3);
 
-        target_pos[0] = InverseKinematics3D(0.095, zVal, xVal, 0.095, 0.250, 0.250, 1);
-        target_pos[1] = InverseKinematics3D(0.095, zVal, xVal, 0.095, 0.250, 0.250, 2);
-        target_pos[2] = InverseKinematics3D(0.095, zVal, xVal, 0.095, 0.250, 0.250, 3);
+        // target_pos[0] = InverseKinematics3D(95, -300, 100, 95, 250, 250, 1);
+        // target_pos[1] = InverseKinematics3D(95, -300, 100, 95, 250, 250, 2);
+        // target_pos[2] = InverseKinematics3D(95, -300, 100, 95, 250, 250, 3);
+
+        // target_pos[0] = Inverse_K(95, zVal, xVal, true, 95, 250, 250, 1);
+        // target_pos[1] = Inverse_K(95, zVal, xVal, true, 95, 250, 250, 2);
+        // target_pos[2] = Inverse_K(95, zVal, xVal, true, 95, 250, 250, 3);
 
         target_pos[3] = -angle[0];
         target_pos[4] =  InverseKinematics2D(xVal_counter, zVal_counter, 1);
@@ -152,10 +158,7 @@ private:
         targetpos_msg.data.clear();
 
         for (int i=0; i < 12; i++){
-            if (i < 3)
-                targetpos_msg.data.push_back(target_pos[i]);
-            else
-                targetpos_msg.data.push_back(0);
+            targetpos_msg.data.push_back(check);
         }
 
         pub_targetpos->publish(targetpos_msg);

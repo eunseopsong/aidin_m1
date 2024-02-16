@@ -92,7 +92,7 @@ void SplineTrajectory(double t, double T, double &xVal, double &zVal)
 {
     /////////////////////// Initializing ////////////////////////
 
-    double vel_of_body = 1000;
+    double vel_of_body = 2500;
     double length_of_STanding_phase = vel_of_body * T /2;
     double height = 400;
 
