@@ -63,7 +63,6 @@ void solve(double d, double e, double f, double T, double singularity, double B_
 double CalculateXValues(double l, double v, double t)
 {
     double returnXValue = -(l/2) + v*t;
-
     return returnXValue;
 }
 
@@ -87,11 +86,10 @@ double CalculateValues(double S[], double t, double T, int cases)
     return returnValue;
 }
 
-void SplineTrajectory(double t, double T, double &xVal, double &zVal)
+void SplineTrajectory(double t, double T, double vel_of_body, double &xVal, double &zVal)
 {
     /////////////////////// Initializing ////////////////////////
 
-    double vel_of_body = 1000;
     double length_of_STanding_phase = vel_of_body * T /2;
     double height = 400;
 

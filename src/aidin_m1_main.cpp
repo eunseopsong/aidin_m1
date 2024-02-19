@@ -73,17 +73,19 @@ private:
     {
         // Initializing
         count_ = count_ + 0.001; // CalculateAndPublishTorque가 실행될 때마다 count_ = count + 1ms; -> count_ 는 실제 시뮬레이션 시간을 나타내는 변수가 됨
-        double T = 0.8;          // The period of the whole trajectory phase
+
+        double vel_of_body = 1000;    // The target velocity of whole robot bodys
+        double T = 0.8;               // The period of the whole trajectory phase
         double t = fmod(count_, T);
         double t_counter = fmod(count_ + 0.400 , T);
 
         // Calculate the coordinate using Trajectory Function
         double yVal = 95;
         double xVal, zVal;
-        SplineTrajectory(t, T, xVal, zVal);
+        SplineTrajectory(t, T, vel_of_body, xVal, zVal);
 
         double xVal_counter, zVal_counter;
-        SplineTrajectory(t_counter, T, xVal_counter, zVal_counter);
+        SplineTrajectory(t_counter, T, vel_of_body, xVal_counter, zVal_counter);
 
         // Calulate the target_pos using Inverse Kinematics
         double target_pos[12];
@@ -124,6 +126,7 @@ private:
                     output_torque[i] =  output_torque[i-9];
             }
         }
+
         /////////////// Publish Desired Pose ///////////////
         std_msgs::msg::Float32MultiArray targetpos_msg;
         targetpos_msg.data.clear();
