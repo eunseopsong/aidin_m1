@@ -64,14 +64,40 @@ private:
     double FeedforwardController(double Kp, double Kd, double target_pos, int index)
     {
         double output_torque = Kp*(target_pos - joint_pos[index]) + Kd*(0 - joint_vel[index]);
-        return output_torque;
+        double case_ =1;
+
+        double M1 = 1;
+        double M2 = 2;
+        double M3 = 3;
+
+        double C1 = 1;
+        double C2 = 2;
+        double C3 = 3;
+
+        double g1 = 1;
+        double g2 = 3;
+        double g3 = 3;
+
+        double scap_output_torque = M1 + C1 + g1;
+        double hip_output_torque  = M2 + C2 + g2;
+        double knee_output_torque = M3 + C3 + g3;
+
+        if (case_ == 1){
+            return scap_output_torque;
+        } else if (case_ == 2) {
+            return hip_output_torque;
+        } else if (case_ == 3) {
+            return knee_output_torque;
+        } else {
+            return output_torque;
+        }
     }
 
     /////////////// timer_에 의해 호출되어 Publish를 실행하는 함수 ///////////////
 
     void CalculateAndPublishTorque()
     {
-        // Initializing
+        // Initialization
         count_ = count_ + 0.001; // CalculateAndPublishTorque가 실행될 때마다 count_ = count + 1ms; -> count_ 는 실제 시뮬레이션 시간을 나타내는 변수가 됨
 
         double vel_of_body = 1000;    // The target velocity of whole robot bodys

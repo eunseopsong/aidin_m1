@@ -27,14 +27,13 @@ using Eigen::VectorXf;
 #define SAMPLING_TIME 0.01
 #define DoF 3
 
-/////////////////////// Initializing ////////////////////////
+/////////////////////// Initialization ////////////////////////
 float joint_pos[12];     // Joint Pose
 float joint_vel[12];     // Joint Velocity
 
 // double sim_time;      // Gazebo simulation time
 double angle[3];         // Angles
 double Kp[3], Kd[3];     // Gains
-
 
 //////////// Method of Undetermined Coefficients using Eigen ////////////
 
@@ -173,7 +172,7 @@ double InverseKinematics3D(double px, double py, double pz, double d1, double l2
     pz = -pz;
 
     // Calculate Scap Joint Value using Inverse Kinematics
-    th1 = fabs( atan2(py, px) - atan2( d1, fabs(py) ) ) - M_PI_2; // fabs : 절댓값
+    th1 = fabs( atan2( py, px ) - atan2( d1, fabs(py) ) ) - M_PI_2; // fabs : 절댓값
 
     // Calculate Knee Joint Value using Inverse Kinematics
     float Ld = sqrt(pow(px, 2) + pow(py, 2) + pow(pz, 2));
@@ -194,6 +193,8 @@ double InverseKinematics3D(double px, double py, double pz, double d1, double l2
         return th3;
     }
 }
+
+///////////////// for Torque Calculation /////////////////
 
 double PDController(double Kp, double Kd, double target_pos, double current_pos, double current_vel)
 {
