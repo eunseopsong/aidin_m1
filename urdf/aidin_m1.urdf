@@ -116,7 +116,7 @@
 
   <link name="RF_hip">
     <inertial>
-      <mass value="0.600"/>
+      <mass value="1.000"/>
       <origin xyz="0.125 0 0" rpy="0 0 0"/>
       <inertia ixx="0.001541527" ixy="0.000007051" ixz="-0.000001356" iyy="0.001938779" iyz="0.000000659" izz="0.001547151"/>
     </inertial>
@@ -142,7 +142,7 @@
 
   <link name="RF_knee">
     <inertial>
-      <mass value="0.600"/>
+      <mass value="1.000"/>
       <origin xyz="0.125 0 0" rpy="0 0 0"/>
       <inertia ixx="0.001541527" ixy="0.000007051" ixz="-0.000001356" iyy="0.001938779" iyz="0.000000659" izz="0.001547151"/>
     </inertial>

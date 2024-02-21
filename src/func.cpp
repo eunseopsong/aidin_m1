@@ -166,32 +166,27 @@ double InverseKinematics2D(double xVal, double zVal, int cases)
         return knee_degree;
 }
 
-double InverseKinematics3D(double px, double py, double pz, double d1, double l2, double l3, int case_)
+void InverseKinematics3D(double px, double py, double pz, double d1, double l2, double l3, double* target_pos)
 {
-    double th1, th2, th3;
+    double th[3];
     pz = -pz;
 
     // Calculate Scap Joint Value using Inverse Kinematics
-    th1 = fabs( atan2( py, px ) - atan2( d1, fabs(py) ) ) - M_PI_2; // fabs : 절댓값
+    th[0] = fabs( atan2( py, px ) - atan2( d1, fabs(py) ) ) - M_PI_2; // fabs : 절댓값
 
     // Calculate Knee Joint Value using Inverse Kinematics
     float Ld = sqrt(pow(px, 2) + pow(py, 2) + pow(pz, 2));
     double costh3 = (pow(Ld, 2) - pow(d1, 2) - pow(l2, 2) - pow(l3, 2)) / (2*l2*l3);
-    th3 = acos(costh3);
+    th[2] = acos(costh3);
 
     // Calculate Hip Joint Value using Inverse Kinematics
-    th2 = ( atan2( pz , sqrt( pow(px, 2) + pow(py, 2) - pow(d1, 2) ) ) - atan2( l3*sin(th3), l2 + l3*cos(th3) ) );
+    th[1] = ( atan2( pz , sqrt( pow(px, 2) + pow(py, 2) - pow(d1, 2) ) ) - atan2( l3*sin(th[2]), l2 + l3*cos(th[2]) ) );
 
-    th2 += M_PI_2;
-    th3 -= M_PI_2;
+    th[1] += M_PI_2;
+    th[2] -= M_PI_2;
 
-    if (case_ == 1) {
-        return th1;
-    } else if (case_ == 2) {
-        return th2;
-    } else {
-        return th3;
-    }
+    for (int i=1; i<3; i++)
+        target_pos[i] = th[i];
 }
 
 ///////////////// for Torque Calculation /////////////////
