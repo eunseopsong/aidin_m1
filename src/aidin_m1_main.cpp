@@ -70,6 +70,7 @@ private:
         double M11 = (2527*cos(th[0]))/160000 + 10031349019590/46116860184273;
         double M12 = (19*cos(th[1])*sin(th[2]))/3200 - (57*cos(th[1]))/3200 + (19*cos(th[2])*sin(th[1]))/3200 - 3890049390/5902958103587056;
         double M13 = (19*cos(th[1])*sin(th[2]))/3200 + (19*cos(th[2])*sin(th[1]))/3200 - 3890049390/5902958103587056;
+        
         double M21 = - (57*cos(th[0]))/3200 - 3890049390/5902958103587056;
         double M22 = cos(th[1] + th[2])/128 + (5*cos(th[1]))/128 - sin(th[1] + th[2])/64 + 4459359147/2882303761517;
         double M23 = cos(th[1] + th[2])/128 - sin(th[1] + th[2])/64 + 4459359147/2882303761517;
@@ -80,6 +81,7 @@ private:
         double C11 = 0;
         double C12 = (19*(cos(th[1] + th[2]) + 3*sin(th[1])))/3200;
         double C13 = (19*cos(th[1] + th[2]))/3200;
+        
         double C21 = (57*sin(th[0]))/3200;
         double C22 = 0;
         double C23 = -cos(th[1] + th[2])/64;
@@ -90,6 +92,7 @@ private:
         double B11 = 0;
         double B12 = 0;
         double B13 =  (19*cos(th[1] + th[2]))/1600;
+        
         double B21 = -(57*sin(th[1]))/3200 - (19*cos(th[1])*cos(th[2]))/3200 + (19*sin(th[1])*sin(th[2]))/3200 + (19*cos(th[0]))/3200;
         double B22 =  (19*sin(th[1])*sin(th[2]))/3200 - (19*cos(th[1])*cos(th[2]))/3200 + (19*cos(th[0]))/3200;
         double B23 = -cos(-th[1])/64 - cos(th[1] + th[2])/64;
@@ -98,6 +101,7 @@ private:
         double B33 =  cos(th[1] + th[2])/64 - cos(-th[1])/64;
 
         double U1 = (55917*sin(th[0]))/20000 + 8829/500;
+        
         double U2 = (18639*sin(th[0]))/20000 - (981*sin(th[1]))/800 + 2943/1000;
         double U3 = (18639*sin(th[0]))/20000 - (981*sin(th[1] + th[2] + M_PI/2))/800 - (981*sin(th[1]))/400 + 2943/1000;
 
@@ -163,10 +167,10 @@ private:
             if (i<3) {
                 output_torque[i] = PDController(Kp[i],   Kd[i],   target_pos[i], joint_pos[i], joint_vel[i]);
             } else if (i<6) {
-                if (i==3)
-                    output_torque[i] = PDController(Kp[i-3],   Kd[i-3],   target_pos[i], joint_pos[i], joint_vel[i]);
-                else
+                if (i==5)
                     output_torque[i] = FeedforwardController(Kp[i-3], Kd[i-3], RF_target_pos, i-3);
+                else
+                    output_torque[i] = PDController(Kp[i-3],   Kd[i-3],   target_pos[i], joint_pos[i], joint_vel[i]);
             } else if (i<9) {
                 if (i == 6)
                     output_torque[i] = -output_torque[i-3];
