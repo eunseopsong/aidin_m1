@@ -61,11 +61,11 @@ public:
 private:
     //////////////// Feedforward Control Function ////////////////
 
-    double FeedforwardController(double Kp, double Kd, double target_pos[3], double th[3], int case_)
+    double FeedforwardController(double Kp, double Kd, double th[3], int case_)
     {
-        double PD_term_1 = Kp*(target_pos[0] - joint_pos[3]) + Kd*(0 - joint_vel[3]);
-        double PD_term_2 = Kp*(target_pos[1] - joint_pos[4]) + Kd*(0 - joint_vel[4]);
-        double PD_term_3 = Kp*(target_pos[2] - joint_pos[5]) + Kd*(0 - joint_vel[5]);
+        double PD_term_1 = Kp*(th[0] - joint_pos[3]) + Kd*(0 - joint_vel[3]);
+        double PD_term_2 = Kp*(th[1] - joint_pos[4]) + Kd*(0 - joint_vel[4]);
+        double PD_term_3 = Kp*(th[2] - joint_pos[5]) + Kd*(0 - joint_vel[5]);
 
         double M11 = (2527*cos(th[0]))/160000 + 10031349019590/46116860184273;
         double M12 = (19*cos(th[1])*sin(th[2]))/3200 - (57*cos(th[1]))/3200 + (19*cos(th[2])*sin(th[1]))/3200 - 3890049390/5902958103587056;
@@ -105,11 +105,11 @@ private:
         double hip_output_torque  = (M12+M22+M32)*PD_term_2 + (C12+C22+C32)*joint_vel[1] + 2*(B12+B22+B32)*joint_vel[1]*joint_vel[2] + U2;
         double knee_output_torque = (M13+M23+M33)*PD_term_3 + (C13+C23+C33)*joint_vel[2] + 2*(B13+B23+B33)*joint_vel[0]*joint_vel[2] + U3;
 
-        if (case_ == 1){
+        if (case_ == 0){
             return scap_output_torque;
-        } else if (case_ == 2) {
+        } else if (case_ == 1) {
             return hip_output_torque;
-        } else if (case_ == 3) {
+        } else if (case_ == 2) {
             return knee_output_torque;
         }
     }
@@ -163,7 +163,10 @@ private:
             if (i<3) {
                 output_torque[i] = PDController(Kp[i],   Kd[i],   target_pos[i], joint_pos[i], joint_vel[i]);
             } else if (i<6) {
-                output_torque[i] = PDController(Kp[i-3], Kd[i-3], target_pos[i], joint_pos[i], joint_vel[i]);
+                if (i==3)
+                    output_torque[i] = PDController(Kp[i-3],   Kd[i-3],   target_pos[i], joint_pos[i], joint_vel[i]);
+                else
+                    output_torque[i] = FeedforwardController(Kp[i-3], Kd[i-3], RF_target_pos, i-3);
             } else if (i<9) {
                 if (i == 6)
                     output_torque[i] = -output_torque[i-3];
