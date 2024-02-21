@@ -185,7 +185,7 @@ double InverseKinematics3D(double px, double py, double pz, double d1, double l2
     th2 += M_PI_2;
     th3 -= M_PI_2;
 
-    if (case_ == 1){
+    if (case_ == 1) {
         return th1;
     } else if (case_ == 2) {
         return th2;
