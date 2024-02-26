@@ -61,7 +61,7 @@ public:
 private:
     //////////////// Feedforward Control Function ////////////////
 
-    double FeedforwardController(double Kp, double Kd, double th[3], int case_)
+    double FeedforwardController2D(double Kp, double Kd, double th[3], int case_)
     {
         double PD_term_1 = Kp*(th[0] - joint_pos[3]) + Kd*(0 - joint_vel[3]);
         double PD_term_2 = Kp*(th[1] - joint_pos[4]) + Kd*(0 - joint_vel[4]);
@@ -70,7 +70,7 @@ private:
         double M11 = (2527*cos(th[0]))/160000 + 10031349019590/46116860184273;
         double M12 = (19*cos(th[1])*sin(th[2]))/3200 - (57*cos(th[1]))/3200 + (19*cos(th[2])*sin(th[1]))/3200 - 3890049390/5902958103587056;
         double M13 = (19*cos(th[1])*sin(th[2]))/3200 + (19*cos(th[2])*sin(th[1]))/3200 - 3890049390/5902958103587056;
-        
+
         double M21 = - (57*cos(th[0]))/3200 - 3890049390/5902958103587056;
         double M22 = cos(th[1] + th[2])/128 + (5*cos(th[1]))/128 - sin(th[1] + th[2])/64 + 4459359147/2882303761517;
         double M23 = cos(th[1] + th[2])/128 - sin(th[1] + th[2])/64 + 4459359147/2882303761517;
@@ -81,7 +81,7 @@ private:
         double C11 = 0;
         double C12 = (19*(cos(th[1] + th[2]) + 3*sin(th[1])))/3200;
         double C13 = (19*cos(th[1] + th[2]))/3200;
-        
+
         double C21 = (57*sin(th[0]))/3200;
         double C22 = 0;
         double C23 = -cos(th[1] + th[2])/64;
@@ -92,7 +92,7 @@ private:
         double B11 = 0;
         double B12 = 0;
         double B13 =  (19*cos(th[1] + th[2]))/1600;
-        
+
         double B21 = -(57*sin(th[1]))/3200 - (19*cos(th[1])*cos(th[2]))/3200 + (19*sin(th[1])*sin(th[2]))/3200 + (19*cos(th[0]))/3200;
         double B22 =  (19*sin(th[1])*sin(th[2]))/3200 - (19*cos(th[1])*cos(th[2]))/3200 + (19*cos(th[0]))/3200;
         double B23 = -cos(-th[1])/64 - cos(th[1] + th[2])/64;
@@ -101,7 +101,64 @@ private:
         double B33 =  cos(th[1] + th[2])/64 - cos(-th[1])/64;
 
         double U1 = (55917*sin(th[0]))/20000 + 8829/500;
-        
+
+        double U2 = (18639*sin(th[0]))/20000 - (981*sin(th[1]))/800 + 2943/1000;
+        double U3 = (18639*sin(th[0]))/20000 - (981*sin(th[1] + th[2] + M_PI/2))/800 - (981*sin(th[1]))/400 + 2943/1000;
+
+        double scap_output_torque = (M11+M21+M31)*PD_term_1 + (C11+C21+C31)*joint_vel[0] + 2*(B11+B21+B31)*joint_vel[0]*joint_vel[1] + U1;
+        double hip_output_torque  = (M12+M22+M32)*PD_term_2 + (C12+C22+C32)*joint_vel[1] + 2*(B12+B22+B32)*joint_vel[1]*joint_vel[2] + U2;
+        double knee_output_torque = (M13+M23+M33)*PD_term_3 + (C13+C23+C33)*joint_vel[2] + 2*(B13+B23+B33)*joint_vel[0]*joint_vel[2] + U3;
+
+        if (case_ == 0){
+            return scap_output_torque;
+        } else if (case_ == 1) {
+            return hip_output_torque;
+        } else if (case_ == 2) {
+            return knee_output_torque;
+        }
+    }
+
+    double FeedforwardController3D(double Kp, double Kd, double th[3], int case_)
+    {
+        double PD_term_1 = Kp*(th[0] - joint_pos[3]) + Kd*(0 - joint_vel[3]);
+        double PD_term_2 = Kp*(th[1] - joint_pos[4]) + Kd*(0 - joint_vel[4]);
+        double PD_term_3 = Kp*(th[2] - joint_pos[5]) + Kd*(0 - joint_vel[5]);
+
+        double M11 = (2527*cos(th[0]))/160000 + 10031349019590/46116860184273;
+        double M12 = (19*cos(th[1])*sin(th[2]))/3200 - (57*cos(th[1]))/3200 + (19*cos(th[2])*sin(th[1]))/3200 - 3890049390/5902958103587056;
+        double M13 = (19*cos(th[1])*sin(th[2]))/3200 + (19*cos(th[2])*sin(th[1]))/3200 - 3890049390/5902958103587056;
+
+        double M21 = - (57*cos(th[0]))/3200 - 3890049390/5902958103587056;
+        double M22 = cos(th[1] + th[2])/128 + (5*cos(th[1]))/128 - sin(th[1] + th[2])/64 + 4459359147/2882303761517;
+        double M23 = cos(th[1] + th[2])/128 - sin(th[1] + th[2])/64 + 4459359147/2882303761517;
+        double M31 = - 38900493902/118059162071741130;
+        double M32 = cos(th[1] + th[2])/128 - sin(-th[1])/64 + 4459359147/5764607523034;
+        double M33 =  cos(th[1] + th[2])/128 + 4459359146/5764607523034;
+
+        double C11 = 0;
+        double C12 = (19*(cos(th[1] + th[2]) + 3*sin(th[1])))/3200;
+        double C13 = (19*cos(th[1] + th[2]))/3200;
+
+        double C21 = (57*sin(th[0]))/3200;
+        double C22 = 0;
+        double C23 = -cos(th[1] + th[2])/64;
+        double C31 = 0;
+        double C32 = cos(-th[1])/128 + cos(th[1] + th[2])/128;
+        double C33 = 0;
+
+        double B11 = 0;
+        double B12 = 0;
+        double B13 =  (19*cos(th[1] + th[2]))/1600;
+
+        double B21 = -(57*sin(th[1]))/3200 - (19*cos(th[1])*cos(th[2]))/3200 + (19*sin(th[1])*sin(th[2]))/3200 + (19*cos(th[0]))/3200;
+        double B22 =  (19*sin(th[1])*sin(th[2]))/3200 - (19*cos(th[1])*cos(th[2]))/3200 + (19*cos(th[0]))/3200;
+        double B23 = -cos(-th[1])/64 - cos(th[1] + th[2])/64;
+        double B31 =  (19*sin(th[1])*sin(th[2]))/3200 - (19*cos(th[1])*cos(th[2]))/3200 + (19*cos(th[0]))/3200;
+        double B32 =  (19*sin(th[1])*sin(th[2]))/3200 - (19*cos(th[1])*cos(th[2]))/3200 + (19*cos(th[0]))/3200;
+        double B33 =  cos(th[1] + th[2])/64 - cos(-th[1])/64;
+
+        double U1 = (55917*sin(th[0]))/20000 + 8829/500;
+
         double U2 = (18639*sin(th[0]))/20000 - (981*sin(th[1]))/800 + 2943/1000;
         double U3 = (18639*sin(th[0]))/20000 - (981*sin(th[1] + th[2] + M_PI/2))/800 - (981*sin(th[1]))/400 + 2943/1000;
 
@@ -168,7 +225,7 @@ private:
                 output_torque[i] = PDController(Kp[i],   Kd[i],   target_pos[i], joint_pos[i], joint_vel[i]);
             } else if (i<6) {
                 if (i==5)
-                    output_torque[i] = FeedforwardController(Kp[i-3], Kd[i-3], RF_target_pos, i-3);
+                    output_torque[i] = FeedforwardController3D(Kp[i-3], Kd[i-3], RF_target_pos, i-3);
                 else
                     output_torque[i] = PDController(Kp[i-3],   Kd[i-3],   target_pos[i], joint_pos[i], joint_vel[i]);
             } else if (i<9) {
