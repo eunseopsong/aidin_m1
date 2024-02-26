@@ -84,7 +84,7 @@
   </gazebo>
 
 <!--//////////////////////////////// RF LINKS /////////////////////////////////-->
-
+  <!-- mass & inertial update 이후 PD control에서 심한 진동 발생 (문제점이 뭐지?) -->
   <link name="RF_scap">
     <inertial>
       <mass value="2.739"/>
@@ -202,7 +202,7 @@
     <origin xyz="0.255 -0.120 0" rpy="-1.57079 0 -1.57079"/>
     <axis xyz="0 0 1"/>
     <limit lower="-1.57089" upper="1.57089" effort="200.0" velocity="9"/>
-    <dynamics damping="0.7"/>
+    <dynamics damping="3"/>
   </joint>
 
   <joint name="RFJ_hip" type="revolute">
@@ -211,7 +211,7 @@
     <origin xyz="0.095 0 0" rpy="-1.57079  1.57079 -1.57079"/>
     <axis xyz="0 0 1"/>
     <limit lower="-3.14" upper="3.14" effort="200.0" velocity="9"/>
-    <dynamics damping="0.7"/>
+    <dynamics damping="3"/>
   </joint>
 
   <joint name="RFJ_knee" type="revolute">
@@ -220,7 +220,7 @@
     <origin xyz="0.250 0 0" rpy="0 0 1.57079"/>
     <axis xyz="0 0 1"/>
     <limit lower="-3.14" upper="3.14" effort="200.0" velocity="9"/>
-    <dynamics damping="0.7"/>
+    <dynamics damping="3"/>
   </joint>
 
   <joint name="RFJ_foot" type="fixed" dont_collapse="true">
