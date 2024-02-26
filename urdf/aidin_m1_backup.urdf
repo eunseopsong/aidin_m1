@@ -84,12 +84,12 @@
   </gazebo>
 
 <!--//////////////////////////////// RF LINKS /////////////////////////////////-->
-
+  <!-- mass & inertial update 이후 PD control에서 심한 진동 발생 (문제점이 뭐지?) -->
   <link name="RF_scap">
     <inertial>
       <mass value="6"/>
       <origin xyz="0 0 0" rpy="0 0 0"/>
-      <inertia ixx="0.73716790" ixy="0.130721360" ixz="0" iyy="0.431162858" iyz="0" izz="0.477083568"/>
+      <inertia ixx="0.018386717" ixy="-0.000009042" ixz="-0.000004977" iyy="0.020489644" iyz="-0.000009312" izz="0.008551259"/>
     </inertial>
 
     <collision>
@@ -116,9 +116,9 @@
 
   <link name="RF_hip">
     <inertial>
-      <mass value="0.600"/>
+      <mass value="0.615"/>
       <origin xyz="0 0 0" rpy="0 0 0"/>
-      <inertia ixx="0.001541527" ixy="0.000007051" ixz="-0.000001356" iyy="0.001938779" iyz="0.000000659" izz="0.001547151"/>
+      <inertia ixx="0.000769544" ixy="-0.000269033" ixz="-0.000074609" iyy="0.007987559" iyz="-0.000017663" izz="0.008526217"/>
     </inertial>
 
     <collision>
@@ -143,9 +143,9 @@
 
   <link name="RF_knee">
     <inertial>
-      <mass value="0.600"/>
+      <mass value="0.343"/>
       <origin xyz="0 0 0" rpy="0 0 0"/>
-      <inertia ixx="0.001541527" ixy="0.000007051" ixz="-0.000001356" iyy="0.001938779" iyz="0.000000659" izz="0.001547151"/>
+      <inertia ixx="0.000092851" ixy="0.000016513" ixz="-0.000000007" iyy="0.004330285" iyz="0.000000016" izz="0.004412529"/>
     </inertial>
 
     <collision>
@@ -202,7 +202,7 @@
     <origin xyz="0.255 -0.120 0" rpy="-1.57079 0 -1.57079"/>
     <axis xyz="0 0 1"/>
     <limit lower="-1.57089" upper="1.57089" effort="200.0" velocity="9"/>
-    <dynamics damping="1.5"/>
+    <dynamics damping="3"/>
   </joint>
 
   <joint name="RFJ_hip" type="revolute">
@@ -211,7 +211,7 @@
     <origin xyz="0.095 0 0" rpy="-1.57079  1.57079 -1.57079"/>
     <axis xyz="0 0 1"/>
     <limit lower="-3.14" upper="3.14" effort="200.0" velocity="9"/>
-    <dynamics damping="1.5"/>
+    <dynamics damping="3"/>
   </joint>
 
   <joint name="RFJ_knee" type="revolute">
@@ -220,7 +220,7 @@
     <origin xyz="0.250 0 0" rpy="0 0 1.57079"/>
     <axis xyz="0 0 1"/>
     <limit lower="-3.14" upper="3.14" effort="200.0" velocity="9"/>
-    <dynamics damping="1.5"/>
+    <dynamics damping="3"/>
   </joint>
 
   <joint name="RFJ_foot" type="fixed" dont_collapse="true">
@@ -236,7 +236,7 @@
     <inertial>
       <mass value="6"/>
       <origin xyz="0 0 0" rpy="0 0 0"/>
-      <inertia ixx="0.73716790" ixy="0.130721360" ixz="0" iyy="0.431162858" iyz="0" izz="0.477083568"/>
+      <inertia ixx="0.017981419" ixy="0.000007516" ixz="-0.000007455" iyy="0.020085287" iyz="-0.000006833" izz="0.008520316"/>
     </inertial>
 
     <collision>
@@ -261,9 +261,9 @@
 
   <link name="LF_hip">
     <inertial>
-      <mass value="0.600"/>
+      <mass value="0.644"/>
       <origin xyz="0 0 0" rpy="0 0 0"/>
-      <inertia ixx="0.001541527" ixy="0.000007051" ixz="-0.000001356" iyy="0.001938779" iyz="0.000000659" izz="0.001547151"/>
+      <inertia ixx="0.000789893" ixy="-0.000285415" ixz="0.000097100" iyy="0.008401738" iyz="0.000021825" izz="0.008953577"/>
     </inertial>
 
     <collision>
@@ -288,9 +288,9 @@
 
   <link name="LF_knee">
     <inertial>
-      <mass value="0.600"/>
+      <mass value="0.343s"/>
       <origin xyz="0 0 0" rpy="0 0 0"/>
-      <inertia ixx="0.001541527" ixy="0.000007051" ixz="-0.000001356" iyy="0.001938779" iyz="0.000000659" izz="0.001547151"/>
+      <inertia ixx="0.000092851" ixy="0.000016513" ixz="-0.000000007" iyy="0.004330285" iyz="0.000000016" izz="0.004412529"/>
     </inertial>
 
     <collision>
@@ -347,7 +347,7 @@
     <origin xyz="0.255 0.120 0" rpy="1.57079 0 1.57079"/>
     <axis xyz="0 0 1"/>
     <limit lower="-1.57089" upper="1.57089" effort="200.0" velocity="9"/>
-    <dynamics damping="1.5"/>
+    <dynamics damping="3"/>
   </joint>
 
   <joint name="LFJ_hip" type="revolute">
@@ -356,7 +356,7 @@
     <origin xyz="0.095 0 0" rpy="-1.57079 1.57079 1.57079"/>
     <axis xyz="0 0 1"/>
     <limit lower="-3.14" upper="3.14" effort="200.0" velocity="9"/>
-    <dynamics damping="1.5"/>
+    <dynamics damping="3"/>
   </joint>
 
   <joint name="LFJ_knee" type="revolute">
@@ -365,7 +365,7 @@
     <origin xyz="0.250 0 0" rpy="0 0 1.57079"/>
     <axis xyz="0 0 1"/>
     <limit lower="-3.14" upper="3.14" effort="200.0" velocity="9"/>
-    <dynamics damping="1.5"/>
+    <dynamics damping="3"/>
   </joint>
 
   <joint name="LFJ_foot" type="fixed" dont_collapse="true">
@@ -381,7 +381,7 @@
     <inertial>
       <mass value="6"/>
       <origin xyz="0 0 0" rpy="0 0 0"/>
-      <inertia ixx="0.73716790" ixy="0.130721360" ixz="0" iyy="0.431162858" iyz="0" izz="0.477083568"/>
+      <inertia ixx="0.018386717" ixy="-0.000009042" ixz="-0.000004977" iyy="0.020489644" iyz="-0.000009312" izz="0.008551259"/>
     </inertial>
 
     <collision>
@@ -406,9 +406,9 @@
 
   <link name="LB_hip">
     <inertial>
-      <mass value="0.600"/>
+      <mass value="0.644"/>
       <origin xyz="0 0 0" rpy="0 0 0"/>
-      <inertia ixx="0.001541527" ixy="0.000007051" ixz="-0.000001356" iyy="0.001938779" iyz="0.000000659" izz="0.001547151"/>
+      <inertia ixx="0.000769544" ixy="-0.000269033" ixz="-0.000074609" iyy="0.007987559" iyz="-0.000017663" izz="0.008526217"/>
     </inertial>
 
     <collision>
@@ -433,9 +433,9 @@
 
   <link name="LB_knee">
     <inertial>
-      <mass value="0.600"/>
+      <mass value="0.343"/>
       <origin xyz="0 0 0" rpy="0 0 0"/>
-      <inertia ixx="0.001541527" ixy="0.000007051" ixz="-0.000001356" iyy="0.001938779" iyz="0.000000659" izz="0.001547151"/>
+      <inertia ixx="0.000092851" ixy="0.000016513" ixz="-0.000000007" iyy="0.004330285" iyz="0.000000016" izz="0.004412529"/>
     </inertial>
 
     <collision>
@@ -492,7 +492,7 @@
     <origin xyz="-0.255 0.120 0" rpy="1.57079 0 1.57079"/>
     <axis xyz="0 0 1"/>
     <limit lower="-1.57089" upper="1.57089" effort="200.0" velocity="9"/>
-    <dynamics damping="1.5"/>
+    <dynamics damping="3"/>
   </joint>
 
   <joint name="LBJ_hip" type="revolute">
@@ -501,7 +501,7 @@
     <origin xyz="0.095 0 0" rpy="-1.559 1.57079 1.58259"/>
     <axis xyz="0 0 1"/>
     <limit lower="-3.14" upper="3.14" effort="200.0" velocity="9"/>
-    <dynamics damping="1.5"/>
+    <dynamics damping="3"/>
   </joint>
 
   <joint name="LBJ_knee" type="revolute">
@@ -510,7 +510,7 @@
     <origin xyz="0.250 0 0" rpy="0 0 1.57079"/>
     <axis xyz="0 0 1"/>
     <limit lower="-3.14" upper="3.14" effort="200.0" velocity="9"/>
-    <dynamics damping="1.5"/>
+    <dynamics damping="3"/>
   </joint>
 
   <joint name="LBJ_foot" type="fixed" dont_collapse="true">
@@ -526,7 +526,7 @@
     <inertial>
       <mass value="6"/>
       <origin xyz="0 0 0" rpy="0 0 0"/>
-      <inertia ixx="0.73716790" ixy="0.130721360" ixz="0" iyy="0.431162858" iyz="0" izz="0.477083568"/>
+      <inertia ixx="0.018377412" ixy="-0.000005124" ixz="-0.000433759" iyy="0.020738470" iyz="-0.000009312" izz="0.008809390"/>
     </inertial>
 
     <collision>
@@ -551,9 +551,9 @@
 
   <link name="RB_hip">
     <inertial>
-      <mass value="0.600"/>
+      <mass value="0.615"/>
       <origin xyz="0 0 0" rpy="0 0 0"/>
-      <inertia ixx="0.001541527" ixy="0.000007051" ixz="-0.000001356" iyy="0.001938779" iyz="0.000000659" izz="0.001547151"/>
+      <inertia ixx="0.000769544" ixy="-0.000269033" ixz="-0.000074609" iyy="0.007987559" iyz="-0.000017663" izz="0.008526217"/>
     </inertial>
 
     <collision>
@@ -578,9 +578,9 @@
 
   <link name="RB_knee">
     <inertial>
-      <mass value="0.600"/>
+      <mass value="0.343"/>
       <origin xyz="0 0 0" rpy="0 0 0"/>
-      <inertia ixx="0.001541527" ixy="0.000007051" ixz="-0.000001356" iyy="0.001938779" iyz="0.000000659" izz="0.001547151"/>
+      <inertia ixx="0.000092851" ixy="0.000016513" ixz="-0.000000007" iyy="0.004330285" iyz="0.000000016" izz="0.004412529"/>
     </inertial>
 
     <collision>
@@ -637,7 +637,7 @@
     <origin xyz="-0.255 -0.120   0" rpy="-1.57079 0 -1.57079"/>
     <axis xyz="0 0 1"/>
     <limit lower="-1.57089" upper="1.57089" effort="200.0" velocity="9"/>
-    <dynamics damping="1.5"/>
+    <dynamics damping="3"/>
   </joint>
 
   <joint name="RBJ_hip" type="revolute">
@@ -646,7 +646,7 @@
     <origin xyz="0.095 0 0" rpy="-1.58259 1.57079 -1.58259"/>
     <axis xyz="0 0 1"/>
     <limit lower="-3.14" upper="3.14" effort="200.0" velocity="9"/>
-    <dynamics damping="1.5"/>
+    <dynamics damping="3"/>
   </joint>
 
   <joint name="RBJ_knee" type="revolute">
@@ -655,7 +655,7 @@
     <origin xyz="0.250 0 0" rpy="0 0 1.57079"/>
     <axis xyz="0 0 1"/>
     <limit lower="-3.14" upper="3.14" effort="200.0" velocity="9"/>
-    <dynamics damping="1.5"/>
+    <dynamics damping="3"/>
   </joint>
 
   <joint name="RBJ_foot" type="fixed" dont_collapse="true">
