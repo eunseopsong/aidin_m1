@@ -170,7 +170,7 @@
 
   <link name="RF_foot">
     <inertial>
-      <mass value="0.01"/>
+      <mass value="0"/>
       <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
     </inertial>
 
@@ -184,7 +184,8 @@
     <visual name="RF_foot_vis_cover">
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <sphere radius="0.0250"/>
+        <mesh filename="/home/eunseop/dev_ws/src/aidin_m1/meshes/feet.stl" scale="0.001 0.001 0.001"/>
+        <!-- <sphere radius="0.0250"/> -->
       </geometry>
       <material name="black"/>
     </visual>
@@ -225,7 +226,7 @@
   <joint name="RFJ_foot" type="fixed" dont_collapse="true">
     <parent link="RF_knee"/>
     <child link="RF_foot"/>
-    <origin xyz="0.25 0 0" rpy="0 0 0"/>
+    <origin xyz="0.250 -0.010 0.002" rpy="-1.57089 0 -1.57089"/>
     <axis xyz="0 0 1"/>
   </joint>
 
@@ -314,7 +315,7 @@
 
   <link name="LF_foot">
     <inertial>
-      <mass value="0.01"/>
+      <mass value="0"/>
       <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
     </inertial>
 
@@ -328,7 +329,8 @@
     <visual name="LF_foot_vis_cover">
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <sphere radius="0.0250"/>
+        <mesh filename="/home/eunseop/dev_ws/src/aidin_m1/meshes/feet.stl" scale="0.001 0.001 0.001"/>
+        <!-- <sphere radius="0.0250"/> -->
       </geometry>
       <material name="black"/>
     </visual>
@@ -369,7 +371,7 @@
   <joint name="LFJ_foot" type="fixed" dont_collapse="true">
     <parent link="LF_knee"/>
     <child link="LF_foot"/>
-    <origin xyz="0.25 0 0" rpy="0 0 0"/>
+    <origin xyz="0.250 -0.010 0.002" rpy="-1.57089 0 -1.57089"/>
     <axis xyz="0 0 1"/>
   </joint>
 
@@ -458,7 +460,7 @@
 
   <link name="LB_foot">
     <inertial>
-      <mass value="0.01"/>
+      <mass value="0"/>
       <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
     </inertial>
 
@@ -472,7 +474,8 @@
     <visual name="LB_foot_vis_cover">
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <sphere radius="0.0250"/>
+        <mesh filename="/home/eunseop/dev_ws/src/aidin_m1/meshes/feet.stl" scale="0.001 0.001 0.001"/>
+        <!-- <sphere radius="0.0250"/> -->
       </geometry>
       <material name="black"/>
     </visual>
@@ -513,7 +516,7 @@
   <joint name="LBJ_foot" type="fixed" dont_collapse="true">
     <parent link="LB_knee"/>
     <child link="LB_foot"/>
-    <origin xyz="0.25 0 0" rpy="0 0 0"/>
+    <origin xyz="0.250 -0.010 0.002" rpy="-1.57089 0 -1.57089"/>
     <axis xyz="0 0 1"/>
   </joint>
 
@@ -602,7 +605,7 @@
 
   <link name="RB_foot">
     <inertial>
-      <mass value="0.01"/>
+      <mass value="0"/>
       <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
     </inertial>
 
@@ -616,7 +619,8 @@
     <visual name="RB_foot_vis_cover">
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <sphere radius="0.0250"/>
+        <mesh filename="/home/eunseop/dev_ws/src/aidin_m1/meshes/feet.stl" scale="0.001 0.001 0.001"/>
+        <!-- <sphere radius="0.0250"/> -->
       </geometry>
       <material name="black"/>
     </visual>
@@ -657,7 +661,7 @@
   <joint name="RBJ_foot" type="fixed" dont_collapse="true">
     <parent link="RB_knee"/>
     <child link="RB_foot"/>
-    <origin xyz="0.25 0 0" rpy="0 0 0"/>
+    <origin xyz="0.250 -0.010 0.002" rpy="-1.57089 0 -1.57089"/>
     <axis xyz="0 0 1"/>
   </joint>
 
