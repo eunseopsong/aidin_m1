@@ -224,10 +224,7 @@ private:
             if (i<3) {
                 output_torque[i] = PDController(Kp[i],   Kd[i],   target_pos[i], joint_pos[i], joint_vel[i]);
             } else if (i<6) {
-                if (i==5)
-                    output_torque[i] = FeedforwardController3D(Kp[i-3], Kd[i-3], RF_target_pos, i-3);
-                else
-                    output_torque[i] = PDController(Kp[i-3],   Kd[i-3],   target_pos[i], joint_pos[i], joint_vel[i]);
+                output_torque[i] = PDController(Kp[i-3], Kd[i-3], target_pos[i], joint_pos[i], joint_vel[i]);
             } else if (i<9) {
                 if (i == 6)
                     output_torque[i] = -output_torque[i-3];
