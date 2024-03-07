@@ -63,16 +63,17 @@ private:
 
     double FeedforwardController(double Kp, double Kd, double th[3], int case_)
     {
-        Matrix3d M;  // 3x3 행렬
+        Matrix3d M;   // 3x3 행렬
         Matrix3d C;
         Matrix3d B;
 
-        Vector3d PD;
+        Vector3d PD;  // 크기 3의 벡터
         Vector3d joint_square;
         Vector3d joint_multiple;
+
         Vector3d G;
 
-        Vector3d T;  // 크기 3의 벡터
+        Vector3d T;
 
         double m1  = 6,     m2  = 0.644, m3  = 0.343;
         double L1  = 0.095, L2  = 0.250;
@@ -96,14 +97,11 @@ private:
         B << 0, 0,  L1*Lg3*m3*cos(th[1] + th[2])*cos(th[0]),
              0, 0, -L2*Lg3*m3*cos(th[2]),
              0, 0,  0;
-        joint_multiple << joint_vel[3]*joint_vel[4], joint_vel[3]*joint_vel[5], joint_vel[4]*joint_vel[5]; 
+        joint_multiple << joint_vel[3]*joint_vel[4], joint_vel[3]*joint_vel[5], joint_vel[4]*joint_vel[5];
 
         G << (981*sin(th[0])*(L1*m2 + L1*m3 + Lg1*m1))/100 + -(981*cos(th[0])*(L1*m2 + Lg1*m1))/100 + 0,
             -(981*L1*m3*cos(th[0]))/100 + (981*L2*m3*cos(th[1]))/100 - (981*Lg3*m3*sin(th[1] + th[2]))/100 + (981*Lg2*m2*cos(th[1]))/100 + - (981*Lg2*m2*sin(th[1]))/100 - (981*Lg3*m3*sin(th[1] + th[2]))/100,
              0 + -(981*m3*(Lg3*cos(th[1] + th[2]) + L2*sin(th[1])))/100 + -(981*Lg3*m3*cos(th[1] + th[2]))/100;
-
-        double scap_output_torque, hip_output_torque, knee_output_torque;
-        T << scap_output_torque, hip_output_torque, knee_output_torque;
 
         T = M*PD + C*joint_square + B*joint_multiple + G;
 
