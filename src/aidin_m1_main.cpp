@@ -164,11 +164,29 @@ private:
         // Calculate the output_torque using PD control
         double output_torque[12];
 
+        // for (int i=0; i<12; i++){
+        //     if (i<3) {
+        //         output_torque[i] = PDController(Kp[i],   Kd[i],   target_pos[i], joint_pos[i], joint_vel[i]);
+        //     } else if (i<6) {
+        //         output_torque[i] = PDController(Kp[i-3], Kd[i-3], target_pos[i], joint_pos[i], joint_vel[i]);
+        //     } else if (i<9) {
+        //         if (i == 6)
+        //             output_torque[i] = -output_torque[i-3];
+        //         else
+        //             output_torque[i] =  output_torque[i-3];
+        //     } else {
+        //         if (i == 9)
+        //             output_torque[i] = -output_torque[i-9];
+        //         else
+        //             output_torque[i] =  output_torque[i-9];
+        //     }
+        // }
+
         for (int i=0; i<12; i++){
             if (i<3) {
                 output_torque[i] = PDController(Kp[i],   Kd[i],   target_pos[i], joint_pos[i], joint_vel[i]);
             } else if (i<6) {
-                output_torque[i] = PDController(Kp[i-3], Kd[i-3], target_pos[i], joint_pos[i], joint_vel[i]);
+                output_torque[i] = FeedforwardController3D(Kp[i-3], Kd[i-3], RF_target_pos, i-3);
             } else if (i<9) {
                 if (i == 6)
                     output_torque[i] = -output_torque[i-3];
