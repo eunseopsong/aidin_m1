@@ -69,22 +69,22 @@ private:
         Vector3d joint_square;
         Vector3d joint_multiple;
 
-        Vector3d G;
+        Vector3d G, T;
 
-        Vector3d T;
-
-        double m1  = 6,     m2  = 0.644, m3  = 0.343;
+        // double m1  = 6;
+        double m2  = 0.644, m3  = 0.343;
         double L1  = 0.095, L2  = 0.250;
         // double L3  = 0.250;
-        double Lg1 = 0.040, Lg2 = 0.125, Lg3 = 0.125;
+        // double Lg1 = 0.040;
+        double Lg2 = 0.125, Lg3 = 0.125;
 
         double PD_term_1 = Kp*(th[0] - joint_pos[3]) + Kd*(0 - joint_vel[3]);
         double PD_term_2 = Kp*(th[1] - joint_pos[4]) + Kd*(0 - joint_vel[4]);
         double PD_term_3 = Kp*(th[2] - joint_pos[5]) + Kd*(0 - joint_vel[5]);
 
-        M << pow(L1, 2)*m2 + pow(L1 ,2)*m3 + pow(Lg1, 2)*m1 + 0.749485744, L1*Lg3*m3*cos(th[0])*cos(th[1])*sin(th[2]) - L1*Lg2*m2*cos(th[0])*cos(th[1]) - L1*L2*m3*cos(th[0])*cos(th[1]) + L1*Lg3*m3*cos(th[0])*cos(th[2])*sin(th[1]) + 0.000017647, L1*Lg3*m3*cos(th[0])*cos(th[1])*sin(th[2]) + L1*Lg3*m3*cos(th[0])*cos(th[1])*sin(th[1]) + 53334784846/3022314549036572,
-             L1*Lg3*m3*cos(th[0])*cos(th[1])*sin(th[2]) - L1*Lg2*m2*cos(th[0])*cos(th[1]) - L1*L2*m3*cos(th[0])*cos(th[1]) + L1*Lg3*m3*cos(th[0])*cos(th[2])*sin(th[1]) + 5333478484/302231454903657, m3*pow(L2,2) - 2*m3*sin(th[2])*L2*Lg3 + m2*pow(Lg2,2) + m3*pow(Lg3,2) + 116541863/9007199254, m3*pow(Lg3, 2) - L2*m3*sin(th[2])*Lg3 + 1165418633/90071992547,
-             L1*Lg3*m3*cos(th[0])*cos(th[1])*sin(th[2]) + L1*Lg3*m3*cos(th[0])*cos(th[2])*sin(th[1]) - 48357032/3022314549036572, m3*pow(Lg3,2) - L2*m3*sin(th[2])*Lg3 + 25436497869/5764607523034, m3*pow(Lg3,2) + 254364978/57646075230;
+        M << L1*pow(m2,2) + L1*pow(m3,2) + 272285119410/368934881474, L1*Lg3*m3*cos(th[0])*cos(th[1])*sin(th[2]) + L1*Lg3*m3*cos(th[0])*cos(th[2])*sin(th[1]) + 22551302239/302231454903657,
+             L1*Lg3*m3*cos(th[0])*cos(th[1])*sin(th[2]) - L1*Lg2*m2*cos(th[0])*cos(th[1]) - L1*L2*m3*cos(th[0])*cos(th[1]) + L1*Lg3*m3*cos(th[0])*cos(th[2])*sin(th[1]) + 22551302239/302231454903657, m3*pow(L2,2) - 2*m3*sin(th[2])*L2*Lg3 + m2*pow(Lg2,2) + m3*pow(Lg3,2) + 11654186/900719925, m3*pow(Lg3,2) - L2*m3*sin(th[2])*Lg3 + 11654186/900719925,
+             L1*Lg3*m3*cos(th[0])*cos(th[1])*sin(th[2]) + L1*Lg3*m3*cos(th[0])*cos(th[2])*sin(th[1]) + 2115620/302231454903657, m3*pow(Lg3,2) - L2*m3*sin(th[2])*Lg3 + 254364978/57646075230, m3*pow(Lg3,2) + 254364978/57646075230;
         PD << PD_term_1, PD_term_2, PD_term_3;
 
         C << 0, L1*cos(th[0])*(L2*m3*sin(th[1]) + Lg2*m2*sin(th[1]) + Lg3*m3*cos(th[1] + th[2])), L1*Lg3*m3*cos(th[1] + th[2])*cos(th[0]),
@@ -97,13 +97,12 @@ private:
              0, 0,  0;
         joint_multiple << joint_vel[3]*joint_vel[4], joint_vel[3]*joint_vel[5], joint_vel[4]*joint_vel[5];
 
-        G << (981*sin(th[0])*(L1*m2 + L1*m3 + Lg1*m1))/100 + -(981*cos(th[0])*(L1*m2 + Lg1*m1))/100 + 0,
-            -(981*L1*m3*cos(th[0]))/100 + (981*L2*m3*cos(th[1]))/100 - (981*Lg3*m3*sin(th[1] + th[2]))/100 + (981*Lg2*m2*cos(th[1]))/100 + - (981*Lg2*m2*sin(th[1]))/100 - (981*Lg3*m3*sin(th[1] + th[2]))/100,
-             0 + -(981*m3*(Lg3*cos(th[1] + th[2]) + L2*sin(th[1])))/100 + -(981*Lg3*m3*cos(th[1] + th[2]))/100;
+        G << (981*L1*sin(th[0])*(m2 + m3))/100 -(981*L1*m2*cos(th[0]))/100 + 0,
+            -(981*L1*m3*cos(th[0]))/100 + (981*L2*m3*cos(th[1]))/100 - (981*Lg3*m3*sin(th[1] + th[2]))/100 + (981*Lg2*m2*cos(th[1]))/100 - (981*Lg2*m2*sin(th[1]))/100 - (981*Lg3*m3*sin(th[1] + th[2]))/100,
+              0 - (981*m3*(Lg3*cos(th[1] + th[2]) + L2*sin(th[1])))/100 - (981*Lg3*m3*cos(th[1] + th[2]))/100;
 
         T = M*PD + C*joint_square + B*joint_multiple + G;
 
-        // std::cout<<M13<<' '<<M23<<' '<<M33<<std::endl;
         if (case_ == 0){
             return T[0];
         } else if (case_ == 1) {
