@@ -63,9 +63,7 @@ private:
 
     double FeedforwardController(double Kp, double Kd, double th[3], int case_)
     {
-        Matrix3d M;   // 3x3 행렬
-        Matrix3d C;
-        Matrix3d B;
+        Matrix3d M, C, B;   // 3x3 행렬
 
         Vector3d PD;  // 크기 3의 벡터
         Vector3d joint_square;
@@ -105,16 +103,12 @@ private:
 
         T = M*PD + C*joint_square + B*joint_multiple + G;
 
-        // double scap_output_torque = (M11+M21+M31)*PD_term_1 + (C11+C21+C31)*joint_vel[3] + 2*(B11+B21+B31)*joint_vel[3]*joint_vel[4] + U1;
-        // double hip_output_torque  = (M12+M22+M32)*PD_term_2 + (C12+C22+C32)*joint_vel[4] + 2*(B12+B22+B32)*joint_vel[4]*joint_vel[5] + U2;
-        // double knee_output_torque = (M13+M23+M33)*PD_term_3 + (C13+C23+C33)*joint_vel[5] + 2*(B13+B23+B33)*joint_vel[3]*joint_vel[5] + U3;
-
         // std::cout<<M13<<' '<<M23<<' '<<M33<<std::endl;
         if (case_ == 0){
             return T[0];
         } else if (case_ == 1) {
             return T[1];
-        } else if (case_ == 2) {
+        } else {
             return T[2];
         }
     }
