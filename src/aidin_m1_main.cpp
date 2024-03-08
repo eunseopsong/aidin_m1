@@ -62,7 +62,7 @@ private:
     //////////////// Feedforward Control Function ////////////////
 
     double FeedforwardController(double Kp, double Kd, double th[3], int case_)
-    {
+    {   // 2024.03.08.13:56 torque publish가 먹통 되는 문제 발생 -> why..?
         Matrix3d M, C, B;   // 3x3 행렬
 
         Vector3d PD;  // 크기 3의 벡터
