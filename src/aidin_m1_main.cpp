@@ -62,7 +62,7 @@ private:
     //////////////// Feedforward Control Function ////////////////
 
     double FeedforwardController(double Kp, double Kd, double th[3], int case_)
-    {   // 2024.03.08.13:56 torque publish가 먹통 되는 문제 발생 -> why..?
+    {
         Matrix3d M, C, B;   // 3x3 행렬
 
         Vector3d PD;  // 크기 3의 벡터
@@ -71,25 +71,25 @@ private:
 
         Vector3d G, T;
 
-        // double m1  = 12.172;
-        double m2  = 1.688, m3  = 1.688;
+        // double m1  = 6;
+        double m2  = 0.644, m3  = 0.343;
         double L1  = 0.095, L2  = 0.250;
         // double L3  = 0.250;
-        // double Lg1 = 0.060;
+        // double Lg1 = 0.040;
         double Lg2 = 0.125, Lg3 = 0.125;
 
         double PD_term_1 = Kp*(th[0] - joint_pos[3]) + Kd*(0 - joint_vel[3]);
         double PD_term_2 = Kp*(th[1] - joint_pos[4]) + Kd*(0 - joint_vel[4]);
         double PD_term_3 = Kp*(th[2] - joint_pos[5]) + Kd*(0 - joint_vel[5]);
 
-        M <<  L1*pow(m2,2) + L1*pow(m3,2) + 10697018289/90071992547, -L1*cos(th[0])*(L2*m3*cos(th[1]) - Lg3*m3*sin(th[1] + th[2]) + Lg2*m2*cos(th[1])), L1*Lg3*m3*sin(th[1] + th[2])*cos(th[0]),
-             -L1*cos(th[0])*(L2*m3*cos(th[1]) - Lg3*m3*sin(th[1] + th[2]) + Lg2*m2*cos(th[1])), m3*pow(L2,2) - 2*m3*sin(th[2])*L2*Lg3 + m2*pow(Lg2,2) + m3*pow(Lg3,2) + 63965189/900719925, m3*pow(Lg3,2) - L2*m3*sin(th[2])*Lg3 + 63965189/900719925,
-              L1*Lg3*m3*sin(th[1] + th[2])*cos(th[0]), m3*pow(Lg3,2) - L2*m3*sin(th[2])*Lg3 + 63965189/1801439850, m3*pow(Lg3,2) + 63965189/1801439850;
+        M << L1*pow(m2,2) + L1*pow(m3,2) + 272285119410/368934881474, L1*Lg3*m3*cos(th[0])*cos(th[1])*sin(th[2]) + L1*Lg3*m3*cos(th[0])*cos(th[2])*sin(th[1]) + 22551302239/302231454903657,
+             L1*Lg3*m3*cos(th[0])*cos(th[1])*sin(th[2]) - L1*Lg2*m2*cos(th[0])*cos(th[1]) - L1*L2*m3*cos(th[0])*cos(th[1]) + L1*Lg3*m3*cos(th[0])*cos(th[2])*sin(th[1]) + 22551302239/302231454903657, m3*pow(L2,2) - 2*m3*sin(th[2])*L2*Lg3 + m2*pow(Lg2,2) + m3*pow(Lg3,2) + 11654186/900719925, m3*pow(Lg3,2) - L2*m3*sin(th[2])*Lg3 + 11654186/900719925,
+             L1*Lg3*m3*cos(th[0])*cos(th[1])*sin(th[2]) + L1*Lg3*m3*cos(th[0])*cos(th[2])*sin(th[1]) + 2115620/302231454903657, m3*pow(Lg3,2) - L2*m3*sin(th[2])*Lg3 + 254364978/57646075230, m3*pow(Lg3,2) + 254364978/57646075230;
         PD << PD_term_1, PD_term_2, PD_term_3;
 
-        C <<  0, L1*cos(th[0])*(L2*m3*sin(th[1]) + Lg2*m2*sin(th[1]) + Lg3*m3*cos(th[1] + th[2])), L1*Lg3*m3*cos(th[1] + th[2])*cos(th[0]),
-              L1*sin(th[0])*(L2*m3*cos(th[1]) - Lg3*m3*sin(th[1] + th[2]) + Lg2*m2*cos(th[1])), 0, -L2*Lg3*m3*cos(th[2]),
-             -L1*Lg3*m3*sin(th[1] + th[2])*sin(th[0]), L2*Lg3*m3*cos(th[2]), 0;
+        C << 0, L1*cos(th[0])*(L2*m3*sin(th[1]) + Lg2*m2*sin(th[1]) + Lg3*m3*cos(th[1] + th[2])), L1*Lg3*m3*cos(th[1] + th[2])*cos(th[0]),
+             L1*sin(th[0])*(L2*m3*cos(th[1]) - Lg3*m3*sin(th[1] + th[2]) + Lg2*m2*cos(th[1])), 0, -L2*Lg3*m3*cos(th[2]),
+            -L1*Lg3*m3*sin(th[1] + th[2])*sin(th[0]), L2*Lg3*m3*cos(th[2]), 0;
         joint_square << pow(joint_vel[3], 2), pow(joint_vel[4], 2), pow(joint_vel[5], 2);
 
         B << 0, 0,  L1*Lg3*m3*cos(th[1] + th[2])*cos(th[0]),
@@ -97,9 +97,9 @@ private:
              0, 0,  0;
         joint_multiple << joint_vel[3]*joint_vel[4], joint_vel[3]*joint_vel[5], joint_vel[4]*joint_vel[5];
 
-        G << (981*L1*sin(th[0])*(m2 + m3))/100 - (981*L1*m2*cos(th[0]))/100,
-             (981*L2*m3*cos(th[1]))/100 - (981*Lg3*m3*sin(th[1] + th[2]))/50 - (981*L1*m3*cos(th[0]))/100 - (981*Lg2*m2*sin(th[1]))/100 + (981*Lg2*m2*cos(th[1]))/100,
-            -(981*m3*(Lg3*cos(th[1] + th[2]) + L2*sin(th[1])))/100 - (981*Lg3*m3*cos(th[1] + th[2]))/100;
+        G << (981*L1*sin(th[0])*(m2 + m3))/100 -(981*L1*m2*cos(th[0]))/100 + 0,
+            -(981*L1*m3*cos(th[0]))/100 + (981*L2*m3*cos(th[1]))/100 - (981*Lg3*m3*sin(th[1] + th[2]))/100 + (981*Lg2*m2*cos(th[1]))/100 - (981*Lg2*m2*sin(th[1]))/100 - (981*Lg3*m3*sin(th[1] + th[2]))/100,
+              0 - (981*m3*(Lg3*cos(th[1] + th[2]) + L2*sin(th[1])))/100 - (981*Lg3*m3*cos(th[1] + th[2]))/100;
 
         T = M*PD + C*joint_square + B*joint_multiple + G;
 
@@ -160,24 +160,24 @@ private:
         for (int i=0; i<12; i++){
             if (i<3) {
                 // output_torque[i] = PDController(Kp[i],   Kd[i],   target_pos[i], joint_pos[i], joint_vel[i]);
-                output_torque[i] =0;
+                output_torque[i] = 0;
             } else if (i<6) {
                 // output_torque[i] = PDController(Kp[i-3], Kd[i-3], target_pos[i], joint_pos[i], joint_vel[i]);
                 output_torque[i] = FeedforwardController(Kp[i-3], Kd[i-3], RF_target_pos, i-3);
             } else if (i<9) {
                 if (i == 6)
                     // output_torque[i] = -output_torque[i-3];
-                    output_torque[i] =0;
+                    output_torque[i] = 0;
                 else
                     // output_torque[i] =  output_torque[i-3];
-                    output_torque[i] =0;
+                    output_torque[i] = 0;
             } else {
                 if (i == 9)
                     // output_torque[i] = -output_torque[i-9];
-                    output_torque[i] =0;
+                    output_torque[i] = 0;
                 else
                     // output_torque[i] =  output_torque[i-9];
-                    output_torque[i] =0;
+                    output_torque[i] = 0;
             }
         }
 
