@@ -65,18 +65,11 @@ private:
     {
         Matrix3d Ic1, Ic2, Ic3, M, C, B;   // 3x3 행렬
 
-        Vector3d PD;  // 크기 3의 벡터
-        Vector3d joint_square;
-        Vector3d joint_multiple;
+        Vector3d PD, joint_square, joint_multiple, G, T;  // 3x1 벡터
 
-        Vector3d G, T;
-
-        double m1  = 2.739;
-        double m2  = 0.615, m3  = 0.343;
-        double L1  = 0.095, L2  = 0.250;
-        // double L3  = 0.250;
-        double Lg1 = 0.03106445;
-        double Lg2 = 0.06456779, Lg3 = 0.07702597;
+        double m1  = 2.739, m2  = 0.615, m3  = 0.343;
+        double L1  = 0.095, L2  = 0.250; // double L3  = 0.250;
+        double Lg1 = 0.03106445, Lg2 = 0.06456779, Lg3 = 0.07702597;
 
         double PD_term_1 = Kp*(th[0] - joint_pos[3]) + Kd*(0 - joint_vel[3]);
         double PD_term_2 = Kp*(th[1] - joint_pos[4]) + Kd*(0 - joint_vel[4]);
@@ -102,8 +95,8 @@ private:
             -L1*Lg3*m3*sin(th[1] + th[2])*sin(th[0]), L2*Lg3*m3*cos(th[2]), 0;
         joint_square << pow(joint_vel[3], 2), pow(joint_vel[4], 2), pow(joint_vel[5], 2);
 
-        B << 0, 0,  L1*Lg3*m3*cos(th[1] + th[2])*cos(th[0]),
-             0, 0, -L2*Lg3*m3*cos(th[2]),
+        B << 0, 0,  2*L1*Lg3*m3*cos(th[1] + th[2])*cos(th[0]),
+             0, 0, -2*L2*Lg3*m3*cos(th[2]),
              0, 0,  0;
         joint_multiple << joint_vel[3]*joint_vel[4], joint_vel[3]*joint_vel[5], joint_vel[4]*joint_vel[5];
 
