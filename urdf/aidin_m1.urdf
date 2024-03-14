@@ -87,11 +87,11 @@
 
   <link name="RF_scap">
     <inertial>
-      <mass value="6"/>
-      <origin xyz="0 0 -0.055" rpy="0 0 0"/>
+      <mass value="12.172"/>
+      <origin xyz="0 0 -0.060" rpy="0 0 0"/>
       <!-- <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/> -->
-      <inertia ixx="0.73716790" ixy="0.130721360" ixz="0" iyy="0.431162858" iyz="0" izz="0.477083568"/>
-      <!-- <inertia ixx="0.018386717" ixy="-0.000009042" ixz="-0.000004977" iyy="0.020489644" iyz="-0.000009312" izz="0.008551259"/> -->
+      <!-- <inertia ixx="0.73716790" ixy="0.130721360" ixz="0" iyy="0.431162858" iyz="0" izz="0.477083568"/> -->
+      <inertia ixx="0.117354510" ixy="0.0" ixz="-0.0" iyy="0.117354510" iyz="0.0" izz="0.039760560"/>
     </inertial>
 
     <collision>
@@ -106,7 +106,7 @@
       <geometry>
         <!-- <cylinder length="0.0760" radius="0.0730"/> -->
         <!-- <mesh filename="file://$(find aidin_m1)/meshes/actuator.stl"/>  ////fail,,//// -->
-        <mesh filename="/home/eunseop/dev_ws/src/aidin_m1/meshes/RF_scap_vis.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/eunseop/dev_ws/src/aidin_m1/meshes/RF_scap.stl" scale="0.001 0.001 0.001"/>
         <!-- <box size="0.140 0.140 0.230"/> -->
       </geometry>
       <material name="red"/>
@@ -118,11 +118,11 @@
 
   <link name="RF_hip">
     <inertial>
-      <mass value="0.644"/>
+      <mass value="1.688"/>
       <origin xyz="0.125 0 0" rpy="0 0 0"/>
       <!-- <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/> -->
       <!-- <inertia ixx="0.001541527" ixy="0.000007051" ixz="-0.000001356" iyy="0.001938779" iyz="0.000000659" izz="0.001547151"/> -->
-      <inertia ixx="0.000769544" ixy="-0.000269033" ixz="-0.000074609" iyy="0.007987559" iyz="-0.000017663" izz="0.008526217"/>
+      <inertia ixx="0.000703125" ixy="0.0" ixz="0.0" iyy="0.035507813" iyz="0.0" izz="0.035507813"/>
     </inertial>
 
     <collision>
@@ -135,7 +135,7 @@
     <visual name="RF_hip_vis_cover">
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="/home/eunseop/dev_ws/src/aidin_m1/meshes/RF_hip_vis.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/eunseop/dev_ws/src/aidin_m1/meshes/RF_hip.stl" scale="0.001 0.001 0.001"/>
         <!-- <box size="0.250 0.050 0.050"/> -->
       </geometry>
       <material name="green"/>
@@ -147,11 +147,11 @@
 
   <link name="RF_knee">
     <inertial>
-      <mass value="0.343"/>
+      <mass value="1.688"/>
       <origin xyz="0.125 0 0" rpy="0 0 0"/>
       <!-- <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/> -->
       <!-- <inertia ixx="0.001541527" ixy="0.000007051" ixz="-0.000001356" iyy="0.001938779" iyz="0.000000659" izz="0.001547151"/> -->
-      <inertia ixx="0.000092851" ixy="0.000016513" ixz="-0.000000007" iyy="0.004330285" iyz="0.000000016" izz="0.004412529"/>
+      <inertia ixx="0.000703125" ixy="0.0" ixz="0.0" iyy="0.035507813" iyz="0.0" izz="0.035507813"/>
     </inertial>
 
     <collision>
@@ -164,7 +164,7 @@
     <visual name="RF_knee_vis_cover">
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="/home/eunseop/dev_ws/src/aidin_m1/meshes/RF_knee_vis.stl" scale="0.001 0.001 0.001"/>
+        <mesh filename="/home/eunseop/dev_ws/src/aidin_m1/meshes/RF_knee.stl" scale="0.001 0.001 0.001"/>
         <!-- <box size="0.250 0.050 0.050"/> -->
       </geometry>
       <material name="blue"/>
