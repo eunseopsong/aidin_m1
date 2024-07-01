@@ -65,7 +65,7 @@ private:
     {
         Matrix3d Ic1, Ic2, Ic3, M, C, B;   // 3x3 행렬
 
-        Vector3d PD, joint_square, joint_multiple, G, T;  // 3x1 벡터
+        Vector3d PD, joint_square, joint_multiple, G, torque_desired;  // 3x1 벡터
 
         double m1  = 2.739, m2  = 0.615, m3  = 0.343;
         double L1  = 0.095, L2  = 0.250; // double L3  = 0.250;
@@ -104,14 +104,14 @@ private:
              (981*L2*m3*cos(th[1]))/100 - (981*Lg3*m3*sin(th[1] + th[2]))/50 - (981*L1*m3*cos(th[0]))/100 - (981*Lg2*m2*sin(th[1]))/100 + (981*Lg2*m2*cos(th[1]))/100,
             -(981*m3*(Lg3*cos(th[1] + th[2]) + L2*sin(th[1])))/100 - (981*Lg3*m3*cos(th[1] + th[2]))/100;
 
-        T = M*PD + C*joint_square + B*joint_multiple + G;
+        torque_desired = M*PD + C*joint_square + B*joint_multiple + G;
 
         if (case_ == 0){
-            return T[0];
+            return torque_desired[0];
         } else if (case_ == 1) {
-            return T[1];
+            return torque_desired[1];
         } else {
-            return T[2];
+            return torque_desired[2];
         }
     }
 
