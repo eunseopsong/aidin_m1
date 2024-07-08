@@ -206,11 +206,7 @@ double PDController(double Kp, double Kd, double target_pos, double current_pos,
     return PD_torque;
 }
 
-<<<<<<< HEAD
 //////////////// Feedforward Control Function ////////////////
-=======
-    //////////////// Feedforward Control Function ////////////////
->>>>>>> 6cb1692c6610027a943202e1b841b928206f2ca9
 
 double FeedforwardController(double Kp, double Kd, double th[3], int case_)
 {
@@ -227,14 +223,14 @@ double FeedforwardController(double Kp, double Kd, double th[3], int case_)
     double PD_term_3 = Kp*(th[2] - joint_pos[5]) + Kd*(0 - joint_vel[5]);
 
     Ic1 <<  0.018386717, -0.000009042, -0.000004977,
-               -0.000009042,  0.020489644, -0.000009312,
-               -0.000004977, -0.000009312,  0.008551259;
+            -0.000009042,  0.020489644, -0.000009312,
+            -0.000004977, -0.000009312,  0.008551259;
     Ic2 <<  0.000769544, -0.000269033, -0.000074609,
-               -0.000269033,  0.007987559, -0.000017663,
-               -0.000074609, -0.000017663,  0.008526217;
+           -0.000269033,  0.007987559, -0.000017663,
+           -0.000074609, -0.000017663,  0.008526217;
     Ic3 <<  0.000092851,  0.000016513, -0.000000007,
-                0.000016513,  0.004330285,  0.000000016,
-               -0.000000007,  0.000000016,  0.004412529;
+            0.000016513,  0.004330285,  0.000000016,
+           -0.000000007,  0.000000016,  0.004412529;
 
     M << Ic1(0,0)+Ic2(0,0)+Ic3(0,0)+ L1*pow(m2,2) + L1*pow(m3,2) + Lg1*pow(m1,2), L1*Lg3*m3*cos(th[0])*cos(th[1])*sin(th[2]) - Ic3(0,2) - L1*L2*m3*cos(th[0])*cos(th[1]) - L1*Lg2*m2*cos(th[0])*cos(th[1]) - Ic2(0,2) + L1*Lg3*m3*cos(th[0])*cos(th[2])*sin(th[1]), L1*Lg3*m3*cos(th[0])*cos(th[1])*sin(th[2]) - Ic3(0,2) - Ic2(0,2) + L1*Lg3*m3*cos(th[0])*cos(th[2])*sin(th[1]),
          L1*Lg3*m3*cos(th[0])*cos(th[1])*sin(th[2]) - Ic3(2,0) - L1*L2*m3*cos(th[0])*cos(th[1]) - L1*Lg2*m2*cos(th[0])*cos(th[1]) - Ic2(2,0) + L1*Lg3*m3*cos(th[0])*cos(th[2])*sin(th[1]), m3*pow(L2,2) - 2*m3*sin(th[2])*L2*Lg3 + m2*pow(Lg2,2) + m3*pow(Lg3,2) + Ic2(2,2) + Ic3(2,2), m3*pow(Lg3,2) - L2*m3*sin(th[2])*Lg3 + Ic2(2,2) + Ic3(2,2),
