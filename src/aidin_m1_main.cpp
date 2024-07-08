@@ -118,12 +118,12 @@ private:
             else if (i<6) // RF joint
             {
                 // output_torque[i] = PDController(Kp[i-3], Kd[i-3], target_pos[i], joint_pos[i], joint_vel[i]);
-                output_torque[i] = FeedforwardController(Kp[i-3], Kd[i-3], RF_target_pos, i-3);
+                output_torque[i] = FeedforwardController(Kp[i-3], Kd[i-3], RF_target_pos, i-3, 3);
             }
             else if (i<9) // LB joint
             {
-                // output_torque[i] = FeedforwardController(Kp[i-6], Kd[i-6], LB_target_pos, i-6); // this is not work. why??
-                output_torque[i] = output_torque[i-3];
+                output_torque[i] = FeedforwardController(Kp[i-6], Kd[i-6], LB_target_pos, i-6, 6); // this is not work. why??
+                // output_torque[i] = output_torque[i-3];
             }
             else // RB joint
             {
