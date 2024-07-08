@@ -59,62 +59,6 @@ public:
     }
 
 private:
-    //////////////// Feedforward Control Function ////////////////
-
-    double FeedforwardController(double Kp, double Kd, double th[3], int case_)
-    {
-        Matrix3d Ic1, Ic2, Ic3, M, C, B;   // 3x3 행렬
-
-        Vector3d PD, joint_square, joint_multiple, G, T;  // 3x1 벡터
-
-        double m1  = 2.739, m2  = 0.615, m3  = 0.343;
-        double L1  = 0.095, L2  = 0.250; // double L3  = 0.250;
-        double Lg1 = 0.03106445, Lg2 = 0.06456779, Lg3 = 0.07702597;
-
-        double PD_term_1 = Kp*(th[0] - joint_pos[3]) + Kd*(0 - joint_vel[3]);
-        double PD_term_2 = Kp*(th[1] - joint_pos[4]) + Kd*(0 - joint_vel[4]);
-        double PD_term_3 = Kp*(th[2] - joint_pos[5]) + Kd*(0 - joint_vel[5]);
-
-        Ic1 <<  0.018386717, -0.000009042, -0.000004977,
-               -0.000009042,  0.020489644, -0.000009312,
-               -0.000004977, -0.000009312,  0.008551259;
-        Ic2 <<  0.000769544, -0.000269033, -0.000074609,
-               -0.000269033,  0.007987559, -0.000017663,
-               -0.000074609, -0.000017663,  0.008526217;
-        Ic3 <<  0.000092851,  0.000016513, -0.000000007,
-                0.000016513,  0.004330285,  0.000000016,
-               -0.000000007,  0.000000016,  0.004412529;
-
-        M << Ic1(0,0)+Ic2(0,0)+Ic3(0,0)+ L1*pow(m2,2) + L1*pow(m3,2) + Lg1*pow(m1,2), L1*Lg3*m3*cos(th[0])*cos(th[1])*sin(th[2]) - Ic3(0,2) - L1*L2*m3*cos(th[0])*cos(th[1]) - L1*Lg2*m2*cos(th[0])*cos(th[1]) - Ic2(0,2) + L1*Lg3*m3*cos(th[0])*cos(th[2])*sin(th[1]), L1*Lg3*m3*cos(th[0])*cos(th[1])*sin(th[2]) - Ic3(0,2) - Ic2(0,2) + L1*Lg3*m3*cos(th[0])*cos(th[2])*sin(th[1]),
-             L1*Lg3*m3*cos(th[0])*cos(th[1])*sin(th[2]) - Ic3(2,0) - L1*L2*m3*cos(th[0])*cos(th[1]) - L1*Lg2*m2*cos(th[0])*cos(th[1]) - Ic2(2,0) + L1*Lg3*m3*cos(th[0])*cos(th[2])*sin(th[1]), m3*pow(L2,2) - 2*m3*sin(th[2])*L2*Lg3 + m2*pow(Lg2,2) + m3*pow(Lg3,2) + Ic2(2,2) + Ic3(2,2), m3*pow(Lg3,2) - L2*m3*sin(th[2])*Lg3 + Ic2(2,2) + Ic3(2,2),
-             L1*Lg3*m3*cos(th[0])*cos(th[1])*sin(th[2]) - Ic3(2,0) + L1*Lg3*m3*cos(th[0])*cos(th[2])*sin(th[1]), m3*pow(Lg3,2) - L2*m3*sin(th[2])*Lg3 + Ic3(2,2), m3*pow(Lg3,2) + Ic3(2,2);
-        PD << PD_term_1, PD_term_2, PD_term_3;
-
-        C << 0, L1*cos(th[0])*(L2*m3*sin(th[1]) + Lg2*m2*sin(th[1]) + Lg3*m3*cos(th[1] + th[2])), L1*Lg3*m3*cos(th[1] + th[2])*cos(th[0]),
-             L1*sin(th[0])*(L2*m3*cos(th[1]) - Lg3*m3*sin(th[1] + th[2]) + Lg2*m2*cos(th[1])), 0, -L2*Lg3*m3*cos(th[2]),
-            -L1*Lg3*m3*sin(th[1] + th[2])*sin(th[0]), L2*Lg3*m3*cos(th[2]), 0;
-        joint_square << pow(joint_vel[3], 2), pow(joint_vel[4], 2), pow(joint_vel[5], 2);
-
-        B << 0, 0,  2*L1*Lg3*m3*cos(th[1] + th[2])*cos(th[0]),
-             0, 0, -2*L2*Lg3*m3*cos(th[2]),
-             0, 0,  0;
-        joint_multiple << joint_vel[3]*joint_vel[4], joint_vel[3]*joint_vel[5], joint_vel[4]*joint_vel[5];
-
-        G << (981*sin(th[0])*(L1*m2 + L1*m3 + Lg1*m1))/100 - (981*cos(th[0])*(L1*m2 + Lg1*m1))/100,
-             (981*L2*m3*cos(th[1]))/100 - (981*Lg3*m3*sin(th[1] + th[2]))/50 - (981*L1*m3*cos(th[0]))/100 - (981*Lg2*m2*sin(th[1]))/100 + (981*Lg2*m2*cos(th[1]))/100,
-            -(981*m3*(Lg3*cos(th[1] + th[2]) + L2*sin(th[1])))/100 - (981*Lg3*m3*cos(th[1] + th[2]))/100;
-
-        T = M*PD + C*joint_square + B*joint_multiple + G;
-
-        if (case_ == 0){
-            return T[0];
-        } else if (case_ == 1) {
-            return T[1];
-        } else {
-            return T[2];
-        }
-    }
-
     /////////////// timer_에 의해 호출되어 Publish를 실행하는 함수 ///////////////
 
     void CalculateAndPublishTorque()

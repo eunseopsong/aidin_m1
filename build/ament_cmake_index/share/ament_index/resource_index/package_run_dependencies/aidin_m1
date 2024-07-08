@@ -1,0 +1,1 @@
+rclcpp;rclcpp_action;msg_srv_action_interface_example;std_msgs;gazebo_ros;ament_lint_auto;ament_lint_common
