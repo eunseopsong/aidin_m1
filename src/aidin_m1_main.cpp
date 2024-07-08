@@ -128,7 +128,7 @@ private:
             }
         }
 
-        /////////////// Publish Desired Pose ///////////////
+        ///////////////// Publish Desired Pose /////////////////
         std_msgs::msg::Float32MultiArray targetpos_msg;
         targetpos_msg.data.clear();
 
