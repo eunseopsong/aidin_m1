@@ -216,7 +216,7 @@ double FeedforwardController(double Kp, double Kd, double th[3], int case_)
 {
     Matrix3d Ic1, Ic2, Ic3, M, C, B;   // 3x3 행렬
 
-    Vector3d PD, joint_square, joint_multiple, G, torque_desired;  // 3x1 벡터
+    Vector3d PD, joint_square, joint_multiple, G, Torque_desired;  // 3x1 벡터
 
     double m1  = 2.739, m2  = 0.615, m3  = 0.343;
     double L1  = 0.095, L2  = 0.250; // double L3  = 0.250;
@@ -237,13 +237,8 @@ double FeedforwardController(double Kp, double Kd, double th[3], int case_)
                -0.000000007,  0.000000016,  0.004412529;
 
     M << Ic1(0,0)+Ic2(0,0)+Ic3(0,0)+ L1*pow(m2,2) + L1*pow(m3,2) + Lg1*pow(m1,2), L1*Lg3*m3*cos(th[0])*cos(th[1])*sin(th[2]) - Ic3(0,2) - L1*L2*m3*cos(th[0])*cos(th[1]) - L1*Lg2*m2*cos(th[0])*cos(th[1]) - Ic2(0,2) + L1*Lg3*m3*cos(th[0])*cos(th[2])*sin(th[1]), L1*Lg3*m3*cos(th[0])*cos(th[1])*sin(th[2]) - Ic3(0,2) - Ic2(0,2) + L1*Lg3*m3*cos(th[0])*cos(th[2])*sin(th[1]),
-<<<<<<< HEAD
-             L1*Lg3*m3*cos(th[0])*cos(th[1])*sin(th[2]) - Ic3(2,0) - L1*L2*m3*cos(th[0])*cos(th[1]) - L1*Lg2*m2*cos(th[0])*cos(th[1]) - Ic2(2,0) + L1*Lg3*m3*cos(th[0])*cos(th[2])*sin(th[1]), m3*pow(L2,2) - 2*m3*sin(th[2])*L2*Lg3 + m2*pow(Lg2,2) + m3*pow(Lg3,2) + Ic2(2,2) + Ic3(2,2), m3*pow(Lg3,2) - L2*m3*sin(th[2])*Lg3 + Ic2(2,2) + Ic3(2,2),
-             L1*Lg3*m3*cos(th[0])*cos(th[1])*sin(th[2]) - Ic3(2,0) + L1*Lg3*m3*cos(th[0])*cos(th[2])*sin(th[1]), m3*pow(Lg3,2) - L2*m3*sin(th[2])*Lg3 + Ic3(2,2), m3*pow(Lg3,2) + Ic3(2,2);
-=======
          L1*Lg3*m3*cos(th[0])*cos(th[1])*sin(th[2]) - Ic3(2,0) - L1*L2*m3*cos(th[0])*cos(th[1]) - L1*Lg2*m2*cos(th[0])*cos(th[1]) - Ic2(2,0) + L1*Lg3*m3*cos(th[0])*cos(th[2])*sin(th[1]), m3*pow(L2,2) - 2*m3*sin(th[2])*L2*Lg3 + m2*pow(Lg2,2) + m3*pow(Lg3,2) + Ic2(2,2) + Ic3(2,2), m3*pow(Lg3,2) - L2*m3*sin(th[2])*Lg3 + Ic2(2,2) + Ic3(2,2),
          L1*Lg3*m3*cos(th[0])*cos(th[1])*sin(th[2]) - Ic3(2,0) + L1*Lg3*m3*cos(th[0])*cos(th[2])*sin(th[1]), m3*pow(Lg3,2) - L2*m3*sin(th[2])*Lg3 + Ic3(2,2), m3*pow(Lg3,2) + Ic3(2,2);
->>>>>>> 6cb1692c6610027a943202e1b841b928206f2ca9
     PD << PD_term_1, PD_term_2, PD_term_3;
 
     C << 0, L1*cos(th[0])*(L2*m3*sin(th[1]) + Lg2*m2*sin(th[1]) + Lg3*m3*cos(th[1] + th[2])), L1*Lg3*m3*cos(th[1] + th[2])*cos(th[0]),
@@ -260,13 +255,13 @@ double FeedforwardController(double Kp, double Kd, double th[3], int case_)
          (981*L2*m3*cos(th[1]))/100 - (981*Lg3*m3*sin(th[1] + th[2]))/50 - (981*L1*m3*cos(th[0]))/100 - (981*Lg2*m2*sin(th[1]))/100 + (981*Lg2*m2*cos(th[1]))/100,
         -(981*m3*(Lg3*cos(th[1] + th[2]) + L2*sin(th[1])))/100 - (981*Lg3*m3*cos(th[1] + th[2]))/100;
 
-    torque_desired = M*PD + C*joint_square + B*joint_multiple + G;
+    Torque_desired = M*PD + C*joint_square + B*joint_multiple + G;
 
     if (case_ == 0){
-        return torque_desired[0];
+        return Torque_desired[0];
     } else if (case_ == 1) {
-        return torque_desired[1];
+        return Torque_desired[1];
     } else {
-        return torque_desired[2];
+        return Torque_desired[2];
     }
 }
