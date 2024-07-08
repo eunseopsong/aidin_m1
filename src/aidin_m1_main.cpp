@@ -83,9 +83,14 @@ private:
         double target_pos[12];
         double LF_target_pos[3];
         double RF_target_pos[3];
+        double LB_target_pos[3];
+        double RB_target_pos[3];
 
         InverseKinematics3D(yVal, zVal, xVal, yVal, 250, 250, LF_target_pos);
         InverseKinematics3D(yVal, zVal_counter, xVal_counter, yVal, 250, 250, RF_target_pos);
+        InverseKinematics3D(yVal, zVal_counter, xVal_counter, yVal, 250, 250, LB_target_pos);
+        InverseKinematics3D(yVal, zVal, xVal, yVal, 250, 250, RB_target_pos);
+
         for (int i=1; i<6; i++) {
             if (i<3)
                 target_pos[i] = LF_target_pos[i];
@@ -93,32 +98,36 @@ private:
                 target_pos[i] = RF_target_pos[i-3];
         }
 
-        target_pos[6] = -target_pos[3];
-        target_pos[7] =  target_pos[4];
-        target_pos[8] =  target_pos[5];
+        target_pos[6] = LB_target_pos[0];
+        target_pos[7] = LB_target_pos[1];
+        target_pos[8] = LB_target_pos[2];
 
-        target_pos[9]  = -target_pos[0];
-        target_pos[10] =  target_pos[1];
-        target_pos[11] =  target_pos[2];
+        target_pos[9]  = RB_target_pos[0];
+        target_pos[10] = RB_target_pos[1];
+        target_pos[11] = RB_target_pos[2];
 
         // Calculate the output_torque using PD control
         double output_torque[12];
 
         for (int i=0; i<12; i++){
-            if (i<3) {
+            if (i<3) // LF joint
+            {
                 // output_torque[i] = PDController(Kp[i],   Kd[i],   target_pos[i], joint_pos[i], joint_vel[i]);
                 output_torque[i] = 0;
-            } else if (i<6) {
+            }
+            else if (i<6) // RF joint
+            {
                 // output_torque[i] = PDController(Kp[i-3], Kd[i-3], target_pos[i], joint_pos[i], joint_vel[i]);
                 output_torque[i] = FeedforwardController(Kp[i-3], Kd[i-3], RF_target_pos, i-3);
-            } else if (i<9) {
-                if (i == 6)
-                    // output_torque[i] = -output_torque[i-3];
-                    output_torque[i] = 0;
-                else
-                    // output_torque[i] =  output_torque[i-3];
-                    output_torque[i] = 0;
-            } else {
+            }
+            else if (i<9) // LB joint
+            {
+                // output_torque[i] = FeedforwardController(Kp[i-6], Kd[i-6], LB_target_pos, i-6); // this is not work. why??
+                output_torque[i] = output_torque[i-3];
+            }
+            else // RB joint
+            {
+                // output_torque[i] = FeedforwardController(Kp[i-9], Kd[i-9], RB_target_pos, i-9);
                 if (i == 9)
                     // output_torque[i] = -output_torque[i-9];
                     output_torque[i] = 0;
