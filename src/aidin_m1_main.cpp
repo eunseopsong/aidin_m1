@@ -106,14 +106,14 @@ private:
         target_pos[10] = RB_target_pos[1];
         target_pos[11] = RB_target_pos[2];
 
-        // Calculate the output_torque using PD control
+        // Calculate the output_torque using PD or Feedforward control
         double output_torque[12];
 
         for (int i=0; i<12; i++){
-            if (i<3) // LF joint
+            if (i<3)      // LF joint
             {
                 // output_torque[i] = PDController(Kp[i],   Kd[i],   target_pos[i], joint_pos[i], joint_vel[i]);
-                output_torque[i] = 0;
+                output_torque[i] = FeedforwardController(Kp[i], Kd[i], LF_target_pos, i, 0);
             }
             else if (i<6) // RF joint
             {
@@ -122,18 +122,11 @@ private:
             }
             else if (i<9) // LB joint
             {
-                output_torque[i] = FeedforwardController(Kp[i-6], Kd[i-6], LB_target_pos, i-6, 6); // this is not work. why??
-                // output_torque[i] = output_torque[i-3];
+                output_torque[i] = FeedforwardController(Kp[i-6], Kd[i-6], LB_target_pos, i-6, 6);
             }
-            else // RB joint
+            else          // RB joint
             {
-                // output_torque[i] = FeedforwardController(Kp[i-9], Kd[i-9], RB_target_pos, i-9);
-                if (i == 9)
-                    // output_torque[i] = -output_torque[i-9];
-                    output_torque[i] = 0;
-                else
-                    // output_torque[i] =  output_torque[i-9];
-                    output_torque[i] = 0;
+                output_torque[i] = FeedforwardController(Kp[i-9], Kd[i-9], RB_target_pos, i-9, 9);
             }
         }
 

@@ -241,10 +241,12 @@
 
   <link name="LF_scap">
     <inertial>
-      <mass value="6"/>
-      <origin xyz="0 0 -0.055" rpy="0 0 0"/>
-      <inertia ixx="0.73716790" ixy="0.130721360" ixz="0" iyy="0.431162858" iyz="0" izz="0.477083568"/>
-      <!-- <inertia ixx="0.017981419" ixy="0.000007516" ixz="-0.000007455" iyy="0.020085287" iyz="-0.000006833" izz="0.008520316"/> -->
+      <mass value="2.739"/>
+      <origin xyz="-0.002 0 -0.031" rpy="0 0 0"/>
+      <!-- <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/> -->
+      <!-- <inertia ixx="0.73716790" ixy="0.130721360" ixz="0" iyy="0.431162858" iyz="0" izz="0.477083568"/> -->
+      <inertia ixx="0.018386717" ixy="-0.000009042" ixz="-0.000004977" iyy="0.020489644" iyz="-0.000009312" izz="0.008551259"/>
+      <!-- <inertia ixx="0.73716790" ixy="0.130721360" ixz="0" iyy="0.431162858" iyz="0" izz="0.477083568"/> -->
     </inertial>
 
     <collision>
@@ -269,10 +271,11 @@
 
   <link name="LF_hip">
     <inertial>
-      <mass value="0.644"/>
-      <origin xyz="0.125 0 0" rpy="0 0 0"/>
+      <mass value="0.615"/>
+      <origin xyz="0.063 0.014 0.002" rpy="0 0 0"/>
+      <!-- <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/> -->
       <!-- <inertia ixx="0.001541527" ixy="0.000007051" ixz="-0.000001356" iyy="0.001938779" iyz="0.000000659" izz="0.001547151"/> -->
-      <inertia ixx="0.000789893" ixy="-0.000285415" ixz="0.000097100" iyy="0.008401738" iyz="0.000021825" izz="0.008953577"/>
+      <inertia ixx="0.000769544" ixy="-0.000269033" ixz="-0.000074609" iyy="0.007987559" iyz="-0.000017663" izz="0.008526217"/>
     </inertial>
 
     <collision>
@@ -298,7 +301,8 @@
   <link name="LF_knee">
     <inertial>
       <mass value="0.343"/>
-      <origin xyz="0.125 0 0" rpy="0 0 0"/>
+      <origin xyz="0.077 0.002 0" rpy="0 0 0"/>
+      <!-- <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/> -->
       <!-- <inertia ixx="0.001541527" ixy="0.000007051" ixz="-0.000001356" iyy="0.001938779" iyz="0.000000659" izz="0.001547151"/> -->
       <inertia ixx="0.000092851" ixy="0.000016513" ixz="-0.000000007" iyy="0.004330285" iyz="0.000000016" izz="0.004412529"/>
     </inertial>
@@ -541,10 +545,12 @@
 
   <link name="RB_scap">
     <inertial>
-      <mass value="6"/>
-      <origin xyz="0 0 0.055" rpy="0 0 0"/>
-      <inertia ixx="0.73716790" ixy="0.130721360" ixz="0" iyy="0.431162858" iyz="0" izz="0.477083568"/>
-      <!-- <inertia ixx="0.018386717" ixy="-0.000009042" ixz="-0.000004977" iyy="0.020489644" iyz="-0.000009312" izz="0.008551259"/> -->
+      <mass value="2.739"/>
+      <origin xyz="-0.002 0 -0.031" rpy="0 0 0"/>
+      <!-- <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/> -->
+      <!-- <inertia ixx="0.73716790" ixy="0.130721360" ixz="0" iyy="0.431162858" iyz="0" izz="0.477083568"/> -->
+      <inertia ixx="0.018386717" ixy="-0.000009042" ixz="-0.000004977" iyy="0.020489644" iyz="-0.000009312" izz="0.008551259"/>
+      <!-- <inertia ixx="0.73716790" ixy="0.130721360" ixz="0" iyy="0.431162858" iyz="0" izz="0.477083568"/> -->
     </inertial>
 
     <collision>
@@ -569,8 +575,9 @@
 
   <link name="RB_hip">
     <inertial>
-      <mass value="0.644"/>
-      <origin xyz="0.125 0 0" rpy="0 0 0"/>
+      <mass value="0.615"/>
+      <origin xyz="0.063 0.014 0.002" rpy="0 0 0"/>
+      <!-- <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/> -->
       <!-- <inertia ixx="0.001541527" ixy="0.000007051" ixz="-0.000001356" iyy="0.001938779" iyz="0.000000659" izz="0.001547151"/> -->
       <inertia ixx="0.000769544" ixy="-0.000269033" ixz="-0.000074609" iyy="0.007987559" iyz="-0.000017663" izz="0.008526217"/>
     </inertial>
@@ -598,7 +605,8 @@
   <link name="RB_knee">
     <inertial>
       <mass value="0.343"/>
-      <origin xyz="0.125 0 0" rpy="0 0 0"/>
+      <origin xyz="0.077 0.002 0" rpy="0 0 0"/>
+      <!-- <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/> -->
       <!-- <inertia ixx="0.001541527" ixy="0.000007051" ixz="-0.000001356" iyy="0.001938779" iyz="0.000000659" izz="0.001547151"/> -->
       <inertia ixx="0.000092851" ixy="0.000016513" ixz="-0.000000007" iyy="0.004330285" iyz="0.000000016" izz="0.004412529"/>
     </inertial>
