@@ -77,62 +77,62 @@ aidin_m1_main_OBJECTS = \
 # External object files for target aidin_m1_main
 aidin_m1_main_EXTERNAL_OBJECTS =
 
-aidin_m1_main: CMakeFiles/aidin_m1_main.dir/src/aidin_m1_main.cpp.o
-aidin_m1_main: CMakeFiles/aidin_m1_main.dir/build.make
-aidin_m1_main: /opt/ros/galactic/lib/librclcpp.so
-aidin_m1_main: /opt/ros/galactic/lib/libament_index_cpp.so
-aidin_m1_main: /opt/ros/galactic/lib/liblibstatistics_collector.so
-aidin_m1_main: /opt/ros/galactic/lib/liblibstatistics_collector_test_msgs__rosidl_typesupport_introspection_c.so
-aidin_m1_main: /opt/ros/galactic/lib/liblibstatistics_collector_test_msgs__rosidl_generator_c.so
-aidin_m1_main: /opt/ros/galactic/lib/liblibstatistics_collector_test_msgs__rosidl_typesupport_c.so
-aidin_m1_main: /opt/ros/galactic/lib/liblibstatistics_collector_test_msgs__rosidl_typesupport_introspection_cpp.so
-aidin_m1_main: /opt/ros/galactic/lib/liblibstatistics_collector_test_msgs__rosidl_typesupport_cpp.so
-aidin_m1_main: /opt/ros/galactic/lib/libstd_msgs__rosidl_typesupport_introspection_c.so
-aidin_m1_main: /opt/ros/galactic/lib/libstd_msgs__rosidl_generator_c.so
-aidin_m1_main: /opt/ros/galactic/lib/libstd_msgs__rosidl_typesupport_c.so
-aidin_m1_main: /opt/ros/galactic/lib/libstd_msgs__rosidl_typesupport_introspection_cpp.so
-aidin_m1_main: /opt/ros/galactic/lib/libstd_msgs__rosidl_typesupport_cpp.so
-aidin_m1_main: /opt/ros/galactic/lib/librcl.so
-aidin_m1_main: /opt/ros/galactic/lib/librcl_interfaces__rosidl_typesupport_introspection_c.so
-aidin_m1_main: /opt/ros/galactic/lib/librcl_interfaces__rosidl_generator_c.so
-aidin_m1_main: /opt/ros/galactic/lib/librcl_interfaces__rosidl_typesupport_c.so
-aidin_m1_main: /opt/ros/galactic/lib/librcl_interfaces__rosidl_typesupport_introspection_cpp.so
-aidin_m1_main: /opt/ros/galactic/lib/librcl_interfaces__rosidl_typesupport_cpp.so
-aidin_m1_main: /opt/ros/galactic/lib/librmw_implementation.so
-aidin_m1_main: /opt/ros/galactic/lib/librcl_logging_spdlog.so
-aidin_m1_main: /opt/ros/galactic/lib/librcl_logging_interface.so
-aidin_m1_main: /opt/ros/galactic/lib/librcl_yaml_param_parser.so
-aidin_m1_main: /opt/ros/galactic/lib/librmw.so
-aidin_m1_main: /opt/ros/galactic/lib/libyaml.so
-aidin_m1_main: /opt/ros/galactic/lib/librosgraph_msgs__rosidl_typesupport_introspection_c.so
-aidin_m1_main: /opt/ros/galactic/lib/librosgraph_msgs__rosidl_generator_c.so
-aidin_m1_main: /opt/ros/galactic/lib/librosgraph_msgs__rosidl_typesupport_c.so
-aidin_m1_main: /opt/ros/galactic/lib/librosgraph_msgs__rosidl_typesupport_introspection_cpp.so
-aidin_m1_main: /opt/ros/galactic/lib/librosgraph_msgs__rosidl_typesupport_cpp.so
-aidin_m1_main: /opt/ros/galactic/lib/libstatistics_msgs__rosidl_typesupport_introspection_c.so
-aidin_m1_main: /opt/ros/galactic/lib/libstatistics_msgs__rosidl_generator_c.so
-aidin_m1_main: /opt/ros/galactic/lib/libstatistics_msgs__rosidl_typesupport_c.so
-aidin_m1_main: /opt/ros/galactic/lib/libstatistics_msgs__rosidl_typesupport_introspection_cpp.so
-aidin_m1_main: /opt/ros/galactic/lib/libstatistics_msgs__rosidl_typesupport_cpp.so
-aidin_m1_main: /opt/ros/galactic/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_c.so
-aidin_m1_main: /opt/ros/galactic/lib/libbuiltin_interfaces__rosidl_generator_c.so
-aidin_m1_main: /opt/ros/galactic/lib/libbuiltin_interfaces__rosidl_typesupport_c.so
-aidin_m1_main: /opt/ros/galactic/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_cpp.so
-aidin_m1_main: /opt/ros/galactic/lib/librosidl_typesupport_introspection_cpp.so
-aidin_m1_main: /opt/ros/galactic/lib/librosidl_typesupport_introspection_c.so
-aidin_m1_main: /opt/ros/galactic/lib/libbuiltin_interfaces__rosidl_typesupport_cpp.so
-aidin_m1_main: /opt/ros/galactic/lib/librosidl_typesupport_cpp.so
-aidin_m1_main: /opt/ros/galactic/lib/librosidl_typesupport_c.so
-aidin_m1_main: /opt/ros/galactic/lib/librcpputils.so
-aidin_m1_main: /opt/ros/galactic/lib/librosidl_runtime_c.so
-aidin_m1_main: /opt/ros/galactic/lib/librcutils.so
-aidin_m1_main: /opt/ros/galactic/lib/libtracetools.so
-aidin_m1_main: CMakeFiles/aidin_m1_main.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/eunseop/dev_ws/src/aidin_m1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable aidin_m1_main"
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: CMakeFiles/aidin_m1_main.dir/src/aidin_m1_main.cpp.o
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: CMakeFiles/aidin_m1_main.dir/build.make
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/librclcpp.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/libament_index_cpp.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/liblibstatistics_collector.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/liblibstatistics_collector_test_msgs__rosidl_typesupport_introspection_c.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/liblibstatistics_collector_test_msgs__rosidl_generator_c.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/liblibstatistics_collector_test_msgs__rosidl_typesupport_c.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/liblibstatistics_collector_test_msgs__rosidl_typesupport_introspection_cpp.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/liblibstatistics_collector_test_msgs__rosidl_typesupport_cpp.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/libstd_msgs__rosidl_typesupport_introspection_c.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/libstd_msgs__rosidl_generator_c.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/libstd_msgs__rosidl_typesupport_c.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/libstd_msgs__rosidl_typesupport_introspection_cpp.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/libstd_msgs__rosidl_typesupport_cpp.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/librcl.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/librcl_interfaces__rosidl_typesupport_introspection_c.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/librcl_interfaces__rosidl_generator_c.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/librcl_interfaces__rosidl_typesupport_c.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/librcl_interfaces__rosidl_typesupport_introspection_cpp.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/librcl_interfaces__rosidl_typesupport_cpp.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/librmw_implementation.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/librcl_logging_spdlog.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/librcl_logging_interface.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/librcl_yaml_param_parser.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/librmw.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/libyaml.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/librosgraph_msgs__rosidl_typesupport_introspection_c.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/librosgraph_msgs__rosidl_generator_c.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/librosgraph_msgs__rosidl_typesupport_c.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/librosgraph_msgs__rosidl_typesupport_introspection_cpp.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/librosgraph_msgs__rosidl_typesupport_cpp.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/libstatistics_msgs__rosidl_typesupport_introspection_c.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/libstatistics_msgs__rosidl_generator_c.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/libstatistics_msgs__rosidl_typesupport_c.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/libstatistics_msgs__rosidl_typesupport_introspection_cpp.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/libstatistics_msgs__rosidl_typesupport_cpp.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_c.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/libbuiltin_interfaces__rosidl_generator_c.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/libbuiltin_interfaces__rosidl_typesupport_c.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_cpp.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/librosidl_typesupport_introspection_cpp.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/librosidl_typesupport_introspection_c.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/libbuiltin_interfaces__rosidl_typesupport_cpp.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/librosidl_typesupport_cpp.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/librosidl_typesupport_c.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/librcpputils.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/librosidl_runtime_c.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/librcutils.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: /opt/ros/galactic/lib/libtracetools.so
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: CMakeFiles/aidin_m1_main.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/eunseop/dev_ws/src/aidin_m1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable ======aidin_m1_main"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/aidin_m1_main.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-CMakeFiles/aidin_m1_main.dir/build: aidin_m1_main
+CMakeFiles/aidin_m1_main.dir/build: $(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main
 
 .PHONY : CMakeFiles/aidin_m1_main.dir/build
 

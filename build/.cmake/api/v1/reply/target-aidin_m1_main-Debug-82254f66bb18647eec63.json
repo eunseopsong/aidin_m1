@@ -2,7 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "aidin_m1_main"
+			"path" : "======aidin_m1_main"
 		}
 	],
 	"backtrace" : 1,
@@ -514,7 +514,7 @@
 		"language" : "CXX"
 	},
 	"name" : "aidin_m1_main",
-	"nameOnDisk" : "aidin_m1_main",
+	"nameOnDisk" : "======aidin_m1_main",
 	"paths" : 
 	{
 		"build" : ".",

@@ -106,7 +106,8 @@ private:
         // Calculate the output_torque using PD or Feedforward control
         double output_torque[12];
 
-        for (int i=0; i<12; i++){
+        for (int i=0; i<12; i++)
+        {   double torque;
             if (i<3)      // LF joint
             {
                 // output_torque[i] = PDController(Kp[i],   Kd[i],   target_pos[i], joint_pos[i], joint_vel[i]);

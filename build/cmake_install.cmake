@@ -46,21 +46,21 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/aidin_m1/aidin_m1_main" AND
-     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/aidin_m1/aidin_m1_main")
+  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/aidin_m1/======aidin_m1_main" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/aidin_m1/======aidin_m1_main")
     file(RPATH_CHECK
-         FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/aidin_m1/aidin_m1_main"
+         FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/aidin_m1/======aidin_m1_main"
          RPATH "")
   endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/aidin_m1" TYPE EXECUTABLE FILES "/home/eunseop/dev_ws/src/aidin_m1/build/aidin_m1_main")
-  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/aidin_m1/aidin_m1_main" AND
-     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/aidin_m1/aidin_m1_main")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/aidin_m1" TYPE EXECUTABLE FILES "/home/eunseop/dev_ws/src/aidin_m1/build/======aidin_m1_main")
+  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/aidin_m1/======aidin_m1_main" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/aidin_m1/======aidin_m1_main")
     file(RPATH_CHANGE
-         FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/aidin_m1/aidin_m1_main"
+         FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/aidin_m1/======aidin_m1_main"
          OLD_RPATH "/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/galactic/lib:"
          NEW_RPATH "")
     if(CMAKE_INSTALL_DO_STRIP)
-      execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/aidin_m1/aidin_m1_main")
+      execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/aidin_m1/======aidin_m1_main")
     endif()
   endif()
 endif()

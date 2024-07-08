@@ -4,8 +4,10 @@ from ament_index_python import get_package_prefix
 from ament_index_python.packages import get_package_share_directory
 
 from launch import LaunchDescription
+from launch.actions import DeclareLaunchArgument, ExecuteProcess, IncludeLaunchDescription
 from launch.actions import ExecuteProcess, IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch.substitutions import Command, LaunchConfiguration
 
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
@@ -26,6 +28,9 @@ def generate_launch_description():
     pkg_path = get_package_share_directory(pkg_name)
     pkg_gazebo_ros = FindPackageShare(package='gazebo_ros').find('gazebo_ros')
     urdf = os.path.join(pkg_path, "urdf", robot_file_name)
+
+    aidin_m1_description_share = FindPackageShare(package='aidin_m1').find('aidin_m1')
+    default_model_path = os.path.join(aidin_m1_description_share, 'urdf/aidin_m1.xacro')
 
     # Start Gazebo server
     start_gazebo_server = IncludeLaunchDescription(
@@ -58,6 +63,8 @@ def generate_launch_description():
 
     return LaunchDescription(
         [
+            DeclareLaunchArgument(name='model', default_value=default_model_path,
+                                    description='~/dev_ws/src/aidin_m1/meshes'),
             start_gazebo_server,
             start_gazebo_client,
             spawn_entity,

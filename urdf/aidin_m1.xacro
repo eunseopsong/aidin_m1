@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<robot name="aidin_m1">
+<robot name="aidin_m1" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
   <material name="black">
     <color rgba="0.0 0.0 0.0 1.0"/>
@@ -74,7 +74,8 @@
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
         <!-- <box size="0.200 0.370 0.216"/> -->
-        <mesh filename="/home/eunseop/dev_ws/src/aidin_m1/meshes/Body_vis.stl" scale="0.001 0.001 0.001"/>
+        <!-- <mesh filename="/home/eunseop/dev_ws/src/aidin_m1/meshes/Body_vis.stl" scale="0.001 0.001 0.001"/> -->
+        <mesh filename="package://aidin_m1/meshes/Body_vis.stl"/>
       </geometry>
       <material name="silver"/>
     </visual>
@@ -89,10 +90,8 @@
     <inertial>
       <mass value="2.739"/>
       <origin xyz="-0.002 0 -0.031" rpy="0 0 0"/>
-      <!-- <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/> -->
       <!-- <inertia ixx="0.73716790" ixy="0.130721360" ixz="0" iyy="0.431162858" iyz="0" izz="0.477083568"/> -->
       <inertia ixx="0.018386717" ixy="-0.000009042" ixz="-0.000004977" iyy="0.020489644" iyz="-0.000009312" izz="0.008551259"/>
-      <!-- <inertia ixx="0.73716790" ixy="0.130721360" ixz="0" iyy="0.431162858" iyz="0" izz="0.477083568"/> -->
     </inertial>
 
     <collision>
