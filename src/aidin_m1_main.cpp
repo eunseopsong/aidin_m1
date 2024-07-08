@@ -91,20 +91,17 @@ private:
         InverseKinematics3D(yVal, zVal_counter, xVal_counter, yVal, 250, 250, LB_target_pos);
         InverseKinematics3D(yVal, zVal, xVal, yVal, 250, 250, RB_target_pos);
 
-        for (int i=1; i<6; i++) {
+        for (int i=1; i<6; i++)
+        {
             if (i<3)
                 target_pos[i] = LF_target_pos[i];
-            else
+            else if (i<6)
                 target_pos[i] = RF_target_pos[i-3];
+            else if (i<9)
+                target_pos[i] = LB_target_pos[i-6];
+            else
+                target_pos[i] = RB_target_pos[i-9];
         }
-
-        target_pos[6] = LB_target_pos[0];
-        target_pos[7] = LB_target_pos[1];
-        target_pos[8] = LB_target_pos[2];
-
-        target_pos[9]  = RB_target_pos[0];
-        target_pos[10] = RB_target_pos[1];
-        target_pos[11] = RB_target_pos[2];
 
         // Calculate the output_torque using PD or Feedforward control
         double output_torque[12];
