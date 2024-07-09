@@ -80,7 +80,7 @@
     <origin xyz="0 0 0" rpy="0 0 0"/>
     <axis xyz="0 1 0"/>
     <dynamics damping="1"/>
-    <limit lower="-1000" upper="1000" effort="200000" velocity="10000"/>  
+    <limit lower="-1000" upper="1000" effort="200000" velocity="10000"/>
   </joint>
 
   <link name="dummy_base_2">
@@ -94,7 +94,7 @@
   <joint name="z_joint_revolute" type="continuous">
     <parent link="dummy_base_2"/>
     <child link="body"/>
-    <origin xyz="0 0 0.500" rpy="0 0 0"/>
+    <origin xyz="0 0 0.480" rpy="0 0 0"/>
     <axis xyz="0 0 1"/>
     <dynamics damping="1"/>
     <limit effort="200" velocity="10"/>
@@ -255,7 +255,7 @@
     <origin xyz="0.255 -0.120 0" rpy="-1.57079 0 -1.57079"/>
     <axis xyz="0 0 1"/>
     <limit lower="-1.57089" upper="1.57089" effort="200.0" velocity="9"/>
-    <dynamics damping="1.5"/>
+    <dynamics damping="3"/>
   </joint>
 
   <joint name="RFJ_hip" type="revolute">
@@ -264,7 +264,7 @@
     <origin xyz="0.095 0 0" rpy="-1.57079  1.57079 -1.57079"/>
     <axis xyz="0 0 1"/>
     <limit lower="-3.14" upper="3.14" effort="200.0" velocity="9"/>
-    <dynamics damping="1.5"/>
+    <dynamics damping="3"/>
   </joint>
 
   <joint name="RFJ_knee" type="revolute">
@@ -273,7 +273,7 @@
     <origin xyz="0.250 0 0" rpy="0 0 1.57079"/>
     <axis xyz="0 0 1"/>
     <limit lower="-3.14" upper="3.14" effort="200.0" velocity="9"/>
-    <dynamics damping="1.5"/>
+    <dynamics damping="3"/>
   </joint>
 
   <joint name="RFJ_foot" type="fixed" dont_collapse="true">
@@ -407,7 +407,7 @@
     <origin xyz="0.255 0.120 0" rpy="1.57079 0 1.57079"/>
     <axis xyz="0 0 1"/>
     <limit lower="-1.57089" upper="1.57089" effort="200.0" velocity="9"/>
-    <dynamics damping="1.5"/>
+    <dynamics damping="3"/>
   </joint>
 
   <joint name="LFJ_hip" type="revolute">
@@ -416,7 +416,7 @@
     <origin xyz="0.095 0 0" rpy="-1.57079 1.57079 1.57079"/>
     <axis xyz="0 0 1"/>
     <limit lower="-3.14" upper="3.14" effort="200.0" velocity="9"/>
-    <dynamics damping="1.5"/>
+    <dynamics damping="3"/>
   </joint>
 
   <joint name="LFJ_knee" type="revolute">
@@ -425,7 +425,7 @@
     <origin xyz="0.250 0 0" rpy="0 0 1.57079"/>
     <axis xyz="0 0 1"/>
     <limit lower="-3.14" upper="3.14" effort="200.0" velocity="9"/>
-    <dynamics damping="1.5"/>
+    <dynamics damping="3"/>
   </joint>
 
   <joint name="LFJ_foot" type="fixed" dont_collapse="true">
@@ -559,7 +559,7 @@
     <origin xyz="-0.255 0.120 0" rpy="1.57079 0 1.57079"/>
     <axis xyz="0 0 1"/>
     <limit lower="-1.57089" upper="1.57089" effort="200.0" velocity="9"/>
-    <dynamics damping="1.5"/>
+    <dynamics damping="3"/>
   </joint>
 
   <joint name="LBJ_hip" type="revolute">
@@ -568,7 +568,7 @@
     <origin xyz="0.095 0 0" rpy="-1.559 1.57079 1.58259"/>
     <axis xyz="0 0 1"/>
     <limit lower="-3.14" upper="3.14" effort="200.0" velocity="9"/>
-    <dynamics damping="1.5"/>
+    <dynamics damping="3"/>
   </joint>
 
   <joint name="LBJ_knee" type="revolute">
@@ -577,7 +577,7 @@
     <origin xyz="0.250 0 0" rpy="0 0 1.57079"/>
     <axis xyz="0 0 1"/>
     <limit lower="-3.14" upper="3.14" effort="200.0" velocity="9"/>
-    <dynamics damping="1.5"/>
+    <dynamics damping="3"/>
   </joint>
 
   <joint name="LBJ_foot" type="fixed" dont_collapse="true">
@@ -711,7 +711,7 @@
     <origin xyz="-0.255 -0.120   0" rpy="-1.57079 0 -1.57079"/>
     <axis xyz="0 0 1"/>
     <limit lower="-1.57089" upper="1.57089" effort="200.0" velocity="9"/>
-    <dynamics damping="1.5"/>
+    <dynamics damping="3"/>
   </joint>
 
   <joint name="RBJ_hip" type="revolute">
@@ -720,7 +720,7 @@
     <origin xyz="0.095 0 0" rpy="-1.58259 1.57079 -1.58259"/>
     <axis xyz="0 0 1"/>
     <limit lower="-3.14" upper="3.14" effort="200.0" velocity="9"/>
-    <dynamics damping="1.5"/>
+    <dynamics damping="3"/>
   </joint>
 
   <joint name="RBJ_knee" type="revolute">
@@ -729,7 +729,7 @@
     <origin xyz="0.250 0 0" rpy="0 0 1.57079"/>
     <axis xyz="0 0 1"/>
     <limit lower="-3.14" upper="3.14" effort="200.0" velocity="9"/>
-    <dynamics damping="1.5"/>
+    <dynamics damping="3"/>
   </joint>
 
   <joint name="RBJ_foot" type="fixed" dont_collapse="true">

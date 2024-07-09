@@ -75,7 +75,7 @@
       <geometry>
         <!-- <box size="0.200 0.370 0.216"/> -->
         <!-- <mesh filename="/home/eunseop/dev_ws/src/aidin_m1/meshes/Body_vis.stl" scale="0.001 0.001 0.001"/> -->
-        <mesh filename="package://aidin_m1/meshes/Body_vis.stl"/>
+        <!-- <mesh filename="package://aidin_m1/meshes/Body_vis.stl"/> -->
       </geometry>
       <material name="silver"/>
     </visual>
