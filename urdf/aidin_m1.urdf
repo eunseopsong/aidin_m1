@@ -94,7 +94,7 @@
   <joint name="z_joint_revolute" type="continuous">
     <parent link="dummy_base_2"/>
     <child link="body"/>
-    <origin xyz="0 0 0.480" rpy="0 0 0"/>
+    <origin xyz="0 0 0.450" rpy="0 0 0"/>
     <axis xyz="0 0 1"/>
     <dynamics damping="1"/>
     <limit effort="200" velocity="10"/>
