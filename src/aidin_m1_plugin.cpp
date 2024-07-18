@@ -28,10 +28,17 @@ namespace gazebo
         // Pointer to subscriber
         private: rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_torque;
         // Pointer to publisher
+        private: rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_bodypose;
         private: rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_jointpos;
         private: rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_jointvel;
+        private: rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_bodypos;
+        private: rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_bodyvel;
+        private: rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_imu;
+        private: rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_contact;
 
-        // Pointer to model
+        // private: rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::NodeHandle* node;
+
+        // Pointer to the model
         private: physics::ModelPtr model;
 
         // Pointer to the joint controller
