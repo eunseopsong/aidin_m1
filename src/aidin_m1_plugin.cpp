@@ -31,10 +31,10 @@ namespace gazebo
         private: rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_bodypose;
         private: rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_jointpos;
         private: rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_jointvel;
-        private: rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_bodypos;
-        private: rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_bodyvel;
-        private: rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_imu;
-        private: rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_contact;
+        // private: rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_bodypos;
+        // private: rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_bodyvel;
+        // private: rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_imu;
+        // private: rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_contact;
 
 
         // Pointer to the model
@@ -151,10 +151,10 @@ namespace gazebo
             this->pub_bodypose = this->node->create_publisher<std_msgs::msg::Float32MultiArray>(robot_namespace+"BodyPose_sim", qos);
             this->pub_jointpos = this->node->create_publisher<std_msgs::msg::Float32MultiArray>(robot_namespace+"JointPos_sim", qos);
             this->pub_jointvel = this->node->create_publisher<std_msgs::msg::Float32MultiArray>(robot_namespace+"JointVel_sim", qos);
-            this->pub_bodypos  = this->node->create_publisher<std_msgs::msg::Float32MultiArray>(robot_namespace+"BodyPos_sim", qos);
-            this->pub_bodyvel  = this->node->create_publisher<std_msgs::msg::Float32MultiArray>(robot_namespace+"BodyVel_sim", qos);
-            this->pub_imu      = this->node->create_publisher<std_msgs::msg::Float32MultiArray>(robot_namespace+"IMU_sim", qos);
-            this->pub_contact  = this->node->create_publisher<std_msgs::msg::Float32MultiArray>(robot_namespace+"Contact_sim", qos);
+            // this->pub_bodypos  = this->node->create_publisher<std_msgs::msg::Float32MultiArray>(robot_namespace+"BodyPos_sim", qos);
+            // this->pub_bodyvel  = this->node->create_publisher<std_msgs::msg::Float32MultiArray>(robot_namespace+"BodyVel_sim", qos);
+            // this->pub_imu      = this->node->create_publisher<std_msgs::msg::Float32MultiArray>(robot_namespace+"IMU_sim", qos);
+            // this->pub_contact  = this->node->create_publisher<std_msgs::msg::Float32MultiArray>(robot_namespace+"Contact_sim", qos);
 
             // Listen to the update event. This event is broadcast every
             // simulation iteration.
@@ -179,7 +179,7 @@ namespace gazebo
             // ignition::math::Vector3<double> rot_rel = model_pose_rel.Rot().Euler();
 
             // publish body position and euler angle
-            std_msgs::Float32MultiArray BodyPose;
+            std_msgs::msg::Float32MultiArray BodyPose;
             BodyPose.data.clear();
             BodyPose.data.push_back(Pos.X());
             BodyPose.data.push_back(Pos.Y());
@@ -224,60 +224,60 @@ namespace gazebo
             pub_jointvel->publish(JointVel);
 
             // publish body position
-            std_msgs::Float32MultiArray BodyPos;
-            BodyPos.data.clear();
-            BodyPos.data.push_back(Pos.X());
-            BodyPos.data.push_back(Pos.Y());
-            BodyPos.data.push_back(Pos.Z());
-            pub_bodypos.publish(BodyPos);
+            // std_msgs::msg::Float32MultiArray BodyPos;
+            // BodyPos.data.clear();
+            // BodyPos.data.push_back(Pos.X());
+            // BodyPos.data.push_back(Pos.Y());
+            // BodyPos.data.push_back(Pos.Z());
+            // pub_bodypos.publish(BodyPos);
 
             // publish body velocity
-            std_msgs::Float32MultiArray BodyVel;
-            BodyVel.data.clear();
-	        BodyVel.data.push_back(WorldLinearVel.X());
-	        BodyVel.data.push_back(WorldLinearVel.Y());
-	        BodyVel.data.push_back(WorldLinearVel.Z());
-	        pub_bodyvel.publish(BodyVel);
+            // std_msgs::msg::Float32MultiArray BodyVel;
+            // BodyVel.data.clear();
+	        // BodyVel.data.push_back(WorldLinearVel.X());
+	        // BodyVel.data.push_back(WorldLinearVel.Y());
+	        // BodyVel.data.push_back(WorldLinearVel.Z());
+	        // pub_bodyvel.publish(BodyVel);
 
             // publish imu
-            std_msgs::Float32MultiArray IMU;
-            IMU.data.clear();
-            IMU.data.push_back(Rot_Euler.X()); // roll, pitch, yaw
-            IMU.data.push_back(Rot_Euler.Y());
-            IMU.data.push_back(Rot_Euler.Z());
-            IMU.data.push_back(RelativeAngularVel.X()); // roll, pitch, yaw velocity
-            IMU.data.push_back(RelativeAngularVel.Y());
-            IMU.data.push_back(RelativeAngularVel.Z());
-            IMU.data.push_back(WorldLinearAccel.X()); // roll, pitch, yaw acceleration
-            IMU.data.push_back(WorldLinearAccel.Y());
-            IMU.data.push_back(WorldLinearAccel.Z());
-            pub_imu.publish(IMU);
+            // std_msgs::msg::Float32MultiArray IMU;
+            // IMU.data.clear();
+            // IMU.data.push_back(Rot_Euler.X()); // roll, pitch, yaw
+            // IMU.data.push_back(Rot_Euler.Y());
+            // IMU.data.push_back(Rot_Euler.Z());
+            // IMU.data.push_back(RelativeAngularVel.X()); // roll, pitch, yaw velocity
+            // IMU.data.push_back(RelativeAngularVel.Y());
+            // IMU.data.push_back(RelativeAngularVel.Z());
+            // IMU.data.push_back(WorldLinearAccel.X()); // roll, pitch, yaw acceleration
+            // IMU.data.push_back(WorldLinearAccel.Y());
+            // IMU.data.push_back(WorldLinearAccel.Z());
+            // pub_imu.publish(IMU);
 
             // get and publish contact states
-            std::string contact_link;
-            double LF_contactFlag = 0;
-            double RF_contactFlag = 0;
-            double LB_contactFlag = 0;
-            double RB_contactFlag = 0;
+            // std::string contact_link;
+            // double LF_contactFlag = 0;
+            // double RF_contactFlag = 0;
+            // double LB_contactFlag = 0;
+            // double RB_contactFlag = 0;
 
-            physics::ContactManager *contactManager = this->model->GetWorld()->Physics()->GetContactManager();
-            for(int i=0; i<contactManager->GetContactCount(); i++)
-            {
-                physics::Contact *contact = contactManager->GetContact(i);
-                contact_link = contact->collision1->GetLink()->GetName();
-                if(contact_link == "LF_knee"){LF_contactFlag = 1;}
-                if(contact_link == "RF_knee"){RF_contactFlag = 1;}
-                if(contact_link == "RB_knee"){LB_contactFlag = 1;}
-                if(contact_link == "LB_knee"){RB_contactFlag = 1;}
-            }
+            // physics::ContactManager *contactManager = this->model->GetWorld()->Physics()->GetContactManager();
+            // for(int i=0; i<contactManager->GetContactCount(); i++)
+            // {
+            //     physics::Contact *contact = contactManager->GetContact(i);
+            //     contact_link = contact->collision1->GetLink()->GetName();
+            //     if(contact_link == "LF_knee"){LF_contactFlag = 1;}
+            //     if(contact_link == "RF_knee"){RF_contactFlag = 1;}
+            //     if(contact_link == "RB_knee"){LB_contactFlag = 1;}
+            //     if(contact_link == "LB_knee"){RB_contactFlag = 1;}
+            // }
 
-            std_msgs::Float32MultiArray Contact;
-            Contact.data.clear();
-            Contact.data.push_back(LF_contactFlag);
-            Contact.data.push_back(RF_contactFlag);
-            Contact.data.push_back(LB_contactFlag);
-            Contact.data.push_back(RB_contactFlag);
-            pub_contact.publish(Contact);
+            // std_msgs::msg::Float32MultiArray Contact;
+            // Contact.data.clear();
+            // Contact.data.push_back(LF_contactFlag);
+            // Contact.data.push_back(RF_contactFlag);
+            // Contact.data.push_back(LB_contactFlag);
+            // Contact.data.push_back(RB_contactFlag);
+            // pub_contact.publish(Contact);
 
             rclcpp::executors::SingleThreadedExecutor executor;
             executor.add_node(this->node);
