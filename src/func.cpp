@@ -28,9 +28,12 @@ using Eigen::VectorXf;
 #define DoF 3
 
 /////////////////////// Initialization ////////////////////////
-float body_pose[3];
+float body_pose[6];
 float joint_pos[12];     // Joint Pose
 float joint_vel[12];     // Joint Velocity
+float body_pos[3];       // Body position (x,y,z)
+float body_vel[3];       // Body velocity d(x,y,z)/dt
+float imu[9];            // (r,p,y) & d(r,p,y)/dt & d^2(r,p,y)/dt^2
 
 // double sim_time;      // Gazebo simulation time
 double angle[3];         // Angles

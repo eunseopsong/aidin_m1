@@ -10,11 +10,11 @@ public:
     JointControl()
     : Node("aidin_m1_control_node"), count_(0) // count_ == 0 (Initialize)
     {
-        // Subscribe to JointPos_sim and JointVel_sim topics
+        // Subscribe
         sub_bodypose = this->create_subscription<std_msgs::msg::Float32MultiArray>(
             "/aidin_m1/BodyPose_sim", 10,
             [this](const std_msgs::msg::Float32MultiArray::SharedPtr msg) {
-                for (int i = 0; i < 3; ++i) {
+                for (int i = 0; i < 6; ++i) {
                     body_pose[i] = msg->data[i];
                 }
             });
@@ -32,6 +32,30 @@ public:
             [this](const std_msgs::msg::Float32MultiArray::SharedPtr msg) {
                 for (int i = 0; i < 12; ++i) {
                     joint_vel[i] = msg->data[i];
+                }
+            });
+
+        sub_bodypos = this->create_subscription<std_msgs::msg::Float32MultiArray>(
+            "/aidin_m1/BodyPos_sim", 10,
+            [this](const std_msgs::msg::Float32MultiArray::SharedPtr msg) {
+                for (int i = 0; i < 3; ++i) {
+                    body_pos[i] = msg->data[i];
+                }
+            });
+
+        sub_bodyvel = this->create_subscription<std_msgs::msg::Float32MultiArray>(
+            "/aidin_m1/BodyVel_sim", 10,
+            [this](const std_msgs::msg::Float32MultiArray::SharedPtr msg) {
+                for (int i = 0; i < 3; ++i) {
+                    body_vel[i] = msg->data[i];
+                }
+            });
+
+        sub_imu = this->create_subscription<std_msgs::msg::Float32MultiArray>(
+            "/aidin_m1/IMU_sim", 10,
+            [this](const std_msgs::msg::Float32MultiArray::SharedPtr msg) {
+                for (int i = 0; i < 9; ++i) {
+                    imu[i] = msg->data[i];
                 }
             });
 
@@ -188,6 +212,10 @@ private:
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_bodypose;
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_jointpos;
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_jointvel;
+    rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_bodypos;
+    rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_bodyvel;
+    rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_imu;
+
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_angles;
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_gains;
 
