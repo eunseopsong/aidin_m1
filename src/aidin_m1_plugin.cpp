@@ -274,10 +274,10 @@ namespace gazebo
             {
                 physics::Contact *contact = contactManager->GetContact(i);
                 contact_link = contact->collision1->GetLink()->GetName();
-                if(contact_link == "LF_knee"){LF_contactFlag = 1;}
-                if(contact_link == "RF_knee"){RF_contactFlag = 1;}
-                if(contact_link == "RB_knee"){LB_contactFlag = 1;}
-                if(contact_link == "LB_knee"){RB_contactFlag = 1;}
+                if(contact_link == "LF_foot"){LF_contactFlag = 1;}
+                if(contact_link == "RF_foot"){RF_contactFlag = 1;}
+                if(contact_link == "RB_foot"){LB_contactFlag = 1;}
+                if(contact_link == "LB_foot"){RB_contactFlag = 1;}
             }
 
             std_msgs::msg::Float32MultiArray Contact;

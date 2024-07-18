@@ -34,6 +34,7 @@ float joint_vel[12];     // Joint Velocity
 float body_pos[3];       // Body position (x,y,z)
 float body_vel[3];       // Body velocity d(x,y,z)/dt
 float imu[9];            // (r,p,y) & d(r,p,y)/dt & d^2(r,p,y)/dt^2
+double contact[4];
 
 // double sim_time;      // Gazebo simulation time
 double angle[3];         // Angles

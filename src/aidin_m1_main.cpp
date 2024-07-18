@@ -59,6 +59,14 @@ public:
                 }
             });
 
+        sub_contact = this->create_subscription<std_msgs::msg::Float32MultiArray>(
+            "/aidin_m1/Contact_sim", 10,
+            [this](const std_msgs::msg::Float32MultiArray::SharedPtr msg) {
+                for (int i = 0; i < 4; ++i) {
+                    contact[i] = msg->data[i];
+                }
+            });
+
         sub_gains = this->create_subscription<std_msgs::msg::Float32MultiArray>(
             "/aidin_m1/Gains_sim", 10,
             [this](const std_msgs::msg::Float32MultiArray::SharedPtr msg) {
@@ -98,10 +106,10 @@ private:
         // Initialization
         count_ = count_ + 0.001; // CalculateAndPublishTorque가 실행될 때마다 count_ = count + 1ms; -> count_ 는 실제 시뮬레이션 시간을 나타내는 변수가 됨
 
-        double vel_of_body = 1000;    // The target velocity of whole robot bodys
-        double T = 0.8;               // The period of the whole trajectory phase
+        double vel_of_body = 500;    // The target velocity of whole robot bodys
+        double T = 1.6;               // The period of the whole trajectory phase
         double t = fmod(count_, T);
-        double t_counter = fmod(count_ + 0.400 , T);
+        double t_counter = fmod(count_ + 0.800 , T);
 
         // Calculate the coordinate using Trajectory Function
         double yVal = 95;
@@ -215,6 +223,7 @@ private:
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_bodypos;
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_bodyvel;
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_imu;
+    rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_contact;
 
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_angles;
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_gains;
