@@ -4,11 +4,22 @@
 #include "rclcpp/rclcpp.hpp"
 
 #include <stdio.h>
+#include <iostream>
+#include <boost/bind.hpp>
+
 #include <gazebo/gazebo.hh>
 #include <gazebo/physics/physics.hh>
+#include <gazebo/common/common.hh>
 
 #include "std_msgs/msg/float32.hpp"
+#include "std_msgs/msg/float64.hpp"
 #include "std_msgs/msg/float32_multi_array.hpp"
+#include "std_msgs/msg/float64_multi_array.hpp"
+
+#include "std_msgs/msg/string.hpp"
+#include "sensor_msgs/msg/imu.hpp"
+
+
 
 using namespace std;
 
