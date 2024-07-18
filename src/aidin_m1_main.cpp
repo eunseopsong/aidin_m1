@@ -11,6 +11,14 @@ public:
     : Node("aidin_m1_control_node"), count_(0) // count_ == 0 (Initialize)
     {
         // Subscribe to JointPos_sim and JointVel_sim topics
+        sub_bodypose = this->create_subscription<std_msgs::msg::Float32MultiArray>(
+            "/aidin_m1/BodyPose_sim", 10,
+            [this](const std_msgs::msg::Float32MultiArray::SharedPtr msg) {
+                for (int i = 0; i < 3; ++i) {
+                    body_pose[i] = msg->data[i];
+                }
+            });
+
         sub_jointpos = this->create_subscription<std_msgs::msg::Float32MultiArray>(
             "/aidin_m1/JointPos_sim", 10,
             [this](const std_msgs::msg::Float32MultiArray::SharedPtr msg) {
@@ -177,6 +185,7 @@ private:
 
         pub_torque->publish(torque_msg);
     }
+    rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_bodypose;
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_jointpos;
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_jointvel;
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_angles;

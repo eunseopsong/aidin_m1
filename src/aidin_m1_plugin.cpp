@@ -19,8 +19,6 @@
 #include "std_msgs/msg/string.hpp"
 #include "sensor_msgs/msg/imu.hpp"
 
-
-
 using namespace std;
 
 namespace gazebo
@@ -29,7 +27,7 @@ namespace gazebo
     {
         // Constructor
         public: aidin_m1_plugin() {
-            int argc =0;
+            // int argc =0;
             // rclcpp::init(argc, nullptr);
         }
 
@@ -42,10 +40,10 @@ namespace gazebo
         private: rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_bodypose;
         private: rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_jointpos;
         private: rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_jointvel;
-        // private: rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_bodypos;
-        // private: rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_bodyvel;
-        // private: rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_imu;
-        // private: rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_contact;
+        private: rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_bodypos;
+        private: rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_bodyvel;
+        private: rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_imu;
+        private: rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_contact;
 
 
         // Pointer to the model
@@ -96,10 +94,10 @@ namespace gazebo
         private: rclcpp::Node::SharedPtr node;
 
 
-        public: void Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
+        public: void Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
         {
             // Store the pointer to the model
-            this->model = _model;
+            this->model = _parent;
 
             // Initialize node
             node = rclcpp::Node::make_shared("my_aidin_m1_node");
@@ -162,10 +160,10 @@ namespace gazebo
             this->pub_bodypose = this->node->create_publisher<std_msgs::msg::Float32MultiArray>(robot_namespace+"BodyPose_sim", qos);
             this->pub_jointpos = this->node->create_publisher<std_msgs::msg::Float32MultiArray>(robot_namespace+"JointPos_sim", qos);
             this->pub_jointvel = this->node->create_publisher<std_msgs::msg::Float32MultiArray>(robot_namespace+"JointVel_sim", qos);
-            // this->pub_bodypos  = this->node->create_publisher<std_msgs::msg::Float32MultiArray>(robot_namespace+"BodyPos_sim", qos);
-            // this->pub_bodyvel  = this->node->create_publisher<std_msgs::msg::Float32MultiArray>(robot_namespace+"BodyVel_sim", qos);
-            // this->pub_imu      = this->node->create_publisher<std_msgs::msg::Float32MultiArray>(robot_namespace+"IMU_sim", qos);
-            // this->pub_contact  = this->node->create_publisher<std_msgs::msg::Float32MultiArray>(robot_namespace+"Contact_sim", qos);
+            this->pub_bodypos  = this->node->create_publisher<std_msgs::msg::Float32MultiArray>(robot_namespace+"BodyPos_sim", qos);
+            this->pub_bodyvel  = this->node->create_publisher<std_msgs::msg::Float32MultiArray>(robot_namespace+"BodyVel_sim", qos);
+            this->pub_imu      = this->node->create_publisher<std_msgs::msg::Float32MultiArray>(robot_namespace+"IMU_sim", qos);
+            this->pub_contact  = this->node->create_publisher<std_msgs::msg::Float32MultiArray>(robot_namespace+"Contact_sim", qos);
 
             // Listen to the update event. This event is broadcast every
             // simulation iteration.
@@ -177,13 +175,13 @@ namespace gazebo
         public: void OnUpdate()
         {
             // get robot state from gazebo
-            ignition::math::Pose3<double>  WorldPose = model->WorldPose();
-            ignition::math::Vector3<double> Pos = WorldPose.Pos(); // body position
-            ignition::math::Vector3<double> Rot_Euler = WorldPose.Rot().Euler(); // body euler angle position
-            ignition::math::Vector3<double> WorldLinearAccel = model->WorldLinearAccel(); // body linear acceleration from world
-            ignition::math::Vector3<double> WorldLinearVel = model->WorldLinearVel(); // body linear velocity from world
-            ignition::math::Vector3<double> WorldAngularVel = model->WorldAngularVel(); // body angle velocity from world
-            ignition::math::Vector3<double> WorldAngularAccel = model->WorldAngularAccel(); // body euler angle acceleration from world
+            ignition::math::Pose3<double>   WorldPose          = model->WorldPose();
+            ignition::math::Vector3<double> Pos                = WorldPose.Pos();             // body position
+            ignition::math::Vector3<double> Rot_Euler          = WorldPose.Rot().Euler();     // body euler angle position
+            ignition::math::Vector3<double> WorldLinearVel     = model->WorldLinearVel();     // body linear velocity from world
+            ignition::math::Vector3<double> WorldLinearAccel   = model->WorldLinearAccel();   // body linear acceleration from world
+            ignition::math::Vector3<double> WorldAngularVel    = model->WorldAngularVel();    // body angle velocity from world
+            ignition::math::Vector3<double> WorldAngularAccel  = model->WorldAngularAccel();  // body euler angle acceleration from world
             ignition::math::Vector3<double> RelativeAngularVel = model->RelativeAngularVel(); // body angular velocity from robot
             // ignition::math::Vector3<double> acc_rel = model->WorldLinearAccel();
             // ignition::math::Pose3<double>  model_pose_rel = model->RelativePose();
@@ -198,7 +196,7 @@ namespace gazebo
             BodyPose.data.push_back(Rot_Euler.X());
             BodyPose.data.push_back(Rot_Euler.Y());
             BodyPose.data.push_back(Rot_Euler.Z());
-            pub_bodypose.publish(BodyPose);
+            pub_bodypose->publish(BodyPose);
 
             // Publish joint position
             std_msgs::msg::Float32MultiArray JointPos;
@@ -235,60 +233,60 @@ namespace gazebo
             pub_jointvel->publish(JointVel);
 
             // publish body position
-            // std_msgs::msg::Float32MultiArray BodyPos;
-            // BodyPos.data.clear();
-            // BodyPos.data.push_back(Pos.X());
-            // BodyPos.data.push_back(Pos.Y());
-            // BodyPos.data.push_back(Pos.Z());
-            // pub_bodypos.publish(BodyPos);
+            std_msgs::msg::Float32MultiArray BodyPos;
+            BodyPos.data.clear();
+            BodyPos.data.push_back(Pos.X());
+            BodyPos.data.push_back(Pos.Y());
+            BodyPos.data.push_back(Pos.Z());
+            pub_bodypos->publish(BodyPos);
 
             // publish body velocity
-            // std_msgs::msg::Float32MultiArray BodyVel;
-            // BodyVel.data.clear();
-	        // BodyVel.data.push_back(WorldLinearVel.X());
-	        // BodyVel.data.push_back(WorldLinearVel.Y());
-	        // BodyVel.data.push_back(WorldLinearVel.Z());
-	        // pub_bodyvel.publish(BodyVel);
+            std_msgs::msg::Float32MultiArray BodyVel;
+            BodyVel.data.clear();
+	        BodyVel.data.push_back(WorldLinearVel.X());
+	        BodyVel.data.push_back(WorldLinearVel.Y());
+	        BodyVel.data.push_back(WorldLinearVel.Z());
+	        pub_bodyvel->publish(BodyVel);
 
             // publish imu
-            // std_msgs::msg::Float32MultiArray IMU;
-            // IMU.data.clear();
-            // IMU.data.push_back(Rot_Euler.X()); // roll, pitch, yaw
-            // IMU.data.push_back(Rot_Euler.Y());
-            // IMU.data.push_back(Rot_Euler.Z());
-            // IMU.data.push_back(RelativeAngularVel.X()); // roll, pitch, yaw velocity
-            // IMU.data.push_back(RelativeAngularVel.Y());
-            // IMU.data.push_back(RelativeAngularVel.Z());
-            // IMU.data.push_back(WorldLinearAccel.X()); // roll, pitch, yaw acceleration
-            // IMU.data.push_back(WorldLinearAccel.Y());
-            // IMU.data.push_back(WorldLinearAccel.Z());
-            // pub_imu.publish(IMU);
+            std_msgs::msg::Float32MultiArray IMU;
+            IMU.data.clear();
+            IMU.data.push_back(Rot_Euler.X()); // roll, pitch, yaw
+            IMU.data.push_back(Rot_Euler.Y());
+            IMU.data.push_back(Rot_Euler.Z());
+            IMU.data.push_back(RelativeAngularVel.X()); // roll, pitch, yaw velocity
+            IMU.data.push_back(RelativeAngularVel.Y());
+            IMU.data.push_back(RelativeAngularVel.Z());
+            IMU.data.push_back(WorldLinearAccel.X()); // roll, pitch, yaw acceleration
+            IMU.data.push_back(WorldLinearAccel.Y());
+            IMU.data.push_back(WorldLinearAccel.Z());
+            pub_imu->publish(IMU);
 
             // get and publish contact states
-            // std::string contact_link;
-            // double LF_contactFlag = 0;
-            // double RF_contactFlag = 0;
-            // double LB_contactFlag = 0;
-            // double RB_contactFlag = 0;
+            std::string contact_link;
+            double LF_contactFlag = 0;
+            double RF_contactFlag = 0;
+            double LB_contactFlag = 0;
+            double RB_contactFlag = 0;
 
-            // physics::ContactManager *contactManager = this->model->GetWorld()->Physics()->GetContactManager();
-            // for(int i=0; i<contactManager->GetContactCount(); i++)
-            // {
-            //     physics::Contact *contact = contactManager->GetContact(i);
-            //     contact_link = contact->collision1->GetLink()->GetName();
-            //     if(contact_link == "LF_knee"){LF_contactFlag = 1;}
-            //     if(contact_link == "RF_knee"){RF_contactFlag = 1;}
-            //     if(contact_link == "RB_knee"){LB_contactFlag = 1;}
-            //     if(contact_link == "LB_knee"){RB_contactFlag = 1;}
-            // }
+            physics::ContactManager *contactManager = this->model->GetWorld()->Physics()->GetContactManager();
+            for(unsigned int i=0; i<contactManager->GetContactCount(); i++)
+            {
+                physics::Contact *contact = contactManager->GetContact(i);
+                contact_link = contact->collision1->GetLink()->GetName();
+                if(contact_link == "LF_knee"){LF_contactFlag = 1;}
+                if(contact_link == "RF_knee"){RF_contactFlag = 1;}
+                if(contact_link == "RB_knee"){LB_contactFlag = 1;}
+                if(contact_link == "LB_knee"){RB_contactFlag = 1;}
+            }
 
-            // std_msgs::msg::Float32MultiArray Contact;
-            // Contact.data.clear();
-            // Contact.data.push_back(LF_contactFlag);
-            // Contact.data.push_back(RF_contactFlag);
-            // Contact.data.push_back(LB_contactFlag);
-            // Contact.data.push_back(RB_contactFlag);
-            // pub_contact.publish(Contact);
+            std_msgs::msg::Float32MultiArray Contact;
+            Contact.data.clear();
+            Contact.data.push_back(LF_contactFlag);
+            Contact.data.push_back(RF_contactFlag);
+            Contact.data.push_back(LB_contactFlag);
+            Contact.data.push_back(RB_contactFlag);
+            pub_contact->publish(Contact);
 
             rclcpp::executors::SingleThreadedExecutor executor;
             executor.add_node(this->node);
@@ -313,6 +311,6 @@ namespace gazebo
     };
 
     // Register this plugin with the simulator
-    GZ_REGISTER_MODEL_PLUGIN(aidin_m1_plugin);
+    GZ_REGISTER_MODEL_PLUGIN(aidin_m1_plugin)
 }
 #endif

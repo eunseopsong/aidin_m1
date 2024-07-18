@@ -28,6 +28,7 @@ using Eigen::VectorXf;
 #define DoF 3
 
 /////////////////////// Initialization ////////////////////////
+float body_pose[3];
 float joint_pos[12];     // Joint Pose
 float joint_vel[12];     // Joint Velocity
 
