@@ -1,4 +1,6 @@
 #include "func.cpp"
+#include <algorithm> // std::copy
+#include <array>
 
 using namespace std;
 using namespace Eigen;
@@ -43,10 +45,10 @@ public:
             "/aidin_m1/Gains_sim", 10, [this](const std_msgs::msg::Float32MultiArray::SharedPtr msg) {
                 for (int i = 0; i < 6; ++i)
                 {
-                    if (i <= 2)
-                        Kp[i] = msg->data[i];
+                    if (i < 3)
+                        Kp[i]   = msg->data[i];
                     else
-                        Kd[i - 3] = msg->data[i];
+                        Kd[i-3] = msg->data[i];
                 }
             });
         sub_angles = create_subscription<std_msgs::msg::Float32MultiArray>(
