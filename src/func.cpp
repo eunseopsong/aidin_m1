@@ -28,17 +28,28 @@ using Eigen::VectorXf;
 #define DoF 3
 
 /////////////////////// Initialization ////////////////////////
-float body_pose[6];
-float joint_pos[13];     // Joint Pose
-float joint_vel[13];     // Joint Velocity
-float body_pos[3];       // Body position (x,y,z)
-float body_vel[3];       // Body velocity d(x,y,z)/dt
-float imu[9];            // (r,p,y) & d(r,p,y)/dt & d^2(r,p,y)/dt^2
-double contact[4];
+// Data storage
+array<double, 6> body_pose{};
+array<double, 12> joint_pos{};
+array<double, 12> joint_vel{};
+array<double, 3> body_pos{};
+array<double, 3> body_vel{};
+array<double, 9> imu{};
+array<double, 4> contact{};
+array<double, 3> angle{};
+array<double, 3> Kp{};
+array<double, 3> Kd{};
+// float body_pose[6];
+// float joint_pos[13];     // Joint Pose
+// float joint_vel[13];     // Joint Velocity
+// float body_pos[3];       // Body position (x,y,z)
+// float body_vel[3];       // Body velocity d(x,y,z)/dt
+// float imu[9];            // (r,p,y) & d(r,p,y)/dt & d^2(r,p,y)/dt^2
+// double contact[4];
 
 // double sim_time;      // Gazebo simulation time
-double angle[3];         // Angles
-double Kp[3], Kd[3];     // Gains
+// double angle[3];         // Angles
+// double Kp[3], Kd[3];     // Gains
 
 //////////// Method of Undetermined Coefficients using Eigen ////////////
 

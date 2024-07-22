@@ -51,8 +51,8 @@ public:
                         Kd[i-3] = msg->data[i];
                 }
             });
-        sub_angles = create_subscription<std_msgs::msg::Float32MultiArray>(
-            "/aidin_m1/Angles_sim", 10, [this](const std_msgs::msg::Float32MultiArray::SharedPtr msg) {
+        sub_command = create_subscription<std_msgs::msg::Float32MultiArray>(
+            "/aidin_m1/Command_sim", 10, [this](const std_msgs::msg::Float32MultiArray::SharedPtr msg) {
                 copy(msg->data.begin(), msg->data.begin() + 3, angle.begin());
             });
 
@@ -99,21 +99,80 @@ private:
         // Calculate the output_torque using PD or Feedforward control
         vector<double> output_torque(12);
 
-        for (int i = 0; i < 12; ++i)
+        for (int i=0; i<12; i++)
         {
+
             if (Kp[0] > 0 && Kp[1] == 0) // standing command
             {
-                output_torque[i] = calculate_torque_standing(i, LF_target_pos, RF_target_pos, LB_target_pos, RB_target_pos);
+                if (i < 3)    // LF joint
+                {
+                    LF_target_pos[0] = 0;
+                    LF_target_pos[1] = M_PI_2/3;
+                    LF_target_pos[2] = 0;
+                    output_torque[i] = FeedforwardController(Kp[i], Kd[i], LF_target_pos.data(), i, 0);
+                }
+                else if (i < 6) // RF joint
+                {
+                    RF_target_pos[0] = 0;
+                    RF_target_pos[1] = M_PI_2/3;
+                    RF_target_pos[2] = 0;
+                    output_torque[i] = FeedforwardController(Kp[i-3], Kd[i-3], RF_target_pos.data(), i-3, 3);
+                }
+                else if (i < 9) // LB joint
+                {
+                    LB_target_pos[0] = 0;
+                    LB_target_pos[1] = M_PI_2/3;
+                    LB_target_pos[2] = 0;
+                    output_torque[i] = FeedforwardController(Kp[i-6], Kd[i-6], LB_target_pos.data(), i-6, 6);
+                }
+                else
+                {
+                    RB_target_pos[0] = 0;
+                    RB_target_pos[1] = M_PI_2/3;
+                    RB_target_pos[2] = 0;
+                    output_torque[i] = FeedforwardController(Kp[i-9], Kd[i-9], RB_target_pos.data(), i-9, 9);
+                }
             }
             else if (Kp[0] > 0 && Kp[1] > 0) // running command
             {
-                output_torque[i] = calculate_torque_running(i, LF_target_pos, RF_target_pos, LB_target_pos, RB_target_pos);
+                if (i<3)      // LF joint
+                {
+                    // output_torque[i] = PDController(Kp[i],   Kd[i],   target_pos[i], joint_pos[i], joint_vel[i]);
+                    output_torque[i] = FeedforwardController(Kp[i], Kd[i], LF_target_pos.data(), i, 0);
+                }
+                else if (i<6) // RF joint
+                {
+                    // output_torque[i] = PDController(Kp[i-3], Kd[i-3], target_pos[i], joint_pos[i], joint_vel[i]);
+                    output_torque[i] = FeedforwardController(Kp[i-3], Kd[i-3], RF_target_pos.data(), i-3, 3);
+                }
+                else if (i<9) // LB joint
+                {
+                    output_torque[i] = FeedforwardController(Kp[i-6], Kd[i-6], LB_target_pos.data(), i-6, 6);
+                }
+                else          // RB joint
+                {
+                    output_torque[i] = FeedforwardController(Kp[i-9], Kd[i-9], RB_target_pos.data(), i-9, 9);
+                }
             }
             else
-            {
                 output_torque[i] = 0;
-            }
         }
+
+        // for (int i = 0; i < 12; ++i)
+        // {
+        //     if (Kp[0] > 0 && Kp[1] == 0) // standing command
+        //     {
+        //         output_torque[i] = calculate_torque_standing(i, LF_target_pos, RF_target_pos, LB_target_pos, RB_target_pos);
+        //     }
+        //     else if (Kp[0] > 0 && Kp[1] > 0) // running command
+        //     {
+        //         output_torque[i] = calculate_torque_running(i, LF_target_pos, RF_target_pos, LB_target_pos, RB_target_pos);
+        //     }
+        //     else
+        //     {
+        //         output_torque[i] = 0;
+        //     }
+        // }
 
         // Publish Desired Pose
         std_msgs::msg::Float32MultiArray targetpos_msg;
@@ -184,8 +243,8 @@ private:
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_bodyvel;
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_imu;
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_contact;
-    rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_angles;
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_gains;
+    rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_command;
 
     // Publisher declarations
     rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_torque;
@@ -195,17 +254,7 @@ private:
     rclcpp::TimerBase::SharedPtr timer_;
     double count_;
 
-    // Data storage
-    array<double, 6> body_pose{};
-    array<double, 12> joint_pos{};
-    array<double, 12> joint_vel{};
-    array<double, 3> body_pos{};
-    array<double, 3> body_vel{};
-    array<double, 9> imu{};
-    array<double, 4> contact{};
-    array<double, 3> angle{};
-    array<double, 3> Kp{};
-    array<double, 3> Kd{};
+
 };
 
 int main(int argc, char **argv)
