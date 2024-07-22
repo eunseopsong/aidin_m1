@@ -253,8 +253,6 @@ private:
     // Timer
     rclcpp::TimerBase::SharedPtr timer_;
     double count_;
-
-
 };
 
 int main(int argc, char **argv)
