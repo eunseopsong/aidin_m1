@@ -56,21 +56,20 @@
 
   <link name="world"/>
 
-  <joint name="x_joint_move" type="prismatic">
+  <!-- <joint name="x_joint_move" type="prismatic">
     <parent link="world"/>
     <child link="dummy_base_1"/>
     <origin xyz="0 0 0" rpy="0 0 0"/>
     <axis xyz="1 0 0"/>
     <dynamics damping="1"/>
-    <!-- lower, upper unit: radian -->
-    <limit lower="-1000" upper="1000" effort="200000" velocity="10000"/> 
+    <limit effort="200" velocity="10"/>
   </joint>
 
   <link name="dummy_base_1">
 		<inertial>
 			<origin xyz="0.0 0.0 0" rpy="0.0 0.0 0.0"/>
-			<mass value="0.01"/>
-			<inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
+			<mass value="0.0001"/>
+			<inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
 		</inertial>
 	</link>
 
@@ -80,19 +79,20 @@
     <origin xyz="0 0 0" rpy="0 0 0"/>
     <axis xyz="0 1 0"/>
     <dynamics damping="1"/>
-    <limit lower="-1000" upper="1000" effort="200000" velocity="10000"/>
+    <limit effort="200" velocity="10"/>
   </joint>
 
   <link name="dummy_base_2">
 		<inertial>
 			<origin xyz="0.0 0.0 0" rpy="0.0 0.0 0.0"/>
-			<mass value="0.01"/>
-			<inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
+			<mass value="0.0001"/>
+			<inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
 		</inertial>
-	</link>
+	</link> -->
 
   <joint name="z_joint_revolute" type="continuous">
-    <parent link="dummy_base_2"/>
+    <!-- <parent link="dummy_base_2"/> -->
+    <parent link="world"/>
     <child link="body"/>
     <origin xyz="0 0 0.450" rpy="0 0 0"/>
     <axis xyz="0 0 1"/>

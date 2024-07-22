@@ -29,8 +29,8 @@ using Eigen::VectorXf;
 
 /////////////////////// Initialization ////////////////////////
 float body_pose[6];
-float joint_pos[12];     // Joint Pose
-float joint_vel[12];     // Joint Velocity
+float joint_pos[13];     // Joint Pose
+float joint_vel[13];     // Joint Velocity
 float body_pos[3];       // Body position (x,y,z)
 float body_vel[3];       // Body velocity d(x,y,z)/dt
 float imu[9];            // (r,p,y) & d(r,p,y)/dt & d^2(r,p,y)/dt^2

@@ -204,7 +204,7 @@ private:
         for (int i=0; i < 12; i++){
             targetpos_msg.data.push_back(target_pos[i]);
         }
-
+        
         pub_targetpos->publish(targetpos_msg);
 
         ////////////////// Publish Torque //////////////////
@@ -213,8 +213,9 @@ private:
 
         for (int i=0; i < 12; i++){
             torque_msg.data.push_back(output_torque[i]);
+            // torque_msg.data.push_back(0);
         }
-
+        torque_msg.data.push_back(90);
         pub_torque->publish(torque_msg);
     }
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_bodypose;
