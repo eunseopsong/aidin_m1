@@ -54,8 +54,15 @@
     <child link="base"/>
   </joint> -->
 
-  <link name="world"/>
-
+  <!-- <link name="world"/> -->
+  <link name="base">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+  </link>
   <!-- <joint name="x_joint_move" type="prismatic">
     <parent link="world"/>
     <child link="dummy_base_1"/>
@@ -90,16 +97,22 @@
 		</inertial>
 	</link> -->
 
-  <joint name="z_joint_revolute" type="continuous">
-    <!-- <parent link="dummy_base_2"/> -->
+  <!-- <joint name="z_joint_revolute" type="continuous">
     <parent link="world"/>
     <child link="body"/>
     <origin xyz="0 0 0.450" rpy="0 0 0"/>
     <axis xyz="0 0 1"/>
     <dynamics damping="1"/>
     <limit effort="200" velocity="10"/>
-  </joint>
+  </joint> -->
 
+  <joint name="floating_base" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <parent link="base"/>
+    <child link="body"/>
+    <!-- <dynamics damping="1"/>
+    <limit effort="200" velocity="10"/> -->
+  </joint>
 <!--////////////////////////////////   Body    ////////////////////////////////-->
 
   <link name="body">

@@ -62,7 +62,7 @@ namespace gazebo
         private: physics::JointControllerPtr joint10_Controller_;
         private: physics::JointControllerPtr joint11_Controller_;
         private: physics::JointControllerPtr joint12_Controller_;
-        private: physics::JointControllerPtr joint13_Controller_;
+        // private: physics::JointControllerPtr joint13_Controller_;
 
         // Pointer to the joint
         private: physics::JointPtr joint1_;
@@ -77,7 +77,7 @@ namespace gazebo
         private: physics::JointPtr joint10_;
         private: physics::JointPtr joint11_;
         private: physics::JointPtr joint12_;
-        private: physics::JointPtr joint13_;
+        // private: physics::JointPtr joint13_;
         // private: physics::LinkPtr link1_;
         // private: physics::LinkPtr plane1_;
         // neccessary?
@@ -131,7 +131,7 @@ namespace gazebo
             this->joint10_ = this->model->GetJoint("aidin_m1::RBJ_scap");
             this->joint11_ = this->model->GetJoint("aidin_m1::RBJ_hip");
             this->joint12_ = this->model->GetJoint("aidin_m1::RBJ_knee");
-            this->joint13_ = this->model->GetJoint("aidin_m1::z_joint_revolute");
+            // this->joint13_ = this->model->GetJoint("aidin_m1::z_joint_revolute");
 
             // Store the joint Controller to control Joint
             this->joint1_Controller_  = this->model->GetJointController();
@@ -146,7 +146,7 @@ namespace gazebo
             this->joint10_Controller_ = this->model->GetJointController();
             this->joint11_Controller_ = this->model->GetJointController();
             this->joint12_Controller_ = this->model->GetJointController();
-            this->joint13_Controller_ = this->model->GetJointController();
+            // this->joint13_Controller_ = this->model->GetJointController();
 
             auto qos = rclcpp::QoS(rclcpp::KeepLast(10)).reliable().durability_volatile();
             //qos.reliability(RMW_QOS_POLICY_RELIABILITY_RELIABLE);
@@ -215,7 +215,7 @@ namespace gazebo
             JointPos.data.push_back(this->joint10_->Position(1));
             JointPos.data.push_back(this->joint11_->Position(1));
             JointPos.data.push_back(this->joint12_->Position(1));
-            JointPos.data.push_back(this->joint13_->Position(1));
+            // JointPos.data.push_back(this->joint13_->Position(1));
             pub_jointpos->publish(JointPos);
 
             // Publish joint velocity
@@ -233,7 +233,7 @@ namespace gazebo
             JointVel.data.push_back(this->joint10_->GetVelocity(1));
             JointVel.data.push_back(this->joint11_->GetVelocity(1));
             JointVel.data.push_back(this->joint12_->GetVelocity(1));
-            JointVel.data.push_back(this->joint13_->GetVelocity(1));
+            // JointVel.data.push_back(this->joint13_->GetVelocity(1));
             pub_jointvel->publish(JointVel);
 
             // publish body position
@@ -266,7 +266,7 @@ namespace gazebo
             IMU.data.push_back(WorldLinearAccel.Z());
 
             // Debugging IMU data
-            RCLCPP_INFO(node->get_logger(), "IMU - Roll: %f, Pitch: %f, Yaw: %f", Rot_Euler.X(), Rot_Euler.Y(), Rot_Euler.Z());
+            // RCLCPP_INFO(node->get_logger(), "IMU - Roll: %f, Pitch: %f, Yaw: %f", Rot_Euler.X(), Rot_Euler.Y(), Rot_Euler.Z());
             // RCLCPP_INFO(node->get_logger(), "IMU Angular Velocity - X: %f, Y: %f, Z: %f", RelativeAngularVel.X(), RelativeAngularVel.Y(), RelativeAngularVel.Z());
             // RCLCPP_INFO(node->get_logger(), "IMU Linear Acceleration - X: %f, Y: %f, Z: %f", WorldLinearAccel.X(), WorldLinearAccel.Y(), WorldLinearAccel.Z());
 
@@ -317,7 +317,7 @@ namespace gazebo
             this->joint10_->SetForce(0, torque->data[9]);
             this->joint11_->SetForce(0, torque->data[10]);
             this->joint12_->SetForce(0, torque->data[11]);
-            this->joint13_->SetForce(0, torque->data[12]);
+            // this->joint13_->SetForce(0, torque->data[12]);
         }
     };
 
