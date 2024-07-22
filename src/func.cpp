@@ -5,6 +5,8 @@
 #include <memory>
 #include <string>
 #include <sstream> // Add this for std::stringstream
+#include <algorithm> // std::copy
+#include <array>
 
 #include <cmath>
 #include <math.h>

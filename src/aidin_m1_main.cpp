@@ -1,6 +1,4 @@
 #include "func.cpp"
-#include <algorithm> // std::copy
-#include <array>
 
 using namespace std;
 using namespace Eigen;
