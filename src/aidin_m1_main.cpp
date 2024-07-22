@@ -106,12 +106,12 @@ private:
         for (int i=0; i<12; i++)
         {
 
-            if (Kp[0] > 0 && Kp[1] == 0) // standing command
+            if (Kp[0] > 0 && Kp[1] == 4000) // standing command
             {
                 if (i < 3)    // LF joint
                 {
                     LF_target_pos[0] = 0;
-                    LF_target_pos[1] = M_PI_2/3;
+                    LF_target_pos[1] = M_PI_2/2;
                     LF_target_pos[2] = 0;
                     output_torque[i] = FeedforwardController(Kp[i], Kd[i], LF_target_pos.data(), i, 0);
                 }
@@ -137,7 +137,7 @@ private:
                     output_torque[i] = FeedforwardController(Kp[i-9], Kd[i-9], RB_target_pos.data(), i-9, 9);
                 }
             }
-            else if (Kp[0] > 0 && Kp[1] > 0) // running command
+            else if (Kp[0] > 0 && Kp[1] == 4001) // running command
             {
                 if (i<3)      // LF joint
                 {
@@ -195,22 +195,22 @@ private:
         double torque;
         if (i < 3) // LF joint
         {
-            LF_target_pos = {0, M_PI_2 / 3, 0};
+            LF_target_pos = {0, M_PI_2 / 3, -M_PI};
             torque = FeedforwardController(Kp[i], Kd[i], LF_target_pos.data(), i, 0);
         }
         else if (i < 6) // RF joint
         {
-            RF_target_pos = {0, M_PI_2 / 3, 0};
+            RF_target_pos = {0, M_PI_2 / 3, -M_PI};
             torque = FeedforwardController(Kp[i - 3], Kd[i - 3], RF_target_pos.data(), i - 3, 3);
         }
         else if (i < 9) // LB joint
         {
-            LB_target_pos = {0, M_PI_2 / 3, 0};
+            LB_target_pos = {0, M_PI_2 / 3, -M_PI};
             torque = FeedforwardController(Kp[i - 6], Kd[i - 6], LB_target_pos.data(), i - 6, 6);
         }
         else // RB joint
         {
-            RB_target_pos = {0, M_PI_2 / 3, 0};
+            RB_target_pos = {0, M_PI_2 / 3, -M_PI};
             torque = FeedforwardController(Kp[i - 9], Kd[i - 9], RB_target_pos.data(), i - 9, 9);
         }
         return torque;
