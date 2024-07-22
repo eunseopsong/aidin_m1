@@ -149,30 +149,38 @@ private:
         for (int i=0; i<12; i++)
         {
 
-            if (Kp[0] > 0 && Kp[1] == 0)
+            if (Kp[0] > 0 && Kp[1] == 0) // standing command
             {
-                if (i==0)      // LF joint
+                if (i < 3)    // LF joint
                 {
-                    // output_torque[i] = PDController(Kp[i],   Kd[i],   target_pos[i], joint_pos[i], joint_vel[i]);
+                    LF_target_pos[0] = 0;
+                    LF_target_pos[1] = 0;
+                    LF_target_pos[2] = 0;
                     output_torque[i] = FeedforwardController(Kp[i], Kd[i], LF_target_pos, i, 0);
                 }
-                else if (i==3) // RF joint
+                else if (i < 6) // RF joint
                 {
-                    // output_torque[i] = PDController(Kp[i-3], Kd[i-3], target_pos[i], joint_pos[i], joint_vel[i]);
+                    RF_target_pos[0] = 0;
+                    RF_target_pos[1] = 0;
+                    RF_target_pos[2] = 0;
                     output_torque[i] = FeedforwardController(Kp[i-3], Kd[i-3], RF_target_pos, i-3, 3);
                 }
-                else if (i==6) // LB joint
+                else if (i < 9) // LB joint
                 {
+                    LB_target_pos[0] = 0;
+                    LB_target_pos[1] = 0;
+                    LB_target_pos[2] = 0;
                     output_torque[i] = FeedforwardController(Kp[i-6], Kd[i-6], LB_target_pos, i-6, 6);
                 }
-                else if (i==9) // RB joint
+                else
                 {
+                    RB_target_pos[0] = 0;
+                    RB_target_pos[1] = 0;
+                    RB_target_pos[2] = 0;
                     output_torque[i] = FeedforwardController(Kp[i-9], Kd[i-9], RB_target_pos, i-9, 9);
                 }
-                else
-                    output_torque[i] = 0;
             }
-            else if (Kp[0] > 0 && Kp[1] > 0)
+            else if (Kp[0] > 0 && Kp[1] > 0) // running command
             {
                 if (i<3)      // LF joint
                 {
