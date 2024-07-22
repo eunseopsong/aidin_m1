@@ -4,6 +4,7 @@
 #include <functional>
 #include <memory>
 #include <string>
+#include <sstream> // Add this for std::stringstream
 
 #include <cmath>
 #include <math.h>
@@ -36,9 +37,9 @@ array<double, 3> body_pos{};
 array<double, 3> body_vel{};
 array<double, 9> imu{};
 array<double, 4> contact{};
-array<double, 3> angle{};
 array<double, 3> Kp{};
 array<double, 3> Kd{};
+string command;
 // float body_pose[6];
 // float joint_pos[13];     // Joint Pose
 // float joint_vel[13];     // Joint Velocity

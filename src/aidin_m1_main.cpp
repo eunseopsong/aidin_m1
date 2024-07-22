@@ -53,7 +53,11 @@ public:
             });
         sub_command = create_subscription<std_msgs::msg::Float32MultiArray>(
             "/aidin_m1/Command_sim", 10, [this](const std_msgs::msg::Float32MultiArray::SharedPtr msg) {
-                copy(msg->data.begin(), msg->data.begin() + 3, angle.begin());
+                std::stringstream ss;
+                for (const auto& val : msg->data) {
+                    ss << val << " ";
+                }
+                command = ss.str();
             });
 
         // Publish torque & target joint poses
