@@ -92,7 +92,7 @@
         <!-- <box size="0.200 0.370 0.216"/> -->
         <mesh filename="/home/eunseop/dev_ws/src/aidin_m1/meshes/Body_vis.stl" scale="0.001 0.001 0.001"/>
       </geometry>
-      <material name="silver"/>
+      <material name="darkgrey"/>
     </visual>
   </link>
   <gazebo reference="body">
@@ -153,11 +153,11 @@
         <mesh filename="/home/eunseop/dev_ws/src/aidin_m1/meshes/RF_scap_vis.stl" scale="0.001 0.001 0.001"/>
         <!-- <box size="0.140 0.140 0.230"/> -->
       </geometry>
-      <material name="red"/>
+      <material name="white"/>
     </visual>
   </link>
   <gazebo reference="RF_scap">
-    <material>Gazebo/Red</material>
+    <material>Gazebo/White</material>
   </gazebo>
 
   <link name="RF_hip">
@@ -182,11 +182,11 @@
         <mesh filename="/home/eunseop/dev_ws/src/aidin_m1/meshes/RF_hip_vis.stl" scale="0.001 0.001 0.001"/>
         <!-- <box size="0.250 0.050 0.050"/> -->
       </geometry>
-      <material name="green"/>
+      <material name="white"/>
     </visual>
   </link>
   <gazebo reference="RF_hip">
-    <material>Gazebo/Green</material>
+    <material>Gazebo/White</material>
   </gazebo>
 
   <link name="RF_knee">
@@ -211,11 +211,11 @@
         <mesh filename="/home/eunseop/dev_ws/src/aidin_m1/meshes/RF_knee_vis.stl" scale="0.001 0.001 0.001"/>
         <!-- <box size="0.250 0.050 0.050"/> -->
       </geometry>
-      <material name="blue"/>
+      <material name="white"/>
     </visual>
   </link>
   <gazebo reference="RF_knee">
-    <material>Gazebo/Blue</material>
+    <material>Gazebo/White</material>
   </gazebo>
 
   <link name="RF_foot">
@@ -305,11 +305,11 @@
         <mesh filename="/home/eunseop/dev_ws/src/aidin_m1/meshes/LF_scap_vis.stl" scale="0.001 0.001 0.001"/>
         <!-- <box size="0.140 0.140 0.230"/> -->
       </geometry>
-      <material name="red"/>
+      <material name="white"/>
     </visual>
   </link>
   <gazebo reference="LF_scap">
-    <material>Gazebo/Red</material>
+    <material>Gazebo/White</material>
   </gazebo>
 
   <link name="LF_hip">
@@ -334,11 +334,11 @@
         <mesh filename="/home/eunseop/dev_ws/src/aidin_m1/meshes/LF_hip_vis.stl" scale="0.001 0.001 0.001"/>
         <!-- <box size="0.250 0.050 0.050"/> -->
       </geometry>
-      <material name="green"/>
+      <material name="white"/>
     </visual>
   </link>
   <gazebo reference="LF_hip">
-    <material>Gazebo/Green</material>
+    <material>Gazebo/White</material>
   </gazebo>
 
   <link name="LF_knee">
@@ -363,11 +363,11 @@
         <mesh filename="/home/eunseop/dev_ws/src/aidin_m1/meshes/LF_knee_vis.stl" scale="0.001 0.001 0.001"/>
         <!-- <box size="0.250 0.050 0.050"/> -->
       </geometry>
-      <material name="blue"/>
+      <material name="white"/>
     </visual>
   </link>
   <gazebo reference="LF_knee">
-    <material>Gazebo/Blue</material>
+    <material>Gazebo/White</material>
   </gazebo>
 
   <link name="LF_foot">
@@ -457,11 +457,11 @@
         <mesh filename="/home/eunseop/dev_ws/src/aidin_m1/meshes/LB_scap_vis.stl" scale="0.001 0.001 0.001"/>
         <!-- <box size="0.140 0.140 0.230"/> -->
       </geometry>
-      <material name="red"/>
+      <material name="white"/>
     </visual>
   </link>
   <gazebo reference="LB_scap">
-    <material>Gazebo/Red</material>
+    <material>Gazebo/White</material>
   </gazebo>
 
   <link name="LB_hip">
@@ -486,11 +486,11 @@
         <mesh filename="/home/eunseop/dev_ws/src/aidin_m1/meshes/LF_hip_vis.stl" scale="0.001 0.001 0.001"/>
         <!-- <box size="0.250 0.050 0.050"/> -->
       </geometry>
-      <material name="green"/>
+      <material name="white"/>
     </visual>
   </link>
   <gazebo reference="LB_hip">
-    <material>Gazebo/Green</material>
+    <material>Gazebo/White</material>
   </gazebo>
 
   <link name="LB_knee">
@@ -515,11 +515,11 @@
         <mesh filename="/home/eunseop/dev_ws/src/aidin_m1/meshes/LF_knee_vis.stl" scale="0.001 0.001 0.001"/>
         <!-- <box size="0.250 0.050 0.050"/> -->
       </geometry>
-      <material name="blue"/>
+      <material name="white"/>
     </visual>
   </link>
   <gazebo reference="LB_knee">
-    <material>Gazebo/Blue</material>
+    <material>Gazebo/White</material>
   </gazebo>
 
   <link name="LB_foot">
@@ -609,11 +609,11 @@
         <mesh filename="/home/eunseop/dev_ws/src/aidin_m1/meshes/RB_scap_vis.stl" scale="0.001 0.001 0.001"/>
         <!-- <box size="0.140 0.140 0.230"/> -->
       </geometry>
-      <material name="red"/>
+      <material name="white"/>
     </visual>
   </link>
   <gazebo reference="RB_scap">
-    <material>Gazebo/Red</material>
+    <material>Gazebo/White</material>
   </gazebo>
 
   <link name="RB_hip">
@@ -638,11 +638,11 @@
         <mesh filename="/home/eunseop/dev_ws/src/aidin_m1/meshes/RF_hip_vis.stl" scale="0.001 0.001 0.001"/>
         <!-- <box size="0.250 0.050 0.050"/> -->
       </geometry>
-      <material name="green"/>
+      <material name="white"/>
     </visual>
   </link>
   <gazebo reference="RB_hip">
-    <material>Gazebo/Green</material>
+    <material>Gazebo/White</material>
   </gazebo>
 
   <link name="RB_knee">
@@ -667,11 +667,11 @@
         <mesh filename="/home/eunseop/dev_ws/src/aidin_m1/meshes/LF_knee_vis.stl" scale="0.001 0.001 0.001"/>
         <!-- <box size="0.250 0.050 0.050"/> -->
       </geometry>
-      <material name="blue"/>
+      <material name="white"/>
     </visual>
   </link>
   <gazebo reference="RB_knee">
-    <material>Gazebo/Blue</material>
+    <material>Gazebo/White</material>
   </gazebo>
 
   <link name="RB_foot">
