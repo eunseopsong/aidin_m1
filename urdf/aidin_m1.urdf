@@ -216,31 +216,40 @@
     <material>Gazebo/White</material>
   </gazebo>
 
-  <link name="RF_foot">
-    <inertial>
-      <mass value="0"/>
-      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
-    </inertial>
+<link name="RF_foot">
+  <inertial>
+    <mass value="0"/>
+    <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+  </inertial>
 
-    <collision name="RF_foot_col1">
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <sphere radius="0.025"/>
-      </geometry>
-    </collision>
+  <collision name="RF_foot_col1">
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <geometry>
+      <sphere radius="0.025"/>
+    </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>0.6</mu> <!-- 주 마찰 계수 -->
+          <mu2>0.6</mu2> <!-- 이차 마찰 계수 (필요 시) -->
+        </ode>
+      </friction>
+    </surface>
+  </collision>
 
-    <visual name="RF_foot_vis_cover">
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="/home/eunseop/dev_ws/src/aidin_m1/meshes/feet.stl" scale="0.001 0.001 0.001"/>
-        <!-- <sphere radius="0.0250"/> -->
-      </geometry>
-      <material name="black"/>
-    </visual>
-  </link>
-  <gazebo reference="RF_foot">
-    <material>Gazebo/Black</material>
-  </gazebo>
+  <visual name="RF_foot_vis_cover">
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <geometry>
+      <mesh filename="/home/eunseop/dev_ws/src/aidin_m1/meshes/feet.stl" scale="0.001 0.001 0.001"/>
+      <!-- <sphere radius="0.0250"/> -->
+    </geometry>
+    <material name="black"/>
+  </visual>
+</link>
+<gazebo reference="RF_foot">
+  <material>Gazebo/Black</material>
+</gazebo>
+
 
 <!--//////////////////////////////// RF JOINTS ////////////////////////////////-->
 
@@ -371,15 +380,23 @@
   <link name="LF_foot">
     <inertial>
       <mass value="0"/>
-      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
+      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
     </inertial>
 
     <collision name="LF_foot_col1">
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <sphere radius="0.025"/>
-      </geometry>
-    </collision>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <geometry>
+      <sphere radius="0.025"/>
+    </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>0.6</mu> <!-- 주 마찰 계수 -->
+          <mu2>0.6</mu2> <!-- 이차 마찰 계수 (필요 시) -->
+        </ode>
+      </friction>
+    </surface>
+  </collision>
 
     <visual name="LF_foot_vis_cover">
       <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -523,7 +540,7 @@
   <link name="LB_foot">
     <inertial>
       <mass value="0"/>
-      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
+      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
     </inertial>
 
     <collision name="LB_foot_col1">
@@ -531,6 +548,14 @@
       <geometry>
         <sphere radius="0.025"/>
       </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>0.6</mu> <!-- 주 마찰 계수 -->
+            <mu2>0.6</mu2> <!-- 이차 마찰 계수 (필요 시) -->
+          </ode>
+        </friction>
+      </surface>
     </collision>
 
     <visual name="LB_foot_vis_cover">
@@ -675,7 +700,7 @@
   <link name="RB_foot">
     <inertial>
       <mass value="0"/>
-      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
+      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
     </inertial>
 
     <collision name="RB_foot_col1">
@@ -683,6 +708,14 @@
       <geometry>
         <sphere radius="0.025"/>
       </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>0.6</mu> <!-- 주 마찰 계수 -->
+            <mu2>0.6</mu2> <!-- 이차 마찰 계수 (필요 시) -->
+          </ode>
+        </friction>
+      </surface>
     </collision>
 
     <visual name="RB_foot_vis_cover">
