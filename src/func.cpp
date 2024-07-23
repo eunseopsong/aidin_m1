@@ -102,6 +102,7 @@ double CalculateValues(double S[], double t, double T, int cases)
     return returnValue;
 }
 
+
 void SplineTrajectory(double t, double T, double vel_of_body, double &xVal, double &zVal)
 {
     /////////////////////// Initializing ////////////////////////
@@ -276,5 +277,23 @@ double FeedforwardController(double Kp, double Kd, double th[3], int case_, int 
         return torque_desired[1];
     } else {
         return torque_desired[2];
+    }
+}
+
+void CalculateTorqueStanding(double* output_torque, array<double, 3> Kp, array<double ,3> Kd)
+{
+    array<double, 3> target_pos;
+    target_pos = {0, M_PI_2/2, 0};
+
+    for (int i=0; i<12; i++)
+    {
+        if (i < 3)      // LF joint
+            output_torque[i] = FeedforwardController(Kp[i], Kd[i], target_pos.data(), i,   0);
+        else if (i < 6) // RF joint
+            output_torque[i] = FeedforwardController(Kp[i-3], Kd[i-3], target_pos.data(), i-3, 3);
+        else if (i < 9) // LB joint
+            output_torque[i] = FeedforwardController(Kp[i-6], Kd[i-6], target_pos.data(), i-6, 6);
+        else            // RB joint
+            output_torque[i] = FeedforwardController(Kp[i-9], Kd[i-9], target_pos.data(), i-9, 9);
     }
 }

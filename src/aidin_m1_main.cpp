@@ -1,3 +1,4 @@
+// #include "FootstepPlanner.cpp"
 #include "func.cpp"
 
 using namespace std;
@@ -94,87 +95,47 @@ private:
         target_pos.insert(target_pos.end(), LB_target_pos.begin(), LB_target_pos.end());
         target_pos.insert(target_pos.end(), RB_target_pos.begin(), RB_target_pos.end());
 
-        // Calculate the output_torque using PD or Feedforward control
+        // Output torque to pubilsh Initialization
         vector<double> output_torque(12);
 
-        // switch (command) {
-        //     case 1:
-
-        //         break;
-        //     case 2:
-
-        //         break;
-        //     default:
-        //         ouput_torque.fill(0.0);
-        // }
-
-
-
-
-        for (int i=0; i<12; i++)
-        {
-            if (command[0] == 1) // standing command
-            {
-                if (i < 3)    // LF joint
-                {
-                    LF_target_pos = {0, M_PI_2/2, 0};
-                    output_torque[i] = FeedforwardController(Kp(i,0), Kd(i,0), LF_target_pos.data(), i, 0);
-                }
-                else if (i < 6) // RF joint
-                {
-                    RF_target_pos = {0, M_PI_2/2, 0};
-                    output_torque[i] = FeedforwardController(Kp(i-3,0), Kd(i-3,0), RF_target_pos.data(), i-3, 3);
-                }
-                else if (i < 9) // LB joint
-                {
-                    LB_target_pos = {0, M_PI_2/2, 0};
-                    output_torque[i] = FeedforwardController(Kp(i-6,0), Kd(i-6,0), LB_target_pos.data(), i-6, 6);
-                }
-                else
-                {
-                    RB_target_pos = {0, M_PI_2/2, 0};
-                    output_torque[i] = FeedforwardController(Kp(i-9,0), Kd(i-9,0), RB_target_pos.data(), i-9, 9);
-                }
-            }
-            else if (command[0] == 3) // running command
-            {
-                if (i<3)      // LF joint
-                {
-                    // output_torque[i] = PDController(Kp[i],   Kd[i],   target_pos[i], joint_pos[i], joint_vel[i]);
-                    output_torque[i] = FeedforwardController(Kp(i,0), Kd(i,0), LF_target_pos.data(), i, 0);
-                }
-                else if (i<6) // RF joint
-                {
-                    // output_torque[i] = PDController(Kp[i-3], Kd[i-3], target_pos[i], joint_pos[i], joint_vel[i]);
-                    output_torque[i] = FeedforwardController(Kp(i-3,0), Kd(i-3,0), RF_target_pos.data(), i-3, 3);
-                }
-                else if (i<9) // LB joint
-                {
-                    output_torque[i] = FeedforwardController(Kp(i-6,0), Kd(i-6,0), LB_target_pos.data(), i-6, 6);
-                }
-                else          // RB joint
-                {
-                    output_torque[i] = FeedforwardController(Kp(i-9,0), Kd(i-9,0), RB_target_pos.data(), i-9, 9);
-                }
-            }
-            else
-                output_torque[i] = 0;
+        switch (int(command[0])) {
+            case 1: // the command to keep a robot "standing still"
+                CalculateTorqueStanding(output_torque.data(), {Kp(0,0), Kp(1,0), Kp(2,0)}, {Kd(0,0), Kd(1,0), Kd(2,0)});
+                break;
+            case 2: // the command to keep a robot "walking in place"
+                // CalculateTorqueWalkingInPlace(ouput_torque);
+                break;
+            case 3: // the command to make a robot "run"
+                CalculateTorqueRunning(output_torque);
+                break;
+            default:
+                fill(output_torque.begin(), output_torque.end(), 0.0);
+                break;
         }
 
-        // for (int i = 0; i < 12; ++i)
+        // for (int i=0; i<12; i++)
         // {
-        //     if (Kp[0] > 0 && Kp[1] == 0) // standing command
+        //     else if (command[0] == 3) // running command
         //     {
-        //         output_torque[i] = calculate_torque_standing(i, LF_target_pos, RF_target_pos, LB_target_pos, RB_target_pos);
-        //     }
-        //     else if (Kp[0] > 0 && Kp[1] > 0) // running command
-        //     {
-        //         output_torque[i] = calculate_torque_running(i, LF_target_pos, RF_target_pos, LB_target_pos, RB_target_pos);
+        //         if (i<3)      // LF joint
+        //         {
+        //             output_torque[i] = FeedforwardController(Kp(i,0), Kd(i,0), LF_target_pos.data(), i, 0);
+        //         }
+        //         else if (i<6) // RF joint
+        //         {
+        //             output_torque[i] = FeedforwardController(Kp(i-3,0), Kd(i-3,0), RF_target_pos.data(), i-3, 3);
+        //         }
+        //         else if (i<9) // LB joint
+        //         {
+        //             output_torque[i] = FeedforwardController(Kp(i-6,0), Kd(i-6,0), LB_target_pos.data(), i-6, 6);
+        //         }
+        //         else          // RB joint
+        //         {
+        //             output_torque[i] = FeedforwardController(Kp(i-9,0), Kd(i-9,0), RB_target_pos.data(), i-9, 9);
+        //         }
         //     }
         //     else
-        //     {
         //         output_torque[i] = 0;
-        //     }
         // }
 
         // Publish Desired Pose
@@ -187,56 +148,6 @@ private:
         torque_msg.data.insert(torque_msg.data.end(), output_torque.begin(), output_torque.end());
         pub_torque->publish(torque_msg);
     }
-
-    // double calculate_torque_standing(int i, array<double, 3> &LF_target_pos, array<double, 3> &RF_target_pos,
-    //                                  array<double, 3> &LB_target_pos, array<double, 3> &RB_target_pos)
-    // {
-    //     double torque;
-    //     if (i < 3) // LF joint
-    //     {
-    //         LF_target_pos = {0, M_PI_2 / 3, -M_PI};
-    //         torque = FeedforwardController(Kp[i], Kd[i], LF_target_pos.data(), i, 0);
-    //     }
-    //     else if (i < 6) // RF joint
-    //     {
-    //         RF_target_pos = {0, M_PI_2 / 3, -M_PI};
-    //         torque = FeedforwardController(Kp[i - 3], Kd[i - 3], RF_target_pos.data(), i - 3, 3);
-    //     }
-    //     else if (i < 9) // LB joint
-    //     {
-    //         LB_target_pos = {0, M_PI_2 / 3, -M_PI};
-    //         torque = FeedforwardController(Kp[i - 6], Kd[i - 6], LB_target_pos.data(), i - 6, 6);
-    //     }
-    //     else // RB joint
-    //     {
-    //         RB_target_pos = {0, M_PI_2 / 3, -M_PI};
-    //         torque = FeedforwardController(Kp[i - 9], Kd[i - 9], RB_target_pos.data(), i - 9, 9);
-    //     }
-    //     return torque;
-    // }
-
-    // double calculate_torque_running(int i, array<double, 3> &LF_target_pos, array<double, 3> &RF_target_pos,
-    //                                 array<double, 3> &LB_target_pos, array<double, 3> &RB_target_pos)
-    // {
-    //     double torque;
-    //     if (i < 3) // LF joint
-    //     {
-    //         torque = FeedforwardController(Kp[i], Kd[i], LF_target_pos.data(), i, 0);
-    //     }
-    //     else if (i < 6) // RF joint
-    //     {
-    //         torque = FeedforwardController(Kp[i - 3], Kd[i - 3], RF_target_pos.data(), i - 3, 3);
-    //     }
-    //     else if (i < 9) // LB joint
-    //     {
-    //         torque = FeedforwardController(Kp[i - 6], Kd[i - 6], LB_target_pos.data(), i - 6, 6);
-    //     }
-    //     else // RB joint
-    //     {
-    //         torque = FeedforwardController(Kp[i - 9], Kd[i - 9], RB_target_pos.data(), i - 9, 9);
-    //     }
-    //     return torque;
-    // }
 
     // Subscriber declarations
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_bodypose;
@@ -263,6 +174,5 @@ int main(int argc, char **argv)
     auto node = std::make_shared<JointControl>();
     rclcpp::spin(node);
     rclcpp::shutdown();
-    
     return 0;
 }
