@@ -250,7 +250,7 @@
     <origin xyz="0.255 -0.120 0" rpy="-1.57079 0 -1.57079"/>
     <axis xyz="0 0 1"/>
     <limit lower="-1.57089" upper="1.57089" effort="200.0" velocity="9"/>
-    <dynamics damping="3"/>
+    <dynamics damping="1" friction="0.2"/>
   </joint>
 
   <joint name="RFJ_hip" type="revolute">
@@ -259,7 +259,7 @@
     <origin xyz="0.095 0 0" rpy="-1.57079  1.57079 -1.57079"/>
     <axis xyz="0 0 1"/>
     <limit lower="-3.14" upper="3.14" effort="200.0" velocity="9"/>
-    <dynamics damping="3"/>
+    <dynamics damping="1" friction="0.2"/>
   </joint>
 
   <joint name="RFJ_knee" type="revolute">
@@ -268,7 +268,7 @@
     <origin xyz="0.250 0 0" rpy="0 0 1.57079"/>
     <axis xyz="0 0 1"/>
     <limit lower="-3.14" upper="3.14" effort="200.0" velocity="9"/>
-    <dynamics damping="3"/>
+    <dynamics damping="1" friction="0.2"/>
   </joint>
 
   <!-- <joint name="RFJ_foot" type="fixed" dont_collapse="true"> -->
@@ -402,7 +402,7 @@
     <origin xyz="0.255 0.120 0" rpy="1.57079 0 1.57079"/>
     <axis xyz="0 0 1"/>
     <limit lower="-1.57089" upper="1.57089" effort="200.0" velocity="9"/>
-    <dynamics damping="3"/>
+    <dynamics damping="1" friction="0.2"/>
   </joint>
 
   <joint name="LFJ_hip" type="revolute">
@@ -411,7 +411,7 @@
     <origin xyz="0.095 0 0" rpy="-1.57079 1.57079 1.57079"/>
     <axis xyz="0 0 1"/>
     <limit lower="-3.14" upper="3.14" effort="200.0" velocity="9"/>
-    <dynamics damping="3"/>
+    <dynamics damping="1" friction="0.2"/>
   </joint>
 
   <joint name="LFJ_knee" type="revolute">
@@ -420,7 +420,7 @@
     <origin xyz="0.250 0 0" rpy="0 0 1.57079"/>
     <axis xyz="0 0 1"/>
     <limit lower="-3.14" upper="3.14" effort="200.0" velocity="9"/>
-    <dynamics damping="3"/>
+    <dynamics damping="1" friction="0.2"/>
   </joint>
 
   <!-- <joint name="LFJ_foot" type="fixed" dont_collapse="true"> -->
@@ -554,7 +554,7 @@
     <origin xyz="-0.255 0.120 0" rpy="1.57079 0 1.57079"/>
     <axis xyz="0 0 1"/>
     <limit lower="-1.57089" upper="1.57089" effort="200.0" velocity="9"/>
-    <dynamics damping="3"/>
+    <dynamics damping="1" friction="0.2"/>
   </joint>
 
   <joint name="LBJ_hip" type="revolute">
@@ -563,7 +563,7 @@
     <origin xyz="0.095 0 0" rpy="-1.559 1.57079 1.58259"/>
     <axis xyz="0 0 1"/>
     <limit lower="-3.14" upper="3.14" effort="200.0" velocity="9"/>
-    <dynamics damping="3"/>
+    <dynamics damping="1" friction="0.2"/>
   </joint>
 
   <joint name="LBJ_knee" type="revolute">
@@ -572,7 +572,7 @@
     <origin xyz="0.250 0 0" rpy="0 0 1.57079"/>
     <axis xyz="0 0 1"/>
     <limit lower="-3.14" upper="3.14" effort="200.0" velocity="9"/>
-    <dynamics damping="3"/>
+    <dynamics damping="1" friction="0.2"/>
   </joint>
 
   <!-- <joint name="LBJ_foot" type="fixed" dont_collapse="true"> -->
@@ -706,7 +706,7 @@
     <origin xyz="-0.255 -0.120   0" rpy="-1.57079 0 -1.57079"/>
     <axis xyz="0 0 1"/>
     <limit lower="-1.57089" upper="1.57089" effort="200.0" velocity="9"/>
-    <dynamics damping="3"/>
+    <dynamics damping="1" friction="0.2"/>
   </joint>
 
   <joint name="RBJ_hip" type="revolute">
@@ -715,7 +715,7 @@
     <origin xyz="0.095 0 0" rpy="-1.58259 1.57079 -1.58259"/>
     <axis xyz="0 0 1"/>
     <limit lower="-3.14" upper="3.14" effort="200.0" velocity="9"/>
-    <dynamics damping="3"/>
+    <dynamics damping="1" friction="0.2"/>
   </joint>
 
   <joint name="RBJ_knee" type="revolute">
@@ -724,7 +724,7 @@
     <origin xyz="0.250 0 0" rpy="0 0 1.57079"/>
     <axis xyz="0 0 1"/>
     <limit lower="-3.14" upper="3.14" effort="200.0" velocity="9"/>
-    <dynamics damping="3"/>
+    <dynamics damping="1" friction="0.2"/>
   </joint>
 
   <!-- <joint name="RBJ_foot" type="fixed" dont_collapse="true"> -->
