@@ -57,20 +57,20 @@ private:
     {
         count_ += 0.001; // Increment simulation time by 1ms
 
-        // Initialize Kp and Kd
+        // Gain Initialization
         Matrix3d Kp, Kd;
-        Kp << 600, 600, 1200,
-             4000, 4000, 8000,
-            26000, 26000, 52000;
-        Kd << 20, 20, 40,
-              20, 20, 40,
-              10, 10, 20;
+        //    Initial_Standing  SWing_Phase  STanding_Phase
+        Kp <<       600,            600,            1200,   // Scapula
+                   4000,           4000,            8000,   // Hip
+                  26000,          26000,           52000;   // Knee
+        Kd <<        20,             20,              40,   // Scapula
+                     20,             20,              40,   // Hip
+                     10,             10,              20;   // Knee
 
-
-        double vel_of_body = 500; // Target velocity of the whole robot body (mm/s)
-        double T = 1.6;           // Period of the whole trajectory phase    (sec)
+        double vel_of_body = command[1]; // Target velocity of the whole robot body (mm/s)
+        double T = command[2];           // Period of the whole trajectory phase    (sec)
         double t = fmod(count_, T);
-        double t_counter = fmod(count_ + 0.800, T);
+        double t_counter = fmod(count_ + T/2, T);
 
         // Calculate the coordinate using Trajectory Function
         double yVal = 95;
@@ -97,41 +97,46 @@ private:
         // Calculate the output_torque using PD or Feedforward control
         vector<double> output_torque(12);
 
+        // switch (command) {
+        //     case 1:
+
+        //         break;
+        //     case 2:
+
+        //         break;
+        //     default:
+        //         ouput_torque.fill(0.0);
+        // }
+
+
+
+
         for (int i=0; i<12; i++)
         {
-
-            if (Kp(0,0) > 0 && Kp(1,0) == 4000) // standing command
+            if (command[0] == 1) // standing command
             {
                 if (i < 3)    // LF joint
                 {
-                    LF_target_pos[0] = 0;
-                    LF_target_pos[1] = M_PI_2/2;
-                    LF_target_pos[2] = 0;
+                    LF_target_pos = {0, M_PI_2/2, 0};
                     output_torque[i] = FeedforwardController(Kp(i,0), Kd(i,0), LF_target_pos.data(), i, 0);
                 }
                 else if (i < 6) // RF joint
                 {
-                    RF_target_pos[0] = 0;
-                    RF_target_pos[1] = M_PI_2/3;
-                    RF_target_pos[2] = 0;
+                    RF_target_pos = {0, M_PI_2/2, 0};
                     output_torque[i] = FeedforwardController(Kp(i-3,0), Kd(i-3,0), RF_target_pos.data(), i-3, 3);
                 }
                 else if (i < 9) // LB joint
                 {
-                    LB_target_pos[0] = 0;
-                    LB_target_pos[1] = M_PI_2/3;
-                    LB_target_pos[2] = 0;
+                    LB_target_pos = {0, M_PI_2/2, 0};
                     output_torque[i] = FeedforwardController(Kp(i-6,0), Kd(i-6,0), LB_target_pos.data(), i-6, 6);
                 }
                 else
                 {
-                    RB_target_pos[0] = 0;
-                    RB_target_pos[1] = M_PI_2/3;
-                    RB_target_pos[2] = 0;
+                    RB_target_pos = {0, M_PI_2/2, 0};
                     output_torque[i] = FeedforwardController(Kp(i-9,0), Kd(i-9,0), RB_target_pos.data(), i-9, 9);
                 }
             }
-            else if (Kp(0,0) > 0 && Kp(1,0) == 4001) // running command
+            else if (command[0] == 3) // running command
             {
                 if (i<3)      // LF joint
                 {
