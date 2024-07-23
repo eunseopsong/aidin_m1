@@ -60,13 +60,13 @@ private:
 
         // Gain Initialization
         Matrix3d Kp, Kd;
-        //    Initial_Standing  SWing_Phase  STanding_Phase
-        Kp <<       600,            600,            1200,   // Scapula
-                   4000,           4000,            8000,   // Hip
-                  26000,          26000,           52000;   // Knee
-        Kd <<        20,             20,              40,   // Scapula
-                     20,             20,              40,   // Hip
-                     10,             10,              20;   // Knee
+        ////  Initial_Standing  SWing_Phase  STanding_Phase
+        Kp <<       600,            600,            1200, //// Scapula
+                   4000,           4000,            8000, //// Hip
+                  26000,          26000,           52000; //// Knee
+        Kd <<        20,             20,              40, //// Scapula
+                     20,             20,              40, //// Hip
+                     10,             10,              20; //// Knee
 
         double vel_of_body = command[1]; // Target velocity of the whole robot body (mm/s)
         double T = command[2];           // Period of the whole trajectory phase    (sec)
@@ -89,11 +89,11 @@ private:
         InverseKinematics3D(yVal, zVal_counter, xVal_counter, yVal, 250, 250, LB_target_pos.data());
         InverseKinematics3D(yVal, zVal, xVal, yVal, 250, 250, RB_target_pos.data());
 
-        vector<double> target_pos;
-        target_pos.insert(target_pos.end(), LF_target_pos.begin(), LF_target_pos.end());
-        target_pos.insert(target_pos.end(), RF_target_pos.begin(), RF_target_pos.end());
-        target_pos.insert(target_pos.end(), LB_target_pos.begin(), LB_target_pos.end());
-        target_pos.insert(target_pos.end(), RB_target_pos.begin(), RB_target_pos.end());
+        array<double, 12> target_pos;
+        copy(LF_target_pos.begin(), LF_target_pos.end(), target_pos.begin());
+        copy(RF_target_pos.begin(), RF_target_pos.end(), target_pos.begin() + 3);
+        copy(LB_target_pos.begin(), LB_target_pos.end(), target_pos.begin() + 6);
+        copy(RB_target_pos.begin(), RB_target_pos.end(), target_pos.begin() + 9);
 
         // Output torque to pubilsh Initialization
         vector<double> output_torque(12);
@@ -103,40 +103,15 @@ private:
                 CalculateTorqueStanding(output_torque.data(), {Kp(0,0), Kp(1,0), Kp(2,0)}, {Kd(0,0), Kd(1,0), Kd(2,0)});
                 break;
             case 2: // the command to keep a robot "walking in place"
-                // CalculateTorqueWalkingInPlace(ouput_torque);
+                CalculateTorqueWalkingInPlace(output_torque.data(), {Kp(0,2), Kp(1,2), Kp(2,2)}, {Kd(0,2), Kd(1,2), Kd(2,2)});
                 break;
             case 3: // the command to make a robot "run"
-                CalculateTorqueRunning(output_torque);
+                CalculateTorqueRunning(output_torque.data(), target_pos.data(), {Kp(0,1), Kp(1,1), Kp(2,1)}, {Kd(0,1), Kd(1,1), Kd(2,1)});
                 break;
             default:
                 fill(output_torque.begin(), output_torque.end(), 0.0);
                 break;
         }
-
-        // for (int i=0; i<12; i++)
-        // {
-        //     else if (command[0] == 3) // running command
-        //     {
-        //         if (i<3)      // LF joint
-        //         {
-        //             output_torque[i] = FeedforwardController(Kp(i,0), Kd(i,0), LF_target_pos.data(), i, 0);
-        //         }
-        //         else if (i<6) // RF joint
-        //         {
-        //             output_torque[i] = FeedforwardController(Kp(i-3,0), Kd(i-3,0), RF_target_pos.data(), i-3, 3);
-        //         }
-        //         else if (i<9) // LB joint
-        //         {
-        //             output_torque[i] = FeedforwardController(Kp(i-6,0), Kd(i-6,0), LB_target_pos.data(), i-6, 6);
-        //         }
-        //         else          // RB joint
-        //         {
-        //             output_torque[i] = FeedforwardController(Kp(i-9,0), Kd(i-9,0), RB_target_pos.data(), i-9, 9);
-        //         }
-        //     }
-        //     else
-        //         output_torque[i] = 0;
-        // }
 
         // Publish Desired Pose
         std_msgs::msg::Float32MultiArray targetpos_msg;

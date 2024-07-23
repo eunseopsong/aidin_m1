@@ -297,3 +297,45 @@ void CalculateTorqueStanding(double* output_torque, array<double, 3> Kp, array<d
             output_torque[i] = FeedforwardController(Kp[i-9], Kd[i-9], target_pos.data(), i-9, 9);
     }
 }
+
+void CalculateTorqueWalkingInPlace(double* output_torque, array<double, 3> Kp, array<double ,3> Kd)
+{
+    array<double, 3> target_pos;
+    target_pos = {0, M_PI_2/2, 0};
+
+    for (int i=0; i<12; i++)
+    {
+        if (i < 3)      // LF joint
+            output_torque[i] = FeedforwardController(Kp[i], Kd[i], target_pos.data(), i,   0);
+        else if (i < 6) // RF joint
+            output_torque[i] = FeedforwardController(Kp[i-3], Kd[i-3], target_pos.data(), i-3, 3);
+        else if (i < 9) // LB joint
+            output_torque[i] = FeedforwardController(Kp[i-6], Kd[i-6], target_pos.data(), i-6, 6);
+        else            // RB joint
+            output_torque[i] = FeedforwardController(Kp[i-9], Kd[i-9], target_pos.data(), i-9, 9);
+    }
+}
+
+void CalculateTorqueRunning(double* output_torque, double* target_pos, array<double, 3> Kp, array<double ,3> Kd)
+{
+    // 3개씩 끊어서 저장할 배열
+    array<double, 3> LF_pos, RF_pos, LB_pos, RB_pos;
+
+    // std::copy를 사용하여 배열 복사
+    copy(target_pos    , target_pos +  3, LF_pos.begin());
+    copy(target_pos + 3, target_pos +  6, RF_pos.begin());
+    copy(target_pos + 6, target_pos +  9, LB_pos.begin());
+    copy(target_pos + 9, target_pos + 12, RB_pos.begin());
+
+    for (int i=0; i<12; i++)
+    {
+        if (i < 3)      // LF joint
+            output_torque[i] = FeedforwardController(Kp[i],   Kd[i],   LF_pos.data(), i,   0);
+        else if (i < 6) // RF joint
+            output_torque[i] = FeedforwardController(Kp[i-3], Kd[i-3], RF_pos.data(), i-3, 3);
+        else if (i < 9) // LB joint
+            output_torque[i] = FeedforwardController(Kp[i-6], Kd[i-6], LB_pos.data(), i-6, 6);
+        else            // RB joint
+            output_torque[i] = FeedforwardController(Kp[i-9], Kd[i-9], RB_pos.data(), i-9, 9);
+    }
+}
