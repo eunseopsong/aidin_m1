@@ -164,7 +164,6 @@
     <inertial>
       <mass value="0.615"/>
       <origin xyz="0.063 0.014 0.002" rpy="0 0 0"/>
-      <!-- <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/> -->
       <!-- <inertia ixx="0.001541527" ixy="0.000007051" ixz="-0.000001356" iyy="0.001938779" iyz="0.000000659" izz="0.001547151"/> -->
       <inertia ixx="0.000769544" ixy="-0.000269033" ixz="-0.000074609" iyy="0.007987559" iyz="-0.000017663" izz="0.008526217"/>
     </inertial>
@@ -193,7 +192,6 @@
     <inertial>
       <mass value="0.343"/>
       <origin xyz="0.077 0.002 0" rpy="0 0 0"/>
-      <!-- <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/> -->
       <!-- <inertia ixx="0.001541527" ixy="0.000007051" ixz="-0.000001356" iyy="0.001938779" iyz="0.000000659" izz="0.001547151"/> -->
       <inertia ixx="0.000092851" ixy="0.000016513" ixz="-0.000000007" iyy="0.004330285" iyz="0.000000016" izz="0.004412529"/>
     </inertial>
@@ -273,11 +271,11 @@
     <dynamics damping="3"/>
   </joint>
 
-  <joint name="RFJ_foot" type="fixed" dont_collapse="true">
+  <!-- <joint name="RFJ_foot" type="fixed" dont_collapse="true"> -->
+  <joint name="RFJ_foot" type="fixed">
     <parent link="RF_knee"/>
     <child link="RF_foot"/>
     <origin xyz="0.250 -0.010 0.002" rpy="-1.57089 0 -1.57089"/>
-    <axis xyz="0 0 1"/>
   </joint>
 
 <!--//////////////////////////////// LF LINKS /////////////////////////////////-->
@@ -425,11 +423,11 @@
     <dynamics damping="3"/>
   </joint>
 
+  <!-- <joint name="LFJ_foot" type="fixed" dont_collapse="true"> -->
   <joint name="LFJ_foot" type="fixed" dont_collapse="true">
     <parent link="LF_knee"/>
     <child link="LF_foot"/>
     <origin xyz="0.250 -0.010 0.002" rpy="-1.57089 0 -1.57089"/>
-    <axis xyz="0 0 1"/>
   </joint>
 
 <!--//////////////////////////////// LB LINKS /////////////////////////////////-->
@@ -577,11 +575,11 @@
     <dynamics damping="3"/>
   </joint>
 
-  <joint name="LBJ_foot" type="fixed" dont_collapse="true">
+  <!-- <joint name="LBJ_foot" type="fixed" dont_collapse="true"> -->
+  <joint name="LBJ_foot" type="fixed">
     <parent link="LB_knee"/>
     <child link="LB_foot"/>
     <origin xyz="0.250 -0.010 0.002" rpy="-1.57089 0 -1.57089"/>
-    <axis xyz="0 0 1"/>
   </joint>
 
 <!--//////////////////////////////// RB LINKS /////////////////////////////////-->
@@ -729,11 +727,11 @@
     <dynamics damping="3"/>
   </joint>
 
-  <joint name="RBJ_foot" type="fixed" dont_collapse="true">
+  <!-- <joint name="RBJ_foot" type="fixed" dont_collapse="true"> -->
+  <joint name="RBJ_foot" type="fixed">
     <parent link="RB_knee"/>
     <child link="RB_foot"/>
     <origin xyz="0.250 -0.010 0.002" rpy="-1.57089 0 -1.57089"/>
-    <axis xyz="0 0 1"/>
   </joint>
 
 <!--//////////////////////////////// Sensor - Lidar //////////////////////////////////-->
