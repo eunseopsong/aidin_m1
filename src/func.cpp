@@ -41,17 +41,6 @@ array<double, 9> imu{};
 array<double, 4> contact{};
 array<double, 3> command{};
 
-// array<double, 3> Kp{};
-// array<double, 3> Kd{};
-
-//    initial_standing  SWingPhase  STandingPhase
-// Kp <<       600,            600,         1200,
-//            4000,           4000,         8000,
-//           26000,          26000,        52000;
-// Kd <<        20,             20,           40,
-//              20,             20,           40,
-//              10,             10,           20;
-
 //////////// Method of Undetermined Coefficients using Eigen ////////////
 
 void solve(double d, double e, double f, double T, double singularity, double B_val[], double arr[6])
@@ -236,7 +225,7 @@ double FeedforwardController(double Kp, double Kd, double th[3], int case_, int 
     double L1  = 0.095, L2  = 0.250; // double L3  = 0.250;
     double Lg1 = 0.03106445, Lg2 = 0.06456779, Lg3 = 0.07702597;
 
-    double PD_term_1 = Kp*(th[0] - joint_pos[cri]) + Kd*(0 - joint_vel[cri]);
+    double PD_term_1 = Kp*(th[0] - joint_pos[cri])   + Kd*(0 - joint_vel[cri]);
     double PD_term_2 = Kp*(th[1] - joint_pos[cri+1]) + Kd*(0 - joint_vel[cri+1]);
     double PD_term_3 = Kp*(th[2] - joint_pos[cri+2]) + Kd*(0 - joint_vel[cri+2]);
 

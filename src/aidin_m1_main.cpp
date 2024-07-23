@@ -84,10 +84,22 @@ private:
         // Calculate the target_pos using Inverse Kinematics
         array<double, 3> LF_target_pos, RF_target_pos, LB_target_pos, RB_target_pos;
 
-        InverseKinematics3D(yVal, zVal, xVal, yVal, 250, 250, LF_target_pos.data());
-        InverseKinematics3D(yVal, zVal_counter, xVal_counter, yVal, 250, 250, RF_target_pos.data());
-        InverseKinematics3D(yVal, zVal_counter, xVal_counter, yVal, 250, 250, LB_target_pos.data());
-        InverseKinematics3D(yVal, zVal, xVal, yVal, 250, 250, RB_target_pos.data());
+        switch (int(command[0])) {
+            case 1: // the command to keep a robot "standing still"
+
+                break;
+            case 2: // the command to keep a robot "walking in place"
+
+                break;
+            case 3: // the command to make a robot "run" (trotting)
+                InverseKinematics3D(yVal, zVal, xVal, yVal, 250, 250, LF_target_pos.data());
+                InverseKinematics3D(yVal, zVal_counter, xVal_counter, yVal, 250, 250, RF_target_pos.data());
+                InverseKinematics3D(yVal, zVal_counter, xVal_counter, yVal, 250, 250, LB_target_pos.data());
+                InverseKinematics3D(yVal, zVal, xVal, yVal, 250, 250, RB_target_pos.data());
+                break;
+            default:
+                break;
+        }
 
         array<double, 12> target_pos;
         copy(LF_target_pos.begin(), LF_target_pos.end(), target_pos.begin());
