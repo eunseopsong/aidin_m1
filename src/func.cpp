@@ -4,7 +4,7 @@
 #include <functional>
 #include <memory>
 #include <string>
-#include <sstream> // Add this for std::stringstream
+// #include <sstream>
 #include <algorithm> // std::copy
 #include <array>
 
@@ -39,20 +39,18 @@ array<double, 3> body_pos{};
 array<double, 3> body_vel{};
 array<double, 9> imu{};
 array<double, 4> contact{};
-array<double, 3> Kp{};
-array<double, 3> Kd{};
-string command;
-// float body_pose[6];
-// float joint_pos[13];     // Joint Pose
-// float joint_vel[13];     // Joint Velocity
-// float body_pos[3];       // Body position (x,y,z)
-// float body_vel[3];       // Body velocity d(x,y,z)/dt
-// float imu[9];            // (r,p,y) & d(r,p,y)/dt & d^2(r,p,y)/dt^2
-// double contact[4];
+array<double, 3> command{};
 
-// double sim_time;      // Gazebo simulation time
-// double angle[3];         // Angles
-// double Kp[3], Kd[3];     // Gains
+// array<double, 3> Kp{};
+// array<double, 3> Kd{};
+
+//    initial_standing  SWingPhase  STandingPhase
+// Kp <<       600,            600,         1200,
+//            4000,           4000,         8000,
+//           26000,          26000,        52000;
+// Kd <<        20,             20,           40,
+//              20,             20,           40,
+//              10,             10,           20;
 
 //////////// Method of Undetermined Coefficients using Eigen ////////////
 
