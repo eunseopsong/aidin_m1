@@ -264,12 +264,6 @@ namespace gazebo
             IMU.data.push_back(WorldLinearAccel.X()); // roll, pitch, yaw acceleration
             IMU.data.push_back(WorldLinearAccel.Y());
             IMU.data.push_back(WorldLinearAccel.Z());
-
-            // Debugging IMU data
-            // RCLCPP_INFO(node->get_logger(), "IMU - Roll: %f, Pitch: %f, Yaw: %f", Rot_Euler.X(), Rot_Euler.Y(), Rot_Euler.Z());
-            // RCLCPP_INFO(node->get_logger(), "IMU Angular Velocity - X: %f, Y: %f, Z: %f", RelativeAngularVel.X(), RelativeAngularVel.Y(), RelativeAngularVel.Z());
-            // RCLCPP_INFO(node->get_logger(), "IMU Linear Acceleration - X: %f, Y: %f, Z: %f", WorldLinearAccel.X(), WorldLinearAccel.Y(), WorldLinearAccel.Z());
-
             pub_imu->publish(IMU);
 
             // get and publish contact states

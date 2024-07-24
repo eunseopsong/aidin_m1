@@ -23,7 +23,7 @@ using Eigen::VectorXf;
 #define DoF 3
 
 /////////////////////// Initialization ////////////////////////
-// Data storage
+
 array<double, 6> body_pose{};
 array<double, 12> joint_pos{};
 array<double, 12> joint_vel{};
@@ -35,13 +35,15 @@ array<double, 3> command{};
 
 //////////// Method of Undetermined Coefficients using Eigen ////////////
 
-void solve(double d, double e, double f, double T, double singularity, double B_val[], double arr[6])
+void solve(double d, double e, double f, double T, double singularity, double B_val[], double* arr)
 {
     Matrix3d A;  // 3x3 행렬
     Vector3d B;  // 크기 3의 벡터
 
     // 행렬과 벡터 값 설정 (A는 주어진 행렬, B는 상수 벡터)
-    A << (5*pow(singularity, 4)), (4*pow(singularity, 3)), (3*pow(singularity, 2)), pow((T/4), 5), pow((T/4), 4), pow((T/4), 3), 20*pow((T/4), 3), 12*pow((T/4), 2), 6*pow((T/4), 1);
+    A << (5*pow(singularity, 4)), (4*pow(singularity, 3)), (3*pow(singularity, 2)),
+            pow((T/4), 5),           pow((T/4), 4),           pow((T/4), 3),
+         20*pow((T/4), 3),        12*pow((T/4), 2),         6*pow((T/4), 1);
     B << B_val[0], B_val[1], B_val[2];
 
     // 선형 시스템 풀기
@@ -89,7 +91,7 @@ void SplineTrajectory(double t, double T, double vel_of_body, double &xVal, doub
     /////////////////////// Initializing ////////////////////////
 
     double length_of_STanding_phase = vel_of_body * T /2;
-    double height = 400;
+    double height = 450;
 
     // int ST_x_case = 1;
     int SW_x_case = 2, Reverse_x_case = 3;
@@ -252,24 +254,6 @@ double FeedforwardController(double Kp, double Kd, double th[3], int case_, int 
 }
 
 void CalculateTorqueStanding(double* output_torque, array<double, 3> Kp, array<double ,3> Kd)
-{
-    array<double, 3> target_pos;
-    target_pos = {0, M_PI_2/2, 0};
-
-    for (int i=0; i<12; i++)
-    {
-        if (i < 3)      // LF joint
-            output_torque[i] = FeedforwardController(Kp[i],   Kd[i],   target_pos.data(), i,   0);
-        else if (i < 6) // RF joint
-            output_torque[i] = FeedforwardController(Kp[i-3], Kd[i-3], target_pos.data(), i-3, 3);
-        else if (i < 9) // LB joint
-            output_torque[i] = FeedforwardController(Kp[i-6], Kd[i-6], target_pos.data(), i-6, 6);
-        else            // RB joint
-            output_torque[i] = FeedforwardController(Kp[i-9], Kd[i-9], target_pos.data(), i-9, 9);
-    }
-}
-
-void CalculateTorqueWalkingInPlace(double* output_torque, array<double, 3> Kp, array<double ,3> Kd)
 {
     array<double, 3> target_pos;
     target_pos = {0, M_PI_2/2, 0};
