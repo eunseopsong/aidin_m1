@@ -8,7 +8,7 @@ class JointControl : public rclcpp::Node
 {
 public:
     JointControl()
-        : Node("aidin_m1_control_node"), _count(0), previous_command{0, 0, 0}
+        : Node("aidin_m1_control_node"), _count(0)
     {
         // Subscribe to topics
         sub_bodypose = create_subscription<std_msgs::msg::Float32MultiArray>(
@@ -41,11 +41,6 @@ public:
             });
         sub_command = create_subscription<std_msgs::msg::Float32MultiArray>(
             "/aidin_m1/Command_sim", 10, [this](const std_msgs::msg::Float32MultiArray::SharedPtr msg) {
-                // Check if the command has changed
-                if (!equal(command.begin(), command.end(), msg->data.begin())) {
-                    _count = 0; // Reset count if command has changed
-                    copy(msg->data.begin(), msg->data.begin() + 3, previous_command.begin());
-                }
                 copy(msg->data.begin(), msg->data.begin() + 3, command.begin());
             });
 
@@ -60,7 +55,7 @@ public:
 private:
     void CalculateAndPublishTorque()
     {
-        // Check if the command array contains valid values
+        // command 배열에 유효한 값이 있는지 확인
         if (std::any_of(command.begin(), command.end(), [](double c) { return c != 0; })) {
             _count += 0.001; // Increment simulation time by 1ms
         }
@@ -78,9 +73,9 @@ private:
         double vel_of_body = command[1]; // Target velocity of the whole robot body (mm/s)
         double T = command[2];           // Period of the whole trajectory phase    (sec)
         double t = fmod(_count, T);
-        double t_counter = fmod(_count + T / 2, T);
+        double t_counter = fmod(_count + T/2, T);
 
-        // RCLCPP_INFO(this->get_logger(), "t: %f, count_: %f", t, count_); // t 값을 디버깅하기 위해 출력
+        // RCLCPP_INFO(this->get_logger(), "t: %f, count_: %f", t, count_);
 
         // Calculate the footstep trajectory using Trajectory Function
         double yVal = 95;
@@ -123,13 +118,13 @@ private:
 
         switch (int(command[0])) {
             case 1: // the command to keep a robot "standing still"
-                CalculateTorqueStanding(output_torque.data(), {Kp(0, 0), Kp(1, 0), Kp(2, 0)}, {Kd(0, 0), Kd(1, 0), Kd(2, 0)});
+                CalculateTorqueStanding(output_torque.data(), {Kp(0,0), Kp(1,0), Kp(2,0)}, {Kd(0,0), Kd(1,0), Kd(2,0)});
                 break;
             case 2: // the command to keep a robot "walking in place"
-                CalculateTorqueRunning(output_torque.data(), target_pos.data(), {Kp(0, 1), Kp(1, 1), Kp(2, 1)}, {Kd(0, 1), Kd(1, 1), Kd(2, 1)});
+                CalculateTorqueRunning(output_torque.data(), target_pos.data(), {Kp(0,1), Kp(1,1), Kp(2,1)}, {Kd(0,1), Kd(1,1), Kd(2,1)});
                 break;
             case 3: // the command to make a robot "run"
-                CalculateTorqueRunning(output_torque.data(), target_pos.data(), {Kp(0, 1), Kp(1, 1), Kp(2, 1)}, {Kd(0, 1), Kd(1, 1), Kd(2, 1)});
+                CalculateTorqueRunning(output_torque.data(), target_pos.data(), {Kp(0,1), Kp(1,1), Kp(2,1)}, {Kd(0,1), Kd(1,1), Kd(2,1)});
                 break;
             default:
                 fill(output_torque.begin(), output_torque.end(), 0.0);
@@ -163,8 +158,7 @@ private:
 
     // Timer
     rclcpp::TimerBase::SharedPtr timer_;
-    double _count;
-    array<double, 3> previous_command; // 이전 command 값을 저장
+    double count_;
 };
 
 int main(int argc, char **argv)
