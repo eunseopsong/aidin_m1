@@ -173,9 +173,8 @@ double InverseKinematics2D(double xVal, double zVal, int cases)
         return knee_degree;
 }
 
-void InverseKinematics3D(double px, double py, double pz, double d1, double l2, double l3, double* target_pos)
+void InverseKinematics3D(double px, double py, double pz, double d1, double l2, double l3, double* th)
 {
-    double th[3];
     pz = -pz;
 
     // Calculate Scap Joint Value using Inverse Kinematics
@@ -191,9 +190,6 @@ void InverseKinematics3D(double px, double py, double pz, double d1, double l2, 
 
     th[1] += M_PI_2;
     th[2] -= M_PI_2;
-
-    for (int i=1; i<3; i++)
-        target_pos[i] = th[i];
 }
 
 ///////////////// for Torque Calculation /////////////////

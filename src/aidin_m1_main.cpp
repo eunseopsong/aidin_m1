@@ -73,7 +73,7 @@ private:
         double t = fmod(count_, T);
         double t_counter = fmod(count_ + T/2, T);
 
-        // Calculate the coordinate using Trajectory Function
+        // Calculate the footstep trajectory using Trajectory Function
         double yVal = 95;
         double xVal, zVal;
         SplineTrajectory(t, T, vel_of_body, xVal, zVal);
@@ -81,12 +81,11 @@ private:
         double xVal_counter, zVal_counter;
         SplineTrajectory(t_counter, T, vel_of_body, xVal_counter, zVal_counter);
 
-        // Calculate the target_pos using Inverse Kinematics
+        // Calculate the target_pos(radian) using Inverse Kinematics
         array<double, 3> LF_target_pos, RF_target_pos, LB_target_pos, RB_target_pos;
 
         switch (int(command[0])) {
             case 1: // the command to keep a robot "standing still"
-
                 break;
             case 2: // the command to keep a robot "walking in place"
 
