@@ -196,17 +196,10 @@ void InverseKinematics3D(double px, double py, double pz, double d1, double l2, 
 
 double PDController(double Kp, double Kd, double target_pos, double current_pos, double current_vel)
 {
-	int torque_limit = 100;
+	double torque_limit = 100;
 	double PD_torque = Kp*(target_pos - current_pos) + Kd*(0 - current_vel);
 
-	if (PD_torque > torque_limit) {
-		PD_torque = torque_limit;
-	}
-    else if (PD_torque < -torque_limit) {
-		PD_torque = -torque_limit;
-	}
-
-    return PD_torque;
+    return min(PD_torque, torque_limit);
 }
 
 //////////////// Feedforward Control Function ////////////////
@@ -256,12 +249,13 @@ double FeedforwardController(double Kp, double Kd, double th[3], int case_, int 
 
     torque_desired = M*PD + C*joint_square + B*joint_multiple + G;
 
+    double torque_limit = 100;
     if (case_ == 0){
-        return torque_desired[0];
+        return min(torque_desired[0], torque_limit);
     } else if (case_ == 1) {
-        return torque_desired[1];
+        return min(torque_desired[1], torque_limit);
     } else {
-        return torque_desired[2];
+        return min(torque_desired[2], torque_limit);
     }
 }
 
@@ -273,7 +267,7 @@ void CalculateTorqueStanding(double* output_torque, array<double, 3> Kp, array<d
     for (int i=0; i<12; i++)
     {
         if (i < 3)      // LF joint
-            output_torque[i] = FeedforwardController(Kp[i], Kd[i], target_pos.data(), i,   0);
+            output_torque[i] = FeedforwardController(Kp[i],   Kd[i],   target_pos.data(), i,   0);
         else if (i < 6) // RF joint
             output_torque[i] = FeedforwardController(Kp[i-3], Kd[i-3], target_pos.data(), i-3, 3);
         else if (i < 9) // LB joint
@@ -291,7 +285,7 @@ void CalculateTorqueWalkingInPlace(double* output_torque, array<double, 3> Kp, a
     for (int i=0; i<12; i++)
     {
         if (i < 3)      // LF joint
-            output_torque[i] = FeedforwardController(Kp[i], Kd[i], target_pos.data(), i,   0);
+            output_torque[i] = FeedforwardController(Kp[i],   Kd[i],   target_pos.data(), i,   0);
         else if (i < 6) // RF joint
             output_torque[i] = FeedforwardController(Kp[i-3], Kd[i-3], target_pos.data(), i-3, 3);
         else if (i < 9) // LB joint
