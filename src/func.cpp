@@ -1,23 +1,15 @@
 #include <iostream>
-#include <iomanip>
 #include <chrono>
 #include <functional>
 #include <memory>
 #include <string>
-// #include <sstream>
 #include <algorithm> // std::copy
 #include <array>
-
-#include <cmath>
-#include <math.h>
-#include <stdlib.h>
 #include <vector>
+#include <cmath>
 #include <eigen3/Eigen/Dense>
 
 #include "rclcpp/rclcpp.hpp"
-#include "std_msgs/msg/string.hpp"
-
-// #include "sensor_msgs/msg/joint_state.hpp"
 #include "std_msgs/msg/float64.hpp"
 #include "std_msgs/msg/float32_multi_array.hpp"
 #include "std_msgs/msg/float64_multi_array.hpp"
@@ -206,9 +198,9 @@ double PDController(double Kp, double Kd, double target_pos, double current_pos,
 
 double FeedforwardController(double Kp, double Kd, double th[3], int case_, int cri)
 {
-    Matrix3d Ic1, Ic2, Ic3, M, C, B;   // 3x3 행렬
+    Matrix3d Ic1, Ic2, Ic3, M, C, B;   // 3x3 Matrix
 
-    Vector3d PD, joint_square, joint_multiple, G, torque_desired;  // 3x1 벡터
+    Vector3d PD, joint_square, joint_multiple, G, torque_desired;  // 3x1 Vector
 
     double m1  = 2.739, m2  = 0.615, m3  = 0.343;
     double L1  = 0.095, L2  = 0.250; // double L3  = 0.250;
