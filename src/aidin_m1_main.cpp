@@ -63,7 +63,7 @@ private:
     {
         // Check if the command array contains valid values
         if (std::any_of(command.begin(), command.end(), [](double c) { return c != 0; })) {
-            _count += 0.0050; // Increment simulation time by 1ms
+            _count += 0.001; // Increment simulation time by 1ms
         }
 
         // Gain Initialization
@@ -81,7 +81,7 @@ private:
         double t1 = fmod(_count +   (T/4), T);
         double t2 = fmod(_count + (3*T/4), T);
         // double t_counter = T/4;
-        double _t = fmod(_count, T*2);
+        double _t = fmod(_count, T*4);
 
         // RCLCPP_INFO(this->get_logger(), "t: %f, count_: %f", t, _count); // t 값을 디버깅하기 위해 출력
 
@@ -104,22 +104,18 @@ private:
                 double t_LF, t_RF, t_LB, t_RB;
                 double x_LF, x_RF, x_LB, x_RB;
                 double z_LF, z_RF, z_LB, z_RB;
-                if (_t <= T/2) {
-                    t_LF = t1; t_RF = T/4;
-                    t_LB = t2; t_RB = T/4;
-
-                } else if (_t <= T) {
-                    t_LF = t1; t_RF = T/4;
-                    t_LB = T/4; t_RB = t2;
-
-                } else if (_t <= 3*T/2) {
-                    t_LF = T/4; t_RF = t1;
-                    t_LB = T/4; t_RB = t2;
-
+                if (_t <= T) {
+                    t_LF = t1;
+                    t_RF = T/4; t_LB = T/4; t_RB = T/4;
+                } else if (_t <= 2*T) {
+                    t_RB = t1;
+                    t_LF = T/4; t_RF = T/4; t_LB = T/4;
+                } else if (_t <= 3*T) {
+                    t_RF = t1;
+                    t_LF = T/4; t_LB = T/4; t_RB = T/4;
                 } else {
-                    t_LF = T/4; t_RF = t1;
-                    t_LB = t2; t_RB = T/4;
-
+                    t_LB = t1;
+                    t_LF = T/4; t_RF = T/4; t_RB = T/4;
                 }
                 SplineTrajectory(t_LF, T, vel_of_body, x_LF, z_LF);
                 SplineTrajectory(t_RF, T, vel_of_body, x_RF, z_RF);
