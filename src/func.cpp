@@ -24,14 +24,14 @@ using Eigen::VectorXf;
 
 /////////////////////// Initialization ////////////////////////
 
-array<double, 6> body_pose{};
+array<double, 6>  body_pose{};
 array<double, 12> joint_pos{};
 array<double, 12> joint_vel{};
-array<double, 3> body_pos{};
-array<double, 3> body_vel{};
-array<double, 9> imu{};
-array<double, 4> contact{};
-array<double, 3> command{};
+array<double, 3>  body_pos{};
+array<double, 3>  body_vel{};
+array<double, 9>  imu{};
+array<double, 4>  contact{};
+array<double, 3>  command{};
 
 //////////// Method of Undetermined Coefficients using Eigen ////////////
 
