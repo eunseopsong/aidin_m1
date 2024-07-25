@@ -1,15 +1,23 @@
 #include <iostream>
+#include <iomanip>
 #include <chrono>
 #include <functional>
 #include <memory>
 #include <string>
+// #include <sstream>
 #include <algorithm> // std::copy
 #include <array>
-#include <vector>
+
 #include <cmath>
+#include <math.h>
+#include <stdlib.h>
+#include <vector>
 #include <eigen3/Eigen/Dense>
 
 #include "rclcpp/rclcpp.hpp"
+#include "std_msgs/msg/string.hpp"
+
+// #include "sensor_msgs/msg/joint_state.hpp"
 #include "std_msgs/msg/float64.hpp"
 #include "std_msgs/msg/float32_multi_array.hpp"
 #include "std_msgs/msg/float64_multi_array.hpp"
@@ -23,27 +31,36 @@ using Eigen::VectorXf;
 #define DoF 3
 
 /////////////////////// Initialization ////////////////////////
-
-array<double, 6>  body_pose{};
+// Data storage
+array<double, 6> body_pose{};
 array<double, 12> joint_pos{};
 array<double, 12> joint_vel{};
-array<double, 3>  body_pos{};
-array<double, 3>  body_vel{};
-array<double, 9>  imu{};
-array<double, 4>  contact{};
-array<double, 3>  command{};
+array<double, 3> body_pos{};
+array<double, 3> body_vel{};
+array<double, 9> imu{};
+array<double, 4> contact{};
+array<double, 3> command{};
+
+// array<double, 3> Kp{};
+// array<double, 3> Kd{};
+
+//    initial_standing  SWingPhase  STandingPhase
+// Kp <<       600,            600,         1200,
+//            4000,           4000,         8000,
+//           26000,          26000,        52000;
+// Kd <<        20,             20,           40,
+//              20,             20,           40,
+//              10,             10,           20;
 
 //////////// Method of Undetermined Coefficients using Eigen ////////////
 
-void solve(double d, double e, double f, double T, double singularity, double B_val[], double* arr)
+void solve(double d, double e, double f, double T, double singularity, double B_val[], double arr[6])
 {
     Matrix3d A;  // 3x3 행렬
     Vector3d B;  // 크기 3의 벡터
 
     // 행렬과 벡터 값 설정 (A는 주어진 행렬, B는 상수 벡터)
-    A << (5*pow(singularity, 4)), (4*pow(singularity, 3)), (3*pow(singularity, 2)),
-            pow((T/4), 5),           pow((T/4), 4),           pow((T/4), 3),
-         20*pow((T/4), 3),        12*pow((T/4), 2),         6*pow((T/4), 1);
+    A << (5*pow(singularity, 4)), (4*pow(singularity, 3)), (3*pow(singularity, 2)), pow((T/4), 5), pow((T/4), 4), pow((T/4), 3), 20*pow((T/4), 3), 12*pow((T/4), 2), 6*pow((T/4), 1);
     B << B_val[0], B_val[1], B_val[2];
 
     // 선형 시스템 풀기
@@ -91,7 +108,7 @@ void SplineTrajectory(double t, double T, double vel_of_body, double &xVal, doub
     /////////////////////// Initializing ////////////////////////
 
     double length_of_STanding_phase = vel_of_body * T /2;
-    double height = 450;
+    double height = 400;
 
     // int ST_x_case = 1;
     int SW_x_case = 2, Reverse_x_case = 3;
@@ -200,15 +217,15 @@ double PDController(double Kp, double Kd, double target_pos, double current_pos,
 
 double FeedforwardController(double Kp, double Kd, double th[3], int case_, int cri)
 {
-    Matrix3d Ic1, Ic2, Ic3, M, C, B;   // 3x3 Matrix
+    Matrix3d Ic1, Ic2, Ic3, M, C, B;   // 3x3 행렬
 
-    Vector3d PD, joint_square, joint_multiple, G, torque_desired;  // 3x1 Vector
+    Vector3d PD, joint_square, joint_multiple, G, torque_desired;  // 3x1 벡터
 
     double m1  = 2.739, m2  = 0.615, m3  = 0.343;
     double L1  = 0.095, L2  = 0.250; // double L3  = 0.250;
     double Lg1 = 0.03106445, Lg2 = 0.06456779, Lg3 = 0.07702597;
 
-    double PD_term_1 = Kp*(th[0] - joint_pos[cri])   + Kd*(0 - joint_vel[cri]);
+    double PD_term_1 = Kp*(th[0] - joint_pos[cri]) + Kd*(0 - joint_vel[cri]);
     double PD_term_2 = Kp*(th[1] - joint_pos[cri+1]) + Kd*(0 - joint_vel[cri+1]);
     double PD_term_3 = Kp*(th[2] - joint_pos[cri+2]) + Kd*(0 - joint_vel[cri+2]);
 
@@ -243,13 +260,12 @@ double FeedforwardController(double Kp, double Kd, double th[3], int case_, int 
 
     torque_desired = M*PD + C*joint_square + B*joint_multiple + G;
 
-    double torque_limit = 100;
     if (case_ == 0){
-        return min(torque_desired[0], torque_limit);
+        return torque_desired[0];
     } else if (case_ == 1) {
-        return min(torque_desired[1], torque_limit);
+        return torque_desired[1];
     } else {
-        return min(torque_desired[2], torque_limit);
+        return torque_desired[2];
     }
 }
 
@@ -261,7 +277,7 @@ void CalculateTorqueStanding(double* output_torque, array<double, 3> Kp, array<d
     for (int i=0; i<12; i++)
     {
         if (i < 3)      // LF joint
-            output_torque[i] = FeedforwardController(Kp[i],   Kd[i],   target_pos.data(), i,   0);
+            output_torque[i] = FeedforwardController(Kp[i], Kd[i], target_pos.data(), i,   0);
         else if (i < 6) // RF joint
             output_torque[i] = FeedforwardController(Kp[i-3], Kd[i-3], target_pos.data(), i-3, 3);
         else if (i < 9) // LB joint

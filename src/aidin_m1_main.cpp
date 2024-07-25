@@ -1,3 +1,4 @@
+// #include "FootstepPlanner.cpp"
 #include "func.cpp"
 
 using namespace std;
@@ -77,58 +78,37 @@ private:
 
         double vel_of_body = command[1]; // Target velocity of the whole robot body (mm/s)
         double T = command[2];           // Period of the whole trajectory phase    (sec)
-        double _t = fmod(_count, T*2);
-        double t_swing     = fmod(_count, T/2) + (T/2);
-        double t_standing  = fmod(_count, T/2);
+        double t = fmod(_count, T);
+        double t_counter = fmod(_count + T/2, T);
 
-        // double t = fmod(_count, T);
-        // double t_counter = fmod(_count + (T/2), T);
+        RCLCPP_INFO(this->get_logger(), "t: %f, count_: %f", t, _count); // t 값을 디버깅하기 위해 출력
 
-        RCLCPP_INFO(this->get_logger(), "_t_sw: %f, t_st: %f", t_swing, t_standing); // t 값을 디버깅하기 위해 출력
+        // Calculate the coordinate using Trajectory Function
+        double yVal = 95;
+        double xVal, zVal;
+        SplineTrajectory(t, T, vel_of_body, xVal, zVal);
 
-        // Calculate the footstep trajectory using Trajectory Function
-        double y_const = 95;
-        double x_swing, z_swing;
-        SplineTrajectory(t_swing, T, vel_of_body, x_swing, z_swing);
+        double xVal_counter, zVal_counter;
+        SplineTrajectory(t_counter, T, vel_of_body, xVal_counter, zVal_counter);
 
-        double x_standing, z_standing;
-        SplineTrajectory(t_standing, T, vel_of_body, x_standing, z_standing);
-
-        // Calculate the target_pos(radian) using Inverse Kinematics
+        // Calculate the target_pos using Inverse Kinematics
         array<double, 3> LF_target_pos, RF_target_pos, LB_target_pos, RB_target_pos;
 
         switch (int(command[0])) {
             case 1: // the command to keep a robot "standing still"
+
                 break;
-            case 2: {// the command to keep a robot "walking in place"
-                if (_t < T/2) {
-                    InverseKinematics3D(y_const, z_swing, x_swing, y_const, 250, 250, LF_target_pos.data());
-                    RF_target_pos = {0, M_PI_2/2, 0};
-                    InverseKinematics3D(y_const, z_standing, x_standing, y_const, 250, 250, LB_target_pos.data());
-                    RB_target_pos = {0, M_PI_2/2, 0};
-                } else if (_t < T) {
-                    InverseKinematics3D(y_const, z_standing, x_standing, y_const, 250, 250, LF_target_pos.data());
-                    RF_target_pos = {0, M_PI_2/2, 0};
-                    LB_target_pos = {0, M_PI_2/2, 0};
-                    InverseKinematics3D(y_const, z_swing, x_swing, y_const, 250, 250, RB_target_pos.data());
-                } else if (_t < 3*T/2) {
-                    LF_target_pos = {0, M_PI_2/2, 0};
-                    InverseKinematics3D(y_const, z_swing, x_swing, y_const, 250, 250, RF_target_pos.data());
-                    LB_target_pos = {0, M_PI_2/2, 0};
-                    InverseKinematics3D(y_const, z_standing, x_standing, y_const, 250, 250, RB_target_pos.data());
-                } else {
-                    LF_target_pos = {0, M_PI_2/2, 0};
-                    InverseKinematics3D(y_const, z_standing, x_standing, y_const, 250, 250, RF_target_pos.data());
-                    InverseKinematics3D(y_const, z_swing, x_swing, y_const, 250, 250, LB_target_pos.data());
-                    RB_target_pos = {0, M_PI_2/2, 0};
-                }
+            case 2: // the command to keep a robot "walking in place"
+                InverseKinematics3D(yVal, zVal, xVal, yVal, 250, 250, LF_target_pos.data());
+                InverseKinematics3D(yVal, zVal_counter, xVal_counter, yVal, 250, 250, RF_target_pos.data());
+                InverseKinematics3D(yVal, zVal_counter, xVal_counter, yVal, 250, 250, LB_target_pos.data());
+                InverseKinematics3D(yVal, zVal, xVal, yVal, 250, 250, RB_target_pos.data());
                 break;
-            }
             case 3: // the command to make a robot "run" (trotting)
-                InverseKinematics3D(y_const, z_standing, x_standing, y_const, 250, 250, LF_target_pos.data());
-                InverseKinematics3D(y_const, z_swing,    x_swing,    y_const, 250, 250, RF_target_pos.data());
-                InverseKinematics3D(y_const, z_standing, x_standing, y_const, 250, 250, LB_target_pos.data());
-                InverseKinematics3D(y_const, z_swing,    x_swing,    y_const, 250, 250, RB_target_pos.data());
+                InverseKinematics3D(yVal, zVal, xVal, yVal, 250, 250, LF_target_pos.data());
+                InverseKinematics3D(yVal, zVal_counter, xVal_counter, yVal, 250, 250, RF_target_pos.data());
+                InverseKinematics3D(yVal, zVal_counter, xVal_counter, yVal, 250, 250, LB_target_pos.data());
+                InverseKinematics3D(yVal, zVal, xVal, yVal, 250, 250, RB_target_pos.data());
                 break;
             default:
                 break;
@@ -145,13 +125,13 @@ private:
 
         switch (int(command[0])) {
             case 1: // the command to keep a robot "standing still"
-                CalculateTorqueStanding(output_torque.data(), {Kp(0, 0), Kp(1, 0), Kp(2, 0)}, {Kd(0, 0), Kd(1, 0), Kd(2, 0)});
+                CalculateTorqueStanding(output_torque.data(), {Kp(0,0), Kp(1,0), Kp(2,0)}, {Kd(0,0), Kd(1,0), Kd(2,0)});
                 break;
             case 2: // the command to keep a robot "walking in place"
-                CalculateTorqueRunning(output_torque.data(), target_pos.data(), {Kp(0, 2), Kp(1, 2), Kp(2, 2)}, {Kd(0, 2), Kd(1, 2), Kd(2, 2)});
+                CalculateTorqueRunning(output_torque.data(), target_pos.data(), {Kp(0,2), Kp(1,2), Kp(2,2)}, {Kd(0,2), Kd(1,2), Kd(2,2)});
                 break;
             case 3: // the command to make a robot "run"
-                CalculateTorqueRunning(output_torque.data(), target_pos.data(), {Kp(0, 1), Kp(1, 1), Kp(2, 1)}, {Kd(0, 1), Kd(1, 1), Kd(2, 1)});
+                CalculateTorqueRunning(output_torque.data(), target_pos.data(), {Kp(0,1), Kp(1,1), Kp(2,1)}, {Kd(0,1), Kd(1,1), Kd(2,1)});
                 break;
             default:
                 fill(output_torque.begin(), output_torque.end(), 0.0);
