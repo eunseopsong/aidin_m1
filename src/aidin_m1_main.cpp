@@ -63,7 +63,7 @@ private:
     {
         // Check if the command array contains valid values
         if (std::any_of(command.begin(), command.end(), [](double c) { return c != 0; })) {
-            _count += 0.001; // Increment simulation time by 1ms
+            _count += 0.0050; // Increment simulation time by 1ms
         }
 
         // Gain Initialization
@@ -102,31 +102,34 @@ private:
                 break;
             case 2: {// the command to keep a robot "walking in place"
                 double t_LF, t_RF, t_LB, t_RB;
+                double x_LF, x_RF, x_LB, x_RB;
+                double z_LF, z_RF, z_LB, z_RB;
                 if (_t <= T/2) {
-                    
+                    t_LF = t1; t_RF = T/4;
+                    t_LB = t2; t_RB = T/4;
 
-
-
-                    // InverseKinematics3D(y_const, z_swing, x_swing, y_const, 250, 250, LF_target_pos.data());
-                    // RF_target_pos = {0, M_PI_2/2, 0};
-                    // InverseKinematics3D(y_const, z_standing, x_standing, y_const, 250, 250, LB_target_pos.data());
-                    // RB_target_pos = {0, M_PI_2/2, 0};
                 } else if (_t <= T) {
-                    // InverseKinematics3D(y_const, z_standing, x_standing, y_const, 250, 250, LF_target_pos.data());
-                    // RF_target_pos = {0, M_PI_2/2, 0};
-                    // LB_target_pos = {0, M_PI_2/2, 0};
-                    // InverseKinematics3D(y_const, z_swing, x_swing, y_const, 250, 250, RB_target_pos.data());
+                    t_LF = t1; t_RF = T/4;
+                    t_LB = T/4; t_RB = t2;
+
                 } else if (_t <= 3*T/2) {
-                    // LF_target_pos = {0, M_PI_2/2, 0};
-                    // InverseKinematics3D(y_const, z_swing, x_swing, y_const, 250, 250, RF_target_pos.data());
-                    // LB_target_pos = {0, M_PI_2/2, 0};
-                    // InverseKinematics3D(y_const, z_standing, x_standing, y_const, 250, 250, RB_target_pos.data());
+                    t_LF = T/4; t_RF = t1;
+                    t_LB = T/4; t_RB = t2;
+
                 } else {
-                    // LF_target_pos = {0, M_PI_2/2, 0};
-                    // InverseKinematics3D(y_const, z_standing, x_standing, y_const, 250, 250, RF_target_pos.data());
-                    // InverseKinematics3D(y_const, z_swing, x_swing, y_const, 250, 250, LB_target_pos.data());
-                    // RB_target_pos = {0, M_PI_2/2, 0};
+                    t_LF = T/4; t_RF = t1;
+                    t_LB = t2; t_RB = T/4;
+
                 }
+                SplineTrajectory(t_LF, T, vel_of_body, x_LF, z_LF);
+                SplineTrajectory(t_RF, T, vel_of_body, x_RF, z_RF);
+                SplineTrajectory(t_LB, T, vel_of_body, x_LB, z_LB);
+                SplineTrajectory(t_RB, T, vel_of_body, x_RB, z_RB);
+
+                InverseKinematics3D(y_const, z_LF, x_LF, y_const, 250, 250, LF_target_pos.data());
+                InverseKinematics3D(y_const, z_RF, x_RF, y_const, 250, 250, RF_target_pos.data());
+                InverseKinematics3D(y_const, z_LB, x_LB, y_const, 250, 250, LB_target_pos.data());
+                InverseKinematics3D(y_const, z_RB, x_RB, y_const, 250, 250, RB_target_pos.data());
                 break;
             }
             case 3: // the command to make a robot "run" (trotting)
