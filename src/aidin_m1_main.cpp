@@ -71,10 +71,10 @@ private:
         ////  Initial_Standing  SWing_Phase  STanding_Phase
         Kp <<       600,            600,             600, //// Scapula
                    4000,           4000,            6000, //// Hip
-                  26000,          26000,           55000; //// Knee
+                  26000,          50000,           55000; //// Knee
         Kd <<        20,             20,              20, //// Scapula
                      20,             20,              20, //// Hip
-                     10,             10,              15; //// Knee
+                     10,             20,              15; //// Knee
 
         double vel_of_body = command[1]; // Target velocity of the whole robot body (mm/s)
         double T = command[2];           // Period of the whole trajectory phase    (sec)
@@ -130,7 +130,7 @@ private:
                 CalculateTorqueStanding(output_torque.data(), {Kp(0,0), Kp(1,0), Kp(2,0)}, {Kd(0,0), Kd(1,0), Kd(2,0)});
                 break;
             case 2: // the command to keep a robot "walking in place"
-                CalculateTorqueRunning(output_torque.data(), target_pos.data(), {Kp(0,1), Kp(1,1), Kp(2,1)}, {Kd(0,1), Kd(1,1), Kd(2,1)});
+                CalculateTorqueRunning(output_torque.data(), target_pos.data(), {Kp(0, 2), Kp(1, 2), Kp(2, 2)}, {Kd(0, 2), Kd(1, 2), Kd(2, 2)});
                 break;
             case 3: // the command to make a robot "run"
                 CalculateTorqueRunning(output_torque.data(), target_pos.data(), {Kp(0,1), Kp(1,1), Kp(2,1)}, {Kd(0,1), Kd(1,1), Kd(2,1)});

@@ -113,7 +113,7 @@ void SplineTrajectory(double t, double T, double vel_of_body, double &xVal, doub
     // undetermined coefficients of SWzValues (a2*t^5 + b2*t^4 + c2*t^3 + d2*t^2 + e2*t + f2)
     double d2 = 0, e2 = 0, f2 = -height;
     double singular2 = T/4;
-    double B_val2[3] = {0, -(5*height/5 +f2), 0};
+    double B_val2[3] = {0, -(4*height/5 +f2), 0};
     double S2[6];
 
     /////////////////////// Calculate the return Value ////////////////////////
@@ -301,3 +301,4 @@ void CalculateTorqueRunning(double* output_torque, double* target_pos, array<dou
             output_torque[i] = FeedforwardController(Kp[i-9], Kd[i-9], RB_pos.data(), i-9, 9);
     }
 }
+
