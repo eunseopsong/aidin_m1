@@ -101,22 +101,15 @@ private:
 
                 break;
             case 2: {// the command to keep a robot "walking in place"
-                double t_LF, t_RF, t_LB, t_RB;
+                double t_LF = T/4, t_RF = T/4, t_LB = T/4, t_RB = T/4;
                 double x_LF, x_RF, x_LB, x_RB;
                 double z_LF, z_RF, z_LB, z_RB;
-                if (_t <= T) {
-                    t_LF = t1;
-                    t_RF = T/4; t_LB = T/4; t_RB = T/4;
-                } else if (_t <= 2*T) {
-                    t_RB = t1;
-                    t_LF = T/4; t_RF = T/4; t_LB = T/4;
-                } else if (_t <= 3*T) {
-                    t_RF = t1;
-                    t_LF = T/4; t_LB = T/4; t_RB = T/4;
-                } else {
-                    t_LB = t1;
-                    t_LF = T/4; t_RF = T/4; t_RB = T/4;
-                }
+
+                if (_t <= T)        t_LF = t1;
+                else if (_t <= 2*T) t_RB = t1;
+                else if (_t <= 3*T) t_RF = t1;
+                else                t_LB = t1;
+
                 SplineTrajectory(t_LF, T, vel_of_body, x_LF, z_LF);
                 SplineTrajectory(t_RF, T, vel_of_body, x_RF, z_RF);
                 SplineTrajectory(t_LB, T, vel_of_body, x_LB, z_LB);
