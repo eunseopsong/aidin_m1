@@ -78,8 +78,8 @@ private:
 
         double vel_of_body = command[1]; // Target velocity of the whole robot body (mm/s)
         double T = command[2];           // Period of the whole trajectory phase    (sec)
-        double t = fmod(_count, T);
-        double t_counter = fmod(_count + T/2, T);
+        double t = fmod(_count+(T/4), T);
+        double t_counter = fmod(_count + (3*T/4), T);
         // double t_counter = T/4;
 
         // RCLCPP_INFO(this->get_logger(), "t: %f, count_: %f", t, _count); // t 값을 디버깅하기 위해 출력
@@ -130,7 +130,7 @@ private:
                 CalculateTorqueStanding(output_torque.data(), {Kp(0,0), Kp(1,0), Kp(2,0)}, {Kd(0,0), Kd(1,0), Kd(2,0)});
                 break;
             case 2: // the command to keep a robot "walking in place"
-                CalculateTorqueRunning(output_torque.data(), target_pos.data(), {Kp(0,2), Kp(1,2), Kp(2,2)}, {Kd(0,2), Kd(1,2), Kd(2,2)});
+                CalculateTorqueRunning(output_torque.data(), target_pos.data(), {Kp(0,1), Kp(1,1), Kp(2,1)}, {Kd(0,1), Kd(1,1), Kd(2,1)});
                 break;
             case 3: // the command to make a robot "run"
                 CalculateTorqueRunning(output_torque.data(), target_pos.data(), {Kp(0,1), Kp(1,1), Kp(2,1)}, {Kd(0,1), Kd(1,1), Kd(2,1)});
