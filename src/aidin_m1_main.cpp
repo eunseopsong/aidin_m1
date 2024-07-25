@@ -78,19 +78,20 @@ private:
 
         double vel_of_body = command[1]; // Target velocity of the whole robot body (mm/s)
         double T = command[2];           // Period of the whole trajectory phase    (sec)
-        double t = fmod(_count+(T/4), T);
-        double t_counter = fmod(_count + (3*T/4), T);
+        double t1 = fmod(_count +   (T/4), T);
+        double t2 = fmod(_count + (3*T/4), T);
         // double t_counter = T/4;
+        double _t = fmod(_count, T*2);
 
         // RCLCPP_INFO(this->get_logger(), "t: %f, count_: %f", t, _count); // t 값을 디버깅하기 위해 출력
 
         // Calculate the coordinate using Trajectory Function
-        double yVal = 95;
-        double xVal, zVal;
-        SplineTrajectory(t, T, vel_of_body, xVal, zVal);
+        double y_const = 95;
+        double x1, z1;
+        SplineTrajectory(t1, T, vel_of_body, x1, z1);
 
-        double xVal_counter, zVal_counter;
-        SplineTrajectory(t_counter, T, vel_of_body, xVal_counter, zVal_counter);
+        double x2, z2;
+        SplineTrajectory(t2, T, vel_of_body, x2, z2);
 
         // Calculate the target_pos using Inverse Kinematics
         array<double, 3> LF_target_pos, RF_target_pos, LB_target_pos, RB_target_pos;
@@ -99,17 +100,40 @@ private:
             case 1: // the command to keep a robot "standing still"
 
                 break;
-            case 2: // the command to keep a robot "walking in place"
-                InverseKinematics3D(yVal, zVal, xVal, yVal, 250, 250, LF_target_pos.data());
-                InverseKinematics3D(yVal, zVal_counter, xVal_counter, yVal, 250, 250, RF_target_pos.data());
-                InverseKinematics3D(yVal, zVal_counter, xVal_counter, yVal, 250, 250, LB_target_pos.data());
-                InverseKinematics3D(yVal, zVal, xVal, yVal, 250, 250, RB_target_pos.data());
+            case 2: {// the command to keep a robot "walking in place"
+                double t_LF, t_RF, t_LB, t_RB;
+                if (_t <= T/2) {
+                    
+
+
+
+                    // InverseKinematics3D(y_const, z_swing, x_swing, y_const, 250, 250, LF_target_pos.data());
+                    // RF_target_pos = {0, M_PI_2/2, 0};
+                    // InverseKinematics3D(y_const, z_standing, x_standing, y_const, 250, 250, LB_target_pos.data());
+                    // RB_target_pos = {0, M_PI_2/2, 0};
+                } else if (_t <= T) {
+                    // InverseKinematics3D(y_const, z_standing, x_standing, y_const, 250, 250, LF_target_pos.data());
+                    // RF_target_pos = {0, M_PI_2/2, 0};
+                    // LB_target_pos = {0, M_PI_2/2, 0};
+                    // InverseKinematics3D(y_const, z_swing, x_swing, y_const, 250, 250, RB_target_pos.data());
+                } else if (_t <= 3*T/2) {
+                    // LF_target_pos = {0, M_PI_2/2, 0};
+                    // InverseKinematics3D(y_const, z_swing, x_swing, y_const, 250, 250, RF_target_pos.data());
+                    // LB_target_pos = {0, M_PI_2/2, 0};
+                    // InverseKinematics3D(y_const, z_standing, x_standing, y_const, 250, 250, RB_target_pos.data());
+                } else {
+                    // LF_target_pos = {0, M_PI_2/2, 0};
+                    // InverseKinematics3D(y_const, z_standing, x_standing, y_const, 250, 250, RF_target_pos.data());
+                    // InverseKinematics3D(y_const, z_swing, x_swing, y_const, 250, 250, LB_target_pos.data());
+                    // RB_target_pos = {0, M_PI_2/2, 0};
+                }
                 break;
+            }
             case 3: // the command to make a robot "run" (trotting)
-                InverseKinematics3D(yVal, zVal, xVal, yVal, 250, 250, LF_target_pos.data());
-                InverseKinematics3D(yVal, zVal_counter, xVal_counter, yVal, 250, 250, RF_target_pos.data());
-                InverseKinematics3D(yVal, zVal_counter, xVal_counter, yVal, 250, 250, LB_target_pos.data());
-                InverseKinematics3D(yVal, zVal, xVal, yVal, 250, 250, RB_target_pos.data());
+                InverseKinematics3D(y_const, z1, x1, y_const, 250, 250, LF_target_pos.data());
+                InverseKinematics3D(y_const, z2, x2, y_const, 250, 250, RF_target_pos.data());
+                InverseKinematics3D(y_const, z2, x2, y_const, 250, 250, LB_target_pos.data());
+                InverseKinematics3D(y_const, z1, x1, y_const, 250, 250, RB_target_pos.data());
                 break;
             default:
                 break;
