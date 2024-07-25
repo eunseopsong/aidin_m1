@@ -80,8 +80,9 @@ private:
         double T = command[2];           // Period of the whole trajectory phase    (sec)
         double t = fmod(_count, T);
         double t_counter = fmod(_count + T/2, T);
+        // double t_counter = T/4;
 
-        RCLCPP_INFO(this->get_logger(), "t: %f, count_: %f", t, _count); // t 값을 디버깅하기 위해 출력
+        // RCLCPP_INFO(this->get_logger(), "t: %f, count_: %f", t, _count); // t 값을 디버깅하기 위해 출력
 
         // Calculate the coordinate using Trajectory Function
         double yVal = 95;
@@ -113,6 +114,7 @@ private:
             default:
                 break;
         }
+        // RCLCPP_INFO(this->get_logger(), "t: %f, count_: %f", RF_target_pos[1], RF_target_pos[2]);
 
         array<double, 12> target_pos;
         copy(LF_target_pos.begin(), LF_target_pos.end(), target_pos.begin());

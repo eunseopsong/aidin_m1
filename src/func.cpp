@@ -108,7 +108,7 @@ void SplineTrajectory(double t, double T, double vel_of_body, double &xVal, doub
     /////////////////////// Initializing ////////////////////////
 
     double length_of_STanding_phase = vel_of_body * T /2;
-    double height = 400;
+    double height = 350;
 
     // int ST_x_case = 1;
     int SW_x_case = 2, Reverse_x_case = 3;
@@ -124,7 +124,7 @@ void SplineTrajectory(double t, double T, double vel_of_body, double &xVal, doub
     // undetermined coefficients of SWzValues (a2*t^5 + b2*t^4 + c2*t^3 + d2*t^2 + e2*t + f2)
     double d2 = 0, e2 = 0, f2 = -height;
     double singular2 = T/4;
-    double B_val2[3] = {0, -(5*height/6 +f2), 0};
+    double B_val2[3] = {0, -(5*height/5 +f2), 0};
     double S2[6];
 
     /////////////////////// Calculate the return Value ////////////////////////
@@ -272,7 +272,8 @@ double FeedforwardController(double Kp, double Kd, double th[3], int case_, int 
 void CalculateTorqueStanding(double* output_torque, array<double, 3> Kp, array<double ,3> Kd)
 {
     array<double, 3> target_pos;
-    target_pos = {0, M_PI_2/2, 0};
+    // target_pos = {0, M_PI_2/2, 0};
+    target_pos = {0, 0.775398, 0.020001}; // when t = T/4
 
     for (int i=0; i<12; i++)
     {
