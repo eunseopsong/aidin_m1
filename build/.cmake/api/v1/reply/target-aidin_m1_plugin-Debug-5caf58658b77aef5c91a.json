@@ -41,7 +41,7 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 52,
+				"line" : 47,
 				"parent" : 0
 			},
 			{
@@ -59,7 +59,7 @@
 			{
 				"command" : 3,
 				"file" : 0,
-				"line" : 53,
+				"line" : 48,
 				"parent" : 0
 			},
 			{
@@ -83,7 +83,7 @@
 			{
 				"command" : 10,
 				"file" : 0,
-				"line" : 15,
+				"line" : 10,
 				"parent" : 0
 			},
 			{
@@ -153,7 +153,7 @@
 			{
 				"command" : 11,
 				"file" : 0,
-				"line" : 22,
+				"line" : 18,
 				"parent" : 0
 			},
 			{
@@ -266,7 +266,7 @@
 				},
 				{
 					"backtrace" : 21,
-					"path" : "/usr/include/sdformat-9.8"
+					"path" : "/usr/include/sdformat-9.10"
 				},
 				{
 					"backtrace" : 21,
@@ -323,7 +323,7 @@
 				{
 					"backtrace" : 4,
 					"isSystem" : true,
-					"path" : "/usr/include/sdformat-9.8/sdf/.."
+					"path" : "/usr/include/sdformat-9.10/sdf/.."
 				},
 				{
 					"backtrace" : 4,
@@ -506,7 +506,7 @@
 			},
 			{
 				"backtrace" : 4,
-				"fragment" : "/usr/lib/x86_64-linux-gnu/libsdformat9.so.9.8.0",
+				"fragment" : "/usr/lib/x86_64-linux-gnu/libsdformat9.so.9.10.1",
 				"role" : "libraries"
 			},
 			{
@@ -533,7 +533,7 @@
 			},
 			{
 				"backtrace" : 4,
-				"fragment" : "/usr/lib/x86_64-linux-gnu/libignition-common3-graphics.so.3.14.2",
+				"fragment" : "/usr/lib/x86_64-linux-gnu/libignition-common3-graphics.so.3.17.0",
 				"role" : "libraries"
 			},
 			{
@@ -2552,15 +2552,15 @@
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "/usr/lib/x86_64-linux-gnu/libignition-transport8.so.8.3.0",
+				"fragment" : "/usr/lib/x86_64-linux-gnu/libignition-transport8.so.8.5.0",
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "/usr/lib/x86_64-linux-gnu/libignition-fuel_tools4.so.4.6.0",
+				"fragment" : "/usr/lib/x86_64-linux-gnu/libignition-fuel_tools4.so.4.9.1",
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "/usr/lib/x86_64-linux-gnu/libignition-msgs5.so.5.10.0",
+				"fragment" : "/usr/lib/x86_64-linux-gnu/libignition-msgs5.so.5.11.0",
 				"role" : "libraries"
 			},
 			{
@@ -2572,7 +2572,7 @@
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "/usr/lib/x86_64-linux-gnu/libignition-common3.so.3.14.2",
+				"fragment" : "/usr/lib/x86_64-linux-gnu/libignition-common3.so.3.17.0",
 				"role" : "libraries"
 			},
 			{

@@ -2079,6 +2079,14 @@
 		},
 		{
 			"isExternal" : true,
+			"path" : "/usr/lib/x86_64-linux-gnu/cmake/sdformat9/sdformat9-config-version.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/usr/lib/x86_64-linux-gnu/cmake/sdformat9/sdformat9-config.cmake"
+		},
+		{
+			"isExternal" : true,
 			"path" : "/opt/ros/galactic/share/std_msgs/cmake/std_msgsConfig-version.cmake"
 		},
 		{
@@ -5476,6 +5484,30 @@
 		},
 		{
 			"isExternal" : true,
+			"path" : "/opt/ros/galactic/share/ament_cmake_copyright/cmake/ament_cmake_copyrightConfig-version.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/opt/ros/galactic/share/ament_cmake_copyright/cmake/ament_cmake_copyrightConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/opt/ros/galactic/share/ament_cmake_copyright/cmake/ament_cmake_copyright-extras.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/opt/ros/galactic/share/ament_cmake_test/cmake/ament_cmake_testConfig-version.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/opt/ros/galactic/share/ament_cmake_test/cmake/ament_cmake_testConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/opt/ros/galactic/share/ament_cmake_copyright/cmake/ament_copyright.cmake"
+		},
+		{
+			"isExternal" : true,
 			"path" : "/opt/ros/galactic/share/ament_cmake_cppcheck/cmake/ament_cmake_cppcheckConfig-version.cmake"
 		},
 		{
@@ -5657,6 +5689,10 @@
 		{
 			"isExternal" : true,
 			"path" : "/opt/ros/galactic/share/ament_lint_auto/cmake/ament_lint_auto_package_hook.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/opt/ros/galactic/share/ament_cmake_copyright/cmake/ament_cmake_copyright_lint_hook.cmake"
 		},
 		{
 			"isExternal" : true,
