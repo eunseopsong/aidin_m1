@@ -45,28 +45,28 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "aidin_m1_main::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-aidin_m1_main-Debug-d3cbaf222b5738e79581.json",
+					"jsonFile" : "target-aidin_m1_main-Debug-24d2805461aec0647391.json",
 					"name" : "aidin_m1_main",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "aidin_m1_plugin::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-aidin_m1_plugin-Debug-5caf58658b77aef5c91a.json",
+					"jsonFile" : "target-aidin_m1_plugin-Debug-8931871dfff249ab972c.json",
 					"name" : "aidin_m1_plugin",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "aidin_m1_uninstall::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-aidin_m1_uninstall-Debug-8e1ea06790777f0daf75.json",
+					"jsonFile" : "target-aidin_m1_uninstall-Debug-82af14bc85d3ee1252d5.json",
 					"name" : "aidin_m1_uninstall",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "uninstall::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-uninstall-Debug-7d4a444f1d4e6830a0d1.json",
+					"jsonFile" : "target-uninstall-Debug-14fbc0515999511a07e7.json",
 					"name" : "uninstall",
 					"projectIndex" : 0
 				}

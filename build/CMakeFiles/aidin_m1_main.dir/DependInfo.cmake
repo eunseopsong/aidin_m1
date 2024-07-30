@@ -11,10 +11,11 @@ set(CMAKE_CXX_COMPILER_ID "GNU")
 # Preprocessor definitions for this target.
 set(CMAKE_TARGET_DEFINITIONS_CXX
   "BOOST_TEST_DYN_LINK"
-  "DEFAULT_RMW_IMPLEMENTATION=rmw_cyclonedds_cpp"
+  "DEFAULT_RMW_IMPLEMENTATION=rmw_fastrtps_cpp"
   "LIBBULLET_VERSION=2.88"
   "LIBBULLET_VERSION_GT_282"
   "RCUTILS_ENABLE_FAULT_INJECTION"
+  "SPDLOG_COMPILED_LIB"
   )
 
 # The include file search paths:
@@ -31,7 +32,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/usr/include/ignition/msgs5"
   "/usr/include/ignition/common3"
   "/usr/include/ignition/fuel_tools4"
-  "/opt/ros/galactic/include"
+  "/opt/ros/foxy/include"
   )
 
 # Targets to which this target links.

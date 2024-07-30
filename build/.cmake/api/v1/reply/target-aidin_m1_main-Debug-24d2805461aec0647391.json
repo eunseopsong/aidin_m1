@@ -27,7 +27,7 @@
 		"files" : 
 		[
 			"CMakeLists.txt",
-			"/opt/ros/galactic/share/ament_cmake_target_dependencies/cmake/ament_target_dependencies.cmake",
+			"/opt/ros/foxy/share/ament_cmake_target_dependencies/cmake/ament_target_dependencies.cmake",
 			"/usr/share/dart/cmake/DARTFindBoost.cmake",
 			"/usr/share/dart/cmake/dart_dartComponent.cmake",
 			"/usr/share/dart/cmake/DARTConfig.cmake",
@@ -41,13 +41,13 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 44,
+				"line" : 45,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 57,
+				"line" : 58,
 				"parent" : 0
 			},
 			{
@@ -59,7 +59,7 @@
 			{
 				"command" : 4,
 				"file" : 0,
-				"line" : 45,
+				"line" : 46,
 				"parent" : 0
 			},
 			{
@@ -177,9 +177,6 @@
 				{
 					"backtrace" : 6,
 					"fragment" : "-Wpedantic"
-				},
-				{
-					"fragment" : "-std=gnu++17"
 				}
 			],
 			"defines" : 
@@ -190,7 +187,7 @@
 				},
 				{
 					"backtrace" : 5,
-					"define" : "DEFAULT_RMW_IMPLEMENTATION=rmw_cyclonedds_cpp"
+					"define" : "DEFAULT_RMW_IMPLEMENTATION=rmw_fastrtps_cpp"
 				},
 				{
 					"backtrace" : 18,
@@ -203,6 +200,10 @@
 				{
 					"backtrace" : 5,
 					"define" : "RCUTILS_ENABLE_FAULT_INJECTION"
+				},
+				{
+					"backtrace" : 5,
+					"define" : "SPDLOG_COMPILED_LIB"
 				}
 			],
 			"includes" : 
@@ -258,7 +259,7 @@
 				{
 					"backtrace" : 21,
 					"isSystem" : true,
-					"path" : "/opt/ros/galactic/include"
+					"path" : "/opt/ros/foxy/include"
 				}
 			],
 			"language" : "CXX",
@@ -301,101 +302,101 @@
 				"role" : "libraryPath"
 			},
 			{
-				"fragment" : "-Wl,-rpath,/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/galactic/lib:",
+				"fragment" : "-Wl,-rpath,/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/foxy/lib:",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 5,
-				"fragment" : "/opt/ros/galactic/lib/librclcpp.so",
+				"fragment" : "/opt/ros/foxy/lib/librclcpp.so",
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "/opt/ros/galactic/lib/libament_index_cpp.so",
+				"fragment" : "/opt/ros/foxy/lib/liblibstatistics_collector.so",
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "/opt/ros/galactic/lib/liblibstatistics_collector.so",
+				"fragment" : "/opt/ros/foxy/lib/liblibstatistics_collector_test_msgs__rosidl_typesupport_introspection_c.so",
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "/opt/ros/galactic/lib/liblibstatistics_collector_test_msgs__rosidl_typesupport_introspection_c.so",
+				"fragment" : "/opt/ros/foxy/lib/liblibstatistics_collector_test_msgs__rosidl_generator_c.so",
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "/opt/ros/galactic/lib/liblibstatistics_collector_test_msgs__rosidl_generator_c.so",
+				"fragment" : "/opt/ros/foxy/lib/liblibstatistics_collector_test_msgs__rosidl_typesupport_c.so",
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "/opt/ros/galactic/lib/liblibstatistics_collector_test_msgs__rosidl_typesupport_c.so",
+				"fragment" : "/opt/ros/foxy/lib/liblibstatistics_collector_test_msgs__rosidl_typesupport_introspection_cpp.so",
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "/opt/ros/galactic/lib/liblibstatistics_collector_test_msgs__rosidl_typesupport_introspection_cpp.so",
-				"role" : "libraries"
-			},
-			{
-				"fragment" : "/opt/ros/galactic/lib/liblibstatistics_collector_test_msgs__rosidl_typesupport_cpp.so",
+				"fragment" : "/opt/ros/foxy/lib/liblibstatistics_collector_test_msgs__rosidl_typesupport_cpp.so",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 5,
-				"fragment" : "/opt/ros/galactic/lib/libstd_msgs__rosidl_typesupport_introspection_c.so",
+				"fragment" : "/opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_introspection_c.so",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 5,
-				"fragment" : "/opt/ros/galactic/lib/libstd_msgs__rosidl_generator_c.so",
+				"fragment" : "/opt/ros/foxy/lib/libstd_msgs__rosidl_generator_c.so",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 5,
-				"fragment" : "/opt/ros/galactic/lib/libstd_msgs__rosidl_typesupport_c.so",
+				"fragment" : "/opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_c.so",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 5,
-				"fragment" : "/opt/ros/galactic/lib/libstd_msgs__rosidl_typesupport_introspection_cpp.so",
+				"fragment" : "/opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_introspection_cpp.so",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 5,
-				"fragment" : "/opt/ros/galactic/lib/libstd_msgs__rosidl_typesupport_cpp.so",
+				"fragment" : "/opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_cpp.so",
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "/opt/ros/galactic/lib/librcl.so",
+				"fragment" : "/opt/ros/foxy/lib/librcl.so",
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "/opt/ros/galactic/lib/librcl_interfaces__rosidl_typesupport_introspection_c.so",
+				"fragment" : "/opt/ros/foxy/lib/librcl_interfaces__rosidl_typesupport_introspection_c.so",
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "/opt/ros/galactic/lib/librcl_interfaces__rosidl_generator_c.so",
+				"fragment" : "/opt/ros/foxy/lib/librcl_interfaces__rosidl_generator_c.so",
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "/opt/ros/galactic/lib/librcl_interfaces__rosidl_typesupport_c.so",
+				"fragment" : "/opt/ros/foxy/lib/librcl_interfaces__rosidl_typesupport_c.so",
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "/opt/ros/galactic/lib/librcl_interfaces__rosidl_typesupport_introspection_cpp.so",
+				"fragment" : "/opt/ros/foxy/lib/librcl_interfaces__rosidl_typesupport_introspection_cpp.so",
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "/opt/ros/galactic/lib/librcl_interfaces__rosidl_typesupport_cpp.so",
+				"fragment" : "/opt/ros/foxy/lib/librcl_interfaces__rosidl_typesupport_cpp.so",
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "/opt/ros/galactic/lib/librmw_implementation.so",
+				"fragment" : "/opt/ros/foxy/lib/librmw_implementation.so",
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "/opt/ros/galactic/lib/librcl_logging_spdlog.so",
+				"fragment" : "/opt/ros/foxy/lib/librmw.so",
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "/opt/ros/galactic/lib/librcl_logging_interface.so",
+				"fragment" : "/opt/ros/foxy/lib/librcl_logging_spdlog.so",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/lib/x86_64-linux-gnu/libspdlog.so.1.5.0",
 				"role" : "libraries"
 			},
 			{
@@ -403,103 +404,99 @@
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "/opt/ros/galactic/lib/librcl_yaml_param_parser.so",
+				"fragment" : "/opt/ros/foxy/lib/librcl_yaml_param_parser.so",
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "/opt/ros/galactic/lib/librmw.so",
+				"fragment" : "/opt/ros/foxy/lib/libyaml.so",
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "/opt/ros/galactic/lib/libyaml.so",
+				"fragment" : "/opt/ros/foxy/lib/librosgraph_msgs__rosidl_typesupport_introspection_c.so",
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "/opt/ros/galactic/lib/librosgraph_msgs__rosidl_typesupport_introspection_c.so",
+				"fragment" : "/opt/ros/foxy/lib/librosgraph_msgs__rosidl_generator_c.so",
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "/opt/ros/galactic/lib/librosgraph_msgs__rosidl_generator_c.so",
+				"fragment" : "/opt/ros/foxy/lib/librosgraph_msgs__rosidl_typesupport_c.so",
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "/opt/ros/galactic/lib/librosgraph_msgs__rosidl_typesupport_c.so",
+				"fragment" : "/opt/ros/foxy/lib/librosgraph_msgs__rosidl_typesupport_introspection_cpp.so",
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "/opt/ros/galactic/lib/librosgraph_msgs__rosidl_typesupport_introspection_cpp.so",
+				"fragment" : "/opt/ros/foxy/lib/librosgraph_msgs__rosidl_typesupport_cpp.so",
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "/opt/ros/galactic/lib/librosgraph_msgs__rosidl_typesupport_cpp.so",
+				"fragment" : "/opt/ros/foxy/lib/libstatistics_msgs__rosidl_typesupport_introspection_c.so",
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "/opt/ros/galactic/lib/libstatistics_msgs__rosidl_typesupport_introspection_c.so",
+				"fragment" : "/opt/ros/foxy/lib/libstatistics_msgs__rosidl_generator_c.so",
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "/opt/ros/galactic/lib/libstatistics_msgs__rosidl_generator_c.so",
+				"fragment" : "/opt/ros/foxy/lib/libstatistics_msgs__rosidl_typesupport_c.so",
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "/opt/ros/galactic/lib/libstatistics_msgs__rosidl_typesupport_c.so",
+				"fragment" : "/opt/ros/foxy/lib/libstatistics_msgs__rosidl_typesupport_introspection_cpp.so",
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "/opt/ros/galactic/lib/libstatistics_msgs__rosidl_typesupport_introspection_cpp.so",
+				"fragment" : "/opt/ros/foxy/lib/libstatistics_msgs__rosidl_typesupport_cpp.so",
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "/opt/ros/galactic/lib/libstatistics_msgs__rosidl_typesupport_cpp.so",
+				"fragment" : "/opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_c.so",
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "/opt/ros/galactic/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_c.so",
+				"fragment" : "/opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_generator_c.so",
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "/opt/ros/galactic/lib/libbuiltin_interfaces__rosidl_generator_c.so",
+				"fragment" : "/opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_c.so",
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "/opt/ros/galactic/lib/libbuiltin_interfaces__rosidl_typesupport_c.so",
+				"fragment" : "/opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_cpp.so",
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "/opt/ros/galactic/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_cpp.so",
+				"fragment" : "/opt/ros/foxy/lib/librosidl_typesupport_introspection_cpp.so",
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "/opt/ros/galactic/lib/librosidl_typesupport_introspection_cpp.so",
+				"fragment" : "/opt/ros/foxy/lib/librosidl_typesupport_introspection_c.so",
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "/opt/ros/galactic/lib/librosidl_typesupport_introspection_c.so",
+				"fragment" : "/opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_cpp.so",
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "/opt/ros/galactic/lib/libbuiltin_interfaces__rosidl_typesupport_cpp.so",
+				"fragment" : "/opt/ros/foxy/lib/librosidl_typesupport_cpp.so",
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "/opt/ros/galactic/lib/librosidl_typesupport_cpp.so",
+				"fragment" : "/opt/ros/foxy/lib/librosidl_typesupport_c.so",
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "/opt/ros/galactic/lib/librosidl_typesupport_c.so",
+				"fragment" : "/opt/ros/foxy/lib/librcpputils.so",
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "/opt/ros/galactic/lib/librcpputils.so",
+				"fragment" : "/opt/ros/foxy/lib/librosidl_runtime_c.so",
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "/opt/ros/galactic/lib/librosidl_runtime_c.so",
-				"role" : "libraries"
-			},
-			{
-				"fragment" : "/opt/ros/galactic/lib/librcutils.so",
+				"fragment" : "/opt/ros/foxy/lib/librcutils.so",
 				"role" : "libraries"
 			},
 			{
@@ -507,7 +504,7 @@
 				"role" : "libraries"
 			},
 			{
-				"fragment" : "/opt/ros/galactic/lib/libtracetools.so",
+				"fragment" : "/opt/ros/foxy/lib/libtracetools.so",
 				"role" : "libraries"
 			}
 		],

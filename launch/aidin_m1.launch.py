@@ -5,20 +5,11 @@ from ament_index_python.packages import get_package_share_directory
 
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, ExecuteProcess, IncludeLaunchDescription
-from launch.actions import ExecuteProcess, IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import Command, LaunchConfiguration
 
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
-
-# # for using mesh import in urdf
-# pkg_share_path = os.pathsep + os.path.join(get_package_prefix("aidin_m1"), 'share')
-# if 'GAZEBO_MODEL_PATH' in os.environ:
-#     os.environ['GAZEBO_MODEL_PATH'] += pkg_share_path
-# else:
-#     os.environ['GAZEBO_MODEL_PATH'] =  pkg_share_path
-
 
 def generate_launch_description():
 
@@ -30,12 +21,15 @@ def generate_launch_description():
     urdf = os.path.join(pkg_path, "urdf", robot_file_name)
 
     aidin_m1_description_share = FindPackageShare(package='aidin_m1').find('aidin_m1')
-    default_model_path = os.path.join(aidin_m1_description_share, 'urdf/aidin_m1.xacro')
+    default_model_path = os.path.join(aidin_m1_description_share, 'urdf/aidin_m1.urdf')
+
+    # Custom world path
+    custom_world_path = os.path.join(pkg_path, "worlds", "house.world")
 
     # Start Gazebo server
     start_gazebo_server = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(os.path.join(pkg_gazebo_ros, 'launch', 'gzserver.launch.py')),
-        launch_arguments={"world": "/usr/share/gazebo-11/worlds/empty.world",
+        launch_arguments={"world": custom_world_path,
                           "verbose": "true"}.items()
     )
 
