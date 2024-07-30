@@ -19,11 +19,18 @@
       </attenuation>
       <direction>-0.5 0.5 -1</direction>
     </light>
-    <physics name='default_physics' default='0' type='ode'>
+
+    <!-- <physics name='default_physics' default='0' type='ode'>
       <max_step_size>0.001</max_step_size>
-      <real_time_factor>1</real_time_factor>
+      <real_time_factor>0.5</real_time_factor>
       <real_time_update_rate>1000</real_time_update_rate>
+    </physics> -->
+    <physics name='default_physics' default='0' type='ode'>
+      <max_step_size>0.0005</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>2000</real_time_update_rate>
     </physics>
+
     <scene>
       <ambient>0.4 0.4 0.4 1</ambient>
       <background>0.7 0.7 0.7 1</background>
@@ -97,6 +104,7 @@
       <real_time>40 544609381</real_time>
       <wall_time>1477526758 389708893</wall_time>
       <iterations>39798</iterations>
+  
       <model name='Floor'>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <scale>1 1 1</scale>
@@ -123,13 +131,16 @@
         <pose frame=''>0 0 5 0 -0 0</pose>
       </light>
     </state>
+
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose frame=''>-27.5315 3.1767 21.7672 0 0.735643 0.02019</pose>
+        <pose frame=''>-6.5 0 5 0 0.735643 0</pose>
+        <!-- <pose frame=''>20 3.1767 20 0 0.735643 0.02019</pose> -->
         <view_controller>orbit</view_controller>
         <projection_type>perspective</projection_type>
       </camera>
     </gui>
+
     <model name='Floor'>
       <link name='main'>
         <pose frame=''>0 0 0.01 0 -0 0</pose>
@@ -159,13 +170,13 @@
               <size>40 40 0.01</size>
             </box>
           </geometry>
-          <material>
+          <!-- <material>
             <script>
               <uri>model://Floor/materials/scripts</uri>
               <uri>model://Floor/materials/textures</uri>
               <name>floor</name>
             </script>
-          </material>
+          </material> -->
         </visual>
         <self_collide>0</self_collide>
         <kinematic>0</kinematic>
