@@ -23,12 +23,12 @@
 #include <numeric>
 
 // Define history size and threshold
-const size_t contact_history_size = 7;
-const double contact_threshold = 0.15; // Lowered threshold to make it more likely to be 1
+const size_t contact_history_size = 10;
+const double contact_threshold = 0.1; // Lowered threshold to make it more likely to be 1
 
 // Define weights for filtering
 // const std::vector<double> contact_weights = {0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0};
-const std::vector<double> contact_weights = {0.15, 0.30, 0.45, 0.60, 0.75, 0.90, 1.0};
+const std::vector<double> contact_weights = {0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0};
 
 using namespace std;
 
@@ -270,7 +270,7 @@ namespace gazebo
             pub_imu->publish(IMU);
 
             physics::ContactManager *contactManager = this->model->GetWorld()->Physics()->GetContactManager();
-            RCLCPP_INFO(this->node->get_logger(), "Contact count: %d", contactManager->GetContactCount());
+            // RCLCPP_INFO(this->node->get_logger(), "Contact count: %d", contactManager->GetContactCount());
 
             std::string contact_link;
             bool LF_contact_detected = false;
@@ -288,24 +288,12 @@ namespace gazebo
                 if (contact->collision1 && contact->collision2) {
                     std::string link1 = contact->collision1->GetLink()->GetName();
                     std::string link2 = contact->collision2->GetLink()->GetName();
-                    RCLCPP_INFO(this->node->get_logger(), "Collision between %s and %s", link1.c_str(), link2.c_str());
+                    // RCLCPP_INFO(this->node->get_logger(), "Collision between %s and %s", link1.c_str(), link2.c_str());
 
-                    if (link1 == "LF_knee" || link2 == "LF_knee") {
-                        LF_contact_detected = true;
-                        // RCLCPP_INFO(this->node->get_logger(), "LF_contact_detected");
-                    }
-                    if (link1 == "RF_knee" || link2 == "RF_knee") {
-                        RF_contact_detected = true;
-                        // RCLCPP_INFO(this->node->get_logger(), "RF_contact_detected");
-                    }
-                    if (link1 == "LB_knee" || link2 == "LB_knee") {
-                        LB_contact_detected = true;
-                        // RCLCPP_INFO(this->node->get_logger(), "LB_contact_detected");
-                    }
-                    if (link1 == "RB_knee" || link2 == "RB_knee") {
-                        RB_contact_detected = true;
-                        // RCLCPP_INFO(this->node->get_logger(), "RB_contact_detected");
-                    }
+                    if (link1 == "LF_knee" || link2 == "LF_knee") {LF_contact_detected = true;}
+                    if (link1 == "RF_knee" || link2 == "RF_knee") {RF_contact_detected = true;}
+                    if (link1 == "LB_knee" || link2 == "LB_knee") {LB_contact_detected = true;}
+                    if (link1 == "RB_knee" || link2 == "RB_knee") {RB_contact_detected = true;}
                 } else {
                     RCLCPP_WARN(this->node->get_logger(), "Collision object does not have valid links");
                 }
@@ -341,7 +329,7 @@ namespace gazebo
             double LB_contactFlag = LB_contact_weighted > contact_threshold ? 1 : 0;
             double RB_contactFlag = RB_contact_weighted > contact_threshold ? 1 : 0;
 
-            RCLCPP_INFO(this->node->get_logger(), "LF_contactFlag: %f, RF_contactFlag: %f, LB_contactFlag: %f, RB_contactFlag: %f", LF_contactFlag, RF_contactFlag, LB_contactFlag, RB_contactFlag);
+            // RCLCPP_INFO(this->node->get_logger(), "LF_contactFlag: %f, RF_contactFlag: %f, LB_contactFlag: %f, RB_contactFlag: %f", LF_contactFlag, RF_contactFlag, LB_contactFlag, RB_contactFlag);
 
             std_msgs::msg::Float32MultiArray Contact;
             Contact.data.clear();
