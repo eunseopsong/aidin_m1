@@ -86,6 +86,11 @@ namespace gazebo
         private: std::deque<bool> LB_contact_history;
         private: std::deque<bool> RB_contact_history;
 
+        private: std::deque<double> LF_distance_history; // for distance
+        private: std::deque<double> RF_distance_history; // for distance
+        private: std::deque<double> LB_distance_history; // for distance
+        private: std::deque<double> RB_distance_history; // for distance
+
         public: void Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
         {
             this->model = _parent;
@@ -215,8 +220,10 @@ namespace gazebo
             bool RB_contact_detected = false;
 
             ignition::math::Vector3d comPos = ComputeCenterOfMass(); // for distance
-            std_msgs::msg::Float32MultiArray Distances; // for distance
-            Distances.data = {0, 0, 0, 0}; // Initialize distances to 0
+            double LF_distance = 0.0;
+            double RF_distance = 0.0;
+            double LB_distance = 0.0;
+            double RB_distance = 0.0;
 
             for (unsigned int i = 0; i < contactManager->GetContactCount(); i++) {
                 auto contact = contactManager->GetContact(i);
@@ -231,23 +238,19 @@ namespace gazebo
 
                     if (link1 == "LF_knee" || link2 == "LF_knee") {
                         ignition::math::Vector3d contactPos = (link1 == "LF_knee") ? contact->collision1->WorldPose().Pos() : contact->collision2->WorldPose().Pos();
-                        double distance = comPos.Distance(contactPos);
-                        Distances.data[0] = static_cast<float>(distance);
+                        LF_distance = comPos.Distance(contactPos);
                     }
                     if (link1 == "RF_knee" || link2 == "RF_knee") {
                         ignition::math::Vector3d contactPos = (link1 == "RF_knee") ? contact->collision1->WorldPose().Pos() : contact->collision2->WorldPose().Pos();
-                        double distance = comPos.Distance(contactPos);
-                        Distances.data[1] = static_cast<float>(distance);
+                        RF_distance = comPos.Distance(contactPos);
                     }
                     if (link1 == "LB_knee" || link2 == "LB_knee") {
                         ignition::math::Vector3d contactPos = (link1 == "LB_knee") ? contact->collision1->WorldPose().Pos() : contact->collision2->WorldPose().Pos();
-                        double distance = comPos.Distance(contactPos);
-                        Distances.data[2] = static_cast<float>(distance);
+                        LB_distance = comPos.Distance(contactPos);
                     }
                     if (link1 == "RB_knee" || link2 == "RB_knee") {
                         ignition::math::Vector3d contactPos = (link1 == "RB_knee") ? contact->collision1->WorldPose().Pos() : contact->collision2->WorldPose().Pos();
-                        double distance = comPos.Distance(contactPos);
-                        Distances.data[3] = static_cast<float>(distance);
+                        RB_distance = comPos.Distance(contactPos);
                     }
                 }
             }
@@ -276,10 +279,31 @@ namespace gazebo
             double LB_contactFlag = LB_contact_weighted > contact_threshold ? 1 : 0;
             double RB_contactFlag = RB_contact_weighted > contact_threshold ? 1 : 0;
 
+            auto updateDistanceHistory = [](std::deque<double>& history, double distance) {
+                if (history.size() >= contact_history_size) history.pop_front();
+                history.push_back(distance);
+            };
+
+            updateDistanceHistory(LF_distance_history, LF_distance);
+            updateDistanceHistory(RF_distance_history, RF_distance);
+            updateDistanceHistory(LB_distance_history, LB_distance);
+            updateDistanceHistory(RB_distance_history, RB_distance);
+
+            auto weighted_distance = [](const std::deque<double>& history, const std::vector<double>& weights) {
+                return std::inner_product(history.begin(), history.end(), weights.begin(), 0.0);
+            };
+
+            double LF_distance_weighted = weighted_distance(LF_distance_history, contact_weights);
+            double RF_distance_weighted = weighted_distance(RF_distance_history, contact_weights);
+            double LB_distance_weighted = weighted_distance(LB_distance_history, contact_weights);
+            double RB_distance_weighted = weighted_distance(RB_distance_history, contact_weights);
+
             std_msgs::msg::Float32MultiArray Contact;
             Contact.data = {static_cast<float>(LF_contactFlag), static_cast<float>(RF_contactFlag), static_cast<float>(LB_contactFlag), static_cast<float>(RB_contactFlag)};
             pub_contact->publish(Contact);
 
+            std_msgs::msg::Float32MultiArray Distances;
+            Distances.data = {static_cast<float>(LF_distance_weighted), static_cast<float>(RF_distance_weighted), static_cast<float>(LB_distance_weighted), static_cast<float>(RB_distance_weighted)};
             pub_distance->publish(Distances); // for distance
 
             rclcpp::executors::SingleThreadedExecutor executor;
