@@ -262,20 +262,19 @@ double FFControl(double Kp, double Kd, double th[3], int case_, int cri)
 
 double MPC(double th[3])
 {
-    VectorXd x_state(12);
-    x_state << imu[0], imu[1], imu[2], body_pos[0], body_pos[1], body_pos[2], imu[3], imu[4], imu[5], body_vel[0], body_vel[1], body_vel[2];
-
-    VectorXd friction(12);
-    
+    Vector3d zero;
+    zero << 0, 0, 0;
 
     Matrix3d Rz;
     Rz <<  cos(imu[2]), sin(imu[2]), 0,
           -sin(imu[2]), cos(imu[2]), 0,
                      0,           0, 1;
 
-    Vector3d zero;
-    zero << 0, 0, 0;
+    VectorXd x_state(12);
+    x_state << imu[0], imu[1], imu[2], body_pos[0], body_pos[1], body_pos[2], imu[3], imu[4], imu[5], body_vel[0], body_vel[1], body_vel[2];
 
+    VectorXd friction(12);
+    
 
 
     th[0] = 0; th[1] = 0; th[2] = 0;
