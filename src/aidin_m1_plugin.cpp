@@ -174,128 +174,128 @@ namespace gazebo
         }
 
         // Called by the world update start event
-        public: void OnUpdate()
-        {
-            // get robot state from gazebo
-            ignition::math::Pose3<double>   WorldPose          = model->WorldPose();
-            ignition::math::Vector3<double> Pos                = WorldPose.Pos();             // body position
-            ignition::math::Vector3<double> Rot_Euler          = WorldPose.Rot().Euler();     // body euler angle position
-            ignition::math::Vector3<double> WorldLinearVel     = model->WorldLinearVel();     // body linear velocity from world
-            ignition::math::Vector3<double> WorldLinearAccel   = model->WorldLinearAccel();   // body linear acceleration from world
-            ignition::math::Vector3<double> WorldAngularVel    = model->WorldAngularVel();    // body angle velocity from world
-            ignition::math::Vector3<double> WorldAngularAccel  = model->WorldAngularAccel();  // body euler angle acceleration from world
-            ignition::math::Vector3<double> RelativeAngularVel = model->RelativeAngularVel(); // body angular velocity from robot
-            // ignition::math::Vector3<double> acc_rel = model->WorldLinearAccel();
-            // ignition::math::Pose3<double>  model_pose_rel = model->RelativePose();
-            // ignition::math::Vector3<double> rot_rel = model_pose_rel.Rot().Euler();
+    public: void OnUpdate() {
+        ignition::math::Pose3<double> WorldPose = model->WorldPose();
+        ignition::math::Vector3<double> Pos = WorldPose.Pos();
+        ignition::math::Vector3<double> Rot_Euler = WorldPose.Rot().Euler();
+        ignition::math::Vector3<double> WorldLinearVel = model->WorldLinearVel();
+        ignition::math::Vector3<double> WorldLinearAccel = model->WorldLinearAccel();
+        ignition::math::Vector3<double> RelativeAngularVel = model->RelativeAngularVel();
 
-            // publish body position and euler angle
-            std_msgs::msg::Float32MultiArray BodyPose;
-            BodyPose.data.clear();
-            BodyPose.data.push_back(Pos.X());
-            BodyPose.data.push_back(Pos.Y());
-            BodyPose.data.push_back(Pos.Z());
-            BodyPose.data.push_back(Rot_Euler.X());
-            BodyPose.data.push_back(Rot_Euler.Y());
-            BodyPose.data.push_back(Rot_Euler.Z());
-            pub_bodypose->publish(BodyPose);
+        std_msgs::msg::Float32MultiArray BodyPose;
+        BodyPose.data.clear();
+        BodyPose.data.push_back(Pos.X());
+        BodyPose.data.push_back(Pos.Y());
+        BodyPose.data.push_back(Pos.Z());
+        BodyPose.data.push_back(Rot_Euler.X());
+        BodyPose.data.push_back(Rot_Euler.Y());
+        BodyPose.data.push_back(Rot_Euler.Z());
+        pub_bodypose->publish(BodyPose);
 
-            // Publish joint position
-            std_msgs::msg::Float32MultiArray JointPos;
-            JointPos.data.clear();
-            JointPos.data.push_back(this->joint1_ ->Position(1));
-            JointPos.data.push_back(this->joint2_ ->Position(1));
-            JointPos.data.push_back(this->joint3_ ->Position(1));
-            JointPos.data.push_back(this->joint4_ ->Position(1));
-            JointPos.data.push_back(this->joint5_ ->Position(1));
-            JointPos.data.push_back(this->joint6_ ->Position(1));
-            JointPos.data.push_back(this->joint7_ ->Position(1));
-            JointPos.data.push_back(this->joint8_ ->Position(1));
-            JointPos.data.push_back(this->joint9_ ->Position(1));
-            JointPos.data.push_back(this->joint10_->Position(1));
-            JointPos.data.push_back(this->joint11_->Position(1));
-            JointPos.data.push_back(this->joint12_->Position(1));
-            // JointPos.data.push_back(this->joint13_->Position(1));
-            pub_jointpos->publish(JointPos);
+        std_msgs::msg::Float32MultiArray JointPos;
+        JointPos.data.clear();
+        JointPos.data.push_back(this->joint1_->Position(1));
+        JointPos.data.push_back(this->joint2_->Position(1));
+        JointPos.data.push_back(this->joint3_->Position(1));
+        JointPos.data.push_back(this->joint4_->Position(1));
+        JointPos.data.push_back(this->joint5_->Position(1));
+        JointPos.data.push_back(this->joint6_->Position(1));
+        JointPos.data.push_back(this->joint7_->Position(1));
+        JointPos.data.push_back(this->joint8_->Position(1));
+        JointPos.data.push_back(this->joint9_->Position(1));
+        JointPos.data.push_back(this->joint10_->Position(1));
+        JointPos.data.push_back(this->joint11_->Position(1));
+        JointPos.data.push_back(this->joint12_->Position(1));
+        pub_jointpos->publish(JointPos);
 
-            // Publish joint velocity
-            std_msgs::msg::Float32MultiArray JointVel;
-            JointVel.data.clear();
-            JointVel.data.push_back(this->joint1_ ->GetVelocity(1));
-            JointVel.data.push_back(this->joint2_ ->GetVelocity(1));
-            JointVel.data.push_back(this->joint3_ ->GetVelocity(1));
-            JointVel.data.push_back(this->joint4_ ->GetVelocity(1));
-            JointVel.data.push_back(this->joint5_ ->GetVelocity(1));
-            JointVel.data.push_back(this->joint6_ ->GetVelocity(1));
-            JointVel.data.push_back(this->joint7_ ->GetVelocity(1));
-            JointVel.data.push_back(this->joint8_ ->GetVelocity(1));
-            JointVel.data.push_back(this->joint9_ ->GetVelocity(1));
-            JointVel.data.push_back(this->joint10_->GetVelocity(1));
-            JointVel.data.push_back(this->joint11_->GetVelocity(1));
-            JointVel.data.push_back(this->joint12_->GetVelocity(1));
-            // JointVel.data.push_back(this->joint13_->GetVelocity(1));
-            pub_jointvel->publish(JointVel);
+        std_msgs::msg::Float32MultiArray JointVel;
+        JointVel.data.clear();
+        JointVel.data.push_back(this->joint1_->GetVelocity(1));
+        JointVel.data.push_back(this->joint2_->GetVelocity(1));
+        JointVel.data.push_back(this->joint3_->GetVelocity(1));
+        JointVel.data.push_back(this->joint4_->GetVelocity(1));
+        JointVel.data.push_back(this->joint5_->GetVelocity(1));
+        JointVel.data.push_back(this->joint6_->GetVelocity(1));
+        JointVel.data.push_back(this->joint7_->GetVelocity(1));
+        JointVel.data.push_back(this->joint8_->GetVelocity(1));
+        JointVel.data.push_back(this->joint9_->GetVelocity(1));
+        JointVel.data.push_back(this->joint10_->GetVelocity(1));
+        JointVel.data.push_back(this->joint11_->GetVelocity(1));
+        JointVel.data.push_back(this->joint12_->GetVelocity(1));
+        pub_jointvel->publish(JointVel);
 
-            // publish body position
-            std_msgs::msg::Float32MultiArray BodyPos;
-            BodyPos.data.clear();
-            BodyPos.data.push_back(Pos.X());
-            BodyPos.data.push_back(Pos.Y());
-            BodyPos.data.push_back(Pos.Z());
-            pub_bodypos->publish(BodyPos);
+        std_msgs::msg::Float32MultiArray BodyPos;
+        BodyPos.data.clear();
+        BodyPos.data.push_back(Pos.X());
+        BodyPos.data.push_back(Pos.Y());
+        BodyPos.data.push_back(Pos.Z());
+        pub_bodypos->publish(BodyPos);
 
-            // publish body velocity
-            std_msgs::msg::Float32MultiArray BodyVel;
-            BodyVel.data.clear();
-	        BodyVel.data.push_back(WorldLinearVel.X());
-	        BodyVel.data.push_back(WorldLinearVel.Y());
-	        BodyVel.data.push_back(WorldLinearVel.Z());
-	        pub_bodyvel->publish(BodyVel);
+        std_msgs::msg::Float32MultiArray BodyVel;
+        BodyVel.data.clear();
+        BodyVel.data.push_back(WorldLinearVel.X());
+        BodyVel.data.push_back(WorldLinearVel.Y());
+        BodyVel.data.push_back(WorldLinearVel.Z());
+        pub_bodyvel->publish(BodyVel);
 
-            // publish imu
-            std_msgs::msg::Float32MultiArray IMU;
-            IMU.data.clear();
-            IMU.data.push_back(Rot_Euler.X()); // roll, pitch, yaw
-            IMU.data.push_back(Rot_Euler.Y());
-            IMU.data.push_back(Rot_Euler.Z());
-            IMU.data.push_back(RelativeAngularVel.X()); // roll, pitch, yaw velocity
-            IMU.data.push_back(RelativeAngularVel.Y());
-            IMU.data.push_back(RelativeAngularVel.Z());
-            IMU.data.push_back(WorldLinearAccel.X()); // roll, pitch, yaw acceleration
-            IMU.data.push_back(WorldLinearAccel.Y());
-            IMU.data.push_back(WorldLinearAccel.Z());
-            pub_imu->publish(IMU);
+        std_msgs::msg::Float32MultiArray IMU;
+        IMU.data.clear();
+        IMU.data.push_back(Rot_Euler.X());
+        IMU.data.push_back(Rot_Euler.Y());
+        IMU.data.push_back(Rot_Euler.Z());
+        IMU.data.push_back(RelativeAngularVel.X());
+        IMU.data.push_back(RelativeAngularVel.Y());
+        IMU.data.push_back(RelativeAngularVel.Z());
+        IMU.data.push_back(WorldLinearAccel.X());
+        IMU.data.push_back(WorldLinearAccel.Y());
+        IMU.data.push_back(WorldLinearAccel.Z());
+        pub_imu->publish(IMU);
 
-            // get and publish contact states
-            std::string contact_link;
-            double LF_contactFlag = 0;
-            double RF_contactFlag = 0;
-            double LB_contactFlag = 0;
-            double RB_contactFlag = 0;
+        physics::ContactManager *contactManager = this->model->GetWorld()->Physics()->GetContactManager();
+        RCLCPP_INFO(this->node->get_logger(), "Contact count: %d", contactManager->GetContactCount());
 
-            physics::ContactManager *contactManager = this->model->GetWorld()->Physics()->GetContactManager();
-            for(unsigned int i=0; i<contactManager->GetContactCount(); i++)
-            {
-                physics::Contact *contact = contactManager->GetContact(i);
-                contact_link = contact->collision1->GetLink()->GetName();
-                if(contact_link == "aidin_m1::LF_foot"){LF_contactFlag = 1;}
-                if(contact_link == "aidin_m1::RF_foot"){RF_contactFlag = 1;}
-                if(contact_link == "aidin_m1::RB_foot"){LB_contactFlag = 1;}
-                if(contact_link == "aidin_m1::LB_foot"){RB_contactFlag = 1;}
+        std::string contact_link;
+        double LF_contactFlag = 0;
+        double RF_contactFlag = 0;
+        double LB_contactFlag = 0;
+        double RB_contactFlag = 0;
+
+        for (unsigned int i = 0; i < contactManager->GetContactCount(); i++) {
+            physics::Contact *contact = contactManager->GetContact(i);
+            if (contact == nullptr) {
+                RCLCPP_WARN(this->node->get_logger(), "Null contact object at index %d", i);
+                continue;
             }
 
-            std_msgs::msg::Float32MultiArray Contact;
-            Contact.data.clear();
-            Contact.data.push_back(LF_contactFlag);
-            Contact.data.push_back(RF_contactFlag);
-            Contact.data.push_back(LB_contactFlag);
-            Contact.data.push_back(RB_contactFlag);
-            pub_contact->publish(Contact);
+            if (contact->collision1 && contact->collision2) {
+                std::string link1 = contact->collision1->GetLink()->GetName();
+                std::string link2 = contact->collision2->GetLink()->GetName();
+                RCLCPP_INFO(this->node->get_logger(), "Collision between %s and %s", link1.c_str(), link2.c_str());
 
-            rclcpp::executors::SingleThreadedExecutor executor;
-            executor.add_node(this->node);
-            executor.spin_once();
+                if (link1 == "aidin_m1::LF_foot" || link2 == "aidin_m1::LF_foot") { LF_contactFlag = 1; }
+                if (link1 == "aidin_m1::RF_foot" || link2 == "aidin_m1::RF_foot") { RF_contactFlag = 1; }
+                if (link1 == "aidin_m1::LB_foot" || link2 == "aidin_m1::LB_foot") { LB_contactFlag = 1; }
+                if (link1 == "aidin_m1::RB_foot" || link2 == "aidin_m1::RB_foot") { RB_contactFlag = 1; }
+            } else {
+                RCLCPP_WARN(this->node->get_logger(), "Collision object does not have valid links");
+            }
         }
+
+        std_msgs::msg::Float32MultiArray Contact;
+        Contact.data.clear();
+        Contact.data.push_back(LF_contactFlag);
+        Contact.data.push_back(RF_contactFlag);
+        Contact.data.push_back(LB_contactFlag);
+        Contact.data.push_back(RB_contactFlag);
+        pub_contact->publish(Contact);
+
+        rclcpp::executors::SingleThreadedExecutor executor;
+        executor.add_node(this->node);
+        executor.spin_once();
+    }
+
+
+
 
         void ROSCallbackTorque_sim(const std_msgs::msg::Float32MultiArray::ConstSharedPtr torque)
         {

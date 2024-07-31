@@ -106,7 +106,7 @@
       <real_time>40 544609381</real_time>
       <wall_time>1477526758 389708893</wall_time>
       <iterations>39798</iterations>
-  
+
       <model name='Floor'>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <scale>1 1 1</scale>

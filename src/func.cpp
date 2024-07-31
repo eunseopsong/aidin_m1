@@ -98,6 +98,7 @@ void SplineTrajectory(double t, double T, double vel_of_body, double &xVal, doub
 
     double length_of_STanding_phase = vel_of_body * T /2;
     double height = 370;
+    // double height = 400;
 
     // int ST_x_case = 1;
     int SW_x_case = 2, Reverse_x_case = 3;
@@ -261,8 +262,8 @@ double FeedforwardController(double Kp, double Kd, double th[3], int case_, int 
 void CalculateTorqueStanding(double* output_torque, array<double, 3> Kp, array<double ,3> Kd)
 {
     array<double, 3> target_pos;
-    // target_pos = {0, 0.775398, 0.020001}; // when t = T/4 (height=350) success
-    target_pos = {0, 0.833070, -0.095344}; // when t = T/4 (height=370) success
+    // target_pos = {0, 0.775398, 0.020001};  // when t = T/4 (height=350) success
+    target_pos = {0, 0.833070, -0.095344};    // when t = T/4 (height=370) success
     // target_pos = {0, 0.863313, -0.155830}; // when t = T/4 (height=380) fail
 
     for (int i=0; i<12; i++)
