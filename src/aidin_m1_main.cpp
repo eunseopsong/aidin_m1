@@ -49,6 +49,10 @@ public:
                 }
                 copy(msg->data.begin(), msg->data.begin() + 3, command.begin());
             });
+        sub_distance = create_subscription<std_msgs::msg::Float32MultiArray>(
+            "/aidin_m1/Distance_sim", 10, [this](const std_msgs::msg::Float32MultiArray::SharedPtr msg) {
+                copy(msg->data.begin(), msg->data.begin() + 4, dist.begin());
+            });
 
         // Publish torque & target joint poses
         pub_torque = this->create_publisher<std_msgs::msg::Float32MultiArray>("/aidin_m1/Torque_sim", 10);
@@ -176,6 +180,7 @@ private:
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_imu;
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_contact;
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_command;
+    rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_distance;
 
     // Publisher declarations
     rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_torque;

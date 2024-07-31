@@ -47,6 +47,7 @@ namespace gazebo
         private: rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_bodyvel;
         private: rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_imu;
         private: rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_contact;
+        private: rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_distance; // for distance
 
         private: physics::ModelPtr model;
 
@@ -134,9 +135,29 @@ namespace gazebo
             this->pub_bodyvel  = this->node->create_publisher<std_msgs::msg::Float32MultiArray>(robot_namespace+"BodyVel_sim", qos);
             this->pub_imu      = this->node->create_publisher<std_msgs::msg::Float32MultiArray>(robot_namespace+"IMU_sim", qos);
             this->pub_contact  = this->node->create_publisher<std_msgs::msg::Float32MultiArray>(robot_namespace+"Contact_sim", qos);
+            this->pub_distance = this->node->create_publisher<std_msgs::msg::Float32MultiArray>(robot_namespace+"Distance_sim", qos); // for distance
 
             this->updateConnection = gazebo::event::Events::ConnectWorldUpdateBegin(
                 std::bind(&aidin_m1_plugin::OnUpdate, this));
+        }
+
+        // Calculate the center of mass
+        ignition::math::Vector3d ComputeCenterOfMass() {
+            ignition::math::Vector3d com(0, 0, 0);
+            double totalMass = 0.0;
+
+            for (auto link : this->model->GetLinks()) {
+                double mass = link->GetInertial()->Mass();
+                ignition::math::Vector3d pos = link->WorldCoGPose().Pos();
+                com += pos * mass;
+                totalMass += mass;
+            }
+
+            if (totalMass > 0) {
+                com /= totalMass;
+            }
+
+            return com;
         }
 
         public: void OnUpdate()
@@ -193,6 +214,10 @@ namespace gazebo
             bool LB_contact_detected = false;
             bool RB_contact_detected = false;
 
+            ignition::math::Vector3d comPos = ComputeCenterOfMass(); // for distance
+            std_msgs::msg::Float32MultiArray Distances; // for distance
+            Distances.data = {0, 0, 0, 0}; // Initialize distances to 0
+
             for (unsigned int i = 0; i < contactManager->GetContactCount(); i++) {
                 auto contact = contactManager->GetContact(i);
                 if (contact && contact->collision1 && contact->collision2) {
@@ -203,6 +228,27 @@ namespace gazebo
                     RF_contact_detected |= (link1 == "RF_knee" || link2 == "RF_knee");
                     LB_contact_detected |= (link1 == "LB_knee" || link2 == "LB_knee");
                     RB_contact_detected |= (link1 == "RB_knee" || link2 == "RB_knee");
+
+                    if (link1 == "LF_knee" || link2 == "LF_knee") {
+                        ignition::math::Vector3d contactPos = (link1 == "LF_knee") ? contact->collision1->WorldPose().Pos() : contact->collision2->WorldPose().Pos();
+                        double distance = comPos.Distance(contactPos);
+                        Distances.data[0] = static_cast<float>(distance);
+                    }
+                    if (link1 == "RF_knee" || link2 == "RF_knee") {
+                        ignition::math::Vector3d contactPos = (link1 == "RF_knee") ? contact->collision1->WorldPose().Pos() : contact->collision2->WorldPose().Pos();
+                        double distance = comPos.Distance(contactPos);
+                        Distances.data[1] = static_cast<float>(distance);
+                    }
+                    if (link1 == "LB_knee" || link2 == "LB_knee") {
+                        ignition::math::Vector3d contactPos = (link1 == "LB_knee") ? contact->collision1->WorldPose().Pos() : contact->collision2->WorldPose().Pos();
+                        double distance = comPos.Distance(contactPos);
+                        Distances.data[2] = static_cast<float>(distance);
+                    }
+                    if (link1 == "RB_knee" || link2 == "RB_knee") {
+                        ignition::math::Vector3d contactPos = (link1 == "RB_knee") ? contact->collision1->WorldPose().Pos() : contact->collision2->WorldPose().Pos();
+                        double distance = comPos.Distance(contactPos);
+                        Distances.data[3] = static_cast<float>(distance);
+                    }
                 }
             }
 
@@ -233,6 +279,8 @@ namespace gazebo
             std_msgs::msg::Float32MultiArray Contact;
             Contact.data = {static_cast<float>(LF_contactFlag), static_cast<float>(RF_contactFlag), static_cast<float>(LB_contactFlag), static_cast<float>(RB_contactFlag)};
             pub_contact->publish(Contact);
+
+            pub_distance->publish(Distances); // for distance
 
             rclcpp::executors::SingleThreadedExecutor executor;
             executor.add_node(this->node);

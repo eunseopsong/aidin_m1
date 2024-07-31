@@ -40,6 +40,7 @@ array<double, 3> body_vel{};
 array<double, 9> imu{};
 array<double, 4> contact{};
 array<double, 3> command{};
+array<double, 4> dist{};
 
 //////////// Method of Undetermined Coefficients using Eigen ////////////
 
