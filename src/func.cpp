@@ -195,7 +195,7 @@ void InverseKinematics3D(double px, double py, double pz, double d1, double l2, 
 
 ///////////////// for Torque Calculation /////////////////
 
-double PDController(double Kp, double Kd, double target_pos, double current_pos, double current_vel)
+double PDControl(double Kp, double Kd, double target_pos, double current_pos, double current_vel)
 {
 	double torque_limit = 100;
 	double PD_torque = Kp*(target_pos - current_pos) + Kd*(0 - current_vel);
@@ -203,9 +203,9 @@ double PDController(double Kp, double Kd, double target_pos, double current_pos,
     return min(PD_torque, torque_limit);
 }
 
-//////////////// Feedforward Control Function ////////////////
+//////////////// FeedForward Control Function ////////////////
 
-double FeedforwardController(double Kp, double Kd, double th[3], int case_, int cri)
+double FFControl(double Kp, double Kd, double th[3], int case_, int cri)
 {
     Matrix3d Ic1, Ic2, Ic3, M, C, B;   // 3x3 행렬
 
@@ -260,6 +260,18 @@ double FeedforwardController(double Kp, double Kd, double th[3], int case_, int 
     }
 }
 
+double MPC(double th[3])
+{
+
+
+
+
+
+
+
+    return 0;
+}
+
 void CalculateTorqueStanding(double* output_torque, array<double, 3> Kp, array<double ,3> Kd)
 {
     array<double, 3> target_pos;
@@ -270,13 +282,13 @@ void CalculateTorqueStanding(double* output_torque, array<double, 3> Kp, array<d
     for (int i=0; i<12; i++)
     {
         if (i < 3)      // LF joint
-            output_torque[i] = FeedforwardController(Kp[i], Kd[i], target_pos.data(), i,   0);
+            output_torque[i] = FFControl(Kp[i], Kd[i], target_pos.data(), i,   0);
         else if (i < 6) // RF joint
-            output_torque[i] = FeedforwardController(Kp[i-3], Kd[i-3], target_pos.data(), i-3, 3);
+            output_torque[i] = FFControl(Kp[i-3], Kd[i-3], target_pos.data(), i-3, 3);
         else if (i < 9) // LB joint
-            output_torque[i] = FeedforwardController(Kp[i-6], Kd[i-6], target_pos.data(), i-6, 6);
+            output_torque[i] = FFControl(Kp[i-6], Kd[i-6], target_pos.data(), i-6, 6);
         else            // RB joint
-            output_torque[i] = FeedforwardController(Kp[i-9], Kd[i-9], target_pos.data(), i-9, 9);
+            output_torque[i] = FFControl(Kp[i-9], Kd[i-9], target_pos.data(), i-9, 9);
     }
 }
 
@@ -294,13 +306,12 @@ void CalculateTorqueRunning(double* output_torque, double* target_pos, array<dou
     for (int i=0; i<12; i++)
     {
         if (i < 3)      // LF joint
-            output_torque[i] = FeedforwardController(Kp[i],   Kd[i],   LF_pos.data(), i,   0);
+            output_torque[i] = (contact[0] == 0) ? FFControl(Kp[i],   Kd[i],   LF_pos.data(), i,   0) : MPC(LF_pos.data());
         else if (i < 6) // RF joint
-            output_torque[i] = FeedforwardController(Kp[i-3], Kd[i-3], RF_pos.data(), i-3, 3);
+            output_torque[i] = (contact[1] == 0) ? FFControl(Kp[i-3], Kd[i-3], RF_pos.data(), i-3, 3) : MPC(RF_pos.data());
         else if (i < 9) // LB joint
-            output_torque[i] = FeedforwardController(Kp[i-6], Kd[i-6], LB_pos.data(), i-6, 6);
+            output_torque[i] = (contact[2] == 0) ? FFControl(Kp[i-6], Kd[i-6], LB_pos.data(), i-6, 6) : MPC(LB_pos.data());
         else            // RB joint
-            output_torque[i] = FeedforwardController(Kp[i-9], Kd[i-9], RB_pos.data(), i-9, 9);
+            output_torque[i] = (contact[3] == 0) ? FFControl(Kp[i-9], Kd[i-9], RB_pos.data(), i-9, 9) : MPC(RB_pos.data());
     }
 }
-
