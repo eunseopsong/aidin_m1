@@ -26,6 +26,9 @@
 const size_t contact_history_size = 10;
 const double contact_threshold = 0.1;
 
+// Define history size for distance filtering
+const size_t distance_history_size = 5;
+
 // Define weights for filtering
 const std::vector<double> contact_weights = {0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0};
 
@@ -255,18 +258,24 @@ namespace gazebo
                 }
             }
 
-            auto updateContactHistory = [](std::deque<bool>& history, bool detected) {
-                if (history.size() >= contact_history_size) history.pop_front();
-                history.push_back(detected);
-            };
+            // Update contact history
+            if (LF_contact_history.size() >= contact_history_size) LF_contact_history.pop_front();
+            if (RF_contact_history.size() >= contact_history_size) RF_contact_history.pop_front();
+            if (LB_contact_history.size() >= contact_history_size) LB_contact_history.pop_front();
+            if (RB_contact_history.size() >= contact_history_size) RB_contact_history.pop_front();
 
-            updateContactHistory(LF_contact_history, LF_contact_detected);
-            updateContactHistory(RF_contact_history, RF_contact_detected);
-            updateContactHistory(LB_contact_history, LB_contact_detected);
-            updateContactHistory(RB_contact_history, RB_contact_detected);
+            LF_contact_history.push_back(LF_contact_detected);
+            RF_contact_history.push_back(RF_contact_detected);
+            LB_contact_history.push_back(LB_contact_detected);
+            RB_contact_history.push_back(RB_contact_detected);
 
+            // Calculate weighted contact detection
             auto weighted_contact = [](const std::deque<bool>& history, const std::vector<double>& weights) {
-                return std::inner_product(history.begin(), history.end(), weights.begin(), 0.0);
+                double sum = 0.0;
+                for (size_t i = 0; i < history.size(); ++i) {
+                    sum += history[i] * weights[i];
+                }
+                return sum;
             };
 
             double LF_contact_weighted = weighted_contact(LF_contact_history, contact_weights);
@@ -280,7 +289,7 @@ namespace gazebo
             double RB_contactFlag = RB_contact_weighted > contact_threshold ? 1 : 0;
 
             auto updateDistanceHistory = [](std::deque<double>& history, double distance) {
-                if (history.size() >= contact_history_size) history.pop_front();
+                if (history.size() >= distance_history_size) history.pop_front();
                 history.push_back(distance);
             };
 
@@ -289,21 +298,22 @@ namespace gazebo
             updateDistanceHistory(LB_distance_history, LB_distance);
             updateDistanceHistory(RB_distance_history, RB_distance);
 
-            auto weighted_distance = [](const std::deque<double>& history, const std::vector<double>& weights) {
-                return std::inner_product(history.begin(), history.end(), weights.begin(), 0.0);
+            auto average_distance = [](const std::deque<double>& history) {
+                if (history.empty()) return 0.0;
+                return std::accumulate(history.begin(), history.end(), 0.0) / history.size();
             };
 
-            double LF_distance_weighted = weighted_distance(LF_distance_history, contact_weights);
-            double RF_distance_weighted = weighted_distance(RF_distance_history, contact_weights);
-            double LB_distance_weighted = weighted_distance(LB_distance_history, contact_weights);
-            double RB_distance_weighted = weighted_distance(RB_distance_history, contact_weights);
+            double LF_distance_filtered = average_distance(LF_distance_history);
+            double RF_distance_filtered = average_distance(RF_distance_history);
+            double LB_distance_filtered = average_distance(LB_distance_history);
+            double RB_distance_filtered = average_distance(RB_distance_history);
 
             std_msgs::msg::Float32MultiArray Contact;
             Contact.data = {static_cast<float>(LF_contactFlag), static_cast<float>(RF_contactFlag), static_cast<float>(LB_contactFlag), static_cast<float>(RB_contactFlag)};
             pub_contact->publish(Contact);
 
             std_msgs::msg::Float32MultiArray Distances;
-            Distances.data = {static_cast<float>(LF_distance_weighted), static_cast<float>(RF_distance_weighted), static_cast<float>(LB_distance_weighted), static_cast<float>(RB_distance_weighted)};
+            Distances.data = {static_cast<float>(LF_distance_filtered), static_cast<float>(RF_distance_filtered), static_cast<float>(LB_distance_filtered), static_cast<float>(RB_distance_filtered)};
             pub_distance->publish(Distances); // for distance
 
             rclcpp::executors::SingleThreadedExecutor executor;
