@@ -24,10 +24,9 @@
 
 // Define history size and threshold
 const size_t contact_history_size = 10;
-const double contact_threshold = 0.1; // Lowered threshold to make it more likely to be 1
+const double contact_threshold = 0.1;
 
 // Define weights for filtering
-// const std::vector<double> contact_weights = {0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0};
 const std::vector<double> contact_weights = {0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0};
 
 using namespace std;

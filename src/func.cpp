@@ -250,12 +250,13 @@ double FeedforwardController(double Kp, double Kd, double th[3], int case_, int 
 
     torque_desired = M*PD + C*joint_square + B*joint_multiple + G;
 
+    double torque_limit = 100;
     if (case_ == 0){
-        return torque_desired[0];
+        return min(torque_desired[0], torque_limit);
     } else if (case_ == 1) {
-        return torque_desired[1];
+        return min(torque_desired[1], torque_limit);
     } else {
-        return torque_desired[2];
+        return min(torque_desired[2], torque_limit);
     }
 }
 
