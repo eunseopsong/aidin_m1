@@ -19,6 +19,13 @@
 #include "std_msgs/msg/string.hpp"
 #include "sensor_msgs/msg/imu.hpp"
 
+#include <deque>
+#include <numeric>
+
+// Define history size and threshold
+const size_t contact_history_size = 5;
+const double contact_threshold = 0.6;
+
 using namespace std;
 
 namespace gazebo
@@ -173,6 +180,13 @@ namespace gazebo
                 std::bind(&aidin_m1_plugin::OnUpdate, this));
         }
 
+        private:
+            std::deque<bool> LF_contact_history;
+            std::deque<bool> RF_contact_history;
+            std::deque<bool> LB_contact_history;
+            std::deque<bool> RB_contact_history;
+
+
         // Called by the world update start event
         public: void OnUpdate() {
             ignition::math::Pose3<double> WorldPose = model->WorldPose();
@@ -255,10 +269,10 @@ namespace gazebo
             // RCLCPP_INFO(this->node->get_logger(), "Contact count: %d", contactManager->GetContactCount());
 
             std::string contact_link;
-            double LF_contactFlag = 0;
-            double RF_contactFlag = 0;
-            double LB_contactFlag = 0;
-            double RB_contactFlag = 0;
+            bool LF_contact_detected = false;
+            bool RF_contact_detected = false;
+            bool LB_contact_detected = false;
+            bool RB_contact_detected = false;
 
             for (unsigned int i = 0; i < contactManager->GetContactCount(); i++) {
                 physics::Contact *contact = contactManager->GetContact(i);
@@ -272,14 +286,37 @@ namespace gazebo
                     std::string link2 = contact->collision2->GetLink()->GetName();
                     // RCLCPP_INFO(this->node->get_logger(), "Collision between %s and %s", link1.c_str(), link2.c_str());
 
-                    if (link1 == "LF_knee" || link2 == "LF_knee") {LF_contactFlag = 1;}
-                    if (link1 == "RF_knee" || link2 == "RF_knee") {RF_contactFlag = 1;}
-                    if (link1 == "LB_knee" || link2 == "LB_knee") {LB_contactFlag = 1;}
-                    if (link1 == "RB_knee" || link2 == "RB_knee") {RB_contactFlag = 1;}
+                    if (link1 == "LF_knee" || link2 == "LF_knee") {LF_contact_detected = true;}
+                    if (link1 == "RF_knee" || link2 == "RF_knee") {RF_contact_detected = true;}
+                    if (link1 == "LB_knee" || link2 == "LB_knee") {LB_contact_detected = true;}
+                    if (link1 == "RB_knee" || link2 == "RB_knee") {RB_contact_detected = true;}
                 } else {
                     RCLCPP_WARN(this->node->get_logger(), "Collision object does not have valid links");
                 }
             }
+
+            // Update contact history
+            if (LF_contact_history.size() >= contact_history_size) LF_contact_history.pop_front();
+            if (RF_contact_history.size() >= contact_history_size) RF_contact_history.pop_front();
+            if (LB_contact_history.size() >= contact_history_size) LB_contact_history.pop_front();
+            if (RB_contact_history.size() >= contact_history_size) RB_contact_history.pop_front();
+
+            LF_contact_history.push_back(LF_contact_detected);
+            RF_contact_history.push_back(RF_contact_detected);
+            LB_contact_history.push_back(LB_contact_detected);
+            RB_contact_history.push_back(RB_contact_detected);
+
+            // Calculate average contact detection
+            double LF_contact_avg = std::accumulate(LF_contact_history.begin(), LF_contact_history.end(), 0.0) / LF_contact_history.size();
+            double RF_contact_avg = std::accumulate(RF_contact_history.begin(), RF_contact_history.end(), 0.0) / RF_contact_history.size();
+            double LB_contact_avg = std::accumulate(LB_contact_history.begin(), LB_contact_history.end(), 0.0) / LB_contact_history.size();
+            double RB_contact_avg = std::accumulate(RB_contact_history.begin(), RB_contact_history.end(), 0.0) / RB_contact_history.size();
+
+            double LF_contactFlag = LF_contact_avg > contact_threshold ? 1 : 0;
+            double RF_contactFlag = RF_contact_avg > contact_threshold ? 1 : 0;
+            double LB_contactFlag = LB_contact_avg > contact_threshold ? 1 : 0;
+            double RB_contactFlag = RB_contact_avg > contact_threshold ? 1 : 0;
+
             // RCLCPP_INFO(this->node->get_logger(), "LF_contactFlag: %f, RF_contactFlag: %f, LB_contactFlag: %f, RB_contactFlag: %f", LF_contactFlag, RF_contactFlag, LB_contactFlag, RB_contactFlag);
 
             std_msgs::msg::Float32MultiArray Contact;
