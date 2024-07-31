@@ -24,7 +24,7 @@ def generate_launch_description():
     default_model_path = os.path.join(aidin_m1_description_share, 'urdf/aidin_m1.urdf')
 
     # Custom world path
-    custom_world_path = os.path.join(pkg_path, "worlds", "simple_env_1.world")
+    custom_world_path = os.path.join(pkg_path, "worlds", "just_ground.world")
 
     # Start Gazebo server
     # start_gazebo_server = IncludeLaunchDescription(
