@@ -8,34 +8,22 @@
   <license>TODO: License declaration</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
-  <!-- setting from 표윤석 -->
-  <!-- <buildtool_depend>rosidl_default_generators</buildtool_depend>
-  <exec_depend>builtin_interfaces</exec_depend>
-  <exec_depend>rosidl_default_runtime</exec_depend> -->
 
   <depend>rclcpp</depend>
   <depend>rclcpp_action</depend>
   <depend>msg_srv_action_interface_example</depend>
   <depend>std_msgs</depend>
-  <!-- <build_depend>ament_cmake</build_depend>
-  <build_depend>rclcpp</build_depend>
-  <build_depend>std_msgs</build_depend> -->
-  <!-- <build_depend>sensor_msgs</build_depend> -->
 
-  <!-- <exec_depend>rclcpp</exec_depend> -->
-  <!-- <exec_depend>std_msgs</exec_depend> -->
-  <!-- <exec_depend>sensor_msgs</exec_depend> -->
   <exec_depend>gazebo_ros</exec_depend>
-  <!-- <exec_depend>aidin_m1</exec_depend> -->
+
+  <!-- 추가: qpOASES 의존성 -->
+  <depend>qpOASES</depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
 
   <export>
     <build_type>ament_cmake</build_type>
-    <!-- <gazebo_ros gazebo_model_path = "~/galactic_ws/src/aidin_m1/meshes" /> -->
-    <!-- <gazebo_ros gazebo_model_path="${prefix}/.."/> -->
     <gazebo_ros gazebo_model_path="${prefix}/models"/>
-    <!-- <gazebo_ros gazebo_media_path="${prefix}/worlds"/> -->
   </export>
 </package>

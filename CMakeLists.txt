@@ -15,9 +15,18 @@ find_package(rclcpp REQUIRED)
 find_package(rclcpp_action REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 
+# 추가: qpOASES 라이브러리를 찾음
+find_path(qpOASES_INCLUDE_DIR qpOASES.hpp)
+find_library(qpOASES_LIBRARIES qpOASES)
+
+if(NOT qpOASES_INCLUDE_DIR OR NOT qpOASES_LIBRARIES)
+  message(FATAL_ERROR "Could not find qpOASES")
+endif()
+
 include_directories(
   ${GAZEBO_INCLUDE_DIRS}
   ${SDFORMAT_INCLUDE_DIRS}
+  ${qpOASES_INCLUDE_DIR} # 추가: qpOASES include 디렉토리
 )
 
 link_directories(
@@ -51,6 +60,7 @@ target_link_libraries(aidin_m1_plugin
   ${SDFORMAT_LIBRARIES}
   ${rclcpp_LIBRARIES}
   ${std_msgs_LIBRARIES}
+  ${qpOASES_LIBRARIES} # 추가: qpOASES 라이브러리
 )
 ament_target_dependencies(aidin_m1_plugin rclcpp std_msgs)
 

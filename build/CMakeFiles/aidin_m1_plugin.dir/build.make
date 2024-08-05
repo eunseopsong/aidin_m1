@@ -475,6 +475,7 @@ libaidin_m1_plugin.so: /opt/ros/foxy/lib/librosidl_typesupport_introspection_cpp
 libaidin_m1_plugin.so: /opt/ros/foxy/lib/libstd_msgs__rosidl_generator_c.so
 libaidin_m1_plugin.so: /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_c.so
 libaidin_m1_plugin.so: /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_cpp.so
+libaidin_m1_plugin.so: /usr/local/lib/libqpOASES.a
 libaidin_m1_plugin.so: /opt/ros/foxy/lib/librclcpp.so
 libaidin_m1_plugin.so: /opt/ros/foxy/lib/libstatistics_msgs__rosidl_generator_c.so
 libaidin_m1_plugin.so: /opt/ros/foxy/lib/libstatistics_msgs__rosidl_typesupport_introspection_c.so
@@ -497,6 +498,7 @@ libaidin_m1_plugin.so: /opt/ros/foxy/lib/librosgraph_msgs__rosidl_typesupport_in
 libaidin_m1_plugin.so: /opt/ros/foxy/lib/librosgraph_msgs__rosidl_typesupport_cpp.so
 libaidin_m1_plugin.so: /opt/ros/foxy/lib/librcl_yaml_param_parser.so
 libaidin_m1_plugin.so: /opt/ros/foxy/lib/libtracetools.so
+libaidin_m1_plugin.so: /usr/local/lib/libqpOASES.a
 libaidin_m1_plugin.so: /usr/lib/x86_64-linux-gnu/libSimTKmath.so.3.6
 libaidin_m1_plugin.so: /usr/lib/x86_64-linux-gnu/libSimTKcommon.so.3.6
 libaidin_m1_plugin.so: /usr/lib/x86_64-linux-gnu/libblas.so
