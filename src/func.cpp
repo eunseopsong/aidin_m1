@@ -5,6 +5,7 @@
 #include <memory>
 
 #include "convexMPC.cpp"
+#include "func.h"
 
 #include <string>
 #include <algorithm> // std::copy
