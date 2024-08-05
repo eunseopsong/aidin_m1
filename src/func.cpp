@@ -4,6 +4,8 @@
 #include <functional>
 #include <memory>
 
+#include "convexMPC.cpp"
+
 #include <string>
 #include <algorithm> // std::copy
 #include <array>
@@ -17,7 +19,6 @@
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/string.hpp"
 
-// #include "sensor_msgs/msg/joint_state.hpp"
 #include "std_msgs/msg/float64.hpp"
 #include "std_msgs/msg/float32_multi_array.hpp"
 #include "std_msgs/msg/float64_multi_array.hpp"
