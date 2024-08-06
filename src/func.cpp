@@ -1,4 +1,4 @@
-#include "convexMPC.cpp"
+#include "convexMPC.h"
 #include "func.h"
 
 using namespace std;
