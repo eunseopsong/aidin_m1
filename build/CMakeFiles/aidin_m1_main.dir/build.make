@@ -57,18 +57,18 @@ include CMakeFiles/aidin_m1_main.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/aidin_m1_main.dir/flags.make
 
-CMakeFiles/aidin_m1_main.dir/src/aidin_m1_main.cpp.o: CMakeFiles/aidin_m1_main.dir/flags.make
-CMakeFiles/aidin_m1_main.dir/src/aidin_m1_main.cpp.o: ../src/aidin_m1_main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eunseop/dev_ws/src/aidin_m1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/aidin_m1_main.dir/src/aidin_m1_main.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/aidin_m1_main.dir/src/aidin_m1_main.cpp.o -c /home/eunseop/dev_ws/src/aidin_m1/src/aidin_m1_main.cpp
+CMakeFiles/aidin_m1_main.dir/src/main.cpp.o: CMakeFiles/aidin_m1_main.dir/flags.make
+CMakeFiles/aidin_m1_main.dir/src/main.cpp.o: ../src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eunseop/dev_ws/src/aidin_m1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/aidin_m1_main.dir/src/main.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/aidin_m1_main.dir/src/main.cpp.o -c /home/eunseop/dev_ws/src/aidin_m1/src/main.cpp
 
-CMakeFiles/aidin_m1_main.dir/src/aidin_m1_main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/aidin_m1_main.dir/src/aidin_m1_main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/eunseop/dev_ws/src/aidin_m1/src/aidin_m1_main.cpp > CMakeFiles/aidin_m1_main.dir/src/aidin_m1_main.cpp.i
+CMakeFiles/aidin_m1_main.dir/src/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/aidin_m1_main.dir/src/main.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/eunseop/dev_ws/src/aidin_m1/src/main.cpp > CMakeFiles/aidin_m1_main.dir/src/main.cpp.i
 
-CMakeFiles/aidin_m1_main.dir/src/aidin_m1_main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/aidin_m1_main.dir/src/aidin_m1_main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/eunseop/dev_ws/src/aidin_m1/src/aidin_m1_main.cpp -o CMakeFiles/aidin_m1_main.dir/src/aidin_m1_main.cpp.s
+CMakeFiles/aidin_m1_main.dir/src/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/aidin_m1_main.dir/src/main.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/eunseop/dev_ws/src/aidin_m1/src/main.cpp -o CMakeFiles/aidin_m1_main.dir/src/main.cpp.s
 
 CMakeFiles/aidin_m1_main.dir/src/func.cpp.o: CMakeFiles/aidin_m1_main.dir/flags.make
 CMakeFiles/aidin_m1_main.dir/src/func.cpp.o: ../src/func.cpp
@@ -98,14 +98,14 @@ CMakeFiles/aidin_m1_main.dir/src/convexMPC.cpp.s: cmake_force
 
 # Object files for target aidin_m1_main
 aidin_m1_main_OBJECTS = \
-"CMakeFiles/aidin_m1_main.dir/src/aidin_m1_main.cpp.o" \
+"CMakeFiles/aidin_m1_main.dir/src/main.cpp.o" \
 "CMakeFiles/aidin_m1_main.dir/src/func.cpp.o" \
 "CMakeFiles/aidin_m1_main.dir/src/convexMPC.cpp.o"
 
 # External object files for target aidin_m1_main
 aidin_m1_main_EXTERNAL_OBJECTS =
 
-$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: CMakeFiles/aidin_m1_main.dir/src/aidin_m1_main.cpp.o
+$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: CMakeFiles/aidin_m1_main.dir/src/main.cpp.o
 $(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: CMakeFiles/aidin_m1_main.dir/src/func.cpp.o
 $(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: CMakeFiles/aidin_m1_main.dir/src/convexMPC.cpp.o
 $(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)$(EQUALS)aidin_m1_main: CMakeFiles/aidin_m1_main.dir/build.make
