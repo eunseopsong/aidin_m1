@@ -733,7 +733,7 @@ Matrix<double, 3, 1> InverseKinematic::LegIK(int _LEG, const Ref<Matrix<double, 
                 _footPos(1) = -sqrt( Rmax*Rmax - Zbound*Zbound )*_XYvecUnit(1);
             }
         }
-        _error = -1;        
+        _error = -1;
     }
 
     ////// Calculate scapular angle
@@ -845,7 +845,7 @@ Matrix<double, 3, 1> InverseKinematic::LegIK(int _LEG, const Ref<Matrix<double, 
     _p13 = _p13/_p13Mag;
     Vector3d _Zvec = _sign*( -crossProduct(_p1, Xvec) );
     _Zvec = _Zvec/sqrt( dotProduct(_Zvec, _Zvec) );
-    
+
     double _cosvalue = dotProduct(_Zvec, _p13);
     double _sinvalue = dotProduct(Xvec, _p13);
 
@@ -885,11 +885,11 @@ Matrix<double, 3, 1> InverseKinematic::LegIK(int _LEG, const Ref<Matrix<double, 
 	if ( (_hipAngle - 2*pi > _kneeAngle) || (_kneeAngle > _hipAngle - minangle) )
     {
         _kneeAngle = 2*pi + _kneeAngle;
-    }    
+    }
 
     _desJointAngles << _scapAngle, _hipAngle, _kneeAngle;
-    
-    if( _error == -1 ) 
+
+    if( _error == -1 )
         _errorCount(_LEG) = _error;
     else
     {

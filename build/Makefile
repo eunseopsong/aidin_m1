@@ -168,17 +168,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named plugin
+# Target rules for targets named aidin_m1_plugin
 
 # Build rule for target.
-plugin: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 plugin
-.PHONY : plugin
+aidin_m1_plugin: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 aidin_m1_plugin
+.PHONY : aidin_m1_plugin
 
 # fast build rule for target.
-plugin/fast:
-	$(MAKE) -f CMakeFiles/plugin.dir/build.make CMakeFiles/plugin.dir/build
-.PHONY : plugin/fast
+aidin_m1_plugin/fast:
+	$(MAKE) -f CMakeFiles/aidin_m1_plugin.dir/build.make CMakeFiles/aidin_m1_plugin.dir/build
+.PHONY : aidin_m1_plugin/fast
 
 #=============================================================================
 # Target rules for targets named aidin_m1_main
@@ -218,6 +218,33 @@ uninstall: cmake_check_build_system
 uninstall/fast:
 	$(MAKE) -f CMakeFiles/uninstall.dir/build.make CMakeFiles/uninstall.dir/build
 .PHONY : uninstall/fast
+
+src/aidin_m1_plugin.o: src/aidin_m1_plugin.cpp.o
+
+.PHONY : src/aidin_m1_plugin.o
+
+# target to build an object file
+src/aidin_m1_plugin.cpp.o:
+	$(MAKE) -f CMakeFiles/aidin_m1_plugin.dir/build.make CMakeFiles/aidin_m1_plugin.dir/src/aidin_m1_plugin.cpp.o
+.PHONY : src/aidin_m1_plugin.cpp.o
+
+src/aidin_m1_plugin.i: src/aidin_m1_plugin.cpp.i
+
+.PHONY : src/aidin_m1_plugin.i
+
+# target to preprocess a source file
+src/aidin_m1_plugin.cpp.i:
+	$(MAKE) -f CMakeFiles/aidin_m1_plugin.dir/build.make CMakeFiles/aidin_m1_plugin.dir/src/aidin_m1_plugin.cpp.i
+.PHONY : src/aidin_m1_plugin.cpp.i
+
+src/aidin_m1_plugin.s: src/aidin_m1_plugin.cpp.s
+
+.PHONY : src/aidin_m1_plugin.s
+
+# target to generate assembly for a file
+src/aidin_m1_plugin.cpp.s:
+	$(MAKE) -f CMakeFiles/aidin_m1_plugin.dir/build.make CMakeFiles/aidin_m1_plugin.dir/src/aidin_m1_plugin.cpp.s
+.PHONY : src/aidin_m1_plugin.cpp.s
 
 src/convexMPC.o: src/convexMPC.cpp.o
 
@@ -309,7 +336,7 @@ help:
 	@echo "... install/local"
 	@echo "... edit_cache"
 	@echo "... test"
-	@echo "... plugin"
+	@echo "... aidin_m1_plugin"
 	@echo "... install/strip"
 	@echo "... aidin_m1_main"
 	@echo "... install"
@@ -317,6 +344,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... aidin_m1_uninstall"
 	@echo "... uninstall"
+	@echo "... src/aidin_m1_plugin.o"
+	@echo "... src/aidin_m1_plugin.i"
+	@echo "... src/aidin_m1_plugin.s"
 	@echo "... src/convexMPC.o"
 	@echo "... src/convexMPC.i"
 	@echo "... src/convexMPC.s"

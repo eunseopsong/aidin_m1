@@ -796,7 +796,7 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/plugin.dir/DependInfo.cmake"
+  "CMakeFiles/aidin_m1_plugin.dir/DependInfo.cmake"
   "CMakeFiles/aidin_m1_main.dir/DependInfo.cmake"
   "CMakeFiles/aidin_m1_uninstall.dir/DependInfo.cmake"
   "CMakeFiles/uninstall.dir/DependInfo.cmake"

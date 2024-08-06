@@ -252,7 +252,7 @@ double runMPC(double th[3]) {
 
     // Define the reference state and control inputs
     Eigen::VectorXd x_ref(13);
-    x_ref << 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; // Example reference state
+    x_ref << 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; // Example reference state
     Eigen::VectorXd u_ref(3 * mpc.getControlInputs().size());
     u_ref << 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1; // Example control inputs
 

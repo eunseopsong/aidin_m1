@@ -61,7 +61,7 @@ void aidin_m1_plugin::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
     this->pub_bodyvel  = this->node->create_publisher<std_msgs::msg::Float32MultiArray>(robot_namespace+"BodyVel_sim", qos);
     this->pub_imu      = this->node->create_publisher<std_msgs::msg::Float32MultiArray>(robot_namespace+"IMU_sim", qos);
     this->pub_contact  = this->node->create_publisher<std_msgs::msg::Float32MultiArray>(robot_namespace+"Contact_sim", qos);
-    this->pub_distance = this->node->create_publisher<std_msgs::msg::Float32MultiArray>(robot_namespace+"Distance_sim", qos); // for distance
+    this->pub_distance = this->node->create_publisher<std_msgs::msg::Float32MultiArray>(robot_namespace+"Distance_sim", qos);
 
     this->updateConnection = gazebo::event::Events::ConnectWorldUpdateBegin(
         std::bind(&aidin_m1_plugin::OnUpdate, this));
@@ -139,7 +139,7 @@ void aidin_m1_plugin::OnUpdate()
     bool LB_contact_detected = false;
     bool RB_contact_detected = false;
 
-    ignition::math::Vector3d comPos = ComputeCenterOfMass(); // for distance
+    ignition::math::Vector3d comPos = ComputeCenterOfMass();
     double LF_distance = 0.0;
     double RF_distance = 0.0;
     double LB_distance = 0.0;
@@ -206,7 +206,7 @@ void aidin_m1_plugin::OnUpdate()
 
     std_msgs::msg::Float32MultiArray Distances;
     Distances.data = {static_cast<float>(LF_distance_filtered), static_cast<float>(RF_distance_filtered), static_cast<float>(LB_distance_filtered), static_cast<float>(RB_distance_filtered)};
-    pub_distance->publish(Distances); // for distance
+    pub_distance->publish(Distances);
 
     rclcpp::executors::SingleThreadedExecutor executor;
     executor.add_node(this->node);

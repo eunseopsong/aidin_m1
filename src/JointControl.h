@@ -33,7 +33,7 @@ private:
     // Timer
     rclcpp::TimerBase::SharedPtr timer_;
     double _count;
-    array<double, 3> previous_command; // 이전 command 값을 저장
+    array<double, 3> previous_command; // save the previous command value
 };
 
 #endif // JOINTCONTROL_H

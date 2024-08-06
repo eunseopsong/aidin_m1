@@ -27,7 +27,7 @@ void convexMPC::computeMPC(const VectorXd &x_ref, const VectorXd & /* u_ref */) 
     VectorXd g = 2 * B.transpose() * Q * (A * x - x_ref);
 
     // Constraints matrices C and D
-    MatrixXd C = MatrixXd::Identity(3 * numLegs * horizonLength, 3 * numLegs * horizonLength); // Fill in constraints based on problem specifics
+    MatrixXd C  = MatrixXd::Identity(3 * numLegs * horizonLength, 3 * numLegs * horizonLength); // Fill in constraints based on problem specifics
     VectorXd lb = VectorXd::Constant(3 * numLegs * horizonLength, -1e2); // Lower bounds for control inputs
     VectorXd ub = VectorXd::Constant(3 * numLegs * horizonLength, 1e2); // Upper bounds for control inputs
 
