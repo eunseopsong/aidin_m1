@@ -1,29 +1,5 @@
-#include <iostream>
-#include <iomanip>
-#include <chrono>
-#include <functional>
-#include <memory>
-
 #include "convexMPC.cpp"
 #include "func.h"
-
-#include <string>
-#include <algorithm> // std::copy
-#include <array>
-
-#include <cmath>
-#include <math.h>
-#include <stdlib.h>
-#include <vector>
-#include <eigen3/Eigen/Dense>
-
-#include "rclcpp/rclcpp.hpp"
-#include "std_msgs/msg/string.hpp"
-
-#include "std_msgs/msg/float64.hpp"
-#include "std_msgs/msg/float32_multi_array.hpp"
-#include "std_msgs/msg/float64_multi_array.hpp"
-#include "rosgraph_msgs/msg/clock.hpp"
 
 using namespace std;
 using namespace Eigen;
@@ -33,7 +9,7 @@ using Eigen::VectorXf;
 #define DoF 3
 
 /////////////////////// Initialization ////////////////////////
-// Data storage
+// variable definition
 array<double, 6> body_pose{};
 array<double, 12> joint_pos{};
 array<double, 12> joint_vel{};
@@ -263,28 +239,9 @@ double FFControl(double Kp, double Kd, double th[3], int case_, int cri)
     }
 }
 
-double MPC(double th[3])
-{
-    Vector3d zero;
-    zero << 0, 0, 0;
-
-    Matrix3d Rz;
-    Rz <<  cos(imu[2]), sin(imu[2]), 0,
-          -sin(imu[2]), cos(imu[2]), 0,
-                     0,           0, 1;
-
-    VectorXd x_state(12);
-    x_state << imu[0], imu[1], imu[2], body_pos[0], body_pos[1], body_pos[2], imu[3], imu[4], imu[5], body_vel[0], body_vel[1], body_vel[2];
-
-    VectorXd friction(12);
-    
 
 
-    th[0] = 0; th[1] = 0; th[2] = 0;
-    return 0;
-}
-
-double runMPC() {
+double runMPC(double th[3]) {
     // Initialize the MPC controller with a prediction horizon and time step
     convexMPC mpc(10, 0.05);
 
@@ -311,9 +268,10 @@ double runMPC() {
     Eigen::VectorXd controlInputs = mpc.getControlInputs();
 
     // 관절 토크 값만을 반환
-    return controlInputs[0]; // 필요에 따라 적절한 인덱스를 선택
+    // return controlInputs[0]; // 필요에 따라 적절한 인덱스를 선택
+    th[0] = 0; th[1] = 0; th[2] = 0;
+    return 0;
 }
-
 
 
 void CalculateTorqueStanding(double* output_torque, array<double, 3> Kp, array<double ,3> Kd)
@@ -350,12 +308,12 @@ void CalculateTorqueRunning(double* output_torque, double* target_pos, array<dou
     for (int i=0; i<12; i++)
     {
         if (i < 3)      // LF joint
-            output_torque[i] = (contact[0] == 0) ? FFControl(Kp[i],   Kd[i],   LF_pos.data(), i,   0) : MPC(LF_pos.data());
+            output_torque[i] = (contact[0] == 0) ? FFControl(Kp[i],   Kd[i],   LF_pos.data(), i,   0) : runMPC(LF_pos.data());
         else if (i < 6) // RF joint
-            output_torque[i] = (contact[1] == 0) ? FFControl(Kp[i-3], Kd[i-3], RF_pos.data(), i-3, 3) : MPC(RF_pos.data());
+            output_torque[i] = (contact[1] == 0) ? FFControl(Kp[i-3], Kd[i-3], RF_pos.data(), i-3, 3) : runMPC(RF_pos.data());
         else if (i < 9) // LB joint
-            output_torque[i] = (contact[2] == 0) ? FFControl(Kp[i-6], Kd[i-6], LB_pos.data(), i-6, 6) : MPC(LB_pos.data());
+            output_torque[i] = (contact[2] == 0) ? FFControl(Kp[i-6], Kd[i-6], LB_pos.data(), i-6, 6) : runMPC(LB_pos.data());
         else            // RB joint
-            output_torque[i] = (contact[3] == 0) ? FFControl(Kp[i-9], Kd[i-9], RB_pos.data(), i-9, 9) : MPC(RB_pos.data());
+            output_torque[i] = (contact[3] == 0) ? FFControl(Kp[i-9], Kd[i-9], RB_pos.data(), i-9, 9) : runMPC(RB_pos.data());
     }
 }
