@@ -51,7 +51,7 @@ install(DIRECTORY
 )
 
 # Build
-add_executable(aidin_m1_main src/aidin_m1_main.cpp)
+add_executable(aidin_m1_main src/aidin_m1_main.cpp src/func.cpp src/convexMPC.cpp) # 추가: 소스 파일들
 ament_target_dependencies(aidin_m1_main rclcpp std_msgs)
 
 add_library(aidin_m1_plugin SHARED src/aidin_m1_plugin.cpp)
@@ -63,6 +63,11 @@ target_link_libraries(aidin_m1_plugin
   ${qpOASES_LIBRARIES} # 추가: qpOASES 라이브러리
 )
 ament_target_dependencies(aidin_m1_plugin rclcpp std_msgs)
+
+# 추가: 메인 실행 파일에 qpOASES 라이브러리 링크
+target_link_libraries(aidin_m1_main
+  ${qpOASES_LIBRARIES}
+)
 
 # Install
 install(TARGETS

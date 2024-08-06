@@ -284,35 +284,35 @@ double MPC(double th[3])
     return 0;
 }
 
-// double runMPC() {
-//     // Initialize the MPC controller with a prediction horizon and time step
-//     convexMPC mpc(10, 0.05);
+double runMPC() {
+    // Initialize the MPC controller with a prediction horizon and time step
+    convexMPC mpc(10, 0.05);
 
-//     // Set the initial state of the robot
-//     Eigen::VectorXd initialState(13);
-//     initialState << 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
-//     mpc.setInitialState(initialState);
+    // Set the initial state of the robot
+    Eigen::VectorXd initialState(13);
+    initialState << 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
+    mpc.setInitialState(initialState);
 
-//     // Define the reference state and control inputs
-//     Eigen::VectorXd x_ref(13);
-//     x_ref << 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; // Example reference state
-//     Eigen::VectorXd u_ref(3 * mpc.getControlInputs().size());
-//     u_ref << 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1; // Example control inputs
+    // Define the reference state and control inputs
+    Eigen::VectorXd x_ref(13);
+    x_ref << 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; // Example reference state
+    Eigen::VectorXd u_ref(3 * mpc.getControlInputs().size());
+    u_ref << 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1; // Example control inputs
 
-//     // Update the dynamics matrices based on the current state
-//     Eigen::MatrixXd A_new = Eigen::MatrixXd::Identity(13, 13); // Example dynamics matrix A
-//     Eigen::MatrixXd B_new = Eigen::MatrixXd::Identity(13, 3 * mpc.getControlInputs().size() / 3); // Example dynamics matrix B
-//     mpc.updateDynamicsMatrices(A_new, B_new);
+    // Update the dynamics matrices based on the current state
+    Eigen::MatrixXd A_new = Eigen::MatrixXd::Identity(13, 13); // Example dynamics matrix A
+    Eigen::MatrixXd B_new = Eigen::MatrixXd::Identity(13, 3 * mpc.getControlInputs().size() / 3); // Example dynamics matrix B
+    mpc.updateDynamicsMatrices(A_new, B_new);
 
-//     // Compute the MPC control inputs
-//     mpc.computeMPC(x_ref, u_ref);
+    // Compute the MPC control inputs
+    mpc.computeMPC(x_ref, u_ref);
 
-//     // Get the control inputs to be applied
-//     Eigen::VectorXd controlInputs = mpc.getControlInputs();
-    
-//     // 관절 토크 값만을 반환
-//     return controlInputs[0]; // 필요에 따라 적절한 인덱스를 선택
-// }
+    // Get the control inputs to be applied
+    Eigen::VectorXd controlInputs = mpc.getControlInputs();
+
+    // 관절 토크 값만을 반환
+    return controlInputs[0]; // 필요에 따라 적절한 인덱스를 선택
+}
 
 
 

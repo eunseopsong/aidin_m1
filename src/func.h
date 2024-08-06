@@ -1,12 +1,43 @@
 #ifndef FUNC_H
 #define FUNC_H
 
+#include <iostream>
+#include <iomanip>
+#include <chrono>
+#include <functional>
+#include <memory>
+
+#include <string>
+#include <algorithm> // std::copy
 #include <array>
+
 #include <cmath>
+#include <math.h>
+#include <stdlib.h>
+#include <vector>
 #include <eigen3/Eigen/Dense>
+
+#include "rclcpp/rclcpp.hpp"
+#include "std_msgs/msg/string.hpp"
+
+#include "std_msgs/msg/float64.hpp"
+#include "std_msgs/msg/float32_multi_array.hpp"
+#include "std_msgs/msg/float64_multi_array.hpp"
+#include "rosgraph_msgs/msg/clock.hpp"
 
 using namespace std;
 using namespace Eigen;
+
+extern array<double, 6> body_pose;
+extern array<double, 12> joint_pos;
+extern array<double, 12> joint_vel;
+extern array<double, 3> body_pos;
+extern array<double, 3> body_vel;
+extern array<double, 9> imu;
+extern array<double, 4> contact;
+extern array<double, 3> command;
+extern array<double, 4> dist;
+
 
 // Function prototypes
 void solve(double d, double e, double f, double T, double singularity, double B_val[], double arr[6]);
@@ -20,6 +51,7 @@ void InverseKinematics3D(double px, double py, double pz, double d1, double l2, 
 double PDControl(double Kp, double Kd, double target_pos, double current_pos, double current_vel);
 double FFControl(double Kp, double Kd, double th[3], int case_, int cri);
 double MPC(double th[3]);
+double runMPC();
 
 void CalculateTorqueStanding(double* output_torque, array<double, 3> Kp, array<double ,3> Kd);
 void CalculateTorqueRunning(double* output_torque, double* target_pos, array<double, 3> Kp, array<double ,3> Kd);

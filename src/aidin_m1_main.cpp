@@ -1,5 +1,5 @@
 // #include "FootstepPlanner.cpp"
-#include "func.cpp"
+#include "func.h"
 
 using namespace std;
 using namespace Eigen;

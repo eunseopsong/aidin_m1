@@ -273,6 +273,60 @@ src/aidin_m1_plugin.cpp.s:
 	$(MAKE) -f CMakeFiles/aidin_m1_plugin.dir/build.make CMakeFiles/aidin_m1_plugin.dir/src/aidin_m1_plugin.cpp.s
 .PHONY : src/aidin_m1_plugin.cpp.s
 
+src/convexMPC.o: src/convexMPC.cpp.o
+
+.PHONY : src/convexMPC.o
+
+# target to build an object file
+src/convexMPC.cpp.o:
+	$(MAKE) -f CMakeFiles/aidin_m1_main.dir/build.make CMakeFiles/aidin_m1_main.dir/src/convexMPC.cpp.o
+.PHONY : src/convexMPC.cpp.o
+
+src/convexMPC.i: src/convexMPC.cpp.i
+
+.PHONY : src/convexMPC.i
+
+# target to preprocess a source file
+src/convexMPC.cpp.i:
+	$(MAKE) -f CMakeFiles/aidin_m1_main.dir/build.make CMakeFiles/aidin_m1_main.dir/src/convexMPC.cpp.i
+.PHONY : src/convexMPC.cpp.i
+
+src/convexMPC.s: src/convexMPC.cpp.s
+
+.PHONY : src/convexMPC.s
+
+# target to generate assembly for a file
+src/convexMPC.cpp.s:
+	$(MAKE) -f CMakeFiles/aidin_m1_main.dir/build.make CMakeFiles/aidin_m1_main.dir/src/convexMPC.cpp.s
+.PHONY : src/convexMPC.cpp.s
+
+src/func.o: src/func.cpp.o
+
+.PHONY : src/func.o
+
+# target to build an object file
+src/func.cpp.o:
+	$(MAKE) -f CMakeFiles/aidin_m1_main.dir/build.make CMakeFiles/aidin_m1_main.dir/src/func.cpp.o
+.PHONY : src/func.cpp.o
+
+src/func.i: src/func.cpp.i
+
+.PHONY : src/func.i
+
+# target to preprocess a source file
+src/func.cpp.i:
+	$(MAKE) -f CMakeFiles/aidin_m1_main.dir/build.make CMakeFiles/aidin_m1_main.dir/src/func.cpp.i
+.PHONY : src/func.cpp.i
+
+src/func.s: src/func.cpp.s
+
+.PHONY : src/func.s
+
+# target to generate assembly for a file
+src/func.cpp.s:
+	$(MAKE) -f CMakeFiles/aidin_m1_main.dir/build.make CMakeFiles/aidin_m1_main.dir/src/func.cpp.s
+.PHONY : src/func.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -296,6 +350,12 @@ help:
 	@echo "... src/aidin_m1_plugin.o"
 	@echo "... src/aidin_m1_plugin.i"
 	@echo "... src/aidin_m1_plugin.s"
+	@echo "... src/convexMPC.o"
+	@echo "... src/convexMPC.i"
+	@echo "... src/convexMPC.s"
+	@echo "... src/func.o"
+	@echo "... src/func.i"
+	@echo "... src/func.s"
 .PHONY : help
 
 
