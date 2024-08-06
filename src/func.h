@@ -39,7 +39,6 @@ extern array<double, 4> contact;
 extern array<double, 3> command;
 extern array<double, 4> dist;
 
-
 // Function set for FootstepTrajectroy generation
 void solve(double d, double e, double f, double T, double singularity, double B_val[], double arr[6]);
 double CalculateXValues(double l, double v, double t);

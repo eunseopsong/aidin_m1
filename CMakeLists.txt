@@ -51,7 +51,7 @@ install(DIRECTORY
 )
 
 # Build
-add_executable(aidin_m1_main src/aidin_m1_main.cpp src/func.cpp src/convexMPC.cpp) # 추가: 소스 파일들
+add_executable(aidin_m1_main src/main.cpp src/func.cpp src/convexMPC.cpp) # 추가: 소스 파일들
 ament_target_dependencies(aidin_m1_main rclcpp std_msgs)
 
 add_library(aidin_m1_plugin SHARED src/aidin_m1_plugin.cpp)
