@@ -184,7 +184,7 @@ double PDControl(double Kp, double Kd, double target_pos, double current_pos, do
 
 //////////////// FeedForward Control Function ////////////////
 
-double FFControl(double Kp, double Kd, double th[3], int case_, int cri)
+double FFControl(double Kp, double Kd, double th[3], int _case, int cri)
 {
     Matrix3d Ic1, Ic2, Ic3, M, C, B;   // 3x3 행렬
 
@@ -230,9 +230,9 @@ double FFControl(double Kp, double Kd, double th[3], int case_, int cri)
     torque_desired = M*PD + C*joint_square + B*joint_multiple + G;
 
     double torque_limit = 100;
-    if (case_ == 0){
+    if (_case == 0){
         return min(torque_desired[0], torque_limit);
-    } else if (case_ == 1) {
+    } else if (_case == 1) {
         return min(torque_desired[1], torque_limit);
     } else {
         return min(torque_desired[2], torque_limit);

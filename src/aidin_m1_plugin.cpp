@@ -95,7 +95,7 @@ void aidin_m1_plugin::OnUpdate()
     auto RelativeAngularVel = model->RelativeAngularVel();
 
     std_msgs::msg::Float32MultiArray BodyPose;
-    BodyPose.data = {static_cast<float>(Pos.X()), static_cast<float>(Pos.Y()), static_cast<float>(Pos.Z()), 
+    BodyPose.data = {static_cast<float>(Pos.X()), static_cast<float>(Pos.Y()), static_cast<float>(Pos.Z()),
                      static_cast<float>(Rot_Euler.X()), static_cast<float>(Rot_Euler.Y()), static_cast<float>(Rot_Euler.Z())};
     pub_bodypose->publish(BodyPose);
 

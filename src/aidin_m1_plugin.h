@@ -37,7 +37,7 @@ namespace gazebo
         rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_bodyvel;
         rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_imu;
         rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_contact;
-        rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_distance; // for distance
+        rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_distance;
 
         physics::ModelPtr model;
         physics::JointControllerPtr joint1_Controller_;
@@ -74,10 +74,10 @@ namespace gazebo
         std::deque<bool> LB_contact_history;
         std::deque<bool> RB_contact_history;
 
-        std::deque<double> LF_distance_history; // for distance
-        std::deque<double> RF_distance_history; // for distance
-        std::deque<double> LB_distance_history; // for distance
-        std::deque<double> RB_distance_history; // for distance
+        std::deque<double> LF_distance_history;
+        std::deque<double> RF_distance_history;
+        std::deque<double> LB_distance_history;
+        std::deque<double> RB_distance_history;
     };
 
     GZ_REGISTER_MODEL_PLUGIN(aidin_m1_plugin)
