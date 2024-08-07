@@ -137,7 +137,7 @@ void JointControl::CalculateAndPublishTorque()
 
     switch (int(command[0])) {
         case 1: // the command to keep a robot "standing still"
-            CalculateTorqueStanding(output_torque.data(), {Kp(0,0), Kp(1,0), Kp(2,0)}, {Kd(0,0), Kd(1,0), Kd(2,0)}, _count, T);
+            CalculateTorqueStanding(output_torque.data(), {Kp(0,0), Kp(1,0), Kp(2,0)}, {Kd(0,0), Kd(1,0), Kd(2,0)}, _count);
             break;
         case 2: // the command to keep a robot "walking in place"
             CalculateTorqueRunning(output_torque.data(), target_pos.data(), {Kp(0, 2), Kp(1, 2), Kp(2, 2)}, {Kd(0, 2), Kd(1, 2), Kd(2, 2)});

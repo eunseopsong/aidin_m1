@@ -274,41 +274,21 @@ double runMPC(double th[3]) {
 }
 
 
-void CalculateTorqueStanding(double* output_torque, array<double, 3> Kp, array<double ,3> Kd, double t)
+void CalculateTorqueStanding(double* output_torque, const std::array<double, 3>& Kp, const std::array<double, 3>& Kd, double t)
 {
-    array<double, 3> target_pos;
-    // target_pos = {0, 0.775398, 0.020001};  // when t = T/4 (height=350) success
-    target_pos = {0, 0.833070, -0.095344};    // when t = T/4 (height=370) success
-    // target_pos = {0, 0.863313, -0.155830}; // when t = T/4 (height=380) fail
+    const std::array<double, 3> target_pos = {0, 0.833070, -0.095344};  // t = T/4 (height=370) success
 
-    if (t < 3){
+    const bool is_initial_phase = (t < 1);
 
-        for (int i=0; i<12; i++)
-        {
-            if (i < 3)      // LF joint
-                output_torque[i] = (i%3==0) ? FFControl(Kp[i], Kd[i], target_pos.data(), i,   0) : 0;
-            else if (i < 6) // RF joint
-                output_torque[i] = (i%3==0) ? FFControl(Kp[i-3], Kd[i-3], target_pos.data(), i-3, 3) : 0;
-            else if (i < 9) // LB joint
-                output_torque[i] = (i%3==0) ? FFControl(Kp[i-6], Kd[i-6], target_pos.data(), i-6, 6) : 0;
-            else            // RB joint
-                output_torque[i] = (i%3==0) ? FFControl(Kp[i-9], Kd[i-9], target_pos.data(), i-9, 9) : 0;
-        }
+    for (int i = 0; i < 12; ++i)
+    {
+        int idx = i % 3;
+        int joint_offset = (i / 3) * 3;
 
-    } else {
-
-        for (int i=0; i<12; i++)
-        {
-            if (i < 3)      // LF joint
-                output_torque[i] = FFControl(Kp[i], Kd[i], target_pos.data(), i,   0);
-            else if (i < 6) // RF joint
-                output_torque[i] = FFControl(Kp[i-3], Kd[i-3], target_pos.data(), i-3, 3);
-            else if (i < 9) // LB joint
-                output_torque[i] = FFControl(Kp[i-6], Kd[i-6], target_pos.data(), i-6, 6);
-            else            // RB joint
-                output_torque[i] = FFControl(Kp[i-9], Kd[i-9], target_pos.data(), i-9, 9);
-        }
-
+        if (is_initial_phase && idx != 0)
+            output_torque[i] = 0;
+        else
+            output_torque[i] = FFControl(Kp[idx], Kd[idx], const_cast<double*>(target_pos.data()), idx, joint_offset);
     }
 }
 
