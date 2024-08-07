@@ -184,7 +184,7 @@ double PDControl(double Kp, double Kd, double target_pos, double current_pos, do
 
 //////////////// FeedForward Control Function ////////////////
 
-double FFControl(double Kp, double Kd, double th[3], int _case, int cri)
+double FFControl(double Kp, double Kd, double th[3], int joint_idx, int leg_idx)
 {
     Matrix3d Ic1, Ic2, Ic3, M, C, B;   // 3x3 행렬
 
@@ -194,9 +194,9 @@ double FFControl(double Kp, double Kd, double th[3], int _case, int cri)
     double L1  = 0.095, L2  = 0.250; // double L3  = 0.250;
     double Lg1 = 0.03106445, Lg2 = 0.06456779, Lg3 = 0.07702597;
 
-    double PD_term_1 = Kp*(th[0] - joint_pos[cri]) + Kd*(0 - joint_vel[cri]);
-    double PD_term_2 = Kp*(th[1] - joint_pos[cri+1]) + Kd*(0 - joint_vel[cri+1]);
-    double PD_term_3 = Kp*(th[2] - joint_pos[cri+2]) + Kd*(0 - joint_vel[cri+2]);
+    double PD_term_1 = Kp*(th[0] - joint_pos[leg_idx]) + Kd*(0 - joint_vel[leg_idx]);
+    double PD_term_2 = Kp*(th[1] - joint_pos[leg_idx+1]) + Kd*(0 - joint_vel[leg_idx+1]);
+    double PD_term_3 = Kp*(th[2] - joint_pos[leg_idx+2]) + Kd*(0 - joint_vel[leg_idx+2]);
 
     Ic1 <<  0.018386717, -0.000009042, -0.000004977,
             -0.000009042,  0.020489644, -0.000009312,
@@ -216,12 +216,12 @@ double FFControl(double Kp, double Kd, double th[3], int _case, int cri)
     C << 0, L1*cos(th[0])*(L2*m3*sin(th[1]) + Lg2*m2*sin(th[1]) + Lg3*m3*cos(th[1] + th[2])), L1*Lg3*m3*cos(th[1] + th[2])*cos(th[0]),
          L1*sin(th[0])*(L2*m3*cos(th[1]) - Lg3*m3*sin(th[1] + th[2]) + Lg2*m2*cos(th[1])), 0, -L2*Lg3*m3*cos(th[2]),
         -L1*Lg3*m3*sin(th[1] + th[2])*sin(th[0]), L2*Lg3*m3*cos(th[2]), 0;
-    joint_square << pow(joint_vel[cri], 2), pow(joint_vel[cri+1], 2), pow(joint_vel[cri+2], 2);
+    joint_square << pow(joint_vel[leg_idx], 2), pow(joint_vel[leg_idx+1], 2), pow(joint_vel[leg_idx+2], 2);
 
     B << 0, 0,  2*L1*Lg3*m3*cos(th[1] + th[2])*cos(th[0]),
          0, 0, -2*L2*Lg3*m3*cos(th[2]),
          0, 0,  0;
-    joint_multiple << joint_vel[cri]*joint_vel[cri+1], joint_vel[cri]*joint_vel[cri+2], joint_vel[cri+1]*joint_vel[cri+2];
+    joint_multiple << joint_vel[leg_idx]*joint_vel[leg_idx+1], joint_vel[leg_idx]*joint_vel[leg_idx+2], joint_vel[leg_idx+1]*joint_vel[leg_idx+2];
 
     G << (981*sin(th[0])*(L1*m2 + L1*m3 + Lg1*m1))/100 - (981*cos(th[0])*(L1*m2 + Lg1*m1))/100,
          (981*L2*m3*cos(th[1]))/100 - (981*Lg3*m3*sin(th[1] + th[2]))/50 - (981*L1*m3*cos(th[0]))/100 - (981*Lg2*m2*sin(th[1]))/100 + (981*Lg2*m2*cos(th[1]))/100,
@@ -230,9 +230,9 @@ double FFControl(double Kp, double Kd, double th[3], int _case, int cri)
     torque_desired = M*PD + C*joint_square + B*joint_multiple + G;
 
     double torque_limit = 100;
-    if (_case == 0){
+    if (joint_idx == 0){
         return min(torque_desired[0], torque_limit);
-    } else if (_case == 1) {
+    } else if (joint_idx == 1) {
         return min(torque_desired[1], torque_limit);
     } else {
         return min(torque_desired[2], torque_limit);
@@ -277,7 +277,7 @@ double runMPC(double th[3]) {
 void CalculateTorqueStanding(double* output_torque, const std::array<double, 3>& Kp, const std::array<double, 3>& Kd, double t)
 {
     const std::array<double, 3> target_pos = {0, 0.833070, -0.095344};  // t = T/4 (height=370) success
-    const bool is_initial_phase = (t < 1);
+    const bool is_initial_phase = (t < 2);
 
     for (int i = 0; i < 12; ++i)
     {
