@@ -109,17 +109,17 @@ void JointControl::CalculateAndPublishTorque()
             SplineTrajectory(t_LB, T, vel_of_body, x_LB, z_LB);
             SplineTrajectory(t_RB, T, vel_of_body, x_RB, z_RB);
 
-            IK3D(y_const, z_LF, x_LF, y_const, 250, 250, LF_target_pos.data());
-            IK3D(y_const, z_RF, x_RF, y_const, 250, 250, RF_target_pos.data());
-            IK3D(y_const, z_LB, x_LB, y_const, 250, 250, LB_target_pos.data());
-            IK3D(y_const, z_RB, x_RB, y_const, 250, 250, RB_target_pos.data());
+            InverseKinematics3D(y_const, z_LF, x_LF, y_const, 250, 250, LF_target_pos.data());
+            InverseKinematics3D(y_const, z_RF, x_RF, y_const, 250, 250, RF_target_pos.data());
+            InverseKinematics3D(y_const, z_LB, x_LB, y_const, 250, 250, LB_target_pos.data());
+            InverseKinematics3D(y_const, z_RB, x_RB, y_const, 250, 250, RB_target_pos.data());
             break;
         }
         case 3: // the command to make a robot "run" (trotting)
-            IK3D(y_const, z1, x1, y_const, 250, 250, LF_target_pos.data());
-            IK3D(y_const, z2, x2, y_const, 250, 250, RF_target_pos.data());
-            IK3D(y_const, z2, x2, y_const, 250, 250, LB_target_pos.data());
-            IK3D(y_const, z1, x1, y_const, 250, 250, RB_target_pos.data());
+            InverseKinematics3D(y_const, z1, x1, y_const, 250, 250, LF_target_pos.data());
+            InverseKinematics3D(y_const, z2, x2, y_const, 250, 250, RF_target_pos.data());
+            InverseKinematics3D(y_const, z2, x2, y_const, 250, 250, LB_target_pos.data());
+            InverseKinematics3D(y_const, z1, x1, y_const, 250, 250, RB_target_pos.data());
             break;
         default:
             break;
@@ -137,7 +137,7 @@ void JointControl::CalculateAndPublishTorque()
 
     switch (int(command[0])) {
         case 1: // the command to keep a robot "standing still"
-            CalculateTorqueStanding(output_torque.data(), {Kp(0,0), Kp(1,0), Kp(2,0)}, {Kd(0,0), Kd(1,0), Kd(2,0)}, _count, T);
+            CalculateTorqueStanding(output_torque.data(), {Kp(0,0), Kp(1,0), Kp(2,0)}, {Kd(0,0), Kd(1,0), Kd(2,0)}, _count);
             break;
         case 2: // the command to keep a robot "walking in place"
             CalculateTorqueRunning(output_torque.data(), target_pos.data(), {Kp(0, 2), Kp(1, 2), Kp(2, 2)}, {Kd(0, 2), Kd(1, 2), Kd(2, 2)});
