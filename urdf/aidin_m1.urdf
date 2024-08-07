@@ -784,7 +784,7 @@
       <update_rate>1000</update_rate> <!--Number of times per second a plugin information is taken within Gazebo. (1000times/sec)-->
 
       <!-- necessary? -->
-      <joint_name>odom_joint</joint_name>
+      <!-- <joint_name>odom_joint</joint_name> -->
 
       <joint_name>RFJ_scap</joint_name>
       <joint_name>RFJ_hip</joint_name>

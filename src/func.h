@@ -55,7 +55,7 @@ double FFControl(double Kp, double Kd, double th[3], int case_, int cri);
 double runMPC(double th[3]);
 
 // Function set for delivering the torque to control node
-void CalculateTorqueStanding(double* output_torque, array<double, 3> Kp, array<double ,3> Kd);
+void CalculateTorqueStanding(double* output_torque, array<double, 3> Kp, array<double ,3> Kd, double t);
 void CalculateTorqueRunning(double* output_torque, double* target_pos, array<double, 3> Kp, array<double ,3> Kd);
 
 #endif // FUNC_H

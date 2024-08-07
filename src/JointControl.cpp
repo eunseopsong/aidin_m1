@@ -77,7 +77,7 @@ void JointControl::CalculateAndPublishTorque()
     // double t_counter = T/4;
     double _t = fmod(_count, T*4);
 
-    // RCLCPP_INFO(this->get_logger(), "t: %f, count_: %f", t, _count); // t 값을 디버깅하기 위해 출력
+    RCLCPP_INFO(this->get_logger(), "t: %f, count_: %f", _t, _count); // t 값을 디버깅하기 위해 출력
 
     // Calculate the coordinate using Trajectory Function
     double y_const = 95;
@@ -137,7 +137,7 @@ void JointControl::CalculateAndPublishTorque()
 
     switch (int(command[0])) {
         case 1: // the command to keep a robot "standing still"
-            CalculateTorqueStanding(output_torque.data(), {Kp(0,0), Kp(1,0), Kp(2,0)}, {Kd(0,0), Kd(1,0), Kd(2,0)});
+            CalculateTorqueStanding(output_torque.data(), {Kp(0,0), Kp(1,0), Kp(2,0)}, {Kd(0,0), Kd(1,0), Kd(2,0)}, _count, T);
             break;
         case 2: // the command to keep a robot "walking in place"
             CalculateTorqueRunning(output_torque.data(), target_pos.data(), {Kp(0, 2), Kp(1, 2), Kp(2, 2)}, {Kd(0, 2), Kd(1, 2), Kd(2, 2)});

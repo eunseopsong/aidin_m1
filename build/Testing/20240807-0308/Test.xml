@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="(empty)"
+	BuildStamp="20240807-0308-20240708-0424"
+	Name="UbuntuEunseop"
+	Generator="ctest-3.16.3"
+	CompilerName="/usr/bin/c++"
+	CompilerVersion="9.4.0"
+	OSName="Linux"
+	Hostname="UbuntuEunseop"
+	OSRelease="5.15.0-117-generic"
+	OSVersion="#127~20.04.1-Ubuntu SMP Thu Jul 11 15:36:12 UTC 2024"
+	OSPlatform="x86_64"
+	Is64Bits="1"
+	VendorString="GenuineIntel"
+	VendorID="Intel Corporation"
+	FamilyID="6"
+	ModelID="140"
+	ProcessorCacheSize="8192"
+	NumberOfLogicalCPU="8"
+	NumberOfPhysicalCPU="4"
+	TotalVirtualMemory="2047"
+	TotalPhysicalMemory="7612"
+	LogicalProcessorsPerPhysical="2"
+	ProcessorClockFrequency="1803.3"
+	>
+	<Testing>
+		<StartDateTime>Aug 07 15:14 KST</StartDateTime>
+		<StartTestTime>1723011243</StartTestTime>
+		<TestList/>
+		<EndDateTime>Aug 07 15:14 KST</EndDateTime>
+		<EndTestTime>1723011243</EndTestTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Testing>
+</Site>
