@@ -77,7 +77,7 @@ void JointControl::CalculateAndPublishTorque()
     // double t_counter = T/4;
     double _t = fmod(_count, T*4);
 
-    RCLCPP_INFO(this->get_logger(), "t: %f, count_: %f", _t, _count); // t 값을 디버깅하기 위해 출력
+    // RCLCPP_INFO(this->get_logger(), "t: %f, count_: %f", _t, _count); // t 값을 디버깅하기 위해 출력
 
     // Calculate the coordinate using Trajectory Function
     double y_const = 95;

@@ -277,7 +277,6 @@ double runMPC(double th[3]) {
 void CalculateTorqueStanding(double* output_torque, const std::array<double, 3>& Kp, const std::array<double, 3>& Kd, double t)
 {
     const std::array<double, 3> target_pos = {0, 0.833070, -0.095344};  // t = T/4 (height=370) success
-
     const bool is_initial_phase = (t < 1);
 
     for (int i = 0; i < 12; ++i)
