@@ -291,26 +291,24 @@ void CalculateTorqueStanding(double* output_torque, const std::array<double, 3>&
     }
 }
 
-void CalculateTorqueRunning(double* output_torque, double* target_pos, array<double, 3> Kp, array<double ,3> Kd)
+void CalculateTorqueRunning(double* output_torque, const double* target_pos, const std::array<double, 3>& Kp, const std::array<double, 3>& Kd)
 {
     // 3개씩 끊어서 저장할 배열
-    array<double, 3> LF_pos, RF_pos, LB_pos, RB_pos;
+    std::array<std::array<double, 3>, 4> pos;
 
     // std::copy를 사용하여 배열 복사
-    copy(target_pos    , target_pos +  3, LF_pos.begin());
-    copy(target_pos + 3, target_pos +  6, RF_pos.begin());
-    copy(target_pos + 6, target_pos +  9, LB_pos.begin());
-    copy(target_pos + 9, target_pos + 12, RB_pos.begin());
+    for (int i = 0; i < 4; ++i) {
+        std::copy(target_pos + 3 * i, target_pos + 3 * (i + 1), pos[i].begin());
+    }
 
-    for (int i=0; i<12; i++)
+    for (int i = 0; i < 12; ++i)
     {
-        if (i < 3)      // LF joint
-            output_torque[i] = (contact[0] == 0) ? FFControl(Kp[i],   Kd[i],   LF_pos.data(), i,   0) : runMPC(LF_pos.data());
-        else if (i < 6) // RF joint
-            output_torque[i] = (contact[1] == 0) ? FFControl(Kp[i-3], Kd[i-3], RF_pos.data(), i-3, 3) : runMPC(RF_pos.data());
-        else if (i < 9) // LB joint
-            output_torque[i] = (contact[2] == 0) ? FFControl(Kp[i-6], Kd[i-6], LB_pos.data(), i-6, 6) : runMPC(LB_pos.data());
-        else            // RB joint
-            output_torque[i] = (contact[3] == 0) ? FFControl(Kp[i-9], Kd[i-9], RB_pos.data(), i-9, 9) : runMPC(RB_pos.data());
+        int leg_index = i / 3;
+        int joint_index = i % 3;
+
+        if (contact[leg_index] == 0)
+            output_torque[i] = FFControl(Kp[joint_index], Kd[joint_index], pos[leg_index].data(), joint_index, leg_index * 3);
+        else
+            output_torque[i] = runMPC(pos[leg_index].data());
     }
 }

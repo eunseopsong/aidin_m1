@@ -56,6 +56,6 @@ double runMPC(double th[3]);
 
 // Function set for delivering the torque to control node
 void CalculateTorqueStanding(double* output_torque, const std::array<double, 3>& Kp, const std::array<double, 3>& Kd, double t);
-void CalculateTorqueRunning(double* output_torque, double* target_pos, array<double, 3> Kp, array<double ,3> Kd);
+void CalculateTorqueRunning(double* output_torque, const double* target_pos, const std::array<double, 3>& Kp, const std::array<double, 3>& Kd);
 
 #endif // FUNC_H
