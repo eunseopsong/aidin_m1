@@ -133,7 +133,7 @@ void SplineTrajectory(double t, double T, double vel_of_body, double &xVal, doub
 
 //////////////////// for Kinematics ////////////////////
 
-double InverseKinematics2D(double xVal, double zVal, int cases)
+double IK2D(double xVal, double zVal, int cases)
 {
     double len_hip = 250, len_knee = 250;
     zVal = -zVal;
@@ -153,7 +153,7 @@ double InverseKinematics2D(double xVal, double zVal, int cases)
         return knee_degree;
 }
 
-void InverseKinematics3D(double px, double py, double pz, double d1, double l2, double l3, double* th)
+void IK3D(double px, double py, double pz, double d1, double l2, double l3, double* th)
 {
     pz = -pz;
 
@@ -274,20 +274,35 @@ double runMPC(double th[3]) {
 }
 
 
-void CalculateTorqueStanding(double* output_torque, const std::array<double, 3>& Kp, const std::array<double, 3>& Kd, double t)
+void CalculateTorqueStanding(double* output_torque, const std::array<double, 3>& Kp, const std::array<double, 3>& Kd, double t, double T)
 {
-    const std::array<double, 3> target_pos = {0, 0.833070, -0.095344};  // t = T/4 (height=370) success
-    const bool is_initial_phase = (t < 2);
+    // std::array<double, 3> target_pos = {0, 0.833070, -0.095344};  // t = T/4 (height=370) success
+    array<double, 3> target_pos;
+
+    double h = 370;
+    double _t = (t > 3*T) ? T/4 : t-2; // _t is from 0 to 3
+    double _x = 0;
+    double _z = (h/5)*_t;
+
+    SplineTrajectory(t_RB, T, vel_of_body, x_RB, z_RB);
+    IK3D(95, _z, 0, 95, 250, 250, target_pos.data());
+
+    // std::cout<<'_z: '<<_z<<std::endl;
+    // std::cout<<'_x: '<<_x<<std::endl<<std::endl;
+
+    const bool is_initial_phase = (t < T);
 
     for (int i = 0; i < 12; ++i)
     {
         int joint_type = i % 3;
         int joint_index = (i / 3) * 3;
 
-        if (is_initial_phase && joint_type != 0)
+        if (is_initial_phase && joint_type != 0){
+            target_pos[0] = 0;
             output_torque[i] = 0;
+        }
         else
-            output_torque[i] = FFControl(Kp[joint_type], Kd[joint_type], const_cast<double*>(target_pos.data()), joint_type, joint_index);
+            output_torque[i] = FFControl(Kp[joint_type], Kd[joint_type], target_pos.data(), joint_type, joint_index);
     }
 }
 
