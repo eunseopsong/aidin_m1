@@ -184,7 +184,7 @@ double PDControl(double Kp, double Kd, double target_pos, double current_pos, do
 
 //////////////// FeedForward Control Function ////////////////
 
-double FFControl(double Kp, double Kd, double th[3], int j_type, int j_idx)
+double FFControl(double Kp, double Kd, double th[3], int joint_idx, int leg_idx)
 {
     Matrix3d Ic1, Ic2, Ic3, M, C, B;   // 3x3 행렬
 
@@ -194,9 +194,9 @@ double FFControl(double Kp, double Kd, double th[3], int j_type, int j_idx)
     double L1  = 0.095, L2  = 0.250; // double L3  = 0.250;
     double Lg1 = 0.03106445, Lg2 = 0.06456779, Lg3 = 0.07702597;
 
-    double PD_term_1 = Kp*(th[0] - joint_pos[j_idx]) + Kd*(0 - joint_vel[j_idx]);
-    double PD_term_2 = Kp*(th[1] - joint_pos[j_idx+1]) + Kd*(0 - joint_vel[j_idx+1]);
-    double PD_term_3 = Kp*(th[2] - joint_pos[j_idx+2]) + Kd*(0 - joint_vel[j_idx+2]);
+    double PD_term_1 = Kp*(th[0] - joint_pos[leg_idx]) + Kd*(0 - joint_vel[leg_idx]);
+    double PD_term_2 = Kp*(th[1] - joint_pos[leg_idx+1]) + Kd*(0 - joint_vel[leg_idx+1]);
+    double PD_term_3 = Kp*(th[2] - joint_pos[leg_idx+2]) + Kd*(0 - joint_vel[leg_idx+2]);
 
     Ic1 <<  0.018386717, -0.000009042, -0.000004977,
             -0.000009042,  0.020489644, -0.000009312,
@@ -216,12 +216,12 @@ double FFControl(double Kp, double Kd, double th[3], int j_type, int j_idx)
     C << 0, L1*cos(th[0])*(L2*m3*sin(th[1]) + Lg2*m2*sin(th[1]) + Lg3*m3*cos(th[1] + th[2])), L1*Lg3*m3*cos(th[1] + th[2])*cos(th[0]),
          L1*sin(th[0])*(L2*m3*cos(th[1]) - Lg3*m3*sin(th[1] + th[2]) + Lg2*m2*cos(th[1])), 0, -L2*Lg3*m3*cos(th[2]),
         -L1*Lg3*m3*sin(th[1] + th[2])*sin(th[0]), L2*Lg3*m3*cos(th[2]), 0;
-    joint_square << pow(joint_vel[j_idx], 2), pow(joint_vel[j_idx+1], 2), pow(joint_vel[j_idx+2], 2);
+    joint_square << pow(joint_vel[leg_idx], 2), pow(joint_vel[leg_idx+1], 2), pow(joint_vel[leg_idx+2], 2);
 
     B << 0, 0,  2*L1*Lg3*m3*cos(th[1] + th[2])*cos(th[0]),
          0, 0, -2*L2*Lg3*m3*cos(th[2]),
          0, 0,  0;
-    joint_multiple << joint_vel[j_idx]*joint_vel[j_idx+1], joint_vel[j_idx]*joint_vel[j_idx+2], joint_vel[j_idx+1]*joint_vel[j_idx+2];
+    joint_multiple << joint_vel[leg_idx]*joint_vel[leg_idx+1], joint_vel[leg_idx]*joint_vel[leg_idx+2], joint_vel[leg_idx+1]*joint_vel[leg_idx+2];
 
     G << (981*sin(th[0])*(L1*m2 + L1*m3 + Lg1*m1))/100 - (981*cos(th[0])*(L1*m2 + Lg1*m1))/100,
          (981*L2*m3*cos(th[1]))/100 - (981*Lg3*m3*sin(th[1] + th[2]))/50 - (981*L1*m3*cos(th[0]))/100 - (981*Lg2*m2*sin(th[1]))/100 + (981*Lg2*m2*cos(th[1]))/100,
@@ -230,9 +230,9 @@ double FFControl(double Kp, double Kd, double th[3], int j_type, int j_idx)
     torque_desired = M*PD + C*joint_square + B*joint_multiple + G;
 
     double torque_limit = 100;
-    if (j_type == 0){
+    if (joint_idx == 0){
         return min(torque_desired[0], torque_limit);
-    } else if (j_type == 1) {
+    } else if (joint_idx == 1) {
         return min(torque_desired[1], torque_limit);
     } else {
         return min(torque_desired[2], torque_limit);
@@ -281,13 +281,13 @@ void CalculateTorqueStanding(double* output_torque, const std::array<double, 3>&
 
     for (int i = 0; i < 12; ++i)
     {
-        int joint_type = i % 3;
-        int joint_index = (i / 3) * 3;
+        int idx = i % 3;
+        int joint_offset = (i / 3) * 3;
 
-        if (is_initial_phase && joint_type != 0)
+        if (is_initial_phase && idx != 0)
             output_torque[i] = 0;
         else
-            output_torque[i] = FFControl(Kp[joint_type], Kd[joint_type], const_cast<double*>(target_pos.data()), joint_type, joint_index);
+            output_torque[i] = FFControl(Kp[idx], Kd[idx], const_cast<double*>(target_pos.data()), idx, joint_offset);
     }
 }
 
@@ -303,12 +303,12 @@ void CalculateTorqueRunning(double* output_torque, const double* target_pos, con
 
     for (int i = 0; i < 12; ++i)
     {
-        int joint_type = i % 3;
-        int joint_index = i;
+        int leg_index = i / 3;
+        int joint_index = i % 3;
 
-        if (contact[joint_index] == 0)
-            output_torque[i] = FFControl(Kp[joint_type], Kd[joint_type], pos[joint_index].data(), joint_type, joint_index);
+        if (contact[leg_index] == 0)
+            output_torque[i] = FFControl(Kp[joint_index], Kd[joint_index], pos[leg_index].data(), joint_index, leg_index * 3);
         else
-            output_torque[i] = runMPC(pos[joint_index / 3].data());
+            output_torque[i] = runMPC(pos[leg_index].data());
     }
 }
