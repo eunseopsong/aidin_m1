@@ -27,6 +27,7 @@ include_directories(
   ${GAZEBO_INCLUDE_DIRS}
   ${SDFORMAT_INCLUDE_DIRS}
   ${qpOASES_INCLUDE_DIR} # 추가: qpOASES include 디렉토리
+  ${CMAKE_CURRENT_SOURCE_DIR}/src # src 디렉토리 추가
 )
 
 link_directories(
@@ -50,30 +51,7 @@ install(DIRECTORY
   DESTINATION share/${PROJECT_NAME}
 )
 
-# Build
-add_executable(aidin_m1_main src/main.cpp src/func.cpp src/convexMPC.cpp) # 추가: 소스 파일들
-ament_target_dependencies(aidin_m1_main rclcpp std_msgs)
-
-add_library(aidin_m1_plugin SHARED src/aidin_m1_plugin.cpp)
-target_link_libraries(aidin_m1_plugin
-  ${GAZEBO_LIBRARIES}
-  ${SDFORMAT_LIBRARIES}
-  ${rclcpp_LIBRARIES}
-  ${std_msgs_LIBRARIES}
-  ${qpOASES_LIBRARIES} # 추가: qpOASES 라이브러리
-)
-ament_target_dependencies(aidin_m1_plugin rclcpp std_msgs)
-
-# 추가: 메인 실행 파일에 qpOASES 라이브러리 링크
-target_link_libraries(aidin_m1_main
-  ${qpOASES_LIBRARIES}
-)
-
-# Install
-install(TARGETS
-  aidin_m1_main
-  aidin_m1_plugin
-  DESTINATION lib/${PROJECT_NAME}
-)
+# src 디렉토리 추가
+# add_subdirectory(src)
 
 ament_package()

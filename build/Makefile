@@ -56,6 +56,18 @@ CMAKE_BINARY_DIR = /home/eunseop/dev_ws/src/aidin_m1/build
 #=============================================================================
 # Targets provided globally by CMake.
 
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip/fast
+
 # Special rule for the target install/local
 install/local: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
@@ -89,18 +101,6 @@ test:
 test/fast: test
 
 .PHONY : test/fast
-
-# Special rule for the target install/strip
-install/strip: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip
-
-# Special rule for the target install/strip
-install/strip/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip/fast
 
 # Special rule for the target install
 install: preinstall
@@ -168,32 +168,6 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named aidin_m1_plugin
-
-# Build rule for target.
-aidin_m1_plugin: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 aidin_m1_plugin
-.PHONY : aidin_m1_plugin
-
-# fast build rule for target.
-aidin_m1_plugin/fast:
-	$(MAKE) -f CMakeFiles/aidin_m1_plugin.dir/build.make CMakeFiles/aidin_m1_plugin.dir/build
-.PHONY : aidin_m1_plugin/fast
-
-#=============================================================================
-# Target rules for targets named aidin_m1_main
-
-# Build rule for target.
-aidin_m1_main: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 aidin_m1_main
-.PHONY : aidin_m1_main
-
-# fast build rule for target.
-aidin_m1_main/fast:
-	$(MAKE) -f CMakeFiles/aidin_m1_main.dir/build.make CMakeFiles/aidin_m1_main.dir/build
-.PHONY : aidin_m1_main/fast
-
-#=============================================================================
 # Target rules for targets named aidin_m1_uninstall
 
 # Build rule for target.
@@ -219,143 +193,21 @@ uninstall/fast:
 	$(MAKE) -f CMakeFiles/uninstall.dir/build.make CMakeFiles/uninstall.dir/build
 .PHONY : uninstall/fast
 
-src/aidin_m1_plugin.o: src/aidin_m1_plugin.cpp.o
-
-.PHONY : src/aidin_m1_plugin.o
-
-# target to build an object file
-src/aidin_m1_plugin.cpp.o:
-	$(MAKE) -f CMakeFiles/aidin_m1_plugin.dir/build.make CMakeFiles/aidin_m1_plugin.dir/src/aidin_m1_plugin.cpp.o
-.PHONY : src/aidin_m1_plugin.cpp.o
-
-src/aidin_m1_plugin.i: src/aidin_m1_plugin.cpp.i
-
-.PHONY : src/aidin_m1_plugin.i
-
-# target to preprocess a source file
-src/aidin_m1_plugin.cpp.i:
-	$(MAKE) -f CMakeFiles/aidin_m1_plugin.dir/build.make CMakeFiles/aidin_m1_plugin.dir/src/aidin_m1_plugin.cpp.i
-.PHONY : src/aidin_m1_plugin.cpp.i
-
-src/aidin_m1_plugin.s: src/aidin_m1_plugin.cpp.s
-
-.PHONY : src/aidin_m1_plugin.s
-
-# target to generate assembly for a file
-src/aidin_m1_plugin.cpp.s:
-	$(MAKE) -f CMakeFiles/aidin_m1_plugin.dir/build.make CMakeFiles/aidin_m1_plugin.dir/src/aidin_m1_plugin.cpp.s
-.PHONY : src/aidin_m1_plugin.cpp.s
-
-src/convexMPC.o: src/convexMPC.cpp.o
-
-.PHONY : src/convexMPC.o
-
-# target to build an object file
-src/convexMPC.cpp.o:
-	$(MAKE) -f CMakeFiles/aidin_m1_main.dir/build.make CMakeFiles/aidin_m1_main.dir/src/convexMPC.cpp.o
-.PHONY : src/convexMPC.cpp.o
-
-src/convexMPC.i: src/convexMPC.cpp.i
-
-.PHONY : src/convexMPC.i
-
-# target to preprocess a source file
-src/convexMPC.cpp.i:
-	$(MAKE) -f CMakeFiles/aidin_m1_main.dir/build.make CMakeFiles/aidin_m1_main.dir/src/convexMPC.cpp.i
-.PHONY : src/convexMPC.cpp.i
-
-src/convexMPC.s: src/convexMPC.cpp.s
-
-.PHONY : src/convexMPC.s
-
-# target to generate assembly for a file
-src/convexMPC.cpp.s:
-	$(MAKE) -f CMakeFiles/aidin_m1_main.dir/build.make CMakeFiles/aidin_m1_main.dir/src/convexMPC.cpp.s
-.PHONY : src/convexMPC.cpp.s
-
-src/func.o: src/func.cpp.o
-
-.PHONY : src/func.o
-
-# target to build an object file
-src/func.cpp.o:
-	$(MAKE) -f CMakeFiles/aidin_m1_main.dir/build.make CMakeFiles/aidin_m1_main.dir/src/func.cpp.o
-.PHONY : src/func.cpp.o
-
-src/func.i: src/func.cpp.i
-
-.PHONY : src/func.i
-
-# target to preprocess a source file
-src/func.cpp.i:
-	$(MAKE) -f CMakeFiles/aidin_m1_main.dir/build.make CMakeFiles/aidin_m1_main.dir/src/func.cpp.i
-.PHONY : src/func.cpp.i
-
-src/func.s: src/func.cpp.s
-
-.PHONY : src/func.s
-
-# target to generate assembly for a file
-src/func.cpp.s:
-	$(MAKE) -f CMakeFiles/aidin_m1_main.dir/build.make CMakeFiles/aidin_m1_main.dir/src/func.cpp.s
-.PHONY : src/func.cpp.s
-
-src/main.o: src/main.cpp.o
-
-.PHONY : src/main.o
-
-# target to build an object file
-src/main.cpp.o:
-	$(MAKE) -f CMakeFiles/aidin_m1_main.dir/build.make CMakeFiles/aidin_m1_main.dir/src/main.cpp.o
-.PHONY : src/main.cpp.o
-
-src/main.i: src/main.cpp.i
-
-.PHONY : src/main.i
-
-# target to preprocess a source file
-src/main.cpp.i:
-	$(MAKE) -f CMakeFiles/aidin_m1_main.dir/build.make CMakeFiles/aidin_m1_main.dir/src/main.cpp.i
-.PHONY : src/main.cpp.i
-
-src/main.s: src/main.cpp.s
-
-.PHONY : src/main.s
-
-# target to generate assembly for a file
-src/main.cpp.s:
-	$(MAKE) -f CMakeFiles/aidin_m1_main.dir/build.make CMakeFiles/aidin_m1_main.dir/src/main.cpp.s
-.PHONY : src/main.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... install/strip"
 	@echo "... install/local"
 	@echo "... edit_cache"
 	@echo "... test"
-	@echo "... aidin_m1_plugin"
-	@echo "... install/strip"
-	@echo "... aidin_m1_main"
 	@echo "... install"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... aidin_m1_uninstall"
 	@echo "... uninstall"
-	@echo "... src/aidin_m1_plugin.o"
-	@echo "... src/aidin_m1_plugin.i"
-	@echo "... src/aidin_m1_plugin.s"
-	@echo "... src/convexMPC.o"
-	@echo "... src/convexMPC.i"
-	@echo "... src/convexMPC.s"
-	@echo "... src/func.o"
-	@echo "... src/func.i"
-	@echo "... src/func.s"
-	@echo "... src/main.o"
-	@echo "... src/main.i"
-	@echo "... src/main.s"
 .PHONY : help
 
 
