@@ -1,4 +1,4 @@
-#include "convexMPC.h"
+#include "convexMPC/convexMPC.h"
 #include "func.h"
 
 using namespace std;
@@ -267,6 +267,9 @@ double runMPC(double th[3]) {
     // Get the control inputs to be applied
     Eigen::VectorXd controlInputs = mpc.getControlInputs();
 
+    // vector<double> output_torque(12);
+    // output_torque = mpc.calculateTorque();
+
     // 관절 토크 값만을 반환
     // return controlInputs[0]; // 필요에 따라 적절한 인덱스를 선택
     th[0] = 0; th[1] = 0; th[2] = 0;
@@ -281,7 +284,7 @@ void CalculateTorqueStanding(double* output_torque, const std::array<double, 3>&
 
     for (int i = 0; i < 12; ++i)
     {
-        int joint_type = i % 3;
+        int joint_type  = i % 3;
         int joint_index = (i / 3) * 3;
 
         if (is_initial_phase && joint_type != 0)
@@ -303,8 +306,8 @@ void CalculateTorqueRunning(double* output_torque, const double* target_pos, con
 
     for (int i = 0; i < 12; ++i)
     {
+        int joint_type  = i % 3;
         int joint_index = i / 3;
-        int joint_type = i % 3;
 
         if (contact[joint_index] == 0)
             output_torque[i] = FFControl(Kp[joint_type], Kd[joint_type], pos[joint_index].data(), joint_type, joint_index * 3);

@@ -66,3 +66,7 @@ void convexMPC::computeMPC(const VectorXd &x_ref, const VectorXd & /* u_ref */) 
 VectorXd convexMPC::getControlInputs() const {
     return u;
 }
+
+// void convexMPC::calculateTorque() {
+    
+// }
