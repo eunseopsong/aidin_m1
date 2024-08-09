@@ -6,7 +6,7 @@
 using std::cout;
 using std::endl;
 
-void RobotState::set(flt* p_, flt* v_, flt* q_, flt* w_, flt* r_,flt yaw_)
+void RobotState::set(float* p_, float* v_, float* q_, float* w_, float* r_,float yaw_)
 {
     for(u8 i = 0; i < 3; i++)
     {

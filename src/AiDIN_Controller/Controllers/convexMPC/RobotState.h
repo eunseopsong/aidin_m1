@@ -11,7 +11,7 @@ using Eigen::Quaternionf;
 class RobotState
 {
     public:
-        void set(flt* p, flt* v, flt* q, flt* w, flt* r, flt yaw);
+        void set(float* p, float* v, float* q, float* w, float* r, float yaw);
         //void compute_rotations();
         void print();
         Matrix<fpt,3,1> p,v,w;
