@@ -38,7 +38,6 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/usr/include/OGRE"
   "/usr/include/OGRE/Terrain"
   "/usr/include/OGRE/Paging"
-  "../src/gazebo_plugin"
   "/usr/include/simbody"
   "/usr/include/ignition/math6"
   "/usr/include/ignition/transport8"

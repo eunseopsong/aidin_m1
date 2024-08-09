@@ -45,7 +45,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "aidin_m1_plugin::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-aidin_m1_plugin-Debug-575cef71a88b00ea374f.json",
+					"jsonFile" : "target-aidin_m1_plugin-Debug-2842baaca4c48788bdf3.json",
 					"name" : "aidin_m1_plugin",
 					"projectIndex" : 0
 				},
@@ -59,7 +59,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "main::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-main-Debug-39131260c2354e6285b1.json",
+					"jsonFile" : "target-main-Debug-4e698528f6caa1d43648.json",
 					"name" : "main",
 					"projectIndex" : 0
 				},

@@ -1,10 +1,14 @@
 include_directories("./")
-# include_directories("../../robot/include")
-# include_directories(SYSTEM "../../third-party/qpOASES/include")
 
-include_directories("/usr/local/include/eigen3")   # lcm includes
-include_directories(${CMAKE_BINARY_DIR})
-include_directories(${PROJECT_SOURCE_DIR})
+include_directories(
+  ${PROJECT_SOURCE_DIR}
+  ${CMAKE_BINARY_DIR}
+  ${GAZEBO_INCLUDE_DIRS}
+
+)
+
+
+
 
 file(GLOB_RECURSE sources
 "./*.cpp"

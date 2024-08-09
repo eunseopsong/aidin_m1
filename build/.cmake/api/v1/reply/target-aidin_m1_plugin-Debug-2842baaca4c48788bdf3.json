@@ -12,7 +12,6 @@
 		[
 			"add_library",
 			"install",
-			"link_directories",
 			"target_link_libraries",
 			"ament_target_dependencies",
 			"add_compile_options",
@@ -41,126 +40,120 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 45,
+				"line" : 38,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 78,
+				"line" : 70,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 42,
 				"parent" : 0
 			},
 			{
 				"command" : 2,
+				"file" : 1,
+				"line" : 145,
+				"parent" : 3
+			},
+			{
+				"command" : 2,
 				"file" : 0,
-				"line" : 33,
+				"line" : 48,
 				"parent" : 0
 			},
 			{
 				"command" : 4,
 				"file" : 0,
-				"line" : 49,
-				"parent" : 0
-			},
-			{
-				"command" : 3,
-				"file" : 1,
-				"line" : 145,
-				"parent" : 4
-			},
-			{
-				"command" : 3,
-				"file" : 0,
-				"line" : 55,
-				"parent" : 0
-			},
-			{
-				"command" : 5,
-				"file" : 0,
 				"line" : 5,
 				"parent" : 0
 			},
 			{
-				"command" : 10,
+				"command" : 9,
 				"file" : 0,
 				"line" : 10,
 				"parent" : 0
 			},
 			{
 				"file" : 5,
-				"parent" : 8
-			},
-			{
-				"command" : 10,
-				"file" : 5,
-				"line" : 166,
-				"parent" : 9
-			},
-			{
-				"file" : 4,
-				"parent" : 10
+				"parent" : 7
 			},
 			{
 				"command" : 9,
+				"file" : 5,
+				"line" : 166,
+				"parent" : 8
+			},
+			{
 				"file" : 4,
-				"line" : 171,
-				"parent" : 11
+				"parent" : 9
 			},
 			{
 				"command" : 8,
 				"file" : 4,
-				"line" : 123,
-				"parent" : 12
+				"line" : 171,
+				"parent" : 10
 			},
 			{
 				"command" : 7,
 				"file" : 4,
+				"line" : 123,
+				"parent" : 11
+			},
+			{
+				"command" : 6,
+				"file" : 4,
 				"line" : 63,
+				"parent" : 12
+			},
+			{
+				"file" : 3,
 				"parent" : 13
 			},
 			{
+				"command" : 6,
 				"file" : 3,
+				"line" : 6,
 				"parent" : 14
 			},
 			{
-				"command" : 7,
-				"file" : 3,
-				"line" : 6,
+				"file" : 2,
 				"parent" : 15
 			},
 			{
+				"command" : 5,
 				"file" : 2,
+				"line" : 13,
 				"parent" : 16
 			},
 			{
-				"command" : 6,
-				"file" : 2,
-				"line" : 13,
-				"parent" : 17
-			},
-			{
-				"command" : 6,
+				"command" : 5,
 				"file" : 5,
 				"line" : 142,
-				"parent" : 9
+				"parent" : 8
 			},
 			{
-				"command" : 6,
+				"command" : 5,
 				"file" : 5,
 				"line" : 148,
-				"parent" : 9
+				"parent" : 8
 			},
 			{
-				"command" : 11,
+				"command" : 10,
 				"file" : 0,
-				"line" : 26,
+				"line" : 25,
 				"parent" : 0
 			},
 			{
-				"command" : 12,
+				"command" : 11,
 				"file" : 1,
 				"line" : 141,
-				"parent" : 4
+				"parent" : 3
 			}
 		]
 	},
@@ -170,22 +163,22 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "  -g -fPIC  "
-				},
-				{
-					"backtrace" : 7,
-					"fragment" : "-Wall"
-				},
-				{
-					"backtrace" : 7,
-					"fragment" : "-Wextra"
-				},
-				{
-					"backtrace" : 7,
-					"fragment" : "-Wpedantic"
+					"fragment" : "-g -fPIC  "
 				},
 				{
 					"backtrace" : 6,
+					"fragment" : "-Wall"
+				},
+				{
+					"backtrace" : 6,
+					"fragment" : "-Wextra"
+				},
+				{
+					"backtrace" : 6,
+					"fragment" : "-Wpedantic"
+				},
+				{
+					"backtrace" : 5,
 					"fragment" : "-I/usr/include/uuid"
 				},
 				{
@@ -195,63 +188,63 @@
 			"defines" : 
 			[
 				{
-					"backtrace" : 6,
+					"backtrace" : 5,
 					"define" : "BOOST_ALL_NO_LIB"
 				},
 				{
-					"backtrace" : 6,
+					"backtrace" : 5,
 					"define" : "BOOST_ATOMIC_DYN_LINK"
 				},
 				{
-					"backtrace" : 6,
+					"backtrace" : 5,
 					"define" : "BOOST_DATE_TIME_DYN_LINK"
 				},
 				{
-					"backtrace" : 6,
+					"backtrace" : 5,
 					"define" : "BOOST_FILESYSTEM_DYN_LINK"
 				},
 				{
-					"backtrace" : 6,
+					"backtrace" : 5,
 					"define" : "BOOST_IOSTREAMS_DYN_LINK"
 				},
 				{
-					"backtrace" : 6,
+					"backtrace" : 5,
 					"define" : "BOOST_PROGRAM_OPTIONS_DYN_LINK"
 				},
 				{
-					"backtrace" : 6,
+					"backtrace" : 5,
 					"define" : "BOOST_REGEX_DYN_LINK"
 				},
 				{
-					"backtrace" : 6,
+					"backtrace" : 5,
 					"define" : "BOOST_SYSTEM_DYN_LINK"
 				},
 				{
-					"backtrace" : 18,
+					"backtrace" : 17,
 					"define" : "BOOST_TEST_DYN_LINK"
 				},
 				{
-					"backtrace" : 6,
+					"backtrace" : 5,
 					"define" : "BOOST_THREAD_DYN_LINK"
 				},
 				{
-					"backtrace" : 5,
+					"backtrace" : 4,
 					"define" : "DEFAULT_RMW_IMPLEMENTATION=rmw_fastrtps_cpp"
 				},
 				{
-					"backtrace" : 19,
+					"backtrace" : 18,
 					"define" : "LIBBULLET_VERSION=2.88"
 				},
 				{
-					"backtrace" : 20,
+					"backtrace" : 19,
 					"define" : "LIBBULLET_VERSION_GT_282"
 				},
 				{
-					"backtrace" : 5,
+					"backtrace" : 4,
 					"define" : "RCUTILS_ENABLE_FAULT_INJECTION"
 				},
 				{
-					"backtrace" : 5,
+					"backtrace" : 4,
 					"define" : "SPDLOG_COMPILED_LIB"
 				},
 				{
@@ -261,85 +254,81 @@
 			"includes" : 
 			[
 				{
-					"backtrace" : 21,
+					"backtrace" : 20,
 					"path" : "/usr/include/gazebo-11"
 				},
 				{
-					"backtrace" : 21,
+					"backtrace" : 20,
 					"path" : "/usr/include/bullet"
 				},
 				{
-					"backtrace" : 21,
+					"backtrace" : 20,
 					"path" : "/usr/include/sdformat-9.10"
 				},
 				{
-					"backtrace" : 21,
+					"backtrace" : 20,
 					"path" : "/usr/include/OGRE"
 				},
 				{
-					"backtrace" : 21,
+					"backtrace" : 20,
 					"path" : "/usr/include/OGRE/Terrain"
 				},
 				{
-					"backtrace" : 21,
+					"backtrace" : 20,
 					"path" : "/usr/include/OGRE/Paging"
 				},
 				{
-					"backtrace" : 21,
-					"path" : "/home/eunseop/dev_ws/src/aidin_m1/src/gazebo_plugin"
-				},
-				{
-					"backtrace" : 21,
+					"backtrace" : 20,
 					"isSystem" : true,
 					"path" : "/usr/include/simbody"
 				},
 				{
-					"backtrace" : 21,
+					"backtrace" : 20,
 					"isSystem" : true,
 					"path" : "/usr/include/ignition/math6"
 				},
 				{
-					"backtrace" : 21,
+					"backtrace" : 20,
 					"isSystem" : true,
 					"path" : "/usr/include/ignition/transport8"
 				},
 				{
-					"backtrace" : 21,
+					"backtrace" : 20,
 					"isSystem" : true,
 					"path" : "/usr/include/ignition/msgs5"
 				},
 				{
-					"backtrace" : 21,
+					"backtrace" : 20,
 					"isSystem" : true,
 					"path" : "/usr/include/ignition/common3"
 				},
 				{
-					"backtrace" : 21,
+					"backtrace" : 20,
 					"isSystem" : true,
 					"path" : "/usr/include/ignition/fuel_tools4"
 				},
 				{
-					"backtrace" : 22,
+					"backtrace" : 21,
 					"isSystem" : true,
 					"path" : "/opt/ros/foxy/include"
 				},
 				{
-					"backtrace" : 6,
+					"backtrace" : 5,
 					"isSystem" : true,
 					"path" : "/usr/include/eigen3"
 				},
 				{
-					"backtrace" : 6,
+					"backtrace" : 5,
 					"isSystem" : true,
 					"path" : "/usr/include/sdformat-9.10/sdf/.."
 				},
 				{
-					"backtrace" : 6,
+					"backtrace" : 5,
 					"isSystem" : true,
 					"path" : "/usr/include/ignition/cmake2"
 				},
 				{
-					"backtrace" : 6,
+					"backtrace" : 5,
 					"isSystem" : true,
 					"path" : "/usr/include/uuid"
 				}
@@ -379,16 +368,11 @@
 				"role" : "flags"
 			},
 			{
-				"backtrace" : 3,
-				"fragment" : "-L/usr/lib/x86_64-linux-gnu/gazebo-11/plugins",
-				"role" : "libraryPath"
-			},
-			{
-				"fragment" : "-Wl,-rpath,/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/foxy/lib:/opt/ros/foxy/lib/x86_64-linux-gnu:",
+				"fragment" : "-Wl,-rpath,/opt/ros/foxy/lib:/opt/ros/foxy/lib/x86_64-linux-gnu:",
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 5,
+				"backtrace" : 4,
 				"fragment" : "/opt/ros/foxy/lib/librclcpp.so",
 				"role" : "libraries"
 			},
@@ -409,12 +393,12 @@
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 6,
+				"backtrace" : 5,
 				"fragment" : "/usr/lib/x86_64-linux-gnu/libSimTKsimbody.so.3.6",
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 6,
+				"backtrace" : 5,
 				"fragment" : "/usr/lib/x86_64-linux-gnu/libdart.so.6.9.2",
 				"role" : "libraries"
 			},
@@ -475,37 +459,37 @@
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 6,
+				"backtrace" : 5,
 				"fragment" : "/usr/lib/x86_64-linux-gnu/libboost_thread.so.1.71.0",
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 6,
+				"backtrace" : 5,
 				"fragment" : "/usr/lib/x86_64-linux-gnu/libboost_system.so.1.71.0",
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 6,
+				"backtrace" : 5,
 				"fragment" : "/usr/lib/x86_64-linux-gnu/libboost_filesystem.so.1.71.0",
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 6,
+				"backtrace" : 5,
 				"fragment" : "/usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0",
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 6,
+				"backtrace" : 5,
 				"fragment" : "/usr/lib/x86_64-linux-gnu/libboost_regex.so.1.71.0",
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 6,
+				"backtrace" : 5,
 				"fragment" : "/usr/lib/x86_64-linux-gnu/libboost_iostreams.so.1.71.0",
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 6,
+				"backtrace" : 5,
 				"fragment" : "/usr/lib/x86_64-linux-gnu/libboost_date_time.so.1.71.0",
 				"role" : "libraries"
 			},
@@ -518,7 +502,7 @@
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 6,
+				"backtrace" : 5,
 				"fragment" : "/usr/lib/x86_64-linux-gnu/libsdformat9.so.9.10.1",
 				"role" : "libraries"
 			},
@@ -527,12 +511,12 @@
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 6,
+				"backtrace" : 5,
 				"fragment" : "/usr/lib/x86_64-linux-gnu/libboost_thread.so.1.71.0",
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 6,
+				"backtrace" : 5,
 				"fragment" : "/usr/lib/x86_64-linux-gnu/libboost_date_time.so.1.71.0",
 				"role" : "libraries"
 			},
@@ -545,7 +529,7 @@
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 6,
+				"backtrace" : 5,
 				"fragment" : "/usr/lib/x86_64-linux-gnu/libignition-common3-graphics.so.3.17.0",
 				"role" : "libraries"
 			},
@@ -758,12 +742,12 @@
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 6,
+				"backtrace" : 5,
 				"fragment" : "/usr/lib/x86_64-linux-gnu/libSimTKmath.so.3.6",
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 6,
+				"backtrace" : 5,
 				"fragment" : "/usr/lib/x86_64-linux-gnu/libSimTKcommon.so.3.6",
 				"role" : "libraries"
 			},

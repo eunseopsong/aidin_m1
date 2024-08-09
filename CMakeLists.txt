@@ -15,7 +15,6 @@ find_package(rclcpp REQUIRED)
 find_package(rclcpp_action REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 
-# 추가: qpOASES 라이브러리를 찾음
 find_path(qpOASES_INCLUDE_DIR qpOASES.hpp)
 find_library(qpOASES_LIBRARIES qpOASES)
 
@@ -27,14 +26,8 @@ include_directories(
   ${GAZEBO_INCLUDE_DIRS}
   ${SDFORMAT_INCLUDE_DIRS}
   ${qpOASES_INCLUDE_DIR}
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/gazebo_plugin
 )
 
-link_directories(
-  ${GAZEBO_LIBRARY_DIRS}
-)
-
-list(APPEND CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GAZEBO_CXX_FLAGS}")
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -58,7 +51,6 @@ target_link_libraries(${PROJECT_NAME}_plugin
   ${qpOASES_LIBRARIES}
 )
 
-# Build the main executable
 # Add other source files containing definitions for the functions and variables used in main.cpp
 add_executable(main src/AiDIN_Controller/main.cpp src/AiDIN_Controller/JointControl.cpp src/AiDIN_Controller/func.cpp src/AiDIN_Controller/Controllers/convexMPC/convexMPC.cpp)
 
