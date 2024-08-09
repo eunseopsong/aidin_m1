@@ -16,8 +16,7 @@
 					"targetIndexes" : 
 					[
 						0,
-						1,
-						2
+						1
 					]
 				}
 			],
@@ -33,20 +32,12 @@
 					"targetIndexes" : 
 					[
 						0,
-						1,
-						2
+						1
 					]
 				}
 			],
 			"targets" : 
 			[
-				{
-					"directoryIndex" : 0,
-					"id" : "aidin_m1_plugin::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-aidin_m1_plugin-Debug-9e80d6f8851840989099.json",
-					"name" : "aidin_m1_plugin",
-					"projectIndex" : 0
-				},
 				{
 					"directoryIndex" : 0,
 					"id" : "aidin_m1_uninstall::@6890427a1f51a3e7e1df",

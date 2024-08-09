@@ -29,11 +29,9 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/usr/include/ignition/msgs5"
   "/usr/include/ignition/common3"
   "/usr/include/ignition/fuel_tools4"
-  "../src/gazebo_plugin"
   "../src/gazebo_plugin/."
-  "/usr/local/include/eigen3"
-  "."
   "../"
+  "."
   )
 
 # Targets to which this target links.

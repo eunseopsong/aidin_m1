@@ -34,22 +34,7 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
-
-# build the plugin library
-add_library(${PROJECT_NAME}_plugin SHARED
-  src/gazebo_plugin/aidin_m1_plugin.cpp
-)
-
-ament_target_dependencies(${PROJECT_NAME}_plugin
-  "rclcpp"
-  "pluginlib"
-  "gazebo"
-)
-
-target_link_libraries(${PROJECT_NAME}_plugin
-  ${GAZEBO_LIBRARIES}
-  ${SDFORMAT_LIBRARIES}
-  ${qpOASES_LIBRARIES}
-)
+#### 왜 add_subdirectory 넣으니까 build 안 되는 거지..? 왜 잘 되는 거지..? ####
+# add_subdirectory(src)
 
 ament_package()

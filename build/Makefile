@@ -168,19 +168,6 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named aidin_m1_plugin
-
-# Build rule for target.
-aidin_m1_plugin: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 aidin_m1_plugin
-.PHONY : aidin_m1_plugin
-
-# fast build rule for target.
-aidin_m1_plugin/fast:
-	$(MAKE) -f CMakeFiles/aidin_m1_plugin.dir/build.make CMakeFiles/aidin_m1_plugin.dir/build
-.PHONY : aidin_m1_plugin/fast
-
-#=============================================================================
 # Target rules for targets named aidin_m1_uninstall
 
 # Build rule for target.
@@ -206,33 +193,6 @@ uninstall/fast:
 	$(MAKE) -f CMakeFiles/uninstall.dir/build.make CMakeFiles/uninstall.dir/build
 .PHONY : uninstall/fast
 
-src/gazebo_plugin/aidin_m1_plugin.o: src/gazebo_plugin/aidin_m1_plugin.cpp.o
-
-.PHONY : src/gazebo_plugin/aidin_m1_plugin.o
-
-# target to build an object file
-src/gazebo_plugin/aidin_m1_plugin.cpp.o:
-	$(MAKE) -f CMakeFiles/aidin_m1_plugin.dir/build.make CMakeFiles/aidin_m1_plugin.dir/src/gazebo_plugin/aidin_m1_plugin.cpp.o
-.PHONY : src/gazebo_plugin/aidin_m1_plugin.cpp.o
-
-src/gazebo_plugin/aidin_m1_plugin.i: src/gazebo_plugin/aidin_m1_plugin.cpp.i
-
-.PHONY : src/gazebo_plugin/aidin_m1_plugin.i
-
-# target to preprocess a source file
-src/gazebo_plugin/aidin_m1_plugin.cpp.i:
-	$(MAKE) -f CMakeFiles/aidin_m1_plugin.dir/build.make CMakeFiles/aidin_m1_plugin.dir/src/gazebo_plugin/aidin_m1_plugin.cpp.i
-.PHONY : src/gazebo_plugin/aidin_m1_plugin.cpp.i
-
-src/gazebo_plugin/aidin_m1_plugin.s: src/gazebo_plugin/aidin_m1_plugin.cpp.s
-
-.PHONY : src/gazebo_plugin/aidin_m1_plugin.s
-
-# target to generate assembly for a file
-src/gazebo_plugin/aidin_m1_plugin.cpp.s:
-	$(MAKE) -f CMakeFiles/aidin_m1_plugin.dir/build.make CMakeFiles/aidin_m1_plugin.dir/src/gazebo_plugin/aidin_m1_plugin.cpp.s
-.PHONY : src/gazebo_plugin/aidin_m1_plugin.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -243,15 +203,11 @@ help:
 	@echo "... install/local"
 	@echo "... edit_cache"
 	@echo "... test"
-	@echo "... aidin_m1_plugin"
 	@echo "... install"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... aidin_m1_uninstall"
 	@echo "... uninstall"
-	@echo "... src/gazebo_plugin/aidin_m1_plugin.o"
-	@echo "... src/gazebo_plugin/aidin_m1_plugin.i"
-	@echo "... src/gazebo_plugin/aidin_m1_plugin.s"
 .PHONY : help
 
 

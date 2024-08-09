@@ -168,34 +168,19 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/rule:
-	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f CMakeFiles/Makefile2 src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/rule
-.PHONY : src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/rule
+src/AiDIN_Controller/CMakeFiles/main.dir/rule:
+	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f CMakeFiles/Makefile2 src/AiDIN_Controller/CMakeFiles/main.dir/rule
+.PHONY : src/AiDIN_Controller/CMakeFiles/main.dir/rule
 
 # Convenience name for target.
-aidin_ctrl: src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/rule
+main: src/AiDIN_Controller/CMakeFiles/main.dir/rule
 
-.PHONY : aidin_ctrl
+.PHONY : main
 
 # fast build rule for target.
-aidin_ctrl/fast:
-	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/build.make src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/build
-.PHONY : aidin_ctrl/fast
-
-# Convenience name for target.
-src/AiDIN_Controller/CMakeFiles/m1_ctrl.dir/rule:
-	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f CMakeFiles/Makefile2 src/AiDIN_Controller/CMakeFiles/m1_ctrl.dir/rule
-.PHONY : src/AiDIN_Controller/CMakeFiles/m1_ctrl.dir/rule
-
-# Convenience name for target.
-m1_ctrl: src/AiDIN_Controller/CMakeFiles/m1_ctrl.dir/rule
-
-.PHONY : m1_ctrl
-
-# fast build rule for target.
-m1_ctrl/fast:
-	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/AiDIN_Controller/CMakeFiles/m1_ctrl.dir/build.make src/AiDIN_Controller/CMakeFiles/m1_ctrl.dir/build
-.PHONY : m1_ctrl/fast
+main/fast:
+	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/AiDIN_Controller/CMakeFiles/main.dir/build.make src/AiDIN_Controller/CMakeFiles/main.dir/build
+.PHONY : main/fast
 
 Controllers/convexMPC/convexMPC.o: Controllers/convexMPC/convexMPC.cpp.o
 
@@ -203,8 +188,7 @@ Controllers/convexMPC/convexMPC.o: Controllers/convexMPC/convexMPC.cpp.o
 
 # target to build an object file
 Controllers/convexMPC/convexMPC.cpp.o:
-	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/build.make src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/convexMPC.cpp.o
-	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/AiDIN_Controller/CMakeFiles/m1_ctrl.dir/build.make src/AiDIN_Controller/CMakeFiles/m1_ctrl.dir/Controllers/convexMPC/convexMPC.cpp.o
+	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/AiDIN_Controller/CMakeFiles/main.dir/build.make src/AiDIN_Controller/CMakeFiles/main.dir/Controllers/convexMPC/convexMPC.cpp.o
 .PHONY : Controllers/convexMPC/convexMPC.cpp.o
 
 Controllers/convexMPC/convexMPC.i: Controllers/convexMPC/convexMPC.cpp.i
@@ -213,8 +197,7 @@ Controllers/convexMPC/convexMPC.i: Controllers/convexMPC/convexMPC.cpp.i
 
 # target to preprocess a source file
 Controllers/convexMPC/convexMPC.cpp.i:
-	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/build.make src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/convexMPC.cpp.i
-	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/AiDIN_Controller/CMakeFiles/m1_ctrl.dir/build.make src/AiDIN_Controller/CMakeFiles/m1_ctrl.dir/Controllers/convexMPC/convexMPC.cpp.i
+	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/AiDIN_Controller/CMakeFiles/main.dir/build.make src/AiDIN_Controller/CMakeFiles/main.dir/Controllers/convexMPC/convexMPC.cpp.i
 .PHONY : Controllers/convexMPC/convexMPC.cpp.i
 
 Controllers/convexMPC/convexMPC.s: Controllers/convexMPC/convexMPC.cpp.s
@@ -223,8 +206,7 @@ Controllers/convexMPC/convexMPC.s: Controllers/convexMPC/convexMPC.cpp.s
 
 # target to generate assembly for a file
 Controllers/convexMPC/convexMPC.cpp.s:
-	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/build.make src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/convexMPC.cpp.s
-	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/AiDIN_Controller/CMakeFiles/m1_ctrl.dir/build.make src/AiDIN_Controller/CMakeFiles/m1_ctrl.dir/Controllers/convexMPC/convexMPC.cpp.s
+	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/AiDIN_Controller/CMakeFiles/main.dir/build.make src/AiDIN_Controller/CMakeFiles/main.dir/Controllers/convexMPC/convexMPC.cpp.s
 .PHONY : Controllers/convexMPC/convexMPC.cpp.s
 
 JointControl.o: JointControl.cpp.o
@@ -233,8 +215,7 @@ JointControl.o: JointControl.cpp.o
 
 # target to build an object file
 JointControl.cpp.o:
-	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/build.make src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/JointControl.cpp.o
-	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/AiDIN_Controller/CMakeFiles/m1_ctrl.dir/build.make src/AiDIN_Controller/CMakeFiles/m1_ctrl.dir/JointControl.cpp.o
+	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/AiDIN_Controller/CMakeFiles/main.dir/build.make src/AiDIN_Controller/CMakeFiles/main.dir/JointControl.cpp.o
 .PHONY : JointControl.cpp.o
 
 JointControl.i: JointControl.cpp.i
@@ -243,8 +224,7 @@ JointControl.i: JointControl.cpp.i
 
 # target to preprocess a source file
 JointControl.cpp.i:
-	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/build.make src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/JointControl.cpp.i
-	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/AiDIN_Controller/CMakeFiles/m1_ctrl.dir/build.make src/AiDIN_Controller/CMakeFiles/m1_ctrl.dir/JointControl.cpp.i
+	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/AiDIN_Controller/CMakeFiles/main.dir/build.make src/AiDIN_Controller/CMakeFiles/main.dir/JointControl.cpp.i
 .PHONY : JointControl.cpp.i
 
 JointControl.s: JointControl.cpp.s
@@ -253,8 +233,7 @@ JointControl.s: JointControl.cpp.s
 
 # target to generate assembly for a file
 JointControl.cpp.s:
-	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/build.make src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/JointControl.cpp.s
-	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/AiDIN_Controller/CMakeFiles/m1_ctrl.dir/build.make src/AiDIN_Controller/CMakeFiles/m1_ctrl.dir/JointControl.cpp.s
+	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/AiDIN_Controller/CMakeFiles/main.dir/build.make src/AiDIN_Controller/CMakeFiles/main.dir/JointControl.cpp.s
 .PHONY : JointControl.cpp.s
 
 func.o: func.cpp.o
@@ -263,8 +242,7 @@ func.o: func.cpp.o
 
 # target to build an object file
 func.cpp.o:
-	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/build.make src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/func.cpp.o
-	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/AiDIN_Controller/CMakeFiles/m1_ctrl.dir/build.make src/AiDIN_Controller/CMakeFiles/m1_ctrl.dir/func.cpp.o
+	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/AiDIN_Controller/CMakeFiles/main.dir/build.make src/AiDIN_Controller/CMakeFiles/main.dir/func.cpp.o
 .PHONY : func.cpp.o
 
 func.i: func.cpp.i
@@ -273,8 +251,7 @@ func.i: func.cpp.i
 
 # target to preprocess a source file
 func.cpp.i:
-	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/build.make src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/func.cpp.i
-	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/AiDIN_Controller/CMakeFiles/m1_ctrl.dir/build.make src/AiDIN_Controller/CMakeFiles/m1_ctrl.dir/func.cpp.i
+	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/AiDIN_Controller/CMakeFiles/main.dir/build.make src/AiDIN_Controller/CMakeFiles/main.dir/func.cpp.i
 .PHONY : func.cpp.i
 
 func.s: func.cpp.s
@@ -283,8 +260,7 @@ func.s: func.cpp.s
 
 # target to generate assembly for a file
 func.cpp.s:
-	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/build.make src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/func.cpp.s
-	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/AiDIN_Controller/CMakeFiles/m1_ctrl.dir/build.make src/AiDIN_Controller/CMakeFiles/m1_ctrl.dir/func.cpp.s
+	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/AiDIN_Controller/CMakeFiles/main.dir/build.make src/AiDIN_Controller/CMakeFiles/main.dir/func.cpp.s
 .PHONY : func.cpp.s
 
 main.o: main.cpp.o
@@ -293,8 +269,7 @@ main.o: main.cpp.o
 
 # target to build an object file
 main.cpp.o:
-	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/build.make src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/main.cpp.o
-	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/AiDIN_Controller/CMakeFiles/m1_ctrl.dir/build.make src/AiDIN_Controller/CMakeFiles/m1_ctrl.dir/main.cpp.o
+	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/AiDIN_Controller/CMakeFiles/main.dir/build.make src/AiDIN_Controller/CMakeFiles/main.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -303,8 +278,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/build.make src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/main.cpp.i
-	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/AiDIN_Controller/CMakeFiles/m1_ctrl.dir/build.make src/AiDIN_Controller/CMakeFiles/m1_ctrl.dir/main.cpp.i
+	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/AiDIN_Controller/CMakeFiles/main.dir/build.make src/AiDIN_Controller/CMakeFiles/main.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -313,8 +287,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/build.make src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/main.cpp.s
-	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/AiDIN_Controller/CMakeFiles/m1_ctrl.dir/build.make src/AiDIN_Controller/CMakeFiles/m1_ctrl.dir/main.cpp.s
+	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/AiDIN_Controller/CMakeFiles/main.dir/build.make src/AiDIN_Controller/CMakeFiles/main.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 # Help Target
@@ -330,8 +303,7 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... test"
-	@echo "... aidin_ctrl"
-	@echo "... m1_ctrl"
+	@echo "... main"
 	@echo "... Controllers/convexMPC/convexMPC.o"
 	@echo "... Controllers/convexMPC/convexMPC.i"
 	@echo "... Controllers/convexMPC/convexMPC.s"

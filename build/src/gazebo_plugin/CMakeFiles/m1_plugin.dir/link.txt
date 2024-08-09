@@ -1,1 +1,1 @@
-/usr/bin/c++    -g   CMakeFiles/m1_plugin.dir/aidin_m1_plugin.cpp.o  -o m1_plugin   -L/usr/lib/x86_64-linux-gnu/gazebo-11/plugins 
+/usr/bin/c++  -g   CMakeFiles/m1_plugin.dir/aidin_m1_plugin.cpp.o  -o m1_plugin 
