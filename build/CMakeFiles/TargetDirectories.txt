@@ -2,7 +2,6 @@
 /home/eunseop/dev_ws/src/aidin_m1/build/CMakeFiles/install/local.dir
 /home/eunseop/dev_ws/src/aidin_m1/build/CMakeFiles/edit_cache.dir
 /home/eunseop/dev_ws/src/aidin_m1/build/CMakeFiles/test.dir
-/home/eunseop/dev_ws/src/aidin_m1/build/CMakeFiles/main.dir
 /home/eunseop/dev_ws/src/aidin_m1/build/CMakeFiles/aidin_m1_plugin.dir
 /home/eunseop/dev_ws/src/aidin_m1/build/CMakeFiles/install.dir
 /home/eunseop/dev_ws/src/aidin_m1/build/CMakeFiles/list_install_components.dir

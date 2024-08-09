@@ -28,11 +28,12 @@ include_directories(
   ${qpOASES_INCLUDE_DIR}
 )
 
-
+# the below 4 sentences are neccessary??
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   ament_lint_auto_find_test_dependencies()
 endif()
+
 
 # build the plugin library
 add_library(${PROJECT_NAME}_plugin SHARED
@@ -49,31 +50,6 @@ target_link_libraries(${PROJECT_NAME}_plugin
   ${GAZEBO_LIBRARIES}
   ${SDFORMAT_LIBRARIES}
   ${qpOASES_LIBRARIES}
-)
-
-# Add other source files containing definitions for the functions and variables used in main.cpp
-add_executable(main src/AiDIN_Controller/main.cpp src/AiDIN_Controller/JointControl.cpp src/AiDIN_Controller/func.cpp src/AiDIN_Controller/Controllers/convexMPC/convexMPC.cpp)
-
-target_link_libraries(main
-  ${GAZEBO_LIBRARIES}
-  ${SDFORMAT_LIBRARIES}
-  ${rclcpp_LIBRARIES}
-  ${qpOASES_LIBRARIES}
-)
-
-# Install
-install(DIRECTORY launch worlds urdf
-  DESTINATION share/${PROJECT_NAME}
-)
-
-# Install the plugin library
-install(TARGETS ${PROJECT_NAME}_plugin
-  DESTINATION lib
-)
-
-# Install the main executable
-install(TARGETS main
-  DESTINATION lib/${PROJECT_NAME}
 )
 
 ament_package()

@@ -9,14 +9,22 @@ include_directories(
   ${CMAKE_BINARY_DIR}
 )
 
-
-
-
 file(GLOB_RECURSE sources
 "./*.cpp"
 "FSM_States/*.cpp"
 "Controllers/convexMPC/*.cpp")
 
+add_executable(main ${sources})
 
+# Link the necessary libraries to the executable
+target_link_libraries(main
+  ${GAZEBO_LIBRARIES}
+  ${SDFORMAT_LIBRARIES}
+  ${rclcpp_LIBRARIES}
+  ${qpOASES_LIBRARIES}
+)
 
-add_executable(aidin_ctrl ${sources} main.cpp)
+# Optionally install the executable
+install(TARGETS main
+  DESTINATION lib/${PROJECT_NAME}
+)

@@ -168,19 +168,6 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named main
-
-# Build rule for target.
-main: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 main
-.PHONY : main
-
-# fast build rule for target.
-main/fast:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
-.PHONY : main/fast
-
-#=============================================================================
 # Target rules for targets named aidin_m1_plugin
 
 # Build rule for target.
@@ -219,114 +206,6 @@ uninstall/fast:
 	$(MAKE) -f CMakeFiles/uninstall.dir/build.make CMakeFiles/uninstall.dir/build
 .PHONY : uninstall/fast
 
-src/AiDIN_Controller/Controllers/convexMPC/convexMPC.o: src/AiDIN_Controller/Controllers/convexMPC/convexMPC.cpp.o
-
-.PHONY : src/AiDIN_Controller/Controllers/convexMPC/convexMPC.o
-
-# target to build an object file
-src/AiDIN_Controller/Controllers/convexMPC/convexMPC.cpp.o:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/AiDIN_Controller/Controllers/convexMPC/convexMPC.cpp.o
-.PHONY : src/AiDIN_Controller/Controllers/convexMPC/convexMPC.cpp.o
-
-src/AiDIN_Controller/Controllers/convexMPC/convexMPC.i: src/AiDIN_Controller/Controllers/convexMPC/convexMPC.cpp.i
-
-.PHONY : src/AiDIN_Controller/Controllers/convexMPC/convexMPC.i
-
-# target to preprocess a source file
-src/AiDIN_Controller/Controllers/convexMPC/convexMPC.cpp.i:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/AiDIN_Controller/Controllers/convexMPC/convexMPC.cpp.i
-.PHONY : src/AiDIN_Controller/Controllers/convexMPC/convexMPC.cpp.i
-
-src/AiDIN_Controller/Controllers/convexMPC/convexMPC.s: src/AiDIN_Controller/Controllers/convexMPC/convexMPC.cpp.s
-
-.PHONY : src/AiDIN_Controller/Controllers/convexMPC/convexMPC.s
-
-# target to generate assembly for a file
-src/AiDIN_Controller/Controllers/convexMPC/convexMPC.cpp.s:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/AiDIN_Controller/Controllers/convexMPC/convexMPC.cpp.s
-.PHONY : src/AiDIN_Controller/Controllers/convexMPC/convexMPC.cpp.s
-
-src/AiDIN_Controller/JointControl.o: src/AiDIN_Controller/JointControl.cpp.o
-
-.PHONY : src/AiDIN_Controller/JointControl.o
-
-# target to build an object file
-src/AiDIN_Controller/JointControl.cpp.o:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/AiDIN_Controller/JointControl.cpp.o
-.PHONY : src/AiDIN_Controller/JointControl.cpp.o
-
-src/AiDIN_Controller/JointControl.i: src/AiDIN_Controller/JointControl.cpp.i
-
-.PHONY : src/AiDIN_Controller/JointControl.i
-
-# target to preprocess a source file
-src/AiDIN_Controller/JointControl.cpp.i:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/AiDIN_Controller/JointControl.cpp.i
-.PHONY : src/AiDIN_Controller/JointControl.cpp.i
-
-src/AiDIN_Controller/JointControl.s: src/AiDIN_Controller/JointControl.cpp.s
-
-.PHONY : src/AiDIN_Controller/JointControl.s
-
-# target to generate assembly for a file
-src/AiDIN_Controller/JointControl.cpp.s:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/AiDIN_Controller/JointControl.cpp.s
-.PHONY : src/AiDIN_Controller/JointControl.cpp.s
-
-src/AiDIN_Controller/func.o: src/AiDIN_Controller/func.cpp.o
-
-.PHONY : src/AiDIN_Controller/func.o
-
-# target to build an object file
-src/AiDIN_Controller/func.cpp.o:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/AiDIN_Controller/func.cpp.o
-.PHONY : src/AiDIN_Controller/func.cpp.o
-
-src/AiDIN_Controller/func.i: src/AiDIN_Controller/func.cpp.i
-
-.PHONY : src/AiDIN_Controller/func.i
-
-# target to preprocess a source file
-src/AiDIN_Controller/func.cpp.i:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/AiDIN_Controller/func.cpp.i
-.PHONY : src/AiDIN_Controller/func.cpp.i
-
-src/AiDIN_Controller/func.s: src/AiDIN_Controller/func.cpp.s
-
-.PHONY : src/AiDIN_Controller/func.s
-
-# target to generate assembly for a file
-src/AiDIN_Controller/func.cpp.s:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/AiDIN_Controller/func.cpp.s
-.PHONY : src/AiDIN_Controller/func.cpp.s
-
-src/AiDIN_Controller/main.o: src/AiDIN_Controller/main.cpp.o
-
-.PHONY : src/AiDIN_Controller/main.o
-
-# target to build an object file
-src/AiDIN_Controller/main.cpp.o:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/AiDIN_Controller/main.cpp.o
-.PHONY : src/AiDIN_Controller/main.cpp.o
-
-src/AiDIN_Controller/main.i: src/AiDIN_Controller/main.cpp.i
-
-.PHONY : src/AiDIN_Controller/main.i
-
-# target to preprocess a source file
-src/AiDIN_Controller/main.cpp.i:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/AiDIN_Controller/main.cpp.i
-.PHONY : src/AiDIN_Controller/main.cpp.i
-
-src/AiDIN_Controller/main.s: src/AiDIN_Controller/main.cpp.s
-
-.PHONY : src/AiDIN_Controller/main.s
-
-# target to generate assembly for a file
-src/AiDIN_Controller/main.cpp.s:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/AiDIN_Controller/main.cpp.s
-.PHONY : src/AiDIN_Controller/main.cpp.s
-
 src/gazebo_plugin/aidin_m1_plugin.o: src/gazebo_plugin/aidin_m1_plugin.cpp.o
 
 .PHONY : src/gazebo_plugin/aidin_m1_plugin.o
@@ -364,25 +243,12 @@ help:
 	@echo "... install/local"
 	@echo "... edit_cache"
 	@echo "... test"
-	@echo "... main"
 	@echo "... aidin_m1_plugin"
 	@echo "... install"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... aidin_m1_uninstall"
 	@echo "... uninstall"
-	@echo "... src/AiDIN_Controller/Controllers/convexMPC/convexMPC.o"
-	@echo "... src/AiDIN_Controller/Controllers/convexMPC/convexMPC.i"
-	@echo "... src/AiDIN_Controller/Controllers/convexMPC/convexMPC.s"
-	@echo "... src/AiDIN_Controller/JointControl.o"
-	@echo "... src/AiDIN_Controller/JointControl.i"
-	@echo "... src/AiDIN_Controller/JointControl.s"
-	@echo "... src/AiDIN_Controller/func.o"
-	@echo "... src/AiDIN_Controller/func.i"
-	@echo "... src/AiDIN_Controller/func.s"
-	@echo "... src/AiDIN_Controller/main.o"
-	@echo "... src/AiDIN_Controller/main.i"
-	@echo "... src/AiDIN_Controller/main.s"
 	@echo "... src/gazebo_plugin/aidin_m1_plugin.o"
 	@echo "... src/gazebo_plugin/aidin_m1_plugin.i"
 	@echo "... src/gazebo_plugin/aidin_m1_plugin.s"
