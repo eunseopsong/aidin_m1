@@ -99,7 +99,7 @@
     <material>Gazebo/DarkGrey</material>
   </gazebo>
 
-  <joint name="imu_joint" type="fixed">
+  <!-- <joint name="imu_joint" type="fixed">
     <parent link="body"/>
     <child link="imu_link"/>
     <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -124,7 +124,7 @@
         <box size="0.001 0.001 0.001"/>
       </geometry>
     </collision>
-  </link>
+  </link> -->
 
 <!--//////////////////////////////// RF LINKS /////////////////////////////////-->
 
