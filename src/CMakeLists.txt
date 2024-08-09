@@ -1,2 +1,2 @@
 add_subdirectory(AiDIN_Controller)
-add_subdirectory(gazebo_plugins)
+add_subdirectory(gazebo_plugin)

@@ -1,0 +1,1 @@
+/usr/bin/c++    -g   CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/convexMPC.cpp.o CMakeFiles/aidin_ctrl.dir/JointControl.cpp.o CMakeFiles/aidin_ctrl.dir/func.cpp.o CMakeFiles/aidin_ctrl.dir/main.cpp.o  -o aidin_ctrl   -L/usr/lib/x86_64-linux-gnu/gazebo-11/plugins 

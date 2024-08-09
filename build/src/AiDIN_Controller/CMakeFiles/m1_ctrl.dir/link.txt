@@ -1,0 +1,2 @@
+/usr/bin/ar qc libm1_ctrl.a  CMakeFiles/m1_ctrl.dir/Controllers/convexMPC/convexMPC.cpp.o CMakeFiles/m1_ctrl.dir/JointControl.cpp.o CMakeFiles/m1_ctrl.dir/func.cpp.o CMakeFiles/m1_ctrl.dir/main.cpp.o
+/usr/bin/ranlib libm1_ctrl.a
