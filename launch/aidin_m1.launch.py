@@ -13,7 +13,7 @@ from launch_ros.substitutions import FindPackageShare
 
 def generate_launch_description():
 
-    robot_file_name ="aidin_m1.urdf"
+    robot_file_name = "aidin_m1.urdf"
     pkg_name = "aidin_m1"
 
     pkg_path = get_package_share_directory(pkg_name)
@@ -26,23 +26,18 @@ def generate_launch_description():
     # Custom world path
     custom_world_path = os.path.join(pkg_path, "worlds", "just_ground.world")
 
-    # Start Gazebo server
-    # start_gazebo_server = IncludeLaunchDescription(
-    #     PythonLaunchDescriptionSource(os.path.join(pkg_gazebo_ros, 'launch', 'gzserver.launch.py')),
-    #     launch_arguments={"world": "/usr/share/gazebo-11/worlds/empty.world",
-    #                       "verbose": "true"}.items()
-    # )
+    # Ensure GAZEBO_PLUGIN_PATH includes the plugin directory
+    os.environ['GAZEBO_PLUGIN_PATH'] = os.path.join(pkg_path, 'lib')
 
+    # Start Gazebo server
     start_gazebo_server = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(os.path.join(pkg_gazebo_ros, 'launch', 'gzserver.launch.py')),
-        launch_arguments={"world": custom_world_path,
-                          "verbose": "true"}.items()
+        launch_arguments={"world": custom_world_path, "verbose": "true"}.items()
     )
 
     # Start Gazebo client
     start_gazebo_client = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            os.path.join(pkg_gazebo_ros, 'launch', 'gzclient.launch.py'))
+        PythonLaunchDescriptionSource(os.path.join(pkg_gazebo_ros, 'launch', 'gzclient.launch.py'))
     )
 
     # Spawn robot
@@ -57,18 +52,17 @@ def generate_launch_description():
     # Start joint_control_node
     gazebo_aidin_m1_control = Node(
         package="aidin_m1",
-        executable="aidin_m1_main",
+        executable="main",
         output="screen",
     )
 
     return LaunchDescription(
         [
             DeclareLaunchArgument(name='model', default_value=default_model_path,
-                                    description='~/dev_ws/src/aidin_m1/meshes'),
+                                  description='~/dev_ws/src/aidin_m1/meshes'),
             start_gazebo_server,
             start_gazebo_client,
             spawn_entity,
             gazebo_aidin_m1_control,
-
         ]
     )

@@ -5344,6 +5344,30 @@
 		},
 		{
 			"isExternal" : true,
+			"path" : "/opt/ros/foxy/share/ament_cmake_cpplint/cmake/ament_cmake_cpplintConfig-version.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/opt/ros/foxy/share/ament_cmake_cpplint/cmake/ament_cmake_cpplintConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/opt/ros/foxy/share/ament_cmake_cpplint/cmake/ament_cmake_cpplint-extras.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/opt/ros/foxy/share/ament_cmake_test/cmake/ament_cmake_testConfig-version.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/opt/ros/foxy/share/ament_cmake_test/cmake/ament_cmake_testConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/opt/ros/foxy/share/ament_cmake_cpplint/cmake/ament_cpplint.cmake"
+		},
+		{
+			"isExternal" : true,
 			"path" : "/opt/ros/foxy/share/ament_cmake_flake8/cmake/ament_cmake_flake8Config-version.cmake"
 		},
 		{
@@ -5517,6 +5541,10 @@
 		{
 			"isExternal" : true,
 			"path" : "/opt/ros/foxy/share/ament_cmake_core/cmake/ament_cmake_coreConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/opt/ros/foxy/share/ament_cmake_cpplint/cmake/ament_cmake_cpplint_lint_hook.cmake"
 		},
 		{
 			"isExternal" : true,

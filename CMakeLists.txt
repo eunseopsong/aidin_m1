@@ -26,8 +26,8 @@ endif()
 include_directories(
   ${GAZEBO_INCLUDE_DIRS}
   ${SDFORMAT_INCLUDE_DIRS}
-  ${qpOASES_INCLUDE_DIR} # 추가: qpOASES include 디렉토리
-  ${CMAKE_CURRENT_SOURCE_DIR}/src # src 디렉토리 추가
+  ${qpOASES_INCLUDE_DIR}
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/gazebo_plugin
 )
 
 link_directories(
@@ -38,21 +38,50 @@ list(APPEND CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GAZEBO_CXX_FLAGS}")
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
-  set(ament_cmake_cpplint_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
 endif()
 
-# Install the launch directory
-install(DIRECTORY
-  launch
-  meshes
-  src
-  urdf
-  worlds
+# build the plugin library
+add_library(${PROJECT_NAME}_plugin SHARED
+  src/gazebo_plugin/aidin_m1_plugin.cpp
+)
+
+ament_target_dependencies(${PROJECT_NAME}_plugin
+  "rclcpp"
+  "pluginlib"
+  "gazebo"
+)
+
+target_link_libraries(${PROJECT_NAME}_plugin
+  ${GAZEBO_LIBRARIES}
+  ${SDFORMAT_LIBRARIES}
+  ${qpOASES_LIBRARIES}
+)
+
+# Build the main executable
+# Add other source files containing definitions for the functions and variables used in main.cpp
+add_executable(main src/AiDIN_Controller/main.cpp src/AiDIN_Controller/JointControl.cpp src/AiDIN_Controller/func.cpp src/AiDIN_Controller/Controllers/convexMPC/convexMPC.cpp)
+
+target_link_libraries(main
+  ${GAZEBO_LIBRARIES}
+  ${SDFORMAT_LIBRARIES}
+  ${rclcpp_LIBRARIES}
+  ${qpOASES_LIBRARIES}
+)
+
+# Install
+install(DIRECTORY launch worlds urdf
   DESTINATION share/${PROJECT_NAME}
 )
 
-# src 디렉토리 추가
-# add_subdirectory(src)
+# Install the plugin library
+install(TARGETS ${PROJECT_NAME}_plugin
+  DESTINATION lib
+)
+
+# Install the main executable
+install(TARGETS main
+  DESTINATION lib/${PROJECT_NAME}
+)
 
 ament_package()

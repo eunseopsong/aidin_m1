@@ -15,6 +15,7 @@ file(GLOB_RECURSE sources
 # add_subdirectory(Controllers/WBC)
 
 add_executable(aidin_ctrl ${sources} main.cpp)
+
 # target_link_libraries(mit_ctrl robot biomimeti/cs)
 # target_link_libraries(mit_ctrl WBC_Ctrl)
 # target_link_libraries(mit_ctrl VisionMPC)

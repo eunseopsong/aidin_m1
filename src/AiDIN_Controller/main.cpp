@@ -1,6 +1,6 @@
-#include "JointControl.cpp"
+#include "JointControl.h"
 
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
     rclcpp::init(argc, argv);
     auto node = std::make_shared<JointControl>();

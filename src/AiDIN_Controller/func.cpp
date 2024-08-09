@@ -1,4 +1,4 @@
-#include "convexMPC/convexMPC.h"
+#include "Controllers/convexMPC/convexMPC.h"
 #include "func.h"
 
 using namespace std;

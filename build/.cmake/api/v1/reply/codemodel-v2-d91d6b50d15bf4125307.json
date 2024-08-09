@@ -16,7 +16,9 @@
 					"targetIndexes" : 
 					[
 						0,
-						1
+						1,
+						2,
+						3
 					]
 				}
 			],
@@ -32,7 +34,9 @@
 					"targetIndexes" : 
 					[
 						0,
-						1
+						1,
+						2,
+						3
 					]
 				}
 			],
@@ -40,9 +44,23 @@
 			[
 				{
 					"directoryIndex" : 0,
+					"id" : "aidin_m1_plugin::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-aidin_m1_plugin-Debug-575cef71a88b00ea374f.json",
+					"name" : "aidin_m1_plugin",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
 					"id" : "aidin_m1_uninstall::@6890427a1f51a3e7e1df",
 					"jsonFile" : "target-aidin_m1_uninstall-Debug-82af14bc85d3ee1252d5.json",
 					"name" : "aidin_m1_uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "main::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-main-Debug-39131260c2354e6285b1.json",
+					"name" : "main",
 					"projectIndex" : 0
 				},
 				{
