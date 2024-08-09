@@ -3,7 +3,6 @@ include_directories("./Controllers")
 
 include_directories(
   ${GAZEBO_INCLUDE_DIRS}
-  ${SDFORMAT_INCLUDE_DIRS}
   ${qpOASES_INCLUDE_DIR}
   ${PROJECT_SOURCE_DIR}
   ${CMAKE_BINARY_DIR}
@@ -14,17 +13,16 @@ file(GLOB_RECURSE sources
 "FSM_States/*.cpp"
 "Controllers/convexMPC/*.cpp")
 
-add_executable(main ${sources})
+add_executable(aidin_ctrl ${sources} main.cpp)
 
 # Link the necessary libraries to the executable
-target_link_libraries(main
+target_link_libraries(aidin_ctrl
   ${GAZEBO_LIBRARIES}
-  ${SDFORMAT_LIBRARIES}
   ${rclcpp_LIBRARIES}
   ${qpOASES_LIBRARIES}
 )
 
 # Optionally install the executable
-install(TARGETS main
+install(TARGETS aidin_ctrl
   DESTINATION lib/${PROJECT_NAME}
 )
