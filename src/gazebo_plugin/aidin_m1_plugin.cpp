@@ -63,6 +63,9 @@ void aidin_m1_plugin::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
     this->pub_contact  = this->node->create_publisher<std_msgs::msg::Float32MultiArray>(robot_namespace+"Contact_sim", qos);
     this->pub_distance = this->node->create_publisher<std_msgs::msg::Float32MultiArray>(robot_namespace+"Distance_sim", qos);
 
+    this->pub_link_force = this->node->create_publisher<std_msgs::msg::Float32MultiArray>(robot_namespace + "LinkForce_sim", qos);
+
+
     this->updateConnection = gazebo::event::Events::ConnectWorldUpdateBegin(
         std::bind(&aidin_m1_plugin::OnUpdate, this));
 }
@@ -207,6 +210,24 @@ void aidin_m1_plugin::OnUpdate()
     std_msgs::msg::Float32MultiArray Distances;
     Distances.data = {static_cast<float>(LF_distance_filtered), static_cast<float>(RF_distance_filtered), static_cast<float>(LB_distance_filtered), static_cast<float>(RB_distance_filtered)};
     pub_distance->publish(Distances);
+
+
+
+    // 링크 힘 측정 및 퍼블리시
+    std_msgs::msg::Float32MultiArray LinkForces;
+    LinkForces.data.clear();
+
+    auto links = this->model->GetLinks();
+    for (auto &link : links) {
+        ignition::math::Vector3d force = link->RelativeForce(); // 링크에 가해지는 힘 측정
+        LinkForces.data.push_back(static_cast<float>(force.Length())); // 힘의 크기를 메시지에 추가
+    }
+
+    pub_link_force->publish(LinkForces);
+
+
+
+
 
     rclcpp::executors::SingleThreadedExecutor executor;
     executor.add_node(this->node);

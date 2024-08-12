@@ -38,6 +38,7 @@ extern array<double, 9> imu;
 extern array<double, 4> contact;
 extern array<double, 3> command;
 extern array<double, 4> dist;
+extern array<double, 12> link_force;
 
 // Function set for FootstepTrajectroy generation
 void solve(double d, double e, double f, double T, double singularity, double B_val[], double arr[6]);

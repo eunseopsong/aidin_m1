@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Site BuildName="(empty)"
-	BuildStamp="20240809-0240-Experimental"
+	BuildStamp="20240812-0123-Experimental"
 	Name="UbuntuEunseop"
 	Generator="ctest-3.16.3"
 	CompilerName="/usr/bin/c++"
@@ -24,11 +24,11 @@
 	ProcessorClockFrequency="2400"
 	>
 	<Testing>
-		<StartDateTime>Aug 09 16:34 KST</StartDateTime>
-		<StartTestTime>1723188870</StartTestTime>
+		<StartDateTime>Aug 12 13:09 KST</StartDateTime>
+		<StartTestTime>1723435745</StartTestTime>
 		<TestList/>
-		<EndDateTime>Aug 09 16:34 KST</EndDateTime>
-		<EndTestTime>1723188870</EndTestTime>
+		<EndDateTime>Aug 12 13:09 KST</EndDateTime>
+		<EndTestTime>1723435745</EndTestTime>
 		<ElapsedMinutes>0</ElapsedMinutes>
 	</Testing>
 </Site>

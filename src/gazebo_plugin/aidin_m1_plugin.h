@@ -39,6 +39,9 @@ namespace gazebo
         rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_contact;
         rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_distance;
 
+        rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_link_force;  // for force
+
+
         physics::ModelPtr model;
         physics::JointControllerPtr joint1_Controller_;
         physics::JointControllerPtr joint2_Controller_;

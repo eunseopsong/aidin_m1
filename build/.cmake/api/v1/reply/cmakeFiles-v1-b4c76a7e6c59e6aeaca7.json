@@ -2075,14 +2075,6 @@
 		},
 		{
 			"isExternal" : true,
-			"path" : "/usr/lib/x86_64-linux-gnu/cmake/sdformat9/sdformat9-config-version.cmake"
-		},
-		{
-			"isExternal" : true,
-			"path" : "/usr/lib/x86_64-linux-gnu/cmake/sdformat9/sdformat9-config.cmake"
-		},
-		{
-			"isExternal" : true,
 			"path" : "/opt/ros/foxy/share/std_msgs/cmake/std_msgsConfig-version.cmake"
 		},
 		{

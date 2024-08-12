@@ -8,7 +8,6 @@ endif()
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(gazebo REQUIRED)
-find_package(sdformat9 REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(pluginlib REQUIRED)
 find_package(rclcpp REQUIRED)
@@ -24,7 +23,6 @@ endif()
 
 include_directories(
   ${GAZEBO_INCLUDE_DIRS}
-  ${SDFORMAT_INCLUDE_DIRS}
   ${qpOASES_INCLUDE_DIR}
 )
 

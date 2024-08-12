@@ -26,6 +26,8 @@ private:
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_command;
     rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_distance;
 
+    rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_link_force;
+
     // Publisher declarations
     rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_torque;
     rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_targetpos;

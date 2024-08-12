@@ -44,6 +44,10 @@ JointControl::JointControl()
         "/aidin_m1/Distance_sim", 10, [this](const std_msgs::msg::Float32MultiArray::SharedPtr msg) {
             copy(msg->data.begin(), msg->data.begin() + 4, dist.begin());
         });
+    sub_link_force = create_subscription<std_msgs::msg::Float32MultiArray>(
+        "/aidin_m1/LinkForce_sim", 10, [this](const std_msgs::msg::Float32MultiArray::SharedPtr msg) {
+            copy(msg->data.begin(), msg->data.begin() + 12, dist.begin());
+        });
 
     // Publish torque & target joint poses
     pub_torque = this->create_publisher<std_msgs::msg::Float32MultiArray>("/aidin_m1/Torque_sim", 10);

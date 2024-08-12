@@ -19,6 +19,7 @@ array<double, 9> imu{};
 array<double, 4> contact{};
 array<double, 3> command{};
 array<double, 4> dist{};
+array<double, 12> link_force{};
 
 //////////// Method of Undetermined Coefficients using Eigen ////////////
 

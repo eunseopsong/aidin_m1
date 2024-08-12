@@ -57,9 +57,61 @@ include src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/progress.make
 # Include the compile flags for this target's objects.
 include src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/flags.make
 
+src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/ConvexMPCLocomotion.cpp.o: src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/flags.make
+src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/ConvexMPCLocomotion.cpp.o: ../src/AiDIN_Controller/Controllers/convexMPC/ConvexMPCLocomotion.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eunseop/dev_ws/src/aidin_m1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/ConvexMPCLocomotion.cpp.o"
+	cd /home/eunseop/dev_ws/src/aidin_m1/build/src/AiDIN_Controller && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/ConvexMPCLocomotion.cpp.o -c /home/eunseop/dev_ws/src/aidin_m1/src/AiDIN_Controller/Controllers/convexMPC/ConvexMPCLocomotion.cpp
+
+src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/ConvexMPCLocomotion.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/ConvexMPCLocomotion.cpp.i"
+	cd /home/eunseop/dev_ws/src/aidin_m1/build/src/AiDIN_Controller && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/eunseop/dev_ws/src/aidin_m1/src/AiDIN_Controller/Controllers/convexMPC/ConvexMPCLocomotion.cpp > CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/ConvexMPCLocomotion.cpp.i
+
+src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/ConvexMPCLocomotion.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/ConvexMPCLocomotion.cpp.s"
+	cd /home/eunseop/dev_ws/src/aidin_m1/build/src/AiDIN_Controller && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/eunseop/dev_ws/src/aidin_m1/src/AiDIN_Controller/Controllers/convexMPC/ConvexMPCLocomotion.cpp -o CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/ConvexMPCLocomotion.cpp.s
+
+src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/Gait.cpp.o: src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/flags.make
+src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/Gait.cpp.o: ../src/AiDIN_Controller/Controllers/convexMPC/Gait.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eunseop/dev_ws/src/aidin_m1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/Gait.cpp.o"
+	cd /home/eunseop/dev_ws/src/aidin_m1/build/src/AiDIN_Controller && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/Gait.cpp.o -c /home/eunseop/dev_ws/src/aidin_m1/src/AiDIN_Controller/Controllers/convexMPC/Gait.cpp
+
+src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/Gait.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/Gait.cpp.i"
+	cd /home/eunseop/dev_ws/src/aidin_m1/build/src/AiDIN_Controller && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/eunseop/dev_ws/src/aidin_m1/src/AiDIN_Controller/Controllers/convexMPC/Gait.cpp > CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/Gait.cpp.i
+
+src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/Gait.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/Gait.cpp.s"
+	cd /home/eunseop/dev_ws/src/aidin_m1/build/src/AiDIN_Controller && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/eunseop/dev_ws/src/aidin_m1/src/AiDIN_Controller/Controllers/convexMPC/Gait.cpp -o CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/Gait.cpp.s
+
+src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/RobotState.cpp.o: src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/flags.make
+src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/RobotState.cpp.o: ../src/AiDIN_Controller/Controllers/convexMPC/RobotState.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eunseop/dev_ws/src/aidin_m1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/RobotState.cpp.o"
+	cd /home/eunseop/dev_ws/src/aidin_m1/build/src/AiDIN_Controller && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/RobotState.cpp.o -c /home/eunseop/dev_ws/src/aidin_m1/src/AiDIN_Controller/Controllers/convexMPC/RobotState.cpp
+
+src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/RobotState.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/RobotState.cpp.i"
+	cd /home/eunseop/dev_ws/src/aidin_m1/build/src/AiDIN_Controller && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/eunseop/dev_ws/src/aidin_m1/src/AiDIN_Controller/Controllers/convexMPC/RobotState.cpp > CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/RobotState.cpp.i
+
+src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/RobotState.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/RobotState.cpp.s"
+	cd /home/eunseop/dev_ws/src/aidin_m1/build/src/AiDIN_Controller && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/eunseop/dev_ws/src/aidin_m1/src/AiDIN_Controller/Controllers/convexMPC/RobotState.cpp -o CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/RobotState.cpp.s
+
+src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/SolverMPC.cpp.o: src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/flags.make
+src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/SolverMPC.cpp.o: ../src/AiDIN_Controller/Controllers/convexMPC/SolverMPC.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eunseop/dev_ws/src/aidin_m1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/SolverMPC.cpp.o"
+	cd /home/eunseop/dev_ws/src/aidin_m1/build/src/AiDIN_Controller && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/SolverMPC.cpp.o -c /home/eunseop/dev_ws/src/aidin_m1/src/AiDIN_Controller/Controllers/convexMPC/SolverMPC.cpp
+
+src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/SolverMPC.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/SolverMPC.cpp.i"
+	cd /home/eunseop/dev_ws/src/aidin_m1/build/src/AiDIN_Controller && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/eunseop/dev_ws/src/aidin_m1/src/AiDIN_Controller/Controllers/convexMPC/SolverMPC.cpp > CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/SolverMPC.cpp.i
+
+src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/SolverMPC.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/SolverMPC.cpp.s"
+	cd /home/eunseop/dev_ws/src/aidin_m1/build/src/AiDIN_Controller && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/eunseop/dev_ws/src/aidin_m1/src/AiDIN_Controller/Controllers/convexMPC/SolverMPC.cpp -o CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/SolverMPC.cpp.s
+
 src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/convexMPC.cpp.o: src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/flags.make
 src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/convexMPC.cpp.o: ../src/AiDIN_Controller/Controllers/convexMPC/convexMPC.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eunseop/dev_ws/src/aidin_m1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/convexMPC.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eunseop/dev_ws/src/aidin_m1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/convexMPC.cpp.o"
 	cd /home/eunseop/dev_ws/src/aidin_m1/build/src/AiDIN_Controller && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/convexMPC.cpp.o -c /home/eunseop/dev_ws/src/aidin_m1/src/AiDIN_Controller/Controllers/convexMPC/convexMPC.cpp
 
 src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/convexMPC.cpp.i: cmake_force
@@ -70,9 +122,35 @@ src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/convexMPC.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/convexMPC.cpp.s"
 	cd /home/eunseop/dev_ws/src/aidin_m1/build/src/AiDIN_Controller && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/eunseop/dev_ws/src/aidin_m1/src/AiDIN_Controller/Controllers/convexMPC/convexMPC.cpp -o CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/convexMPC.cpp.s
 
+src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/convexMPC_interface.cpp.o: src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/flags.make
+src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/convexMPC_interface.cpp.o: ../src/AiDIN_Controller/Controllers/convexMPC/convexMPC_interface.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eunseop/dev_ws/src/aidin_m1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/convexMPC_interface.cpp.o"
+	cd /home/eunseop/dev_ws/src/aidin_m1/build/src/AiDIN_Controller && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/convexMPC_interface.cpp.o -c /home/eunseop/dev_ws/src/aidin_m1/src/AiDIN_Controller/Controllers/convexMPC/convexMPC_interface.cpp
+
+src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/convexMPC_interface.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/convexMPC_interface.cpp.i"
+	cd /home/eunseop/dev_ws/src/aidin_m1/build/src/AiDIN_Controller && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/eunseop/dev_ws/src/aidin_m1/src/AiDIN_Controller/Controllers/convexMPC/convexMPC_interface.cpp > CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/convexMPC_interface.cpp.i
+
+src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/convexMPC_interface.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/convexMPC_interface.cpp.s"
+	cd /home/eunseop/dev_ws/src/aidin_m1/build/src/AiDIN_Controller && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/eunseop/dev_ws/src/aidin_m1/src/AiDIN_Controller/Controllers/convexMPC/convexMPC_interface.cpp -o CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/convexMPC_interface.cpp.s
+
+src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/convexMPC_util.cpp.o: src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/flags.make
+src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/convexMPC_util.cpp.o: ../src/AiDIN_Controller/Controllers/convexMPC/convexMPC_util.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eunseop/dev_ws/src/aidin_m1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/convexMPC_util.cpp.o"
+	cd /home/eunseop/dev_ws/src/aidin_m1/build/src/AiDIN_Controller && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/convexMPC_util.cpp.o -c /home/eunseop/dev_ws/src/aidin_m1/src/AiDIN_Controller/Controllers/convexMPC/convexMPC_util.cpp
+
+src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/convexMPC_util.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/convexMPC_util.cpp.i"
+	cd /home/eunseop/dev_ws/src/aidin_m1/build/src/AiDIN_Controller && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/eunseop/dev_ws/src/aidin_m1/src/AiDIN_Controller/Controllers/convexMPC/convexMPC_util.cpp > CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/convexMPC_util.cpp.i
+
+src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/convexMPC_util.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/convexMPC_util.cpp.s"
+	cd /home/eunseop/dev_ws/src/aidin_m1/build/src/AiDIN_Controller && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/eunseop/dev_ws/src/aidin_m1/src/AiDIN_Controller/Controllers/convexMPC/convexMPC_util.cpp -o CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/convexMPC_util.cpp.s
+
 src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/JointControl.cpp.o: src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/flags.make
 src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/JointControl.cpp.o: ../src/AiDIN_Controller/JointControl.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eunseop/dev_ws/src/aidin_m1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/JointControl.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eunseop/dev_ws/src/aidin_m1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/JointControl.cpp.o"
 	cd /home/eunseop/dev_ws/src/aidin_m1/build/src/AiDIN_Controller && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/aidin_ctrl.dir/JointControl.cpp.o -c /home/eunseop/dev_ws/src/aidin_m1/src/AiDIN_Controller/JointControl.cpp
 
 src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/JointControl.cpp.i: cmake_force
@@ -85,7 +163,7 @@ src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/JointControl.cpp.s: cmake_force
 
 src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/func.cpp.o: src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/flags.make
 src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/func.cpp.o: ../src/AiDIN_Controller/func.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eunseop/dev_ws/src/aidin_m1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/func.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eunseop/dev_ws/src/aidin_m1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/func.cpp.o"
 	cd /home/eunseop/dev_ws/src/aidin_m1/build/src/AiDIN_Controller && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/aidin_ctrl.dir/func.cpp.o -c /home/eunseop/dev_ws/src/aidin_m1/src/AiDIN_Controller/func.cpp
 
 src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/func.cpp.i: cmake_force
@@ -98,7 +176,7 @@ src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/func.cpp.s: cmake_force
 
 src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/main.cpp.o: src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/flags.make
 src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/main.cpp.o: ../src/AiDIN_Controller/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eunseop/dev_ws/src/aidin_m1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eunseop/dev_ws/src/aidin_m1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/main.cpp.o"
 	cd /home/eunseop/dev_ws/src/aidin_m1/build/src/AiDIN_Controller && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/aidin_ctrl.dir/main.cpp.o -c /home/eunseop/dev_ws/src/aidin_m1/src/AiDIN_Controller/main.cpp
 
 src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/main.cpp.i: cmake_force
@@ -111,7 +189,13 @@ src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/main.cpp.s: cmake_force
 
 # Object files for target aidin_ctrl
 aidin_ctrl_OBJECTS = \
+"CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/ConvexMPCLocomotion.cpp.o" \
+"CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/Gait.cpp.o" \
+"CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/RobotState.cpp.o" \
+"CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/SolverMPC.cpp.o" \
 "CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/convexMPC.cpp.o" \
+"CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/convexMPC_interface.cpp.o" \
+"CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/convexMPC_util.cpp.o" \
 "CMakeFiles/aidin_ctrl.dir/JointControl.cpp.o" \
 "CMakeFiles/aidin_ctrl.dir/func.cpp.o" \
 "CMakeFiles/aidin_ctrl.dir/main.cpp.o"
@@ -119,13 +203,401 @@ aidin_ctrl_OBJECTS = \
 # External object files for target aidin_ctrl
 aidin_ctrl_EXTERNAL_OBJECTS =
 
+src/AiDIN_Controller/aidin_ctrl: src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/ConvexMPCLocomotion.cpp.o
+src/AiDIN_Controller/aidin_ctrl: src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/Gait.cpp.o
+src/AiDIN_Controller/aidin_ctrl: src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/RobotState.cpp.o
+src/AiDIN_Controller/aidin_ctrl: src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/SolverMPC.cpp.o
 src/AiDIN_Controller/aidin_ctrl: src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/convexMPC.cpp.o
+src/AiDIN_Controller/aidin_ctrl: src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/convexMPC_interface.cpp.o
+src/AiDIN_Controller/aidin_ctrl: src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/Controllers/convexMPC/convexMPC_util.cpp.o
 src/AiDIN_Controller/aidin_ctrl: src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/JointControl.cpp.o
 src/AiDIN_Controller/aidin_ctrl: src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/func.cpp.o
 src/AiDIN_Controller/aidin_ctrl: src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/main.cpp.o
 src/AiDIN_Controller/aidin_ctrl: src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/build.make
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libSimTKsimbody.so.3.6
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libdart.so.6.9.2
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libgazebo.so
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libgazebo_client.so
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libgazebo_gui.so
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libgazebo_sensors.so
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libgazebo_rendering.so
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libgazebo_physics.so
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libgazebo_ode.so
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libgazebo_transport.so
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libgazebo_msgs.so
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libgazebo_util.so
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libgazebo_common.so
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libgazebo_gimpact.so
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libgazebo_opcode.so
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libgazebo_opende_ou.so
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.71.0
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libboost_system.so.1.71.0
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so.1.71.0
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libboost_regex.so.1.71.0
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libboost_iostreams.so.1.71.0
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libboost_date_time.so.1.71.0
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libprotobuf.so
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libsdformat9.so.9.10.1
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libOgreMain.so
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.71.0
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libboost_date_time.so.1.71.0
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libOgreTerrain.so
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libOgrePaging.so
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libignition-common3-graphics.so.3.17.0
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librclcpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librcutils.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librcpputils.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstatistics_msgs__rosidl_generator_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstatistics_msgs__rosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstatistics_msgs__rosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstatistics_msgs__rosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstatistics_msgs__rosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_runtime_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstd_msgs__rosidl_generator_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_generator_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/liblibstatistics_collector.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/liblibstatistics_collector_test_msgs__rosidl_generator_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/liblibstatistics_collector_test_msgs__rosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/liblibstatistics_collector_test_msgs__rosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/liblibstatistics_collector_test_msgs__rosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/liblibstatistics_collector_test_msgs__rosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librcutils.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librcpputils.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstatistics_msgs__rosidl_generator_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstatistics_msgs__rosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstatistics_msgs__rosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstatistics_msgs__rosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstatistics_msgs__rosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_runtime_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstd_msgs__rosidl_generator_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_generator_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/liblibstatistics_collector.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/liblibstatistics_collector_test_msgs__rosidl_generator_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/liblibstatistics_collector_test_msgs__rosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/liblibstatistics_collector_test_msgs__rosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/liblibstatistics_collector_test_msgs__rosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/liblibstatistics_collector_test_msgs__rosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librcl.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librcutils.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstatistics_msgs__rosidl_generator_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstatistics_msgs__rosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstatistics_msgs__rosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstatistics_msgs__rosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstatistics_msgs__rosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_runtime_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstd_msgs__rosidl_generator_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_generator_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/liblibstatistics_collector.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/liblibstatistics_collector_test_msgs__rosidl_generator_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/liblibstatistics_collector_test_msgs__rosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/liblibstatistics_collector_test_msgs__rosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/liblibstatistics_collector_test_msgs__rosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/liblibstatistics_collector_test_msgs__rosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librcl.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librcpputils.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstatistics_msgs__rosidl_generator_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstatistics_msgs__rosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstatistics_msgs__rosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstatistics_msgs__rosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstatistics_msgs__rosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_runtime_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstd_msgs__rosidl_generator_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_generator_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/liblibstatistics_collector.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/liblibstatistics_collector_test_msgs__rosidl_generator_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/liblibstatistics_collector_test_msgs__rosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/liblibstatistics_collector_test_msgs__rosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/liblibstatistics_collector_test_msgs__rosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/liblibstatistics_collector_test_msgs__rosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librcl.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librcpputils.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librcutils.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstatistics_msgs__rosidl_generator_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstatistics_msgs__rosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstatistics_msgs__rosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstatistics_msgs__rosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstatistics_msgs__rosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_runtime_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstd_msgs__rosidl_generator_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/liblibstatistics_collector.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librcl.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstatistics_msgs__rosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstatistics_msgs__rosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstatistics_msgs__rosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstatistics_msgs__rosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/liblibstatistics_collector_test_msgs__rosidl_generator_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/liblibstatistics_collector_test_msgs__rosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/liblibstatistics_collector_test_msgs__rosidl_generator_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/liblibstatistics_collector_test_msgs__rosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/liblibstatistics_collector_test_msgs__rosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/liblibstatistics_collector_test_msgs__rosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librcl.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librcl_interfaces__rosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librcl_interfaces__rosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librcl_interfaces__rosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librcl_interfaces__rosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librcl_yaml_param_parser.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librmw_implementation.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librcl_logging_spdlog.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libtracetools.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librcpputils.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librcutils.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_generator_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_generator_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librcutils.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librcpputils.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_runtime_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosgraph_msgs__rosidl_generator_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosgraph_msgs__rosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosgraph_msgs__rosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosgraph_msgs__rosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosgraph_msgs__rosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_generator_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librcutils.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librcpputils.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_runtime_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosgraph_msgs__rosidl_generator_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosgraph_msgs__rosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosgraph_msgs__rosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosgraph_msgs__rosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosgraph_msgs__rosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_generator_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librcutils.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librcpputils.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_runtime_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosgraph_msgs__rosidl_generator_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosgraph_msgs__rosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosgraph_msgs__rosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosgraph_msgs__rosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosgraph_msgs__rosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_generator_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librcutils.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librcpputils.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_runtime_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosgraph_msgs__rosidl_generator_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosgraph_msgs__rosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosgraph_msgs__rosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosgraph_msgs__rosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosgraph_msgs__rosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_generator_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librcutils.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librcpputils.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_runtime_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosgraph_msgs__rosidl_generator_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosgraph_msgs__rosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosgraph_msgs__rosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosgraph_msgs__rosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosgraph_msgs__rosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librcl_yaml_param_parser.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_generator_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librcutils.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librcpputils.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_runtime_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosgraph_msgs__rosidl_generator_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosgraph_msgs__rosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosgraph_msgs__rosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosgraph_msgs__rosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosgraph_msgs__rosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librcl_yaml_param_parser.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstatistics_msgs__rosidl_generator_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstatistics_msgs__rosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstatistics_msgs__rosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstatistics_msgs__rosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstatistics_msgs__rosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_generator_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librcutils.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librcpputils.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_runtime_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosgraph_msgs__rosidl_generator_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosgraph_msgs__rosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosgraph_msgs__rosidl_generator_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosgraph_msgs__rosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosgraph_msgs__rosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosgraph_msgs__rosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librcl_yaml_param_parser.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libyaml.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstatistics_msgs__rosidl_generator_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstatistics_msgs__rosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstatistics_msgs__rosidl_generator_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstatistics_msgs__rosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstatistics_msgs__rosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstatistics_msgs__rosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libtracetools.so
+src/AiDIN_Controller/aidin_ctrl: /usr/local/lib/libqpOASES.a
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstd_msgs__rosidl_generator_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstd_msgs__rosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/liblibstatistics_collector.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/liblibstatistics_collector_test_msgs__rosidl_generator_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/liblibstatistics_collector_test_msgs__rosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/liblibstatistics_collector_test_msgs__rosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/liblibstatistics_collector_test_msgs__rosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/liblibstatistics_collector_test_msgs__rosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librcl.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libtracetools.so
+src/AiDIN_Controller/aidin_ctrl: /usr/local/lib/libqpOASES.a
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libSimTKmath.so.3.6
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libSimTKcommon.so.3.6
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libblas.so
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/liblapack.so
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libblas.so
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/liblapack.so
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libdart-external-odelcpsolver.so.6.9.2
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libccd.so
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libfcl.so
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libassimp.so
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/liboctomap.so.1.9.3
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/liboctomath.so.1.9.3
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libboost_atomic.so.1.71.0
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libignition-transport8.so.8.5.0
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libignition-fuel_tools4.so.4.9.1
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libignition-msgs5.so.5.11.0
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libignition-math6.so.6.15.1
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libprotobuf.so
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libignition-common3.so.3.17.0
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libuuid.so
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libuuid.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librcl_interfaces__rosidl_generator_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librmw.so
+src/AiDIN_Controller/aidin_ctrl: /usr/lib/x86_64-linux-gnu/libspdlog.so.1.5.0
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libstd_msgs__rosidl_generator_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_generator_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_introspection_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_introspection_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/libbuiltin_interfaces__rosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_cpp.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_typesupport_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librcpputils.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librosidl_runtime_c.so
+src/AiDIN_Controller/aidin_ctrl: /opt/ros/foxy/lib/librcutils.so
 src/AiDIN_Controller/aidin_ctrl: src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/eunseop/dev_ws/src/aidin_m1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable aidin_ctrl"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/eunseop/dev_ws/src/aidin_m1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable aidin_ctrl"
 	cd /home/eunseop/dev_ws/src/aidin_m1/build/src/AiDIN_Controller && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/aidin_ctrl.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
