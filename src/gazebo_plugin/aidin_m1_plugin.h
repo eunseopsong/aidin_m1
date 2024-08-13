@@ -38,7 +38,6 @@ namespace gazebo
         rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_imu;
         rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_contact;
         rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_distance;
-
         rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr pub_link_force;  // for force
 
 
