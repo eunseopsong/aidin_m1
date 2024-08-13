@@ -11,16 +11,16 @@ using Eigen::VectorXf;
 
 /////////////////////// Initialization ////////////////////////
 // variable definition
-array<double, 6> body_pose{};
-array<double, 12> joint_pos{};
-array<double, 12> joint_vel{};
-array<double, 3> body_pos{};
-array<double, 3> body_vel{};
-array<double, 9> imu{};
-array<double, 4> contact{};
-array<double, 3> command{};
-array<double, 4> dist{};
-array<double, 12> link_force{};
+array<float, 6> body_pose{};
+array<float, 12> joint_pos{};
+array<float, 12> joint_vel{};
+array<float, 3> body_pos{};
+array<float, 3> body_vel{};
+array<float, 9> imu{};
+array<float, 4> contact{};
+array<float, 3> command{};
+array<float, 4> dist{};
+array<float, 12> link_force{};
 
 //////////// Method of Undetermined Coefficients using Eigen ////////////
 

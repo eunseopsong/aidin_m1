@@ -29,16 +29,16 @@ using namespace std;
 using namespace Eigen;
 
 // variable declaration
-extern array<double, 6> body_pose;
-extern array<double, 12> joint_pos;
-extern array<double, 12> joint_vel;
-extern array<double, 3> body_pos;
-extern array<double, 3> body_vel;
-extern array<double, 9> imu;
-extern array<double, 4> contact;
-extern array<double, 3> command;
-extern array<double, 4> dist;
-extern array<double, 12> link_force;
+extern array<float, 6> body_pose;
+extern array<float, 12> joint_pos;
+extern array<float, 12> joint_vel;
+extern array<float, 3> body_pos;
+extern array<float, 3> body_vel;
+extern array<float, 9> imu;
+extern array<float, 4> contact;
+extern array<float, 3> command;
+extern array<float, 4> dist;
+extern array<float, 12> link_force;
 
 // Function set for FootstepTrajectroy generation
 void solve(double d, double e, double f, double T, double singularity, double B_val[], double arr[6]);

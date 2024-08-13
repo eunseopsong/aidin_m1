@@ -11,9 +11,12 @@ using Eigen::Quaternionf;
 class RobotState
 {
     public:
+        // typedef float flt;
         void set(flt* p, flt* v, flt* q, flt* w, flt* r, flt yaw);
         //void compute_rotations();
         void print();
+
+        // typedef float fpt;
         Matrix<fpt,3,1> p,v,w;
         Matrix<fpt,3,4> r_feet;
         Matrix<fpt,3,3> R;
@@ -21,8 +24,8 @@ class RobotState
         Matrix<fpt,3,3> I_body;
         Quaternionf q;
         fpt yaw;
-        fpt m = 9;
-        //fpt m = 50.236; //DH
+        // fpt m = 9;
+        fpt m = 10;
     //private:
 };
 #endif
