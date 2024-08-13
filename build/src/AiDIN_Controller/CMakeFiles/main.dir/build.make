@@ -57,18 +57,18 @@ include src/AiDIN_Controller/CMakeFiles/main.dir/progress.make
 # Include the compile flags for this target's objects.
 include src/AiDIN_Controller/CMakeFiles/main.dir/flags.make
 
-src/AiDIN_Controller/CMakeFiles/main.dir/Controllers/convexMPC/convexMPC.cpp.o: src/AiDIN_Controller/CMakeFiles/main.dir/flags.make
-src/AiDIN_Controller/CMakeFiles/main.dir/Controllers/convexMPC/convexMPC.cpp.o: ../src/AiDIN_Controller/Controllers/convexMPC/convexMPC.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eunseop/dev_ws/src/aidin_m1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object src/AiDIN_Controller/CMakeFiles/main.dir/Controllers/convexMPC/convexMPC.cpp.o"
-	cd /home/eunseop/dev_ws/src/aidin_m1/build/src/AiDIN_Controller && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/Controllers/convexMPC/convexMPC.cpp.o -c /home/eunseop/dev_ws/src/aidin_m1/src/AiDIN_Controller/Controllers/convexMPC/convexMPC.cpp
+src/AiDIN_Controller/CMakeFiles/main.dir/Controllers/convexMPC/RobotState.cpp.o: src/AiDIN_Controller/CMakeFiles/main.dir/flags.make
+src/AiDIN_Controller/CMakeFiles/main.dir/Controllers/convexMPC/RobotState.cpp.o: ../src/AiDIN_Controller/Controllers/convexMPC/RobotState.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/eunseop/dev_ws/src/aidin_m1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object src/AiDIN_Controller/CMakeFiles/main.dir/Controllers/convexMPC/RobotState.cpp.o"
+	cd /home/eunseop/dev_ws/src/aidin_m1/build/src/AiDIN_Controller && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/Controllers/convexMPC/RobotState.cpp.o -c /home/eunseop/dev_ws/src/aidin_m1/src/AiDIN_Controller/Controllers/convexMPC/RobotState.cpp
 
-src/AiDIN_Controller/CMakeFiles/main.dir/Controllers/convexMPC/convexMPC.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/Controllers/convexMPC/convexMPC.cpp.i"
-	cd /home/eunseop/dev_ws/src/aidin_m1/build/src/AiDIN_Controller && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/eunseop/dev_ws/src/aidin_m1/src/AiDIN_Controller/Controllers/convexMPC/convexMPC.cpp > CMakeFiles/main.dir/Controllers/convexMPC/convexMPC.cpp.i
+src/AiDIN_Controller/CMakeFiles/main.dir/Controllers/convexMPC/RobotState.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/Controllers/convexMPC/RobotState.cpp.i"
+	cd /home/eunseop/dev_ws/src/aidin_m1/build/src/AiDIN_Controller && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/eunseop/dev_ws/src/aidin_m1/src/AiDIN_Controller/Controllers/convexMPC/RobotState.cpp > CMakeFiles/main.dir/Controllers/convexMPC/RobotState.cpp.i
 
-src/AiDIN_Controller/CMakeFiles/main.dir/Controllers/convexMPC/convexMPC.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/Controllers/convexMPC/convexMPC.cpp.s"
-	cd /home/eunseop/dev_ws/src/aidin_m1/build/src/AiDIN_Controller && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/eunseop/dev_ws/src/aidin_m1/src/AiDIN_Controller/Controllers/convexMPC/convexMPC.cpp -o CMakeFiles/main.dir/Controllers/convexMPC/convexMPC.cpp.s
+src/AiDIN_Controller/CMakeFiles/main.dir/Controllers/convexMPC/RobotState.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/Controllers/convexMPC/RobotState.cpp.s"
+	cd /home/eunseop/dev_ws/src/aidin_m1/build/src/AiDIN_Controller && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/eunseop/dev_ws/src/aidin_m1/src/AiDIN_Controller/Controllers/convexMPC/RobotState.cpp -o CMakeFiles/main.dir/Controllers/convexMPC/RobotState.cpp.s
 
 src/AiDIN_Controller/CMakeFiles/main.dir/JointControl.cpp.o: src/AiDIN_Controller/CMakeFiles/main.dir/flags.make
 src/AiDIN_Controller/CMakeFiles/main.dir/JointControl.cpp.o: ../src/AiDIN_Controller/JointControl.cpp
@@ -111,7 +111,7 @@ src/AiDIN_Controller/CMakeFiles/main.dir/main.cpp.s: cmake_force
 
 # Object files for target main
 main_OBJECTS = \
-"CMakeFiles/main.dir/Controllers/convexMPC/convexMPC.cpp.o" \
+"CMakeFiles/main.dir/Controllers/convexMPC/RobotState.cpp.o" \
 "CMakeFiles/main.dir/JointControl.cpp.o" \
 "CMakeFiles/main.dir/func.cpp.o" \
 "CMakeFiles/main.dir/main.cpp.o"
@@ -119,7 +119,7 @@ main_OBJECTS = \
 # External object files for target main
 main_EXTERNAL_OBJECTS =
 
-src/AiDIN_Controller/main: src/AiDIN_Controller/CMakeFiles/main.dir/Controllers/convexMPC/convexMPC.cpp.o
+src/AiDIN_Controller/main: src/AiDIN_Controller/CMakeFiles/main.dir/Controllers/convexMPC/RobotState.cpp.o
 src/AiDIN_Controller/main: src/AiDIN_Controller/CMakeFiles/main.dir/JointControl.cpp.o
 src/AiDIN_Controller/main: src/AiDIN_Controller/CMakeFiles/main.dir/func.cpp.o
 src/AiDIN_Controller/main: src/AiDIN_Controller/CMakeFiles/main.dir/main.cpp.o

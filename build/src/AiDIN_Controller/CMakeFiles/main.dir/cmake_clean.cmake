@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/main.dir/Controllers/convexMPC/convexMPC.cpp.o"
+  "CMakeFiles/main.dir/Controllers/convexMPC/RobotState.cpp.o"
   "CMakeFiles/main.dir/JointControl.cpp.o"
   "CMakeFiles/main.dir/func.cpp.o"
   "CMakeFiles/main.dir/main.cpp.o"

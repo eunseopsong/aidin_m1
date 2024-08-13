@@ -34,6 +34,12 @@ def generate_launch_description():
         PythonLaunchDescriptionSource(os.path.join(pkg_gazebo_ros, 'launch', 'gzserver.launch.py')),
         launch_arguments={"world": custom_world_path, "verbose": "true"}.items()
     )
+    # start_gazebo_server = IncludeLaunchDescription(
+    #     PythonLaunchDescriptionSource(os.path.join(pkg_gazebo_ros, 'launch', 'gzserver.launch.py')),
+    #     launch_arguments={"world": "/usr/share/gazebo-11/worlds/empty.world",
+    #                       "verbose": "true"}.items()
+    # )
+
 
     # Start Gazebo client
     start_gazebo_client = IncludeLaunchDescription(
@@ -52,7 +58,7 @@ def generate_launch_description():
     # Start joint_control_node
     gazebo_aidin_m1_control = Node(
         package="aidin_m1",
-        executable="main",
+        executable="aidin_ctrl",
         output="screen",
     )
 
