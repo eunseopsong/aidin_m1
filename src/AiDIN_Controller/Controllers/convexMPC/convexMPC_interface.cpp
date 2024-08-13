@@ -8,7 +8,7 @@
 
 #define K_NUM_LEGS 4
 
-// #define K_NUM_LEGS 4
+#define K_NUM_LEGS 4
 
 problem_setup problem_configuration;
 u8 gait_data[K_MAX_GAIT_SEGMENTS];
