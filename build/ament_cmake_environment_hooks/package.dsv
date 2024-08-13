@@ -1,0 +1,4 @@
+source;share/aidin_m1/local_setup.bash
+source;share/aidin_m1/local_setup.dsv
+source;share/aidin_m1/local_setup.sh
+source;share/aidin_m1/local_setup.zsh

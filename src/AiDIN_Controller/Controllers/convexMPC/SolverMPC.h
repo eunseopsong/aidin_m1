@@ -1,7 +1,6 @@
 #ifndef _solver_mpc
 #define _solver_mpc
 
-
 #include <eigen3/Eigen/Dense>
 #include "common_types.h"
 #include "convexMPC_interface.h"
