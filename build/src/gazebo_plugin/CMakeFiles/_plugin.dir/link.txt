@@ -1,1 +1,0 @@
-/usr/bin/c++  -g   CMakeFiles/_plugin.dir/aidin_m1_plugin.cpp.o  -o _plugin 
