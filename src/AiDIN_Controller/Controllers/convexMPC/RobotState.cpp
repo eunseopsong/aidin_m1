@@ -49,6 +49,3 @@ void RobotState::print()
        <<w.transpose()<<"\nRotation\n"<<R<<"\nYaw Rotation\n"
        <<R_yaw<<"\nFoot Locations\n"<<r_feet<<"\nInertia\n"<<I_body<<endl;
 }
-
-
-

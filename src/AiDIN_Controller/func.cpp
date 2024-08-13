@@ -1,5 +1,6 @@
 // #include "Controllers/convexMPC/convexMPC.h"
 #include "func.h"
+#include "Controllers/convexMPC/RobotState.h"
 
 using namespace std;
 using namespace Eigen;

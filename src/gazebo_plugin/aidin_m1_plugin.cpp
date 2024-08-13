@@ -16,7 +16,7 @@ void aidin_m1_plugin::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
 {
     this->model = _parent;
     node = rclcpp::Node::make_shared("my_aidin_m1_node");
-    RCLCPP_INFO(this->node->get_logger(), "aiidn_m1_plugin run");
+    // RCLCPP_INFO(this->node->get_logger(), "aiidn_m1_plugin run");
     std::cerr << "The aidin_m1 plugin is attached to the model [" << this->model->GetName() << "]\n";
 
     std::string robot_namespace = "/" + this->model->GetName() + "/";
@@ -62,7 +62,6 @@ void aidin_m1_plugin::Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
     this->pub_imu      = this->node->create_publisher<std_msgs::msg::Float32MultiArray>(robot_namespace+"IMU_sim", qos);
     this->pub_contact  = this->node->create_publisher<std_msgs::msg::Float32MultiArray>(robot_namespace+"Contact_sim", qos);
     this->pub_distance = this->node->create_publisher<std_msgs::msg::Float32MultiArray>(robot_namespace+"Distance_sim", qos);
-
     this->pub_link_force = this->node->create_publisher<std_msgs::msg::Float32MultiArray>(robot_namespace + "LinkForce_sim", qos);
 
 

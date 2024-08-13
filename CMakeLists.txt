@@ -47,7 +47,7 @@ install(DIRECTORY urdf/
   DESTINATION share/${PROJECT_NAME}/urdf
 )
 
-#### 왜 add_subdirectory 넣으니까 build 안 되는 거지..? 이거 없는데 왜 잘 되는 거지..? ####
+# include the sub directory
 add_subdirectory(src)
 
 ament_package()
