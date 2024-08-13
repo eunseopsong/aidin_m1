@@ -1,7 +1,6 @@
 #include "JointControl.h"
 #include "Controllers/convexMPC/RobotState.h"
 
-RobotState rs;
 
 JointControl::JointControl()
     : Node("aidin_m1_control_node"), _count(0), previous_command{0, 0, 0}
@@ -158,7 +157,7 @@ void JointControl::CalculateAndPublishTorque()
     }
 
 
-
+    RobotState rs;
     // rs.set(update->p, update->v, update->q, update->w, update->r, update->yaw);
     rs.set(body_pos.data(), body_vel.data(), dist.data(), body_vel.data(), joint_pos.data(), imu[2]);
     // rs.print(); // 여기다 넣으면 1ms마다 출력되는데 어케 해야되지
