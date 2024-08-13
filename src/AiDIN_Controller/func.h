@@ -53,7 +53,7 @@ void InverseKinematics3D(double px, double py, double pz, double d1, double l2, 
 // Function set for calculating torque of each joint
 double PDControl(double Kp, double Kd, double target_pos, double current_pos, double current_vel);
 double FFControl(double Kp, double Kd, double th[3], int case_, int cri);
-double runMPC(double th[3]);
+// double runMPC(double th[3]);
 
 // Function set for delivering the torque to control node
 void CalculateTorqueStanding(double* output_torque, const std::array<double, 3>& Kp, const std::array<double, 3>& Kd, double t);

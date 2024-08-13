@@ -3,7 +3,7 @@
 #include <stdint.h>
 #include <eigen3/Eigen/Dense>
 
-//adding this line adds print statements and sanity checks
+//adding this line adds print statements and sanity checks 
 //that are too slow for realtime use.
 //#define K_DEBUG
 

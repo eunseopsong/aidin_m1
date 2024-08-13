@@ -14,6 +14,9 @@ set(CMAKE_MAKEFILE_DEPENDS
   "ament_cmake_core/package.cmake"
   "ament_cmake_package_templates/templates.cmake"
   "../package.xml"
+  "../src/AiDIN_Controller/CMakeLists.txt"
+  "../src/CMakeLists.txt"
+  "../src/gazebo_plugin/CMakeLists.txt"
   "/opt/ros/foxy/cmake/yamlConfig.cmake"
   "/opt/ros/foxy/cmake/yamlConfigVersion.cmake"
   "/opt/ros/foxy/cmake/yamlTargets-none.cmake"
@@ -797,10 +800,15 @@ set(CMAKE_MAKEFILE_PRODUCTS
   "ament_cmake_index/share/ament_index/resource_index/parent_prefix_path/aidin_m1"
   "ament_cmake_index/share/ament_index/resource_index/packages/aidin_m1"
   "CMakeFiles/CMakeDirectoryInformation.cmake"
+  "src/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "src/AiDIN_Controller/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "src/gazebo_plugin/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/aidin_m1_uninstall.dir/DependInfo.cmake"
   "CMakeFiles/uninstall.dir/DependInfo.cmake"
+  "src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/DependInfo.cmake"
+  "src/gazebo_plugin/CMakeFiles/aidin_m1_plugin.dir/DependInfo.cmake"
   )

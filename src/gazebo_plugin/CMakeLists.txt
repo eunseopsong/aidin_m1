@@ -1,32 +1,37 @@
+# Include directories
 include_directories("./")
 
 include_directories(
+  ${GAZEBO_INCLUDE_DIRS}
+  ${qpOASES_INCLUDE_DIR}
   ${PROJECT_SOURCE_DIR}
   ${CMAKE_BINARY_DIR}
-  ${GAZEBO_INCLUDE_DIRS}
-
 )
 
+# Gather all source files recursively
 file(GLOB_RECURSE sources
-"./*.cpp"
+  "./*.cpp"
 )
 
-add_executable(m1_plugin ${sources})
+# Define the plugin library target
+add_library(aidin_m1_plugin SHARED ${sources})
 
-#### 밑에 것들 없어도 되는 건가..? 왜 되지 ####
-# build the plugin library
-# add_library(${PROJECT_NAME}_plugin SHARED
-#   src/gazebo_plugin/aidin_m1_plugin.cpp
-# )
+# Link the necessary libraries to the plugin
+target_link_libraries(aidin_m1_plugin
+  ${GAZEBO_LIBRARIES}
+  ${rclcpp_LIBRARIES}
+  ${SDFORMAT_LIBRARIES}
+  ${qpOASES_LIBRARIES}
+)
 
-# ament_target_dependencies(${PROJECT_NAME}_plugin
-#   "rclcpp"
-#   "pluginlib"
-#   "gazebo"
-# )
+# Specify ament dependencies
+ament_target_dependencies(aidin_m1_plugin
+  "rclcpp"
+  "pluginlib"
+  "gazebo"
+)
 
-# target_link_libraries(${PROJECT_NAME}_plugin
-#   ${GAZEBO_LIBRARIES}
-#   ${SDFORMAT_LIBRARIES}
-#   ${qpOASES_LIBRARIES}
-# )
+# Install the Gazebo plugin library
+install(TARGETS aidin_m1_plugin
+  LIBRARY DESTINATION lib/${PROJECT_NAME}
+)

@@ -168,19 +168,19 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-src/gazebo_plugin/CMakeFiles/m1_plugin.dir/rule:
-	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f CMakeFiles/Makefile2 src/gazebo_plugin/CMakeFiles/m1_plugin.dir/rule
-.PHONY : src/gazebo_plugin/CMakeFiles/m1_plugin.dir/rule
+src/gazebo_plugin/CMakeFiles/aidin_m1_plugin.dir/rule:
+	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f CMakeFiles/Makefile2 src/gazebo_plugin/CMakeFiles/aidin_m1_plugin.dir/rule
+.PHONY : src/gazebo_plugin/CMakeFiles/aidin_m1_plugin.dir/rule
 
 # Convenience name for target.
-m1_plugin: src/gazebo_plugin/CMakeFiles/m1_plugin.dir/rule
+aidin_m1_plugin: src/gazebo_plugin/CMakeFiles/aidin_m1_plugin.dir/rule
 
-.PHONY : m1_plugin
+.PHONY : aidin_m1_plugin
 
 # fast build rule for target.
-m1_plugin/fast:
-	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/gazebo_plugin/CMakeFiles/m1_plugin.dir/build.make src/gazebo_plugin/CMakeFiles/m1_plugin.dir/build
-.PHONY : m1_plugin/fast
+aidin_m1_plugin/fast:
+	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/gazebo_plugin/CMakeFiles/aidin_m1_plugin.dir/build.make src/gazebo_plugin/CMakeFiles/aidin_m1_plugin.dir/build
+.PHONY : aidin_m1_plugin/fast
 
 aidin_m1_plugin.o: aidin_m1_plugin.cpp.o
 
@@ -188,7 +188,7 @@ aidin_m1_plugin.o: aidin_m1_plugin.cpp.o
 
 # target to build an object file
 aidin_m1_plugin.cpp.o:
-	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/gazebo_plugin/CMakeFiles/m1_plugin.dir/build.make src/gazebo_plugin/CMakeFiles/m1_plugin.dir/aidin_m1_plugin.cpp.o
+	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/gazebo_plugin/CMakeFiles/aidin_m1_plugin.dir/build.make src/gazebo_plugin/CMakeFiles/aidin_m1_plugin.dir/aidin_m1_plugin.cpp.o
 .PHONY : aidin_m1_plugin.cpp.o
 
 aidin_m1_plugin.i: aidin_m1_plugin.cpp.i
@@ -197,7 +197,7 @@ aidin_m1_plugin.i: aidin_m1_plugin.cpp.i
 
 # target to preprocess a source file
 aidin_m1_plugin.cpp.i:
-	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/gazebo_plugin/CMakeFiles/m1_plugin.dir/build.make src/gazebo_plugin/CMakeFiles/m1_plugin.dir/aidin_m1_plugin.cpp.i
+	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/gazebo_plugin/CMakeFiles/aidin_m1_plugin.dir/build.make src/gazebo_plugin/CMakeFiles/aidin_m1_plugin.dir/aidin_m1_plugin.cpp.i
 .PHONY : aidin_m1_plugin.cpp.i
 
 aidin_m1_plugin.s: aidin_m1_plugin.cpp.s
@@ -206,7 +206,7 @@ aidin_m1_plugin.s: aidin_m1_plugin.cpp.s
 
 # target to generate assembly for a file
 aidin_m1_plugin.cpp.s:
-	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/gazebo_plugin/CMakeFiles/m1_plugin.dir/build.make src/gazebo_plugin/CMakeFiles/m1_plugin.dir/aidin_m1_plugin.cpp.s
+	cd /home/eunseop/dev_ws/src/aidin_m1/build && $(MAKE) -f src/gazebo_plugin/CMakeFiles/aidin_m1_plugin.dir/build.make src/gazebo_plugin/CMakeFiles/aidin_m1_plugin.dir/aidin_m1_plugin.cpp.s
 .PHONY : aidin_m1_plugin.cpp.s
 
 # Help Target
@@ -222,7 +222,7 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... test"
-	@echo "... m1_plugin"
+	@echo "... aidin_m1_plugin"
 	@echo "... aidin_m1_plugin.o"
 	@echo "... aidin_m1_plugin.i"
 	@echo "... aidin_m1_plugin.s"

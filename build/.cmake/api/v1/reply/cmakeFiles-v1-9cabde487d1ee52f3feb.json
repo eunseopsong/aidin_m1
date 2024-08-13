@@ -5573,6 +5573,15 @@
 		{
 			"isExternal" : true,
 			"path" : "/opt/ros/foxy/share/ament_cmake_core/cmake/core/templates/nameConfig-version.cmake.in"
+		},
+		{
+			"path" : "src/CMakeLists.txt"
+		},
+		{
+			"path" : "src/AiDIN_Controller/CMakeLists.txt"
+		},
+		{
+			"path" : "src/gazebo_plugin/CMakeLists.txt"
 		}
 	],
 	"kind" : "cmakeFiles",

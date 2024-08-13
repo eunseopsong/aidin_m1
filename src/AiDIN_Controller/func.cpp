@@ -1,4 +1,4 @@
-#include "Controllers/convexMPC/convexMPC.h"
+// #include "Controllers/convexMPC/convexMPC.h"
 #include "func.h"
 
 using namespace std;
@@ -242,40 +242,40 @@ double FFControl(double Kp, double Kd, double th[3], int j_type, int j_idx)
 
 
 
-double runMPC(double th[3]) {
-    // Initialize the MPC controller with a prediction horizon and time step
-    convexMPC mpc(10, 0.05);
+// double runMPC(double th[3]) {
+//     // Initialize the MPC controller with a prediction horizon and time step
+//     convexMPC mpc(10, 0.05);
 
-    // Set the initial state of the robot
-    Eigen::VectorXd initialState(13);
-    initialState << 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
-    mpc.setInitialState(initialState);
+//     // Set the initial state of the robot
+//     Eigen::VectorXd initialState(13);
+//     initialState << 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
+//     mpc.setInitialState(initialState);
 
-    // Define the reference state and control inputs
-    Eigen::VectorXd x_ref(13);
-    x_ref << 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; // Example reference state
-    Eigen::VectorXd u_ref(3 * mpc.getControlInputs().size());
-    u_ref << 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1; // Example control inputs
+//     // Define the reference state and control inputs
+//     Eigen::VectorXd x_ref(13);
+//     x_ref << 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; // Example reference state
+//     Eigen::VectorXd u_ref(3 * mpc.getControlInputs().size());
+//     u_ref << 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1; // Example control inputs
 
-    // Update the dynamics matrices based on the current state
-    Eigen::MatrixXd A_new = Eigen::MatrixXd::Identity(13, 13); // Example dynamics matrix A
-    Eigen::MatrixXd B_new = Eigen::MatrixXd::Identity(13, 3 * mpc.getControlInputs().size() / 3); // Example dynamics matrix B
-    mpc.updateDynamicsMatrices(A_new, B_new);
+//     // Update the dynamics matrices based on the current state
+//     Eigen::MatrixXd A_new = Eigen::MatrixXd::Identity(13, 13); // Example dynamics matrix A
+//     Eigen::MatrixXd B_new = Eigen::MatrixXd::Identity(13, 3 * mpc.getControlInputs().size() / 3); // Example dynamics matrix B
+//     mpc.updateDynamicsMatrices(A_new, B_new);
 
-    // Compute the MPC control inputs
-    mpc.computeMPC(x_ref, u_ref);
+//     // Compute the MPC control inputs
+//     mpc.computeMPC(x_ref, u_ref);
 
-    // Get the control inputs to be applied
-    Eigen::VectorXd controlInputs = mpc.getControlInputs();
+//     // Get the control inputs to be applied
+//     Eigen::VectorXd controlInputs = mpc.getControlInputs();
 
-    // vector<double> output_torque(12);
-    // output_torque = mpc.calculateTorque();
+//     // vector<double> output_torque(12);
+//     // output_torque = mpc.calculateTorque();
 
-    // 관절 토크 값만을 반환
-    // return controlInputs[0]; // 필요에 따라 적절한 인덱스를 선택
-    th[0] = 0; th[1] = 0; th[2] = 0;
-    return 0;
-}
+//     // 관절 토크 값만을 반환
+//     // return controlInputs[0]; // 필요에 따라 적절한 인덱스를 선택
+//     th[0] = 0; th[1] = 0; th[2] = 0;
+//     return 0;
+// }
 
 
 void CalculateTorqueStanding(double* output_torque, const std::array<double, 3>& Kp, const std::array<double, 3>& Kd, double t)
@@ -313,6 +313,7 @@ void CalculateTorqueRunning(double* output_torque, const double* target_pos, con
         if (contact[joint_index] == 0)
             output_torque[i] = FFControl(Kp[joint_type], Kd[joint_type], pos[joint_index].data(), joint_type, joint_index * 3);
         else
-            output_torque[i] = runMPC(pos[joint_index].data());
+            // output_torque[i] = runMPC(pos[joint_index].data());
+            output_torque[i] = 0;
     }
 }

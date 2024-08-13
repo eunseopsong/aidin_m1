@@ -32,7 +32,22 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
+# Install launch files
+install(DIRECTORY launch/
+  DESTINATION share/${PROJECT_NAME}/launch
+)
+
+# Install worlds directory
+install(DIRECTORY worlds/
+  DESTINATION share/${PROJECT_NAME}/worlds
+)
+
+# Install URDF files
+install(DIRECTORY urdf/
+  DESTINATION share/${PROJECT_NAME}/urdf
+)
+
 #### 왜 add_subdirectory 넣으니까 build 안 되는 거지..? 이거 없는데 왜 잘 되는 거지..? ####
-# add_subdirectory(src)
+add_subdirectory(src)
 
 ament_package()

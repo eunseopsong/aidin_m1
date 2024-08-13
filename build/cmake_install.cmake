@@ -38,6 +38,18 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/aidin_m1/launch" TYPE DIRECTORY FILES "/home/eunseop/dev_ws/src/aidin_m1/launch/")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/aidin_m1/worlds" TYPE DIRECTORY FILES "/home/eunseop/dev_ws/src/aidin_m1/worlds/")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/aidin_m1/urdf" TYPE DIRECTORY FILES "/home/eunseop/dev_ws/src/aidin_m1/urdf/")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ament_index/resource_index/package_run_dependencies" TYPE FILE FILES "/home/eunseop/dev_ws/src/aidin_m1/build/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/aidin_m1")
 endif()
 
@@ -94,6 +106,12 @@ endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/aidin_m1" TYPE FILE FILES "/home/eunseop/dev_ws/src/aidin_m1/package.xml")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for each subdirectory.
+  include("/home/eunseop/dev_ws/src/aidin_m1/build/src/cmake_install.cmake")
+
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)

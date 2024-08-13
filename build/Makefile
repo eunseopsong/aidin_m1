@@ -193,6 +193,32 @@ uninstall/fast:
 	$(MAKE) -f CMakeFiles/uninstall.dir/build.make CMakeFiles/uninstall.dir/build
 .PHONY : uninstall/fast
 
+#=============================================================================
+# Target rules for targets named aidin_ctrl
+
+# Build rule for target.
+aidin_ctrl: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 aidin_ctrl
+.PHONY : aidin_ctrl
+
+# fast build rule for target.
+aidin_ctrl/fast:
+	$(MAKE) -f src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/build.make src/AiDIN_Controller/CMakeFiles/aidin_ctrl.dir/build
+.PHONY : aidin_ctrl/fast
+
+#=============================================================================
+# Target rules for targets named aidin_m1_plugin
+
+# Build rule for target.
+aidin_m1_plugin: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 aidin_m1_plugin
+.PHONY : aidin_m1_plugin
+
+# fast build rule for target.
+aidin_m1_plugin/fast:
+	$(MAKE) -f src/gazebo_plugin/CMakeFiles/aidin_m1_plugin.dir/build.make src/gazebo_plugin/CMakeFiles/aidin_m1_plugin.dir/build
+.PHONY : aidin_m1_plugin/fast
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -208,6 +234,8 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... aidin_m1_uninstall"
 	@echo "... uninstall"
+	@echo "... aidin_ctrl"
+	@echo "... aidin_m1_plugin"
 .PHONY : help
 
 
