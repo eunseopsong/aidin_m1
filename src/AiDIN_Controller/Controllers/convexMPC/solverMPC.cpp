@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <sys/time.h>
 // #include <Utilities/Timer.h>
+#include "Timer.h"
 // #include <JCQP/QpProblem.h>
 
 //#define K_PRINT_EVERYTHING

@@ -49,5 +49,7 @@ install(DIRECTORY urdf/
 
 # include the sub directory
 add_subdirectory(src)
+add_subdirectory(common)
+add_subdirectory(third-party)
 
 ament_package()
