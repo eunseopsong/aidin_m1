@@ -216,28 +216,17 @@ void aidin_m1_plugin::OnUpdate()
     std_msgs::msg::Float32MultiArray LinkForces;
     LinkForces.data.clear();
 
-    // this->cell1_ = this->model->GetLink("RF_rod_cell");
-    // this->cell2_ = this->model->GetLink("LF_rod_cell");
-    // this->cell3_ = this->model->GetLink("LB_rod_cell");
-    // this->cell4_ = this->model->GetLink("RB_rod_cell");
+    auto links = this->model->GetLinks();
+    for (auto &link : links) {
+        ignition::math::Vector3d force = link->RelativeForce(); // 링크에 가해지는 힘 측정
+        LinkForces.data.push_back(static_cast<float>(force.Length())); // 힘의 크기를 메시지에 추가
 
-    // float f1 = cell1_->RelativeForce().Length();
-    // float f2 = cell2_->RelativeForce().Length();
-    // float f3 = cell3_->RelativeForce().Length();
-    // float f4 = cell4_->RelativeForce().Length();
+        // 각 링크의 힘 크기 디버깅 정보 출력
+        std::cout << "Link: " << link->GetName() << ", Force Magnitude: " << force << std::endl;
 
-    // LinkForces.data = {f1, f2, f3, f4};
+    }
+
     pub_link_force->publish(LinkForces);
-
-
-
-    // auto links = this->model->GetLinks();
-    // for (auto &link : links) {
-    //     ignition::math::Vector3d force = link->RelativeForce(); // 링크에 가해지는 힘 측정
-    //     LinkForces.data.push_back(static_cast<float>(force.Length())); // 힘의 크기를 메시지에 추가
-    // }
-
-    // pub_link_force->publish(LinkForces);
 
 
 
