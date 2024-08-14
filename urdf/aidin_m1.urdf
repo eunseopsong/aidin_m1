@@ -82,7 +82,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <box size="0.200 0.370 0.216"/>
+        <box size="0.200 0.370 0.160"/>
       </geometry>
     </collision>
 
@@ -99,32 +99,175 @@
     <material>Gazebo/DarkGrey</material>
   </gazebo>
 
-  <!-- <joint name="imu_joint" type="fixed">
-    <parent link="body"/>
-    <child link="imu_link"/>
-    <origin rpy="0 0 0" xyz="0 0 0"/>
-  </joint>
+<!--//////////////////// for IMU Measurement (Force sensing) ///////////////////////-->
 
-  <link name="imu_link">
+  <link name="upper_body">
     <inertial>
-      <mass value="0.001"/>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="0.0001"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
       <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
     </inertial>
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+
+    <collision>
+      <origin xyz="0 0 0.085" rpy="0 0 0"/>
       <geometry>
-        <box size="0.001 0.001 0.001"/>
+        <box size="0.200 0.370 0.010"/>
+      </geometry>
+    </collision>
+
+    <visual name="uppper_body_visual">
+      <origin xyz="0 0 0.085" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.200 0.370 0.010"/>
+      </geometry>
+      <material name="darkgrey"/>
+    </visual>
+  </link>
+  <gazebo reference="upper_body">
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+
+  <joint name="upper_body_J" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <parent link="base"/>
+    <child link="upper_body"/>
+  </joint>
+
+  <!--//// RF ////-->
+  <link name="RF_rod_cell">
+    <inertial>
+      <mass value="0.001"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
+    </inertial>
+
+    <collision>
+      <origin xyz="0.075 -0.050 0.0901" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.002" radius="0.005"/>
+      </geometry>
+    </collision>
+
+    <visual name="RF_rod_cell_visual">
+      <origin xyz="0.075 -0.050 0.0901" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.002" radius="0.005"/>
       </geometry>
       <material name="red"/>
     </visual>
+  </link>
+  <gazebo reference="RF_rod_cell">
+    <material>Gazebo/Red</material>
+  </gazebo>
+
+  <joint name="RFJ_rod_cell" type="fixed">
+    <!-- <origin rpy="0.075 -0.050 0.095" xyz="0 0 0"/> -->
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <parent link="upper_body"/>
+    <child link="RF_rod_cell"/>
+  </joint>
+
+  <!--//// LF ////-->
+  <link name="LF_rod_cell">
+    <inertial>
+      <mass value="0.001"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
+    </inertial>
+
     <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin xyz="0.075 0.050 0.0901" rpy="0 0 0"/>
       <geometry>
-        <box size="0.001 0.001 0.001"/>
+        <cylinder length="0.002" radius="0.005"/>
       </geometry>
     </collision>
-  </link> -->
+
+    <visual name="LF_rod_cell_visual">
+      <origin xyz="0.075 0.050 0.0901" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.002" radius="0.005"/>
+      </geometry>
+      <material name="red"/>
+    </visual>
+  </link>
+  <gazebo reference="LF_rod_cell">
+    <material>Gazebo/Red</material>
+  </gazebo>
+
+  <joint name="LFJ_rod_cell" type="fixed">
+    <!-- <origin rpy="0.075 0.050 0.095" xyz="0 0 0"/> -->
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <parent link="upper_body"/>
+    <child link="LF_rod_cell"/>
+  </joint>
+
+  <!--//// LB ////-->
+  <link name="LB_rod_cell">
+    <inertial>
+      <mass value="0.001"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
+    </inertial>
+
+    <collision>
+      <origin xyz="-0.075 0.050 0.0901" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.002" radius="0.005"/>
+      </geometry>
+    </collision>
+
+    <visual name="LB_rod_cell_visual">
+      <origin xyz="-0.075 0.050 0.0901" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.002" radius="0.005"/>
+      </geometry>
+      <material name="red"/>
+    </visual>
+  </link>
+  <gazebo reference="LB_rod_cell">
+    <material>Gazebo/Red</material>
+  </gazebo>
+
+  <joint name="LBJ_rod_cell" type="fixed">
+    <!-- <origin rpy="-0.075 0.050 0.095" xyz="0 0 0"/> -->
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <parent link="upper_body"/>
+    <child link="LB_rod_cell"/>
+  </joint>
+
+  <!--//// RB ////-->
+  <link name="RB_rod_cell">
+    <inertial>
+      <mass value="0.001"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
+    </inertial>
+
+    <collision>
+      <origin xyz="-0.075 -0.050 0.0901" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.002" radius="0.005"/>
+      </geometry>
+    </collision>
+
+    <visual name="RB_rod_cell_visual">
+      <origin xyz="-0.075 -0.050 0.0901" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.002" radius="0.005"/>
+      </geometry>
+      <material name="red"/>
+    </visual>
+  </link>
+  <gazebo reference="RB_rod_cell">
+    <material>Gazebo/Red</material>
+  </gazebo>
+
+  <joint name="RBJ_rod_cell" type="fixed">
+    <!-- <origin rpy="-0.075 -0.050 0.095" xyz="0 0 0"/> -->
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <parent link="upper_body"/>
+    <child link="RB_rod_cell"/>
+  </joint>
 
 <!--//////////////////////////////// RF LINKS /////////////////////////////////-->
 
@@ -776,6 +919,8 @@
 <!--/////////////////////////////// Camera Back //////////////////////////////////-->
 
 <!--/////////////////////////////// Camera Right //////////////////////////////////-->
+
+
 
 <!--//////////////////////////////// Aidin_m1 Plugin ////////////////////////////////-->
 
