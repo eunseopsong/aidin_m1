@@ -68,6 +68,15 @@ namespace gazebo
         physics::JointPtr joint11_;
         physics::JointPtr joint12_;
 
+
+
+        // physics::LinkPtr cell1_;
+        // physics::LinkPtr cell2_;
+        // physics::LinkPtr cell3_;
+        // physics::LinkPtr cell4_;
+
+
+
         event::ConnectionPtr updateConnection;
         rclcpp::Node::SharedPtr node;
 
