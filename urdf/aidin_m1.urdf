@@ -131,7 +131,7 @@
     <parent link="base"/>
     <child link="upper_body"/>
     <origin xyz="0 0 0.085" rpy="0 0 0"/>
-    <axis xyz="0 0 1"/>
+    <axis xyz="1 0 0"/>
     <limit lower="0" upper="0.0001" effort="1" velocity="0.0001"/>
   </joint>
 
@@ -166,7 +166,7 @@
     <parent link="upper_body"/>
     <child link="RF_rod_cell"/>
     <origin xyz="0.075 -0.050 0.0075" rpy="0 0 0"/>
-    <axis xyz="0 0 1"/>
+    <axis xyz="1 0 0"/>
     <limit lower="0" upper="0.0001" effort="1" velocity="0.0001"/>
   </joint>
 
@@ -201,7 +201,7 @@
     <parent link="upper_body"/>
     <child link="LF_rod_cell"/>
     <origin xyz="0.075 0.050 0.0075" rpy="0 0 0"/>
-    <axis xyz="0 0 1"/>
+    <axis xyz="1 0 0"/>
     <limit lower="0" upper="0.0001" effort="1" velocity="0.0001"/>
   </joint>
 
@@ -236,7 +236,7 @@
     <parent link="upper_body"/>
     <child link="LB_rod_cell"/>
     <origin xyz="-0.075 0.050 0.0075" rpy="0 0 0"/>
-    <axis xyz="0 0 1"/>
+    <axis xyz="1 0 0"/>
     <limit lower="0" upper="0.0001" effort="1" velocity="0.0001"/>
   </joint>
 
@@ -271,7 +271,7 @@
     <parent link="upper_body"/>
     <child link="RB_rod_cell"/>
     <origin xyz="-0.075 -0.050 0.0075" rpy="0 0 0"/>
-    <axis xyz="0 0 1"/>
+    <axis xyz="1 0 0"/>
     <limit lower="0" upper="0.0001" effort="1" velocity="0.0001"/>
   </joint>
 
@@ -306,7 +306,7 @@
     <parent link="upper_body"/>
     <child link="upper_box"/>
     <origin xyz="0 0 0.015" rpy="0 0 0"/>
-    <axis xyz="0 0 1"/>
+    <axis xyz="1 0 0"/>
     <limit lower="0" upper="0.0001" effort="1" velocity="0.0001"/>
   </joint>
 

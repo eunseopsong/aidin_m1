@@ -215,15 +215,15 @@ void aidin_m1_plugin::OnUpdate()
     // 링크 힘 측정 및 퍼블리시
     std_msgs::msg::Float32MultiArray LinkForces;
     LinkForces.data.clear();
-
+    // int i=0;
     auto links = this->model->GetLinks();
     for (auto &link : links) {
         ignition::math::Vector3d force = link->RelativeForce(); // 링크에 가해지는 힘 측정
         LinkForces.data.push_back(static_cast<float>(force.Length())); // 힘의 크기를 메시지에 추가
 
         // 각 링크의 힘 크기 디버깅 정보 출력
-        std::cout << "Link: " << link->GetName() << ", Force Magnitude: " << force << std::endl;
-
+        // std::cout << "Link: " << link->GetName() << ", Force: " << force << "index: "<< i <<std::endl;
+        // i++;
     }
 
     pub_link_force->publish(LinkForces);
