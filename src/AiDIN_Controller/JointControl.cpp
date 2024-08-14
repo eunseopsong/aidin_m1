@@ -48,7 +48,7 @@ JointControl::JointControl()
         });
     sub_link_force = create_subscription<std_msgs::msg::Float32MultiArray>(
         "/aidin_m1/LinkForce_sim", 10, [this](const std_msgs::msg::Float32MultiArray::SharedPtr msg) {
-            copy(msg->data.begin(), msg->data.begin() + 12, dist.begin());
+            copy(msg->data.begin(), msg->data.begin() + 21, dist.begin());
         });
 
     // Publish torque & target joint poses

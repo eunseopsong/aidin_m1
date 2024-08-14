@@ -20,7 +20,7 @@ array<float, 9> imu{};
 array<float, 4> contact{};
 array<float, 3> command{};
 array<float, 4> dist{};
-array<float, 12> link_force{};
+array<float, 21> link_force{};
 
 //////////// Method of Undetermined Coefficients using Eigen ////////////
 
