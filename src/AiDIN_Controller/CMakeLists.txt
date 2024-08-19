@@ -1,6 +1,12 @@
 include_directories("./")
 include_directories("./Controllers")
-include_directories("./FSM_States")
+# include_directories("./FSM_States")
+
+include_directories("../../third-party/")
+include_directories(SYSTEM "../../third-party/qpOASES/include")
+# include_directories("../../third-party/ParamHandler")
+
+
 
 include_directories(
   ${GAZEBO_INCLUDE_DIRS}
