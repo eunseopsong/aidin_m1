@@ -2,7 +2,7 @@
 # add_subdirectory(ParamHandler)
 # add_subdirectory(inih)
 # add_subdirectory(osqp)
-add_subdirectory(JCQP)
+# add_subdirectory(JCQP)
 # add_subdirectory(qpOASES)
 # add_subdirectory(lord_imu)
 # add_subdirectory(SOEM)

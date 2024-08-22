@@ -2,8 +2,8 @@ include_directories("./")
 include_directories("./Controllers")
 # include_directories("./FSM_States")
 
-include_directories("../../third-party/")
-include_directories(SYSTEM "../../third-party/qpOASES/include")
+# include_directories("../../third-party/")
+# include_directories(SYSTEM "../../third-party/qpOASES/include")
 # include_directories("../../third-party/ParamHandler")
 
 
@@ -33,3 +33,14 @@ target_link_libraries(aidin_ctrl
 install(TARGETS aidin_ctrl
   DESTINATION lib/${PROJECT_NAME}
 )
+
+# add_subdirectory(Controllers/WBC)
+# add_subdirectory(Controllers/WBC_Ctrl)
+# add_subdirectory(Controllers/VisionMPC)
+
+# add_executable(aidin_ctrl ${sources} AiDIN_Controller.cpp main.cpp)
+# target_link_libraries(mit_ctrl robot biomimetics)
+# target_link_libraries(aidin_ctrl dynacore_param_handler qpOASES)
+# target_link_libraries(mit_ctrl Goldfarb_Optimizer osqp)
+# target_link_libraries(mit_ctrl WBC_Ctrl)
+# target_link_libraries(mit_ctrl VisionMPC)
